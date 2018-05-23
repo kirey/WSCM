@@ -1,0 +1,1 @@
+export { RiskManagementService } from './kjgri.risk.service';

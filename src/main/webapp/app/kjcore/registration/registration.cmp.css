@@ -1,0 +1,20 @@
+#cmp-registration {
+  padding-top: 71px; }
+  #cmp-registration .img-captcha {
+    padding: 5px; }
+  #cmp-registration .pointer-cursor {
+    cursor: pointer;
+    font-weight: bold; }
+  #cmp-registration .glyphicon-refresh {
+    cursor: pointer;
+    top: 4px; }
+    #cmp-registration .glyphicon-refresh:hover {
+      color: green; }
+  #cmp-registration .green-text {
+    color: green; }
+  #cmp-registration .margin-top-20 {
+    margin-top: 20px; }
+  #cmp-registration .break-word {
+    word-wrap: break-word; }
+
+/*# sourceMappingURL=registration.cmp.css.map */

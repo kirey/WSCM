@@ -1,0 +1,65 @@
+#cmp-admin_users {
+    .search-span {
+        float: left;
+    }
+
+    .margin-top-23 {
+        margin-top: 23px;
+    }
+    
+    .progress-image {
+        width: 30px;
+    }
+    
+    .ui-calendar {
+        display: block;
+    }
+
+    .result-hr {
+        margin-top: 0;
+    }
+
+    .add-user-btn {
+        margin-top: 25px;
+    }
+
+    .ui-radiobutton-label {
+        padding-left: 0;
+    }
+    .modal-title {
+        word-break: break-all;
+    }
+    .modal-body {
+        > .row {
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+        .row > div.col-md-3, .row > div.col-md-4 {
+            text-align: left;
+        }
+        .row > div.col-md-8, .row > div.col-md-9 {
+            text-align: center;
+        }
+    }
+    .no-padding:nth-child(2n+1) {
+        padding-right:0;
+    }
+    .no-padding:nth-child(2n+2) {
+        padding-left:0;
+    }
+    .no-padding-super-admin:nth-child(2n+1) {
+        padding-left: 0;
+    }
+    .no-padding-super-admin:nth-child(2n+2) {
+        padding-right: 0;
+    }
+
+    .glyphicon-remove {
+        cursor: pointer;
+        line-height: 1.4;
+
+        &:hover {
+            color: #d9534f;
+        }
+    }
+}

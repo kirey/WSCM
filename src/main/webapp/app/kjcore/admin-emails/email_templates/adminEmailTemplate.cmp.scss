@@ -1,0 +1,265 @@
+#cmp-admin-email-template{
+    .temp-txt-hover-class {
+        visibility: hidden;
+        width: 120px;
+        height: 200px;
+        background-color: black;
+        color: black;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        position: absolute;
+        z-index: 1;
+    }
+ 
+    .disabledField {
+        background: #dddddd;
+    }
+
+    .hide-input {
+        display: none !important; 
+    }
+
+    .file-label-upload-icon {
+        float: right;
+        padding-right: 5px; 
+    }
+
+    .file-label-info {
+        width: 90%;
+        float: left;
+        word-break: break-all;
+        font-size: 14px;
+        padding-left: 10px;
+        text-align: left; 
+    }
+
+    .file-label:hover {
+        background: #619dd0;
+        border: 1px solid #4489c3; 
+    }
+
+    .file-label {
+        background: #337ab7;
+        border: 1px solid #337ab7;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        float: right;
+        font-size: 22px;
+        margin-bottom: 3px;
+        margin-left: 0px;
+        padding: 11px 0px;
+        width: 100%;
+    }
+
+    #temp-pre {
+        white-space: pre-line;
+        text-align : left;
+    }
+
+    #resource-pre {
+        white-space: pre-line;
+        text-align : left;
+    }
+
+    .temp-file-class:hover .temp-txt-hover-class {
+        visibility: visible;
+    }
+
+    .temp-txt-hover-class {
+        border-style: groove;
+        width: 300px; 
+        height: 300px;
+        overflow: auto; 
+        background-color:#E9E9E9;
+    }
+
+    .temp-file-class {
+        display: inline-block;
+    }
+
+    .resource-img-hover-class {
+        visibility: hidden;
+        width: 150px;
+        height: 110px;
+        background-color:#E9E9E9;
+        color: black;
+        border-radius: 6px;
+        border-style: groove;
+        padding: 5px 0;
+
+        position: absolute;
+        z-index: 1;
+    }
+
+    .resource-file-class:hover .resource-img-hover-class {
+        visibility: visible;
+    }
+
+    .resource-file-class {
+        padding:3px;
+    }
+
+    .btnAdd{
+        border-radius:4px;
+        margin-right: 6px;
+    }
+
+    .alert-message {
+        margin-top: 10px; 
+    }
+
+    .add-email-template-span{
+        float:right;
+        padding-bottom: 1%;
+    }
+
+    .template-file-icon {
+        width: 42px; 
+        height: 41px;
+    }
+
+    .btn-download-template {
+        display: inline-block;
+        width: 30px;
+        padding: 3px !important; 
+
+    }
+
+    .icon-inline-resources {
+        width: 30px;
+    }
+
+    .gif-loading-refresh-table {
+        width: 30px;
+    }
+
+    .mandatory-label {
+        color: red;
+    }
+
+    #template-file-input {
+        display:none;
+    }
+
+    .add-inline-resources-div {
+        padding-top: 20%;
+    }
+
+    .input-file-hidden {
+        display:none;
+    }
+
+    .add-inline-icon {
+        width: 30px; 
+        height: 30px;
+    }
+
+    .img-inline-resource-file {
+        width: 100px;
+        height: 80px; 
+        margin:0 auto; 
+        display: block;
+    }
+
+    .img-inline-res-file-dialog {
+        width: 50px;
+        height: 50px;
+    }
+
+    .btns-inline-resource {
+        width: 48%; 
+        margin-left: 2%;
+    }
+
+    .btn-cancel-in-resources {
+        width: 48%;
+    }
+
+    .btn-edit-inline-res {
+        width:18px; 
+        padding: 0px;
+    }
+
+    .delete-email-template {
+        text-align: center; 
+        color: red
+    }
+
+    .img-res-file-dialog {
+        width: 100px;
+        height: 100px;
+    }
+
+    .modal-add-edit-form {
+        width: 25%;
+    }
+
+    .modal-dialog {
+        overflow-y: initial !important;
+        height: 70%;
+    }
+
+    .modal-body {
+        overflow-y: auto;
+    }
+
+    .add-inline-resources-modal {
+        width: 30%;
+    }
+
+    .edit-template-button {
+        float: left;
+        width: 30px;
+        padding: 3px !important; 
+    }
+
+    .delete-template-button {
+        float: right;
+        width: 30px;
+        padding: 3px !important;
+    }
+
+    .btn-show-resource {
+        width: 35px;
+        height: 30px;
+    }
+
+    .resource-button {
+        width: 30px;
+        padding: 3px !important; 
+    }
+
+    .download-resource-button {
+        width: 30px;
+        padding: 3px !important; 
+    }
+
+    .edit-resource-button {
+        float: left;
+        width: 21px;
+        height: 27px;
+        padding: 3px !important; 
+    }
+
+    .delete-resource-button {
+        float: right;
+        width: 21px;
+        height: 27px;
+        padding: 3px !important;
+    }
+
+    .add-resource-button {
+        width: 30px;
+        padding: 3px !important; 
+    }
+
+    .dialog-remove-resource {
+        width: 550px;
+    }
+
+    .dialog-delete-template {
+        width: 550px;
+    }
+}

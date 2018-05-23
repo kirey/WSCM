@@ -1,0 +1,82 @@
+#cmp-admin-translation .label_text {
+  font-size: 14px;
+  font-weight: bold; }
+#cmp-admin-translation .delete-button {
+  float: right;
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin-translation .edit-button {
+  float: left;
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin-translation .table_form {
+  margin-top: 15px;
+  width: 100%; }
+  #cmp-admin-translation .table_form table {
+    margin-bottom: 10px; }
+  #cmp-admin-translation .table_form td {
+    padding: 5px 10px 5px 10px; }
+  #cmp-admin-translation .table_form td:first-child {
+    padding-left: 0; }
+  #cmp-admin-translation .table_form td:last-child {
+    padding-right: 0; }
+#cmp-admin-translation .div-button .btn-success {
+  margin-top: 20px; }
+#cmp-admin-translation .modal-body .modal-class {
+  font-size: 15px;
+  text-align: center !important; }
+#cmp-admin-translation .filters {
+  background: whitesmoke;
+  margin: 0 15px 15px;
+  padding: 0 0 12px 0; }
+#cmp-admin-translation .button_icon {
+  border-radius: 50%;
+  color: #fff;
+  font-size: 10px;
+  float: left;
+  height: 21px;
+  bottom: 2px;
+  padding: 3px 5px;
+  position: relative;
+  width: 21px; }
+#cmp-admin-translation .extension-error {
+  color: #852525; }
+#cmp-admin-translation .hide-input {
+  display: none !important; }
+#cmp-admin-translation .file-label {
+  background: #337ab7;
+  border: 1px solid #337ab7;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  float: right;
+  font-size: 22px;
+  margin-top: 2px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  padding: 11px 0px;
+  width: 100%; }
+#cmp-admin-translation .file-label:hover {
+  background: #619dd0;
+  border: 1px solid #4489c3; }
+#cmp-admin-translation .file-label-info {
+  width: 90%;
+  float: left;
+  word-break: break-all;
+  font-size: 14px;
+  padding-left: 10px; }
+#cmp-admin-translation .file-label-upload-icon {
+  float: right;
+  padding-right: 5px; }
+#cmp-admin-translation .top-margin {
+  margin-top: 10px; }
+#cmp-admin-translation .bottom-margin {
+  margin-bottom: 10px; }
+#cmp-admin-translation .glyphicon-remove {
+  cursor: pointer;
+  line-height: 1.4; }
+#cmp-admin-translation .ui-chkbox-label {
+  margin-bottom: -1px;
+  cursor: pointer; }
+
+/*# sourceMappingURL=adminTranslation.cmp.css.map */

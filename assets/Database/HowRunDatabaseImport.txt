@@ -1,0 +1,36 @@
+## Configuring database ##
+
+Follow these steps to import `data_pump file`.
+
+### Using impdp oracle tool ###
+To import data_pump file you can use one of the following two ways:
+
+##### First choice
+Copy dump file (here`data_pump_SRNI_DD_MM_YYYY_KFUTURE.dmp`) to default data pump folder which you can find with the following query:
+```javascript
+select DIRECTORY_PATH from DBA_DIRECTORIES where DIRECTORY_NAME = 'DATA_PUMP_DIR';
+```
+Note: In your database there must be a user KFUTURE without objects.
+
+Now you can import dump file by executing the following command in the command prompt:
+```javascript
+impdp KFUTURE/KFUTURE@database_net_service_name SCHEMAS=KFUTURE dumpfile=data_pump_SRNI_DD_MM_YYYY_KFUTURE.dmp logfile=data_pump_SRNI_DD_MM_YYYY_KFUTURE.log
+```
+where 'database_net_service_name' should be replaced with the service name of the database you are importing into.
+
+
+##### Second choice - Importing to a local XE database
+Rename dump file `data_pump_SRNI_DD_MM_YYYY_KFUTURE.dmp` to `EXPDAT.dmp` and copy this file to folder `C:\oraclexe\app\oracle\admin\XE\dpdump` on your computer.
+If there is already user KFUTURE in the database it should be removed with the following command:
+```javascript 
+DROP USER KFUTURE CASCADE;
+```
+Than re-create user KFUTURE with the following commands:
+```javascript 
+CREATE USER KFUTURE IDENTIFIED BY KFUTURE DEFAULT TABLESPACE "USERS";
+GRANT "DBA" TO KFUTURE;
+```
+Now you can import dump file with the following command issued in command prompt: 
+```javascript 
+impdp KFUTURE/KFUTURE
+```

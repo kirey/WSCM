@@ -1,0 +1,169 @@
+<div id="cmp-measured_styles" class="app_content-container-cmp">
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <h2 class="view-header">
+        <div class="view-header-sub">
+            {{ 'fe.measuredStyle.mainHeader' | translate }}
+        </div>
+    </h2>
+
+    <div class="container-fluid">
+        <div class="row"> 
+            <div class="col-md-12 padding-bottom-20">
+                <lazyload-dropdown [inline]="true" [label]="'fe.measuredStyle.dicMeasure' | translate" [(ngModel)]="selectedDicStyle" (ngModelChange)="onDicStyleChange($event)" [value]="dicStyles" [placeholder]="'fe.generalComponentContent.select' | translate"
+                    [filterPlaceholder]="'fe.generalComponentContent.search' | translate" display="displayName"></lazyload-dropdown>
+            </div>
+        </div>
+        <div class="row" *ngIf="selectedDicStyle">
+            <div class="col-md-12 clearfix margin-bottom-10">
+                <button class="btn btn-success pull-right" (click)="showModal(measuredStyleModal, 'addMeasuredStyle')">{{'fe.measuredStyle.addMeasuredStyle' | translate}}</button>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <p-dataTable #dataTable [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [value]="styles" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table clearfix">
+                    <p-column field="valueMin" [header]="'fe.measuredStyle.valueMin' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center">{{object.valueMin}}</div>
+                        </template>
+                    </p-column>
+                    <p-column field="valueMax" [header]="'fe.measuredStyle.valueMax' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center">{{object.valueMax}}</div>
+                        </template>
+                    </p-column>
+                    <p-column field="strokeWidth" [header]="'fe.measuredStyle.strokeWidth' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center">{{object.strokeWidth}}</div>
+                        </template>
+                    </p-column>
+                    <p-column field="description" [header]="'fe.measuredStyle.description' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center">{{object.description}}</div>
+                        </template>
+                    </p-column>
+                    <p-column field="fill" [header]="'fe.measuredStyle.fill' | translate" sortable="true">
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center" [ngStyle]="{'background-color': object.fill, 'height': '34px'}"></div>
+                        </template>
+                    </p-column>
+                    <p-column field="stroke" [header]="'fe.measuredStyle.stroke' | translate" sortable="true">
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center" [ngStyle]="{'background-color': object.stroke, 'height': '34px'}"></div>
+                        </template>
+                    </p-column>
+                    <p-column field="operations" [style]="{'width': '112px'}">
+                        <template pTemplate="header">
+                            <!-- <button class="btn btn-success" (click)="showModal(measuredStyleModal, 'addMeasuredStyle')">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button> -->
+                        </template>
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center">
+                                <button class="btn btn-warning" (click)="showModal(measuredStyleModal, 'editMeasuredStyle', object)">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                                <button type="button" class="btn btn-danger" (click)="showModal(deleteMeasuredStyleModal, 'deleteMeasuredStyle', object)">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Add/Edit Risk Modal -->
+    <div bsModal #measuredStyleModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="measuredStyleModal" aria-hidden="true">
+        <div *ngIf="measuredStyleForm" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <form [formGroup]="measuredStyleForm" (ngSubmit)="measuredStyleFormSubmit(measuredStyleModal)" novalidate>
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="hideModal(measuredStyleModal)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                        <h4 class="modal-title">{{ (measuredStyleForm.controls.id.value?'fe.measuredStyle.edit':'fe.measuredStyle.add') | translate}}</h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <div class="form-group col-md-6">
+                            <label for="fill">{{ 'fe.measuredStyle.fill' | translate }}</label>
+                            <span *ngIf="measuredStyleFormCopy.fill==''" class="label label-danger pull-right">Required</span>
+                            <div class="input-group">
+                                <input class="form-control" name="fill" [(colorPicker)]="measuredStyleFormCopy.fill" [(cpToggle)]="toggles.fill" [style.background]="measuredStyleFormCopy.fill" [cpOutputFormat]="'rgba'" readonly/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" (click)="toggleColorPicker('fill')"><span class="glyphicon glyphicon-edit"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="stroke">{{ 'fe.measuredStyle.stroke' | translate }}</label>
+                            <span *ngIf="measuredStyleFormCopy.stroke==''" class="label label-danger pull-right">Required</span>
+                            <div class="input-group">
+                                <input class="form-control" name="stroke" [(colorPicker)]="measuredStyleFormCopy.stroke" [(cpToggle)]="toggles.stroke" [style.background]="measuredStyleFormCopy.stroke" [cpOutputFormat]="'rgba'" readonly/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" (click)="toggleColorPicker('stroke')"><span class="glyphicon glyphicon-edit"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="strokeWidth">{{ 'fe.measuredStyle.strokeWidth' | translate }}</label>
+                            <control-messages [control]="measuredStyleForm.controls.strokeWidth"></control-messages>
+                            <input class="form-control" formControlName="strokeWidth" name="strokeWidth" placeholder="{{ 'fe.measuredStyle.strokeWidth' | translate }}" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="description">{{ 'fe.measuredStyle.description' | translate }}</label>
+                            <control-messages [control]="measuredStyleForm.controls.description"></control-messages>
+                            <textarea class="form-control" formControlName="description" name="description" placeholder="{{ 'fe.measuredStyle.description' | translate }}"></textarea>
+                        </div>
+                        <validation-messages [errors]="formErrors" inputName="minAndMax">
+                            <div class="form-group col-md-6">
+                                <validation-messages [errors]="formErrors" inputName="valueMin">
+                                    <label for="valueMin">{{ 'fe.measuredStyle.valueMin' | translate }}</label>
+                                    <control-messages [control]="measuredStyleForm.controls.valueMin"></control-messages>
+                                    <input type="text" class="form-control" formControlName="valueMin" name="valueMin" placeholder="{{ 'fe.measuredStyle.valueMin' | translate }}" onlyDecimal [allowedNegative]="true" />
+                                </validation-messages>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <validation-messages [errors]="formErrors" inputName="valueMax">
+                                    <label for="valueMax">{{ 'fe.measuredStyle.valueMax' | translate }}</label>
+                                    <control-messages [control]="measuredStyleForm.controls.valueMax"></control-messages>
+                                    <input type="text" class="form-control" formControlName="valueMax" name="valueMax" placeholder="{{ 'fe.measuredStyle.valueMax' | translate }}" onlyDecimal [allowedNegative]="true" />
+                                </validation-messages>
+                            </div>
+                        </validation-messages>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="hideModal(measuredStyleModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                        <button type="submit" class="btn btn-success" [disabled]="measuredStyleForm.invalid">{{'fe.generalComponentContent.save' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Measured Style Modal -->
+    <div bsModal #deleteMeasuredStyleModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteMeasuredStyleModal" aria-hidden="true">
+        <div *ngIf="selectedMeasuredStyle" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(deleteMeasuredStyleModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{ 'fe.generalComponentContent.remove' | translate}}</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <p>Are you sure you want to remove this item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="hideModal(deleteMeasuredStyleModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                    <button type="button" class="btn btn-success" (click)="removeMeasuredStyle(deleteMeasuredStyleModal)">{{'fe.generalComponentContent.remove' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

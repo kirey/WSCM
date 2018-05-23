@@ -1,0 +1,200 @@
+<div id="cmp-admin-email-configs" class="app_content-container-cmp">
+    <h2 class="view-header clearfix">
+        <div class="view-header-sub">
+            {{'fe.emailConfigs.mainHeader' | translate}}
+        </div>
+    </h2>
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="_utilityService.setAlert(componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <div class="container-fluid form-group pull-right">
+        <input class="btn btn-success" type="submit" (click)="showModal(addEditFormModal, 'addEmailConfigs')" [value]="'fe.emailConfigs.btnAddEmailConfigs' | translate">
+    </div>
+
+    <div class="container-fluid">
+        <p-dataTable [value]="listOfEmailConfigs" #dataTable [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50, 100, 250, 500]" [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" reorderableColumns="true" class="table">
+            <p-column field="name" [header]="'fe.emailConfigs.colName' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailConfigs="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailConfigs.name" placement="top">
+                        {{emailConfigs.name}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="username" [header]="'fe.emailConfigs.colUsername' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailConfigs="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailConfigs.username" placement="top">
+                        {{emailConfigs.username}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="password" [header]="'fe.emailConfigs.colPassword' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailConfigs="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailConfigs.password" placement="top">
+                        {{emailConfigs.password}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="host" [header]="'fe.emailConfigs.colHost' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailConfigs="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailConfigs.host" placement="top">
+                        {{emailConfigs.host}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="port" [header]="'fe.emailConfigs.colPort' | translate" [style]="{'width': '8%'}" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailConfigs="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailConfigs.port" placement="top">
+                        {{emailConfigs.port}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="emailAddress" [header]="'fe.emailConfigs.colEmailAddress' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailConfigs="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailConfigs.emailAddress" placement="top">
+                        {{emailConfigs.emailAddress}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="messageFrom" [header]="'fe.emailConfigs.colMessageFrom' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailConfigs="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailConfigs.messageFrom" placement="top">
+                        {{emailConfigs.messageFrom}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="description" [header]="'fe.emailConfigs.colDescription' | translate" [style]="{'width': '13%'}" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailConfigs="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailConfigs.description" placement="top">
+                        {{emailConfigs.description | shortText: 100 : '...'}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column [style]="{'width': '84px'}">
+                <template pTemplate="header">
+                    <span *ngIf="!isLoadingAllEmailConfigs">
+						<button class="btn btn-success" (click)="refreshTableEmailConfigs()">
+							<span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                    </span>
+                    <span *ngIf="isLoadingAllEmailConfigs">
+			   			<img class="gif-loading-refresh-table" [src]="_constants.getAPP_FULL_REF_ROUTE_PREFIX() + 'assets/images/uploading.gif'">
+		    		</span>
+                </template>
+                <template let-emailConfigs="rowData" pTemplate="body">
+                    <button class="btn btn-warning edit-button" [tooltip]="'fe.generalComponentContent.edit' | translate" placement="top" type="button" (click)="showModal(addEditFormModal, 'editEmailConfigs', emailConfigs)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                    <button class="btn btn-danger delete-button" type="button" [tooltip]="'fe.generalComponentContent.delete' | translate" placement="top" (click)="showModal(lgModalDelete, 'deleteEmailConfigs', emailConfigs)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </template>
+            </p-column>
+        </p-dataTable>
+    </div>
+    <div bsModal #addEditFormModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div *ngIf="form" class="modal-dialog modal-lg modal-dialog-center modal-add-edit-form">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(addEditFormModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <div *ngIf="isAddForm">
+                        <h4 class="modal-title">{{'fe.emailConfigs.headerAddForm' | translate}}</h4>
+                    </div>
+                    <div *ngIf="!isAddForm">
+                        <h4 class="modal-title">{{'fe.emailConfigs.headerEditForm' | translate}}</h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="form">
+                        <div *ngIf="emailConfigs" class="ui-grid ui-grid-responsive ui-grid-pad">
+                            <div class="form-group">
+                                <label [attr.for]="name">{{'fe.emailConfigs.fieldName' | translate}}</label>
+                                <control-messages [control]="form.controls.name" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="name"></validation-messages>
+                                <input type="text" class="form-control" [(ngModel)]="emailConfigs.name" formControlName="name" [placeholder]="'fe.emailConfigs.fieldName' | translate" />
+                            </div>
+                            <div class="form-group">
+                                <label [attr.for]="username">{{'fe.emailConfigs.fieldUsername' | translate}}</label>
+                                <control-messages [control]="form.controls.username" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="username"></validation-messages>
+                                <input type="text" class="form-control" [(ngModel)]="emailConfigs.username" formControlName="username" [placeholder]="'fe.emailConfigs.fieldUsername' | translate" />
+                            </div>
+                            <div class="form-group">
+                                <label [attr.for]="password">{{'fe.emailConfigs.fieldPassword' | translate}}</label>
+                                <control-messages [control]="form.controls.password" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="password"></validation-messages>
+                                <div class="input-group">
+                                    <input type="{{password}}" class="form-control" [(ngModel)]="emailConfigs.password" formControlName="password" [placeholder]="'fe.emailConfigs.fieldPassword' | translate" />
+                                    <div class="input-group-addon cursor-pointer" (click)="togglePassword()"><i class="glyphicon glyphicon-eye-open"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label [attr.for]="host">{{'fe.emailConfigs.fieldHost' | translate}}</label>
+                                <control-messages [control]="form.controls.host" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="host"></validation-messages>
+                                <input type="text" class="form-control" [(ngModel)]="emailConfigs.host" formControlName="host" [placeholder]="'fe.emailConfigs.fieldHost' | translate" />
+                            </div>
+                            <div class="form-group">
+                                <label [attr.for]="text">{{'fe.emailConfigs.fieldPort' | translate}}</label>
+                                <control-messages [control]="form.controls.port" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="port"></validation-messages>
+                                <input type="text" class="form-control" [(ngModel)]="emailConfigs.port" formControlName="port" [placeholder]="'fe.emailConfigs.fieldPort' | translate" onlyNumber />
+                            </div>
+                            <div class="form-group">
+                                <label [attr.for]="emailAddress">{{'fe.emailConfigs.fieldEmailAddress' | translate}}</label>
+                                <control-messages [control]="form.controls.emailAddress" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="emailAddress"></validation-messages>
+                                <input type="text" class="form-control" [(ngModel)]="emailConfigs.emailAddress" formControlName="emailAddress" [placeholder]="'fe.emailConfigs.fieldEmailAddress' | translate">
+                            </div>
+                            <div class="form-group">
+                                <label [attr.for]="messageFrom">{{'fe.emailConfigs.fieldMessageFrom' | translate}}</label>
+                                <control-messages [control]="form.controls.messageFrom" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="messageFrom"></validation-messages>
+                                <input type="text" class="form-control" [(ngModel)]="emailConfigs.messageFrom" formControlName="messageFrom" [placeholder]="'fe.emailConfigs.fieldMessageFrom' | translate" />
+                            </div>
+                            <div class="form-group">
+                                <label [attr.for]="description">{{'fe.emailConfigs.fieldDescription' | translate}}</label>
+                                <control-messages [control]="form.controls.description" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="description"></validation-messages>
+                                <textarea type="text" class="form-control textarea-description-input" [(ngModel)]="emailConfigs.description" formControlName="description" [placeholder]="'fe.emailConfigs.fieldDescription' | translate"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div *ngIf="isAddForm">
+                        <input type="submit" class="btn btn-default" (click)="hideModal(addEditFormModal)" [value]="'fe.emailConfigs.btnClose' | translate">
+                        <input class="btn btn-primary" type="submit" [disabled]="!form.valid" [value]="'fe.emailConfigs.btnSave' | translate" (click)="saveOrUpdateEmailConfigs('save', addEditFormModal)">
+                    </div>
+                    <div *ngIf="!isAddForm">
+                        <input type="submit" class="btn btn-default" (click)="hideModal(addEditFormModal)" [value]="'fe.emailConfigs.btnClose' | translate">
+                        <input class="btn btn-primary" type="submit" [disabled]="!form.valid" [value]="'fe.emailConfigs.btnEdit' | translate" (click)="saveOrUpdateEmailConfigs('update', addEditFormModal)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div bsModal #lgModalDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-center dialog-delete-email-configs">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(lgModalDelete)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{'fe.emailConfigs.msgDeleteConfirmation' | translate}}:</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-class delete-email-configs"><b>{{deletedEmailConfigs?.name}}</b></div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-default modal-cancel" (click)="hideModal(lgModalDelete);$event.stopPropagation()" [value]="'fe.emailConfigs.btnCancel' | translate">
+                    <input type="submit" class="btn btn-primary btn-danger" (click)="deleteEmailConfigs(deletedEmailConfigs, lgModalDelete);$event.stopPropagation()" [value]="'fe.emailConfigs.btnDelete' | translate">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

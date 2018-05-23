@@ -1,0 +1,847 @@
+<div id="cmp-company_management" class="app_content-container-cmp kjgri">
+    <!-- Alert -->
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <!-- Header title -->
+    <h2 class="view-header">
+        <div class="view-header-sub">
+            {{ 'fe.companyManagement.mainHeader' | translate }}
+        </div>
+    </h2>
+
+    <!-- Filter form for companies table -->
+    <div class="filter_box clearfix">
+        <form #filterForm="ngForm" (ngSubmit)="filterCompanies(filterForm, companyDataTable)">
+            <div class="col-md-4 form-group">
+                <label class="control-label" for="filter-comapny_type">{{ 'fe.companyManagement.companyType' | translate }}</label>
+                <select name="companyType" id="filter-comapny_type" placeholder="Select company type" class="form-control" ngModel>
+                    <option value="">All</option>
+                    <option value="insuranceCompany">{{ 'fe.companyManagement.insuranceCompany' | translate }}</option>
+                    <option value="clientCompany">{{ 'fe.companyManagement.clientCompany' | translate }}</option>
+                </select>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="filter-company_name" class="control-label">{{'fe.companyManagement.companyName' | translate}}</label>
+                <input type="text" name="companyName" id="filter-company_name" [placeholder]="'fe.companyManagement.companyName' | translate" class="form-control" ngModel />
+            </div>
+            <div class="col-md-offset-9 col-md-3 clearfix">
+                <button type="submit" class="btn btn-primary pull-right">Apply</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Buttons for adding new company and edit default comapny-->
+    <div class="container-fluid">
+        <span class="pull-right form-group">
+            <button type="submit" class="btn btn-success" (click)="showModal(addCompanyModal, 'addCompany')">
+                 {{ 'fe.companyManagement.addNewCompany' | translate }}
+            </button>
+            <button type="submit" class="btn btn-primary" (click)="showModal(editDefaultCompany, 'editDefaultCompany')">
+                 {{ 'fe.companyManagement.editDefaultCompany' | translate }}
+            </button>
+        </span>
+    </div>
+
+    <!-- Companies table -->
+    <div class="container-fluid company_list">
+        <!-- Companies table -->
+        <!--<p-dataTable #adminRoutesDataTable [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [value]="companies" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50, 100, 250, 500]" [globalFilter]="globalFilter" reorderableColumns="true" class="table">-->
+        <p-dataTable [value]="companiesResults.results" #companyDataTable [lazy]="true" [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [totalRecords]="companiesResults.totalCount" [rows]="dataTableConfig.rows" [paginator]="dataTableConfig.paginator" [pageLinks]="dataTableConfig.pageLinks" [rowsPerPageOptions]="dataTableConfig.rowsPerPageOptions" [reorderableColumns]="dataTableConfig.reorderableColumns" (onLazyLoad)="onLazyLoad($event, filterForm)" class="table">
+            <p-column field="name" sortable="true" [header]="'fe.generalComponentContent.name' | translate">
+            </p-column>
+            <p-column field="code" [header]="'fe.companyManagement.companyCode' | translate">
+            </p-column>
+            <p-column field="companyType" [header]="'fe.companyManagement.companyType' | translate">
+            </p-column>
+            <p-column field="description" [header]="'fe.generalComponentContent.description' | translate">
+            </p-column>
+            <p-column field="flActive" [header]="'fe.generalComponentContent.enabled' | translate" [style]="{'width': '84px'}">
+                <template let-company="rowData" pTemplate="body">
+                    <div class="text-center">
+                        <button class="btn" [ngClass]="{'btn-danger': !company.flActive, 'btn-success': company.flActive}" (click)="updateCompanyStatus(company, filterForm, companyDataTable)" [tooltip]="'fe.companyManagement.changeCompanyStatus' | translate" [placement]="'top'">
+                            <span class="glyphicon" [ngClass]="{'glyphicon-remove': !company.flActive, 'glyphicon-ok': company.flActive}"></span>
+                        </button>
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="operations" [style]="{'width': '120px'}">
+                <template pTemplate="header">
+                    <span>
+						<button class="btn btn-success" (click)="filterCompanies(filterForm, companyDataTable)">
+							<span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                    </span>
+                </template>
+                <template let-company="rowData" pTemplate="body">
+                    <div class="text-center">
+                        <button class="btn btn-warning" (click)="showModal(editCompanyModal, 'editCompany', company.id)">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button class="btn btn-primary" (click)="showJoinedCompanyModal(previewCompanyModal, 'previewCompany', company)">
+                            <span class="glyphicon glyphicon-link"></span>
+                        </button>
+                    </div>
+                </template>
+            </p-column>
+        </p-dataTable>
+    </div>
+
+    <!-- Preview Company Modal -->
+    <div bsModal #previewCompanyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="previewCompanyModal" aria-hidden="true">
+        <div *ngIf="insuranceCompany" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(previewCompanyModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{ 'fe.companyManagement.connectTitle' | translate }} - {{ insuranceCompany.name }}</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <div class="row">
+                        <div class="col-md-12 margin-bottom-10">
+                            <lazyload-dropdown class="col-md-8" #companiesLazyDropDown [(ngModel)]="companyToAdd" [value]="availableCompanies" [label]="'fe.generalComponentContent.company' | translate"
+                                [clear]="true" display="name" [placeholder]="'fe.generalComponentContent.select' | translate" [filterPlaceholder]="'fe.generalComponentContent.search' | translate">
+                            </lazyload-dropdown>
+                            <button [disabled]="!companyToAdd" class="col-md-4 btn btn-success margin-top-20" (click)="connectCompany(companyToAdd.id)">{{'fe.companyManagement.connect' | translate}}</button>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="insuranceCompany.companyType == 'insuranceCompany'">
+                        <div class="col-md-12">
+                            <p-dataTable [value]="joinedCompanies" [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [rows]="dataTableConfig.rows" [paginator]="dataTableConfig.paginator" [pageLinks]="dataTableConfig.pageLinks" [rowsPerPageOptions]="dataTableConfig.rowsPerPageOptions" [reorderableColumns]="dataTableConfig.reorderableColumns">
+                                <p-column field="name" sortable="true" [filter]="true" [header]="'fe.generalComponentContent.name' | translate">
+                                </p-column>
+                                <p-column field="code" sortable="true" [filter]="true" [header]="'fe.companyManagement.companyCode' | translate">
+                                </p-column>
+                                <p-column field="description" sortable="true" [filter]="true" [header]="'fe.generalComponentContent.description' | translate">
+                                </p-column>
+                                <p-column [header]="'fe.companyManagement.allowInfoAccess' | translate" [style]="{'width': '180px'}">
+                                    <template let-object="rowData" pTemplate="body">
+                                        <div class="text-center">
+                                            <button class="btn" [ngClass]="{'btn-danger': !object.flConsentToView, 'btn-success': object.flConsentToView}" (click)="updateInfoConsent(object.id, object.flConsentToView)" [tooltip]="'fe.companyManagement.allowInfoAccess' | translate" [placement]="'top'">
+                                                <span class="glyphicon" [ngClass]="{'glyphicon-remove': !object.flConsentToView, 'glyphicon-ok': object.flConsentToView}"></span>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </p-column>
+                                <p-column field="operations" [style]="{'width': '60px'}">
+                                    <template pTemplate="header">
+                                        <span>
+                                             <button class="btn btn-success" (click)="loadJoinedCompanies(insuranceCompany.id)">
+                                                <span class="glyphicon glyphicon-refresh"></span>
+                                            </button> 
+                                        </span>
+                                    </template>
+                                    <template let-object="rowData" pTemplate="body">
+                                        <div class="text-center">
+                                            <button class="btn btn-danger" (click)="detachJoinedCompany(previewCompanyModal, detachCompanyModal, object, true)">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="insuranceCompany.companyType == 'clientCompany'">
+                        <div class="col-md-12">
+                            <p-dataTable [value]="joinedCompanies" [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [rows]="dataTableConfig.rows" [paginator]="dataTableConfig.paginator" [pageLinks]="dataTableConfig.pageLinks" [rowsPerPageOptions]="dataTableConfig.rowsPerPageOptions" [reorderableColumns]="dataTableConfig.reorderableColumns">
+                                <p-column field="name" sortable="true" [filter]="true" [header]="'fe.generalComponentContent.name' | translate">
+                                </p-column>
+                                <p-column field="code" sortable="true" [filter]="true" [header]="'fe.companyManagement.companyCode' | translate">
+                                </p-column>
+                                <p-column field="description" sortable="true" [filter]="true" [header]="'fe.generalComponentContent.description' | translate">
+                                </p-column>
+                                <p-column [header]="'fe.companyManagement.allowInfoAccess' | translate" [style]="{'width': '180px'}">
+                                    <template let-object="rowData" pTemplate="body">
+                                        <div class="text-center">
+                                            <button class="btn" [ngClass]="{'btn-danger': !object.flConsentToView, 'btn-success': object.flConsentToView}" (click)="updateInfoConsent(object.id, object.flConsentToView)" [tooltip]="'fe.companyManagement.allowInfoAccess' | translate" [placement]="'top'">
+                                                <span class="glyphicon" [ngClass]="{'glyphicon-remove': !object.flConsentToView, 'glyphicon-ok': object.flConsentToView}"></span>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </p-column>
+                                <p-column field="operations" [style]="{'width': '60px'}">
+                                    <template pTemplate="header">
+                                        <span>
+                                             <button class="btn btn-success" (click)="loadJoinedCompanies(insuranceCompany.id)">
+                                                <span class="glyphicon glyphicon-refresh"></span>
+                                            </button> 
+                                        </span>
+                                    </template>
+                                    <template let-object="rowData" pTemplate="body">
+                                        <div class="text-center">
+                                            <button class="btn btn-danger" (click)="detachJoinedCompany(previewCompanyModal, detachCompanyModal, object)">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="hideModal(previewCompanyModal)">{{'fe.generalComponentContent.close' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detach warning modal -->
+    <div bsModal #detachCompanyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="detachCompanyModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(detachCompanyModal)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+                    <h4 class="modal-title detachFromInsurance">{{'fe.companyManagement.detachFromCompany' | translate}}</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <h3>{{ detachingCompany?.name }}</h3>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" (click)="detachCompany(detachCompanyModal)">{{'fe.companyManagement.remove' | translate}}</button>
+                    <button class="btn btn-default" (click)="hideModal(detachCompanyModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit company modal with form-->
+    <div bsModal #editCompanyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" (onHidden)="onCompanyModalHide()">
+        <div class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(editCompanyModal)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+                    <h4 class="modal-title">{{'fe.companyManagement.editCompany' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <tabset>
+                        <!-- Company details tab-->
+                        <tab [heading]="'fe.companyManagement.companyProfile' | translate" [active]="tabsActivity.profile" (select)="selectTab('profile')">
+                            <!-- Company profile data form -->
+                            <form [formGroup]="editForm" (ngSubmit)="updateCompany(editForm.value, editCompanyModal, filterForm, companyDataTable)" *ngIf="editForm">
+                                <div class="row">
+                                    <div class="form-group col-md-5">
+                                        <label for="edit_form-company_name">{{'fe.companyManagement.companyName' | translate}}</label>
+                                        <control-messages [control]="editForm.controls.name"></control-messages>
+                                        <input type="text" formControlName="name" class="form-control" id="edit_form-company_name" [placeholder]="'fe.companyManagement.companyName' | translate">
+                                    </div>
+                                    <div class="form-group col-md-7">
+                                        <label for="edit_form-description">{{'fe.generalComponentContent.description' | translate}}</label>
+                                        <control-messages [control]="editForm.controls.description"></control-messages>
+                                        <input type="text" formControlName="description" class="form-control" id="edit_form-description" [placeholder]="'fe.generalComponentContent.description' | translate">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <validation-messages [errors]="formErrors" inputName="company.code">
+                                            <label for="edit_form-code">{{'fe.companyManagement.companyCode' | translate}}</label>
+                                            <control-messages [control]="editForm.controls.code"></control-messages>
+                                            <input type="text" formControlName="code" class="form-control" id="edit_form-code" [placeholder]="'fe.companyManagement.companyCode' | translate">
+                                        </validation-messages>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <validation-messages [errors]="formErrors" inputName="company.passwordTimeoutForm">
+                                            <label for="edit_form-password_timeout">{{'fe.companyManagement.passwordTimeout' | translate}}</label>
+                                            <control-messages [control]="editForm.controls.passwordTimeoutForm"></control-messages>
+                                            <input type="text" formControlName="passwordTimeoutForm" class="form-control" id="edit_form-password_timeout" [placeholder]="'fe.companyManagement.passwordTimeout' | translate" onlyDecimal />
+                                            <p class="help-block">{{'fe.companyManagement.timeoutHelpMessage' | translate}}</p>
+                                        </validation-messages>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="enabled">{{'fe.companyManagement.companyActive' | translate}}</label>
+                                        <div class="checkbox">
+                                            <p-checkbox formControlName="flActive" binary="true" [label]="'fe.generalComponentContent.enabled' | translate"></p-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                </div>
+                                <hr class="form-hr">
+                                <!-- Radio buttons for company type and package -->
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label class="pull-left company_package-label">{{ 'fe.companyManagement.companyType' | translate }}</label>
+                                        <control-messages [control]="editForm.controls.companyType" class="pull-left"></control-messages>
+                                        <div class="clear-both"></div>
+                                        <div class="checkbox">
+                                            <p-radioButton value="insuranceCompany" [label]="'fe.companyManagement.insuranceCompany' | translate" name="companyType" formControlName="companyType"></p-radioButton>
+                                        </div>
+                                        <div class="checkbox">
+                                            <p-radioButton value="clientCompany" [label]="'fe.companyManagement.clientCompany' | translate" name="companyType" formControlName="companyType"></p-radioButton>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4" *ngIf="editForm.controls.companyType.value">
+                                        <label class="pull-left company_package-label">{{ 'fe.companyManagement.package' | translate }}</label>
+                                        <control-messages [control]="editForm.controls.packageCode" class="pull-left"></control-messages>
+                                        <div class="clear-both"></div>
+                                        <div class="checkbox" *ngFor="let package of packages">
+                                            <p-radioButton [value]="package.code" [label]="package.name" name="packageName" formControlName="packageCode"></p-radioButton>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Package expiration date</label>
+                                            <p-calendar formControlName="packageExpiryDate" dateFormat="dd-mm-yy" monthNavigator="true" [minDate]="editForm.value._packageExpiryDateMin" [inputStyleClass]="'form-control'" [readonlyInput]="true"></p-calendar>
+                                        </div>
+                                        <div class="form-group row col-md-7">
+                                            <label>Renew</label>
+                                            <span class="pull-right glyphicon glyphicon-remove" (click)="clearRenew(editForm, packageCount)"></span>
+                                            <div class="input-group">
+                                                <input type="number" min="1" #packageCount class="form-control" placeholder="Packages" aria-describedby="basic-addon2">
+                                                <span class="input-group-btn" id="basic-addon2"><button class="btn btn-default" type="button" (click)="renewPackage(editForm, packageCount.value)"><span class="glyphicon glyphicon-ok"></span></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">{{'fe.generalComponentContent.save' | translate}}</button>
+                            </form>
+                            <hr class="modal-hr_full">
+                            <!-- Company logo input-->
+                            <div>
+                                <label>{{'fe.companyManagement.changeCompanyLogo' | translate}}</label>
+                                <div class="file_input-picture">
+                                    <div class="picture-wrapper">
+                                        <div class="picture-box" [style.background-image]="'url(' + selectedCompanyFileInput.value + ')' | safeStyle"></div>
+                                        <div class="picture-loading" *ngIf="!selectedCompanyFileInput.value">
+                                            <div id="circularG">
+                                                <div id="circularG_1" class="circularG"></div>
+                                                <div id="circularG_2" class="circularG"></div>
+                                                <div id="circularG_3" class="circularG"></div>
+                                                <div id="circularG_4" class="circularG"></div>
+                                                <div id="circularG_5" class="circularG"></div>
+                                                <div id="circularG_6" class="circularG"></div>
+                                                <div id="circularG_7" class="circularG"></div>
+                                                <div id="circularG_8" class="circularG"></div>
+                                            </div>
+                                        </div>
+                                        <div class="picture-btn">
+                                            <label for="file_input-picture-selectedCompany"><span class="glyphicon glyphicon-pencil"></span></label>
+                                            <input type="file" *ngIf="selectedCompanyFileInput.value" id="file_input-picture-selectedCompany" (change)="onFileInputChange($event, 'selectedCompanyFileInput')">
+                                        </div>
+                                    </div>
+                                    <div class="help-block" [ngClass]="{size_exceded: selectedCompanyFileInput.file?.size > 1048576}">{{'fe.companyManagement.helpFileSize' | translate}}</div>
+                                    <button class="btn btn-primary" (click)="uploadCompanyLogo(selectedCompanyFileInput.file, editForm.value.id, editCompanyModal, filterForm, companyDataTable)" [disabled]="!selectedCompanyFileInput.file || selectedCompanyFileInput.file?.size > 1048576">{{'fe.generalComponentContent.save' | translate}}</button>
+                                </div>
+                            </div>
+                        </tab>
+                        <!-- Company style form tab-->
+                        <tab [heading]="'fe.companyManagement.companyStyle' | translate" [active]="tabsActivity.editStyle" (select)="selectTab('editStyle')">
+                            <div class="margin_bottom-15">
+                                <tabset type="pills">
+                                    <!-- Current style tab -->
+                                    <tab [heading]="'fe.companyManagement.currentStyle' | translate" [active]="tabsActivity.currentStyle" (select)="selectTab('currentStyle', true)">
+                                        <div class="tab_box">
+                                            <div class="container-fluid double_row">
+                                                <div class="col-md-3 form-group" *ngFor="let rule of selectedCompanyProfile.activeCss; let i = index;">
+                                                    <label>{{rule.name}}</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" [(colorPicker)]="cssBundle.activeCss[rule.key].value" [(cpToggle)]="cssBundle.activeCss[rule.key].toggle" [style.background]="cssBundle.activeCss[rule.key].value" [cpOutputFormat]="'rgba'" readonly/>
+                                                        <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button" (click)="toggleColorPicker(cssBundle.activeCss[rule.key])"><span class="glyphicon glyphicon-edit"></span></button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tab>
+                                    <!-- Previously style tab -->
+                                    <tab [heading]="'fe.companyManagement.previousStyle' | translate" [active]="tabsActivity.previousStyle" (select)="selectTab('previousStyle', true)">
+                                        <div class="tab_box" *ngIf="selectedCompanyProfile.previousCss">
+                                            <div class="container-fluid double_row">
+                                                <div class="col-md-3 form-group" *ngFor="let rule of selectedCompanyProfile.previousCss; let i = index;">
+                                                    <label>{{rule.name}}</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" [style.background]="cssBundle.previousCss[rule.key].value" readonly/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="form-hr">
+                                            <div>
+                                                <label>{{'fe.companyManagement.resetCompanyStyleToPrevious' | translate}}</label>
+                                                <div>
+                                                    <button type="button" class="btn btn-warning" (click)="resetCompanyStyleToPrevious(selectedCompanyProfile.company.id, editCompanyModal, filterForm, companyDataTable)">{{'fe.generalComponentContent.reset' | translate}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="help-block tab_box" *ngIf="!selectedCompanyProfile.previousCss">
+                                            {{'fe.companyManagement.noPreviousCss' | translate}}
+                                        </div>
+                                    </tab>
+                                    <!-- Default style tab -->
+                                    <tab [heading]="'fe.companyManagement.defaultStyle' | translate" [active]="tabsActivity.defaultStyle" (select)="selectTab('defaultStyle', true)">
+                                        <div class="tab_box">
+                                            <div class="container-fluid double_row">
+                                                <div class="col-md-3 form-group" *ngFor="let rule of selectedCompanyProfile.defaultCss; let i = index;">
+                                                    <label>{{rule.name}}</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" [style.background]="cssBundle.defaultCss[rule.key].value" readonly/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="form-hr">
+                                            <div>
+                                                <label>{{'fe.companyManagement.resetCompanyStyleToDefault' | translate}}</label>
+                                                <div>
+                                                    <button type="button" class="btn btn-warning" (click)="resetCompanyStyleToDefault(selectedCompanyProfile.company.id, editCompanyModal, filterForm, companyDataTable)">{{'fe.generalComponentContent.reset' | translate}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tab>
+                                </tabset>
+                            </div>
+                            <button type="button" class="btn btn-primary" *ngIf="tabsActivity.editStyle && tabsActivity.currentStyle" (click)="editCompanyStyle(selectedCompanyProfile.company.id, cssBundle.activeCss, editCompanyModal, filterForm, companyDataTable)">{{'fe.generalComponentContent.save' | translate}}</button>
+                        </tab>
+                        <!-- Company location tab -->
+                        <tab [heading]="'fe.companyManagement.companyLocations' | translate" [active]="tabsActivity.locations" (select)="selectTab('locations')" [disabled]="selectedCompanyProfile.company?.companyType != 'clientCompany'">
+                            <div class="row">
+                                <div class="col-md-5 locations">
+                                    <div class="locations-list" *ngIf="!addLocationForm">
+                                        <h4>Locations: <button class="btn btn-success pull-right refresh_icon" (click)="openLocationTab(true)" [disabled]="locationEditMode"><span class="glyphicon glyphicon-refresh"></span></button></h4>
+                                        <accordion [closeOthers]="true">
+                                            <!-- One location accordion group -->
+                                            <accordion-group #group (click)="locationEditMode || openLocation(location, $index, group.isOpen)" [isDisabled]="locationEditMode || navigationAnimationStatus" *ngFor="let location of selectedCompanyLocations; let $index = index" [ngClass]="{'disabled': !location.flEnabled, 'enabled': location.flEnabled}">
+                                                <div accordion-heading class="accordion-heading">
+                                                    {{ location.name }}
+                                                    <i class="pull-right float-xs-right glyphicon heading-arrow" [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+                                                </div>
+                                                <div class="change_map_location-overlay" *ngIf="editLocationMapMode">
+                                                    <span>{{ 'fe.companyManagement.selectNewLocations' | translate }}</span>
+                                                </div>
+                                                <!-- Form for editing location -->
+                                                <div class="location-item-body" *ngIf="locationEditMode">
+                                                    <form [formGroup]="locationForms[$index]" *ngIf="locationForms[$index]" (ngSubmit)="updateLocation(locationForms[$index].value, selectedCompanyProfile.company.id)">
+                                                        <div class="form-group">
+                                                            <label for="location_forms-name">{{ 'fe.generalComponentContent.name' | translate }}</label>
+                                                            <control-messages [control]="locationForms[$index].controls.name"></control-messages>
+                                                            <input type="text" formControlName="name" class="form-control" id="location_forms-name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="location_forms-zip_code">{{ 'fe.companyManagement.zipCode' | translate }}</label>
+                                                            <control-messages [control]="locationForms[$index].controls.zipCode"></control-messages>
+                                                            <input type="text" formControlName="zipCode" class="form-control" id="location_forms-zip_code">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="location_forms-city">{{ 'fe.companyManagement.city' | translate }}</label>
+                                                            <control-messages [control]="locationForms[$index].controls.city"></control-messages>
+                                                            <input type="text" formControlName="city" class="form-control" id="location_forms-city">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="location_forms-address">{{ 'fe.companyManagement.address' | translate}}</label>
+                                                            <control-messages [control]="locationForms[$index].controls.address"></control-messages>
+                                                            <input type="text" formControlName="address" class="form-control" id="location_forms-address">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="location_forms-longitude">{{ 'fe.companyManagement.longitude' | translate }}</label>
+                                                                <control-messages [control]="locationForms[$index].controls.longitude"></control-messages>
+                                                                <input type="text" formControlName="longitude" class="form-control" readonly id="location_forms-longitude">
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label for="location_forms-latitude">{{ 'fe.companyManagement.latitude' | translate }}</label>
+                                                                <control-messages [control]="locationForms[$index].controls.latitude"></control-messages>
+                                                                <input type="text" formControlName="latitude" class="form-control" readonly id="location_forms-latitude">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p-checkbox binary="true" [label]="'fe.generalComponentContent.enabled' | translate" formControlName="flEnabled"></p-checkbox>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p-checkbox binary="true" [label]="'fe.companyManagement.headquarters' | translate" formControlName="flHeadquarter"></p-checkbox>
+                                                        </div>
+                                                        <hr class="form-hr">
+                                                        <div class="text-right">
+                                                            <div class="pull-left navigate_to" (click)="navigateToLocation([selectedLocation.longitude, selectedLocation.latitude])"><span class="glyphicon glyphicon-screenshot"></span></div>
+                                                            <button type="submit" class="btn btn-success" [disabled]="!locationForms[$index].valid">{{ 'fe.generalComponentContent.save' | translate }}</button>
+                                                            <button type="button" class="btn btn-default" (click)="locationDeactivateEdit()">{{ 'fe.generalComponentContent.cancel' | translate }}</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- Panel with data preview for selected location -->
+                                                <div *ngIf="!locationEditMode">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label>{{ 'fe.generalComponentContent.name' | translate }}</label>
+                                                            <div>{{ location.name }}</div>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>{{ 'fe.companyManagement.zipCode' | translate }}</label>
+                                                            <div>{{ location.zipCode }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>{{ 'fe.companyManagement.city' | translate}}</label>
+                                                        <div>{{ location.city }}</div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>{{ 'fe.companyManagement.address' | translate}}</label>
+                                                        <div>{{ location.address }}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label>{{ 'fe.companyManagement.longitude' | translate }}</label>
+                                                            <div>{{ location.longitude }}</div>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>{{ 'fe.companyManagement.latitude' | translate }}</label>
+                                                            <div>{{ location.latitude }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>{{ 'fe.generalComponentContent.enabled' | translate}}</label>
+                                                        <div>
+                                                            {{ (location.flEnabled ? 'fe.generalComponentContent.yes' : 'fe.generalComponentContent.no') | translate }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>{{ 'fe.companyManagement.headquarters' | translate }}</label>
+                                                        <div>
+                                                            {{ (location.flHeadquarter ? 'fe.generalComponentContent.yes' : 'fe.generalComponentContent.no') | translate }}
+                                                        </div>
+                                                    </div>
+                                                    <hr class="form-hr">
+                                                    <div class="text-right">
+                                                        <div class="pull-left navigate_to" (click)="navigateToLocation([selectedLocation.longitude, selectedLocation.latitude])"><span class="glyphicon glyphicon-screenshot"></span></div>
+                                                        <button type="button" class="btn btn-primary" (click)="locationActivateEdit(location, locationForms[$index])">{{ 'fe.generalComponentContent.edit' | translate }}</button>
+                                                    </div>
+                                                </div>
+                                            </accordion-group>
+                                        </accordion>
+                                    </div>
+
+                                    <div class="add_location">
+                                        <button type="button" class="btn btn-success add_icon" [disabled]="locationEditMode || locationOpened" *ngIf="!addLocationForm" (click)="openAddLocationForm()"><span class="glyphicon glyphicon-plus"></span></button>
+
+                                        <div class="add_location-box" *ngIf="addLocationForm">
+                                            <h4>{{ 'fe.companyManagement.addNewLocation' | translate }}</h4>
+                                            <form [formGroup]="addLocationForm">
+                                                <div class="form-group">
+                                                    <label for="add-location_form-name">{{ 'fe.generalComponentContent.name' | translate }}</label>
+                                                    <control-messages [control]="addLocationForm.controls.name"></control-messages>
+                                                    <input type="text" formControlName="name" class="form-control" id="add-location_form-name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <validation-messages [errors]="formErrors" inputName="zipCode">
+                                                        <label for="add-location_form-zip_code">{{ 'fe.companyManagement.zipCode' | translate }}</label>
+                                                        <control-messages [control]="addLocationForm.controls.zipCode"></control-messages>
+                                                        <input type="text" formControlName="zipCode" class="form-control" id="add-location_form-zip_code">
+                                                    </validation-messages>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="add-location_form-city">{{ 'fe.companyManagement.city' | translate }}</label>
+                                                    <control-messages [control]="addLocationForm.controls.city"></control-messages>
+                                                    <input type="text" formControlName="city" class="form-control" id="add-location_form-city">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="add-location_form-address">{{ 'fe.companyManagement.address' | translate}}</label>
+                                                    <control-messages [control]="addLocationForm.controls.address"></control-messages>
+                                                    <input type="text" formControlName="address" class="form-control" id="add-location_form-address">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="add-location_form-longitude">{{ 'fe.companyManagement.longitude' | translate}}</label>
+                                                        <control-messages [control]="addLocationForm.controls.longitude"></control-messages>
+                                                        <input type="text" formControlName="longitude" class="form-control" readonly id="add-location_form-longitude">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="add-location_form-latitude">{{ 'fe.companyManagement.latitude' | translate}}</label>
+                                                        <control-messages [control]="addLocationForm.controls.latitude"></control-messages>
+                                                        <input type="text" formControlName="latitude" class="form-control" readonly id="add-location_form-latitude">
+                                                    </div>
+                                                </div>
+                                                <div class="help-block">{{ 'fe.companyManagement.markLocation' | translate}}</div>
+                                                <div class="form-group ">
+                                                    <p-checkbox binary="true" [label]="'fe.generalComponentContent.enabled' | translate" formControlName="flEnabled"></p-checkbox>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p-checkbox binary="true" [label]="'fe.companyManagement.headquarters' | translate" formControlName="flHeadquarter"></p-checkbox>
+                                                </div>
+                                                <hr class="form-hr">
+                                                <div class="text-right">
+                                                    <button type="button" class="btn btn-success" [disabled]="!addLocationForm.valid" (click)="addNewLocation(addLocationForm.value)">{{ 'fe.generalComponentContent.save' | translate }}</button>
+                                                    <button type="button" class="btn btn-default" (click)="cancelAddLocation()">{{ 'fe.generalComponentContent.cancel' | translate }}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Map for previewing selected location and editing -->
+                                <div class="col-md-7 text-left">
+                                    <div class="row">
+                                        <form #searchForm (ngSubmit)="searchAddress()" id="search-form" class="col-md-10">
+                                            <div class="form-group">
+                                                <input class="form-control" name="q" [(ngModel)]="q" placeholder="{{ 'fe.companyManagement.labelSearchAddress' | translate }}" autocomplete="off" />
+                                                <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="clearSearchAddress(true)"></span>
+                                                <button type="submit" class="btn btn-default search-button">
+                                                    {{ 'fe.generalComponentContent.search' | translate }}
+                                                </button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </form>
+                                    </div>
+                                    <ul *ngIf="searchActiveAddress" class="search-list col-md-10">
+                                        <li *ngFor="let address of addresses" (click)="selectAddress(address)">
+                                            {{ address.display_name }}
+                                        </li>
+                                    </ul>
+                                    <div id="map" style="height: 500px;" [ngClass]="{'edit_location': editLocationMapMode}"></div>
+                                    <div>
+                                        <button type="button" class="btn btn-primary edit_location-map-btn" (click)="changeLocation()" *ngIf="locationEditMode && !editLocationMapMode">{{ 'fe.companyManagement.changeLocation' | translate }}</button>
+                                        <button type="button" class="btn btn-success edit_location-map-btn" [disabled]="!clickedCoordinates" (click)="saveNewLocation()" *ngIf="editLocationMapMode">{{ 'fe.generalComponentContent.save' | translate }}</button>
+                                        <button type="button" class="btn btn-default edit_location-map-btn" (click)="cancelLocationChange()" *ngIf="editLocationMapMode">{{ 'fe.generalComponentContent.cancel' | translate }}</button>
+
+                                        <!--<div class="pull-right">
+                                            <label>Search by coordinates</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+                                                <span class="input-group-addon" id="basic-addon2">Longitude</span>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="hideModal(editCompanyModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add company modal with form -->
+    <div bsModal #addCompanyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content" *ngIf="addForm">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(addCompanyModal)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+                    <h4 class="modal-title">{{'fe.companyManagement.addCompany' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addForm">
+                        <!-- Company profile data -->
+                        <div class="row">
+                            <div class="form-group col-md-5">
+                                <label for="add_form-company_name">{{'fe.companyManagement.companyName' | translate}}</label>
+                                <control-messages [control]="addForm.controls.name"></control-messages>
+                                <input type="text" formControlName="name" class="form-control" id="add_form-company_name" [placeholder]="'fe.companyManagement.companyName' | translate">
+                            </div>
+                            <div class="form-group col-md-7">
+                                <label for="add_form-description">{{'fe.generalComponentContent.description' | translate}}</label>
+                                <control-messages [control]="addForm.controls.description"></control-messages>
+                                <input type="text" formControlName="description" class="form-control" id="add_form-description" [placeholder]="'fe.generalComponentContent.description' | translate">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <validation-messages [errors]="formErrors" inputName="company.code">
+                                    <label for="add_form-code">{{'fe.companyManagement.companyCode' | translate}}</label>
+                                    <control-messages [control]="addForm.controls.code"></control-messages>
+                                    <input type="text" formControlName="code" class="form-control" id="add_form-code" [placeholder]="'fe.companyManagement.companyCode' | translate">
+                                </validation-messages>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <validation-messages [errors]="formErrors" inputName="company.email">
+                                    <label for="add_form-email">{{'fe.generalComponentContent.email' | translate}}</label>
+                                    <control-messages [control]="addForm.controls.email"></control-messages>
+                                    <input type="text" formControlName="email" class="form-control" id="add_form-email" [placeholder]="'fe.generalComponentContent.email' | translate">
+                                </validation-messages>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <validation-messages [errors]="formErrors" inputName="company.passwordTimeoutForm">
+                                    <label for="add_form-password_timeout">{{'fe.companyManagement.passwordTimeout' | translate}}</label>
+                                    <control-messages [control]="addForm.controls.passwordTimeoutForm"></control-messages>
+                                    <input type="text" formControlName="passwordTimeoutForm" class="form-control" id="add_form-password_timeout" [placeholder]="'fe.companyManagement.passwordTimeout' | translate" onlyDecimal />
+                                    <p class="help-block">{{'fe.companyManagement.timeoutHelpMessage' | translate}}</p>
+                                </validation-messages>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="enabled">{{'fe.companyManagement.companyActive' | translate}}</label>
+                                <div class="checkbox">
+                                    <p-checkbox formControlName="flActive" binary="true" [label]="'fe.generalComponentContent.enabled' | translate"></p-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="form-hr">
+                        <!-- Radio buttons for company type and package -->
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="pull-left company_package-label">{{ 'fe.companyManagement.companyType' | translate }}</label>
+                                <control-messages [control]="addForm.controls.companyType" class="pull-left"></control-messages>
+                                <div class="clear-both"></div>
+                                <div class="checkbox">
+                                    <p-radioButton value="insuranceCompany" [label]="'fe.companyManagement.insuranceCompany' | translate" name="companyType" formControlName="companyType" (click)="loadPackages(addForm.value.companyType, 'addForm')"></p-radioButton>
+                                </div>
+                                <div class="checkbox">
+                                    <p-radioButton value="clientCompany" [label]="'fe.companyManagement.clientCompany' | translate" name="companyType" formControlName="companyType" (click)="loadPackages(addForm.value.companyType, 'addForm')"></p-radioButton>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4" *ngIf="addForm.value.companyType">
+                                <label class="pull-left company_package-label">{{ 'fe.companyManagement.package' | translate }}</label>
+                                <control-messages [control]="addForm.controls.packageCode" class="pull-left"></control-messages>
+                                <div class="clear-both"></div>
+                                <div class="checkbox" *ngFor="let package of packages">
+                                    <p-radioButton [value]="package.code" [label]="package.name" name="packageName" formControlName="packageCode"></p-radioButton>
+                                </div>
+                            </div>
+                            <div class="col-md-4" *ngIf="addForm.value.packageCode" >
+                                <div class="form-group">
+                                    <label>Package expiration date</label>
+                                    <p-calendar formControlName="packageExpiryDate" dateFormat="dd-mm-yy" monthNavigator="true" [minDate]="addForm.value._packageExpiryDateMin" [inputStyleClass]="'form-control'" [readonlyInput]="true"></p-calendar>
+                                </div>
+                                <div class="form-group row col-md-7">
+                                    <label>Renew</label>
+                                    <span class="pull-right glyphicon glyphicon-remove" (click)="clearRenew(addForm, packageCount)"></span>
+                                    <div class="input-group">
+                                        <input type="number" min="1" #packageCount class="form-control" placeholder="Packages" aria-describedby="basic-addon2">
+                                        <span class="input-group-btn" id="basic-addon2"><button class="btn btn-default" type="button" (click)="renewPackage(addForm, packageCount.value)"><span class="glyphicon glyphicon-ok"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr class="modal-hr_full">
+                    <!-- Company logo input-->
+                    <div>
+                        <label>{{'fe.companyManagement.changeCompanyLogo' | translate}}</label>
+                        <div class="file_input-picture">
+                            <div class="picture-wrapper">
+                                <div class="picture-box" [style.background-image]="'url(' + addCompanyFileInput.value + ')' | safeStyle"></div>
+                                <div class="picture-loading" *ngIf="!addCompanyFileInput.value">
+                                    <div id="circularG">
+                                        <div id="circularG_1" class="circularG"></div>
+                                        <div id="circularG_2" class="circularG"></div>
+                                        <div id="circularG_3" class="circularG"></div>
+                                        <div id="circularG_4" class="circularG"></div>
+                                        <div id="circularG_5" class="circularG"></div>
+                                        <div id="circularG_6" class="circularG"></div>
+                                        <div id="circularG_7" class="circularG"></div>
+                                        <div id="circularG_8" class="circularG"></div>
+                                    </div>
+                                </div>
+                                <div class="picture-btn">
+                                    <label for="file_input-picture-add_company"><span class="glyphicon glyphicon-pencil"></span></label>
+                                    <input type="file" id="file_input-picture-add_company" (change)="onFileInputChange($event, 'addCompanyFileInput')">
+                                </div>
+                            </div>
+                            <div class="help-block" [ngClass]="{size_exceded: addCompanyFileInput.file?.size > 1048576}">{{'fe.companyManagement.helpFileSize' | translate}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" [disabled]="!addForm.valid" (click)="addNewCompany(addForm.value, addCompanyModal, filterForm, companyDataTable)">{{'fe.generalComponentContent.add' | translate}}</button>
+                    <button type="button" class="btn btn-default" (click)="hideModal(addCompanyModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit company modal with form-->
+    <div bsModal #editDefaultCompany="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(editDefaultCompany)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+                    <h4 class="modal-title">{{'fe.companyManagement.editDefaultCompany' | translate}}</h4>
+                </div>
+                <div class="modal-body clearfix" *ngIf="defaultCompany && cssBundle.defaultCss">
+                    <tabset>
+                        <!-- Company profile data tab -->
+                        <tab [heading]="'fe.companyManagement.details' | translate">
+                            <div class="row">
+                                <form [formGroup]="defaultCompanyForm" (ngSubmit)="updateDefaultCompany(defaultCompanyForm.value, editDefaultCompany, filterForm, companyDataTable)">
+                                    <div class="col-md-6 form-group">
+                                        <label for="edit_default-company_name">{{'fe.companyManagement.companyName' | translate}}</label>
+                                        <control-messages [control]="defaultCompanyForm.controls.name"></control-messages>
+                                        <input type="text" formControlName="name" class="form-control" id="edit_default-company_name" [placeholder]="'fe.companyManagement.companyName' | translate">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="edit_default-description">{{'fe.generalComponentContent.description' | translate}}</label>
+                                        <control-messages [control]="defaultCompanyForm.controls.description"></control-messages>
+                                        <input type="text" formControlName="description" class="form-control" id="edit_default-description" [placeholder]="'fe.generalComponentContent.description' | translate">
+                                    </div>
+                                    <div class="container-fluid">
+                                        <button type="submit" class="btn btn-primary">{{'fe.generalComponentContent.save' | translate}}</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <hr class="form-hr">
+                            <div>
+                                <label>{{'fe.companyManagement.changeCompanyLogo' | translate}}</label>
+                                <div class="file_input-picture">
+                                    <div class="picture-wrapper">
+                                        <div class="picture-box" [style.background-image]="'url(' + defaultCompanyFileInput.value + ')' | safeStyle"></div>
+                                        <div class="picture-loading" *ngIf="!defaultCompanyFileInput.value">
+                                            <div id="circularG">
+                                                <div id="circularG_1" class="circularG"></div>
+                                                <div id="circularG_2" class="circularG"></div>
+                                                <div id="circularG_3" class="circularG"></div>
+                                                <div id="circularG_4" class="circularG"></div>
+                                                <div id="circularG_5" class="circularG"></div>
+                                                <div id="circularG_6" class="circularG"></div>
+                                                <div id="circularG_7" class="circularG"></div>
+                                                <div id="circularG_8" class="circularG"></div>
+                                            </div>
+                                        </div>
+                                        <div class="picture-btn">
+                                            <label for="file_input-picture-default_company"><span class="glyphicon glyphicon-pencil"></span></label>
+                                            <input type="file" id="file_input-picture-default_company" (change)="onFileInputChange($event, 'defaultCompanyFileInput')">
+                                        </div>
+                                    </div>
+                                    <div class="help-block" [ngClass]="{size_exceded: defaultCompanyFileInput.file?.size > 1048576}">{{'fe.companyManagement.helpFileSize' | translate}}</div>
+                                    <button class="btn btn-primary" (click)="uploadCompanyLogo(defaultCompanyFileInput.file, defaultCompany.company.id, editDefaultCompany, filterForm, companyDataTable)" [disabled]="!defaultCompanyFileInput.file || defaultCompanyFileInput.file?.size > 1048576">{{'fe.generalComponentContent.save' | translate}}</button>
+                                </div>
+                            </div>
+                        </tab>
+                        <!-- Css management tab -->
+                        <tab [heading]="'fe.companyManagement.style' | translate">
+                            <div class="container-fluid double_row">
+                                <div class="col-md-3 form-group" *ngFor="let rule of selectedCompanyProfile.defaultCss; let i = index;">
+                                    <label>{{rule.name}}</label>
+                                    <div class="input-group">
+                                        <input class="form-control" [(colorPicker)]="cssBundle.defaultCss[rule.key].value" [(cpToggle)]="cssBundle.defaultCss[rule.key].toggle" [style.background]="cssBundle.defaultCss[rule.key].value" [cpOutputFormat]="'rgba'" readonly/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" (click)="toggleColorPicker(cssBundle.defaultCss[rule.key])"><span class="glyphicon glyphicon-edit"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <button type="submit" class="btn btn-primary" (click)="editDefaultStyle(cssBundle.defaultCss, editDefaultCompany)">{{'fe.generalComponentContent.save' | translate}}</button>
+                                </div>
+                            </div>
+                            <hr class="form-hr">
+                            <div class="container-fluid">
+                                <div class="col-md-12">
+                                    <label>{{'fe.companyManagement.resetDefaultCssToInit' | translate}}</label>
+                                    <div>
+                                        <button type="button" class="btn btn-warning" (click)="resetDefaultCssToInit(editDefaultCompany, filterForm, companyDataTable)">{{'fe.generalComponentContent.reset' | translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="hideModal(editDefaultCompany)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

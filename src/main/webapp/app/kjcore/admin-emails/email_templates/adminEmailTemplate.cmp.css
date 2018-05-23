@@ -1,0 +1,167 @@
+#cmp-admin-email-template .temp-txt-hover-class {
+  visibility: hidden;
+  width: 120px;
+  height: 200px;
+  background-color: black;
+  color: black;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1; }
+#cmp-admin-email-template .disabledField {
+  background: #dddddd; }
+#cmp-admin-email-template .hide-input {
+  display: none !important; }
+#cmp-admin-email-template .file-label-upload-icon {
+  float: right;
+  padding-right: 5px; }
+#cmp-admin-email-template .file-label-info {
+  width: 90%;
+  float: left;
+  word-break: break-all;
+  font-size: 14px;
+  padding-left: 10px;
+  text-align: left; }
+#cmp-admin-email-template .file-label:hover {
+  background: #619dd0;
+  border: 1px solid #4489c3; }
+#cmp-admin-email-template .file-label {
+  background: #337ab7;
+  border: 1px solid #337ab7;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  float: right;
+  font-size: 22px;
+  margin-bottom: 3px;
+  margin-left: 0px;
+  padding: 11px 0px;
+  width: 100%; }
+#cmp-admin-email-template #temp-pre {
+  white-space: pre-line;
+  text-align: left; }
+#cmp-admin-email-template #resource-pre {
+  white-space: pre-line;
+  text-align: left; }
+#cmp-admin-email-template .temp-file-class:hover .temp-txt-hover-class {
+  visibility: visible; }
+#cmp-admin-email-template .temp-txt-hover-class {
+  border-style: groove;
+  width: 300px;
+  height: 300px;
+  overflow: auto;
+  background-color: #E9E9E9; }
+#cmp-admin-email-template .temp-file-class {
+  display: inline-block; }
+#cmp-admin-email-template .resource-img-hover-class {
+  visibility: hidden;
+  width: 150px;
+  height: 110px;
+  background-color: #E9E9E9;
+  color: black;
+  border-radius: 6px;
+  border-style: groove;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1; }
+#cmp-admin-email-template .resource-file-class:hover .resource-img-hover-class {
+  visibility: visible; }
+#cmp-admin-email-template .resource-file-class {
+  padding: 3px; }
+#cmp-admin-email-template .btnAdd {
+  border-radius: 4px;
+  margin-right: 6px; }
+#cmp-admin-email-template .alert-message {
+  margin-top: 10px; }
+#cmp-admin-email-template .add-email-template-span {
+  float: right;
+  padding-bottom: 1%; }
+#cmp-admin-email-template .template-file-icon {
+  width: 42px;
+  height: 41px; }
+#cmp-admin-email-template .btn-download-template {
+  display: inline-block;
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin-email-template .icon-inline-resources {
+  width: 30px; }
+#cmp-admin-email-template .gif-loading-refresh-table {
+  width: 30px; }
+#cmp-admin-email-template .mandatory-label {
+  color: red; }
+#cmp-admin-email-template #template-file-input {
+  display: none; }
+#cmp-admin-email-template .add-inline-resources-div {
+  padding-top: 20%; }
+#cmp-admin-email-template .input-file-hidden {
+  display: none; }
+#cmp-admin-email-template .add-inline-icon {
+  width: 30px;
+  height: 30px; }
+#cmp-admin-email-template .img-inline-resource-file {
+  width: 100px;
+  height: 80px;
+  margin: 0 auto;
+  display: block; }
+#cmp-admin-email-template .img-inline-res-file-dialog {
+  width: 50px;
+  height: 50px; }
+#cmp-admin-email-template .btns-inline-resource {
+  width: 48%;
+  margin-left: 2%; }
+#cmp-admin-email-template .btn-cancel-in-resources {
+  width: 48%; }
+#cmp-admin-email-template .btn-edit-inline-res {
+  width: 18px;
+  padding: 0px; }
+#cmp-admin-email-template .delete-email-template {
+  text-align: center;
+  color: red; }
+#cmp-admin-email-template .img-res-file-dialog {
+  width: 100px;
+  height: 100px; }
+#cmp-admin-email-template .modal-add-edit-form {
+  width: 25%; }
+#cmp-admin-email-template .modal-dialog {
+  overflow-y: initial !important;
+  height: 70%; }
+#cmp-admin-email-template .modal-body {
+  overflow-y: auto; }
+#cmp-admin-email-template .add-inline-resources-modal {
+  width: 30%; }
+#cmp-admin-email-template .edit-template-button {
+  float: left;
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin-email-template .delete-template-button {
+  float: right;
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin-email-template .btn-show-resource {
+  width: 35px;
+  height: 30px; }
+#cmp-admin-email-template .resource-button {
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin-email-template .download-resource-button {
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin-email-template .edit-resource-button {
+  float: left;
+  width: 21px;
+  height: 27px;
+  padding: 3px !important; }
+#cmp-admin-email-template .delete-resource-button {
+  float: right;
+  width: 21px;
+  height: 27px;
+  padding: 3px !important; }
+#cmp-admin-email-template .add-resource-button {
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin-email-template .dialog-remove-resource {
+  width: 550px; }
+#cmp-admin-email-template .dialog-delete-template {
+  width: 550px; }
+
+/*# sourceMappingURL=adminEmailTemplate.cmp.css.map */

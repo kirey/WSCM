@@ -1,0 +1,38 @@
+#cmp-admin_users .search-span {
+  float: left; }
+#cmp-admin_users .margin-top-23 {
+  margin-top: 23px; }
+#cmp-admin_users .progress-image {
+  width: 30px; }
+#cmp-admin_users .ui-calendar {
+  display: block; }
+#cmp-admin_users .result-hr {
+  margin-top: 0; }
+#cmp-admin_users .add-user-btn {
+  margin-top: 25px; }
+#cmp-admin_users .ui-radiobutton-label {
+  padding-left: 0; }
+#cmp-admin_users .modal-title {
+  word-break: break-all; }
+#cmp-admin_users .modal-body > .row {
+  padding-top: 12px;
+  padding-bottom: 12px; }
+#cmp-admin_users .modal-body .row > div.col-md-3, #cmp-admin_users .modal-body .row > div.col-md-4 {
+  text-align: left; }
+#cmp-admin_users .modal-body .row > div.col-md-8, #cmp-admin_users .modal-body .row > div.col-md-9 {
+  text-align: center; }
+#cmp-admin_users .no-padding:nth-child(2n+1) {
+  padding-right: 0; }
+#cmp-admin_users .no-padding:nth-child(2n+2) {
+  padding-left: 0; }
+#cmp-admin_users .no-padding-super-admin:nth-child(2n+1) {
+  padding-left: 0; }
+#cmp-admin_users .no-padding-super-admin:nth-child(2n+2) {
+  padding-right: 0; }
+#cmp-admin_users .glyphicon-remove {
+  cursor: pointer;
+  line-height: 1.4; }
+  #cmp-admin_users .glyphicon-remove:hover {
+    color: #d9534f; }
+
+/*# sourceMappingURL=kjgri.adminUsers.cmp.css.map */

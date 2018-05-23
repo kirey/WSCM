@@ -1,0 +1,233 @@
+<div id="cmp-class_loading" class="app_content-container-cmp">
+	<div *ngIf="componentAlert.show" class="alert_box">
+		<alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+			<span [innerHTML]="componentAlert.message"></span>
+		</alert>
+	</div>
+
+	<h2 class="view-header clearfix">
+		<div class="view-header-sub">
+			{{'fe.classLoading.mainHeader' | translate}}
+		</div>
+	</h2>
+
+	<div class="container-fluid form-group">
+		<span class="search-span">
+			<input #globalFilter type="text" class="form-control" placeholder="{{'fe.generalComponentContent.search' | translate}}">
+		</span>
+		<span class="pull-right">
+			<button class="btn btn-primary" [ngClass]="{ 'button_highlight': buttonAnimation }" (click)="loadClassesIntoJVM()">
+				<span>{{'fe.classLoading.btnLoadClasses' | translate}}</span>
+		</button>
+		<button class="btn btn-success" (click)="showModal(addEditModal, 'addNewClass')">
+				{{'fe.classLoading.addNewClass' | translate}}
+			</button>
+		</span>
+	</div>
+
+	<div class="container-fluid">
+		<p-dataTable #tableClasses [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [value]="allClasses" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
+			<p-column field="flEnabled" [style]="{ 'width': '33px' }">
+				<template pTemplate="header">
+					<p-checkbox binary="true" (onChange)="checkboxChangeAll($event)"></p-checkbox>
+				</template>
+				<template let-object="rowData" pTemplate="body">
+					<p-checkbox binary="true" [(ngModel)]="object.flEnabled" (onChange)="checkboxChange(object)"></p-checkbox>
+				</template>
+			</p-column>
+			<p-column field="kjcPackages.name" [header]="'fe.classLoading.colPackage' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+				<template let-object="rowData" pTemplate="body">
+					<div class="text-center" [tooltip]="object.kjcPackages.name" placement="top">{{object.kjcPackages.name}}</div>
+				</template>
+			</p-column>
+			<p-column field="name" [header]="'fe.classLoading.colClass' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+				<template let-object="rowData" pTemplate="body">
+					<div class="text-center" [tooltip]="object.name" placement="top">{{object.name}}</div>
+				</template>
+			</p-column>
+			<p-column field="kjcClassCategories.name" [header]="'fe.classLoading.colCategory' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+				<template let-object="rowData" pTemplate="body">
+					<div class="text-center" [tooltip]="object.kjcClassCategories.name" placement="top">{{object.kjcClassCategories.name}}</div>
+				</template>
+			</p-column>
+			<p-column field="description" [header]="'fe.generalComponentContent.description' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+				<template let-object="rowData" pTemplate="body">
+					<div class="col-description" [tooltip]="object.description" placement="top">{{object.description}}</div>
+				</template>
+			</p-column>
+			<p-column field="operations" [style]="{'width': '84px'}">
+				<template pTemplate="header">
+					<span>
+						<button class="btn btn-success" (click)="refreshTable(tableClasses, 'tableClasses')">
+							<span class="glyphicon glyphicon-refresh"></span>
+					</button>
+					</span>
+				</template>
+				<template let-object="rowData" pTemplate="body">
+					<button class="btn btn-warning edit-button" (click)="showModal(addEditModal, 'editClass', object)">
+						<span class="glyphicon glyphicon-edit"></span>
+					</button>
+					<button class="btn btn-danger delete-button" (click)="showModal(deleteModal, 'deleteClass', object)">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+				</template>
+			</p-column>
+		</p-dataTable>
+
+		<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div *ngIf="deleteClassObject" class="modal-dialog modal-md modal-dialog-center">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" aria-label="Close" (click)="hideModal(deleteModal)">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+						<h4 class="modal-title">{{'fe.classLoading.deleteClass' | translate}}:</h4>
+					</div>
+					<div class="modal-body">
+						<div>
+							<b>{{'fe.classLoading.colPackage' | translate}}:</b> {{deleteClassObject.kjcPackages.name}}
+						</div>
+						<div>
+							<b>{{'fe.classLoading.colClass' | translate}}:</b> {{deleteClassObject.name}}
+						</div>
+						<div>
+							<b>{{'fe.classLoading.colCategory' | translate}}:</b> {{deleteClassObject.kjcClassCategories.name}}
+						</div>
+						<div>
+							<b>{{'fe.generalComponentContent.description' | translate}}:</b> {{deleteClassObject.description}}
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-default modal-cancel" (click)="hideModal(deleteModal);$event.stopPropagation()">{{'fe.generalComponentContent.cancel' | translate}}</button>
+						<button class="btn btn-primary modal-delete" (click)="deleteClass(deleteClassObject, deleteModal);$event.stopPropagation()">{{'fe.generalComponentContent.confirm' | translate}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div bsModal #addEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div *ngIf="add" class="modal-dialog modal-md modal-dialog-center">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" aria-label="Close" (click)="hideModal(addEditModal)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+					<h4 class="modal-title">{{'fe.classLoading.addNewClass' | translate}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>{{'fe.classLoading.fieldCategory' | translate}}</label>
+						<span *ngIf="!category" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+						<select type="text" class="form-control" [(ngModel)]="category">
+							<option *ngFor="let c of allCategories" [ngValue]="c">{{c.name}}</option>
+						</select>
+					</div>
+					<validation-messages [errors]="uploadFormErrors" inputName="description">
+						<div class="form-group">
+							<label>{{'fe.generalComponentContent.description' | translate}}</label>
+							<textarea maxlength="1000" class="form-control" rows="1" [(ngModel)]="description" id="description"></textarea>
+							<span *ngIf="description && description.length==1000" class="label label-warning">Reached maximum characters allowed.</span>
+						</div>
+					</validation-messages>
+
+					<div class="form-group">
+						<label>{{'fe.classLoading.fieldFile' | translate}}</label>
+						<span *ngIf="!javaFile" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+						<upload-validator *ngIf="javaFile" [file]="javaFile" [extension]="'java'"></upload-validator>
+
+						<validation-messages [errors]="uploadFormErrors" inputName="javaFile">
+							<div class="clearfix file">
+								<label for="javaFileInput" class="file-label clearfix">
+							<div *ngIf="javaFile" class="file-label-info">
+								<div>{{'fe.classLoading.fieldSize' | translate}}: <b>{{javaFile.size | bytes}}</b></div>
+								<div>{{'fe.classLoading.fieldName' | translate}}: <b>{{javaFileName}}</b></div>
+							</div>
+							<div class="file-label-upload-icon">
+								<span class="glyphicon glyphicon-upload"></span>
+							</div>
+						</label>
+								<input class="hide-input" type="file" id="javaFileInput" #javaFileInput accept=".java" (change)="onChangeJavaFile($event)">
+							</div>
+						</validation-messages>
+					</div>
+
+					<div class="form-group">
+						<label>{{'fe.classLoading.fieldCompiledFile' | translate}}</label>
+						<span *ngIf="!compiledFile" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+						<upload-validator *ngIf="compiledFile" [file]="compiledFile" [extension]="'class'"></upload-validator>
+
+						<validation-messages [errors]="uploadFormErrors" inputName="compiledFile">
+							<div class="clearfix file">
+								<label for="compiledFileInput" class="file-label clearfix">
+							<div *ngIf="compiledFile" class="file-label-info">
+								<div>{{'fe.classLoading.fieldSize' | translate}}: <b>{{compiledFile.size | bytes}}</b></div>
+								<div>{{'fe.classLoading.fieldName' | translate}}: <b>{{compiledFileName}}</b></div>
+							</div>
+							<div class="file-label-upload-icon">
+								<span class="glyphicon glyphicon-upload"></span>
+							</div>
+						</label>
+								<input class="hide-input" id="compiledFileInput" #compiledFileInput type="file" accept=".class" (change)="onChangeCompiledFile($event)">
+							</div>
+						</validation-messages>
+						<div *ngIf="uploadFilesError" class="file_input-validation_message">{{'fe.classLoading.fileNameError' | translate}}</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" (click)="hideModal(addEditModal)">{{'fe.classLoading.btnCancel' | translate}}</button>
+					<button type="button" class="btn btn-primary" [disabled]="validateUploadForm()" (click)="upload(addEditModal)">{{'fe.classLoading.btnUpload' | translate}}</button>
+				</div>
+			</div>
+		</div>
+
+		<div *ngIf="edit" class="modal-dialog modal-md modal-dialog-center">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" aria-label="Close" (click)="hideModal(addEditModal)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+					<h4 class="modal-title">{{classEditName}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>{{'fe.classLoading.fieldCategory' | translate}}</label>
+						<select type="text" class="form-control" [(ngModel)]="categoryEdit">
+							<option *ngFor="let c of allCategories" [ngValue]="c">{{c.name}}</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>{{'fe.generalComponentContent.description' | translate}}</label>
+						<textarea maxlength="1000" class="form-control" rows="1" [(ngModel)]="descriptionEdit"></textarea>
+						<span *ngIf="descriptionEdit && descriptionEdit.length==1000" class="label label-warning">{{ 'fe.generalComponentContent.max' | translate }} Reached maximum characters allowed. (1000)</span>
+					</div>
+
+					<div class="form-group">
+						<label>{{'fe.classLoading.fieldCompiledFile' | translate}}</label>
+						<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="clearFileEdit()"></span>
+						<upload-validator *ngIf="compiledFileEdit" [file]="compiledFileEdit" [extension]="'class'"></upload-validator>
+						<div *ngIf="compiledFileError" class="extension-error">{{'fe.classLoading.classFileError' | translate}}</div>
+						<validation-messages [errors]="editFormErrors" inputName="compiledFile">
+							<div class="clearfix file">
+								<label for="compiledFileEdit" class="file-label clearfix">
+						<div *ngIf="compiledFileEdit" class="file-label-info">
+							<div>{{'fe.classLoading.fieldSize' | translate}}: <b>{{compiledFileEdit.size | bytes}}</b></div>
+							<div>{{'fe.classLoading.fieldName' | translate}}: <b>{{compiledFileNameEdit}}</b></div>
+						</div>
+						<div class="file-label-upload-icon">
+						<span class="glyphicon glyphicon-upload"></span>
+					</div>
+					</label>
+								<input class="hide-input" type="file" #compiledFileInputEdit id="compiledFileEdit" accept=".class" (change)="onChangeCompiledFileEdit($event)">
+							</div>
+						</validation-messages>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" (click)="hideModal(addEditModal);$event.stopPropagation;">{{'fe.generalComponentContent.cancel' | translate}}</button>
+					<button type="button" class="btn btn-primary" [disabled]="compiledFileError" (click)="postEditClass(addEditModal)">{{'fe.generalComponentContent.edit' | translate}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,70 @@
+#cmp-monitoring_booked_reports {
+    .statusTooltip {
+        background-color: #f0f1f4;
+        color:black;
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    }
+
+    .mon-booked-reports-filter {
+        background: rgb(245, 245, 245);
+        margin: 0 15px 15px;
+        padding: 14px 0;
+
+        .label_text {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .date_input {
+            width: 100%;
+            input {
+                width: 100%;
+            }
+        }
+
+        .form-group { 
+            margin: 0;
+        }
+
+        .filter_controls {
+            padding-top: 20px;
+        }
+        
+        .glyphicon-remove {
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .glyphicon-remove:hover {
+            color: #d9534f;
+        }
+    }
+
+    .generated{
+        background-color:green;
+        display: inline-block;
+        height: 12px;
+        width:12px;
+    }
+
+    .booked{
+        background-color:grey;
+        display: inline-block;
+        height: 12px;
+        width:12px;
+    }
+
+    .executing{
+        background-color:yellow;
+        display: inline-block;
+        height: 12px;
+        width:12px;
+    }
+
+    .failed{
+        background-color:red;
+        display: inline-block;
+        height: 12px;
+        width:12px;
+    }
+}

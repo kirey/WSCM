@@ -1,0 +1,283 @@
+<div id="cmp-admin-email-template" class="app_content-container-cmp">
+    <h2 class="view-header clearfix">
+        <div class="view-header-sub">
+            {{'fe.emailTemplates.mainHeader' | translate}}
+        </div>
+    </h2>
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="_utilityService.setAlert(componentAlert)">
+            {{componentAlert.message}}
+        </alert>
+    </div>
+    <div class="container-fluid form-group pull-right">
+        <input type="submit" class="btn btn-success" (click)="showModal(addEditFormModal, 'addEditForm')" [value]="'fe.emailTemplates.btnAddEmailTemplate' | translate">
+    </div>
+    <div class="container-fluid">
+        <p-dataTable [value]="listOfEmailsTemplates" #dataTable [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50, 100, 250, 500]" [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" reorderableColumns="true" class="table">
+            <p-column field="name" [header]="'fe.emailTemplates.colName' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailTemplate="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailTemplate.name" placement="top">
+                        {{emailTemplate.name}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="emailSubject" [header]="'fe.emailTemplates.colEmailSubject' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailTemplate="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailTemplate.emailSubject" placement="top">
+                        {{emailTemplate.emailSubject}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="description" [header]="'fe.emailTemplates.colDescription' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-emailTemplate="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="emailTemplate.description" placement="top">
+                        {{emailTemplate.description | shortText: 100 : '...'}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column [header]="'fe.emailTemplates.colTemplateFile' | translate" [style]="{'text-align':'center', 'width':'120px'}">
+                <template let-emailTemplate="rowData" pTemplate="body">
+                    <div class="temp-file-class">
+                        <button type="button" class="btn btn-primary btn-download-template" [tooltip]="'fe.generalComponentContent.download' | translate" placement="top" (click)="downloadTemplateFile(emailTemplate)" on-mouseover="onMouseHoverTempFile(emailTemplate)"><span class="glyphicon glyphicon-save-file"></span></button>
+                        <pre id="temp-pre" class="temp-txt-hover-class" [hidden]="!isMouseHoverTempFile">{{templateFile}}</pre>
+                    </div>
+                </template>
+            </p-column>
+            <p-column [header]="'fe.emailTemplates.colInlineResources' | translate" [style]="{'text-align':'center', 'width':'110px'}">
+                <template let-emailTemplate="rowData" pTemplate="body">
+                    <button (click)="showInlineResources(emailTemplate)" [tooltip]="'fe.generalComponentContent.resources' | translate" placement="top" class="btn btn-primary resource-button">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                    </button>
+                </template>
+            </p-column>
+            <p-column [style]="{'width': '90px'}">
+                <template pTemplate="header">
+                    <span *ngIf="!isloadingEmailsTemplates">
+						<button class="btn btn-success" (click)="refreshTable()">
+							<span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                    </span>
+                    <span *ngIf="isloadingEmailsTemplates">
+			   			<img class="gif-loading-refresh-table" [src]="_constants.getAPP_FULL_REF_ROUTE_PREFIX() + 'assets/images/uploading.gif'">
+		    		</span>
+                </template>
+                <template let-emailTemplate="rowData" pTemplate="body">
+                    <button class="btn btn-warning edit-template-button" [tooltip]="'fe.generalComponentContent.edit' | translate" placement="top" (click)="showModal(addEditFormModal, 'editForm', emailTemplate)">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    <button class="btn btn-danger delete-template-button" [tooltip]="'fe.generalComponentContent.delete' | translate" placement="top" type="button" (click)="showModal(lgModalDeleteTemplate, 'deleteTemplate', emailTemplate)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                </template>
+            </p-column>
+        </p-dataTable>
+    </div>
+    <div bsModal #addEditFormModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-center modal-add-edit-form">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(addEditFormModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <div *ngIf="isAddForm">
+                        <h4 class="modal-title">{{'fe.emailTemplates.headerAddForm' | translate}}</h4>
+                    </div>
+                    <div *ngIf="!isAddForm">
+                        <h4 class="modal-title">{{'fe.emailTemplates.headerEditForm' | translate}}</h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="componentAlert.show && isInvalidForm" class="view-header-alert_box">
+                        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="_utilityService.setAlert(componentAlert)">
+                            <span [innerHTML]="componentAlert.message"></span>
+                        </alert>
+                    </div>
+                    <form [formGroup]="form">
+                        <div class="ui-grid ui-grid-responsive ui-grid-pad">
+                            <div class="form-group">
+                                <label [attr.for]="name">{{'fe.emailTemplates.fieldName' | translate}}</label>
+                                <control-messages [control]="form.controls.name" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="name"></validation-messages>
+                                <input type="text" class="form-control" formControlName="name" [(ngModel)]="emailTemplate.name" [placeholder]="'fe.emailTemplates.fieldName' | translate" />
+                            </div>
+                            <div class="form-group">
+                                <label [attr.for]="emailSubject">{{'fe.emailTemplates.fieldEmailSubject' | translate}}</label>
+                                <control-messages [control]="form.controls.emailSubject" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="emailSubject"></validation-messages>
+                                <input type="text" class="form-control" [(ngModel)]="emailTemplate.emailSubject" formControlName="emailSubject" [placeholder]="'fe.emailTemplates.fieldEmailSubject' | translate" />
+                            </div>
+                            <div class="form-group">
+                                <label [attr.for]="description">{{'fe.emailTemplates.fieldDescription' | translate}}</label>
+                                <control-messages [control]="form.controls.description" class="pull-right"></control-messages>
+                                <validation-messages [errors]="formErrors" inputName="description"></validation-messages>
+                                <input type="text" class="form-control" [(ngModel)]="emailTemplate.description" formControlName="description" [placeholder]="'fe.emailTemplates.fieldDescription' | translate" />
+                            </div>
+                            <div class="form-group">
+                                <div class="cleafix">
+                                    <label [attr.for]="template" class="label-text">{{'fe.emailTemplates.fieldTemplateFile' | translate}}</label>
+                                    <span *ngIf="!emailTemplate.template" class="label label-danger pull-right">Required</span>
+                                    <validation-messages [errors]="formErrors" inputName="template"></validation-messages>
+                                    <button class="file-label clearfix" onclick="document.getElementById('template-file-input').click();">
+                                                <div  *ngIf="isChosenTemplateFile" class="file-label-info">
+                                                    <div><b>{{'fe.emailTemplates.size' | translate}}: {{emailTemplate.template.size | bytes}}</b></div>
+                                                    <div><b>{{'fe.emailTemplates.templateFileName' | translate}}: {{emailTemplate.template.name}}</b></div>
+                                                </div>
+                                                <div *ngIf="isInvalidTemplateFile" class="file-label-info"><b>{{'fe.emailTemplates.msgInvalidTemplateFile' | translate}}</b></div>
+                                                <div *ngIf="isRequiredTemplateFile" class="file-label-info"><b>{{'fe.emailTemplates.msgRequiredTemplateFile' | translate}}</b></div>
+                                                <div class="file-label-upload-icon">
+                                                    <span class="glyphicon glyphicon-upload"></span>
+                                                </div>
+                                            </button>
+                                    <input id="template-file-input" type="file" class="form-control" name="template" accept=".txt, .ftl" (change)="uploadTemplateFile($event)">
+                                </div>
+                            </div>
+                            <div class="form-group add-inline-resources-div">
+                                <label [attr.for]="inlineResources">{{'fe.emailTemplates.fieldAddInlineResources' | translate}}  
+                                    <button type="button" class="btn btn-primary add-resource-button" onclick="document.getElementById('inline-res-file-input').click();">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button></label>
+                                <input type="file" id="inline-res-file-input" class="form-control input-file-hidden" name="inlineResources" accept="image/*" (change)="addInlineResources($event)">
+                            </div>
+                            <div [hidden]="isInlineResFormHidden" *ngIf="newInlineRes">
+                                <form [formGroup]="formInlineRes">
+                                    <div class="form-group">
+                                        <label [attr.for]="cdResource">
+                                            <span tyle="padding:3px" class="resource-file-class">
+                                                <img class="add-inline-icon" [src]="_constants.getAPP_FULL_REF_ROUTE_PREFIX() + 'assets/images/inline-resource.png'" on-mouseover="onMouseHoverInlineRes(newInlineRes.resourceFile)"/>
+                                                <pre id="resource-pre" class="resource-img-hover-class">
+                                                    <img [src]="'data:image/jpg;base64,' + newInlineRes.resourceFile" class="img-inline-resource-file"/>
+                                                </pre>
+                                            </span>
+                                            {{'fe.emailTemplates.fieldCidResource' | translate}}
+                                        </label>
+                                        <control-messages [control]="formInlineRes.controls.cdResource" class="pull-right"></control-messages>
+                                        <validation-messages [errors]="formErrors" inputName="cdResource"></validation-messages>
+                                        <div *ngIf="!isNotDuplicatedCID" class="validation_messages-box clearfix">
+                                            <div class="message">{{'fe.emailTemplates.msgDuplicateCID' | translate}}</div>
+                                        </div>
+                                        <input type="text" class="form-control" [(ngModel)]="newInlineRes.cdResource" formControlName="cdResource" [placeholder]="'fe.emailTemplates.fieldCidResource' | translate" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label [attr.for]="cdDescription">{{'fe.emailTemplates.fieldDescription' | translate}}</label>
+                                        <control-messages [control]="formInlineRes.controls.cdDescription" class="pull-right"></control-messages>
+                                        <validation-messages [errors]="formErrors" inputName="cdDescription"></validation-messages>
+                                        <input type="text" class="form-control" [(ngModel)]="newInlineRes.description" formControlName="cdDescription" [placeholder]="'fe.emailTemplates.fieldDescription' | translate" />
+                                    </div>
+                                    <div class="ui-grid-row text-center form-group">
+                                        <input type="submit" class="btn btn-warning btn-cancel-in-resources" (click)="cancelAddEditInlineRes()" [value]="'fe.emailTemplates.btnCancel' | translate">
+                                        <input type="submit" *ngIf="isAddNewResBtn" class="btn btn-primary btns-inline-resource" [disabled]="!formInlineRes.valid" (click)="saveEditInlineResource(newInlineRes)" [value]="'fe.emailTemplates.addResource' | translate">
+                                        <input type="submit" *ngIf="!isAddNewResBtn" class="btn btn-primary btns-inline-resource" [disabled]="!formInlineRes.valid" (click)="saveEditInlineResource(newInlineRes)" [value]="'fe.emailTemplates.btnUpdate' | translate">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="ui-grid-row form-group">
+                                <p-dataTable #inlineResDataTable [value]="listOfInResTemplate" [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate">
+                                    <p-column [header]="'fe.emailTemplates.colResources' | translate" [style]="{'text-align':'center','width':'90px'}">
+                                        <template let-resource="rowData" pTemplate="body">
+                                            <div class="resource-file-class">
+                                                <button type="button" class="btn btn-primary download-resource-button" [tooltip]="'fe.generalComponentContent.download' | translate" placement="top" (click)="downloadInlineResFile(resource)"><span class="glyphicon glyphicon-save-file" on-mouseover="onMouseHoverInlineRes(resource.resourceFile)"></span></button>
+                                                <pre id="resource-pre" class="resource-img-hover-class">
+                                                    <img [src]="'data:image/jpg;base64,' + resource.resourceFile" class="img-inline-resource-file"/>
+                                                </pre>
+                                            </div>
+                                        </template>
+                                    </p-column>
+                                    <p-column [style]=" {'width':'28%'} " field="cdResource" [header]="'fe.emailTemplates.colCID' | translate">
+                                        <template let-inlineResource="rowData" pTemplate="body">
+                                            <div class="text-center" [tooltip]="inlineResource.cdResource" placement="top">
+                                                {{inlineResource.cdResource}}
+                                            </div>
+                                        </template>
+                                    </p-column>
+                                    <p-column [style]=" {'width':'40%'} " field="description" [header]="'fe.emailTemplates.colDescriptionResource' | translate">
+                                        <template let-inlineResource="rowData" pTemplate="body">
+                                            <div class="text-center" [tooltip]="inlineResource.description" placement="top">
+                                                {{inlineResource.description | shortText: 50 : '...'}}
+                                            </div>
+                                        </template>
+                                    </p-column>
+                                    <p-column [style]=" {'width':'70px'} ">
+                                        <template let-resource="rowData" pTemplate="body">
+                                            <button (click)="prepareToEditInlineResource(resource)" [disabled]="resource.id" class="btn btn-warning edit-resource-button">
+                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                </button>
+                                            <button (click)="removedInlineResource=resource;lgModalRemoveInline.show();" class="btn btn-danger delete-resource-button">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </button>
+                                        </template>
+                                    </p-column>
+                                </p-dataTable>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div *ngIf="isAddForm" class="ui-grid-row form-group">
+                        <input type="submit" class="btn btn-default" (click)="hideModal(addEditFormModal)" [value]="'fe.emailTemplates.btnClose' | translate">
+                        <input class="btn btn-primary" type="submit" [disabled]="!form.valid || !isChosenTemplateFile || !isInlineResFormHidden" [value]="'fe.emailTemplates.btnSave' | translate" (click)="saveOrUpdateEmailTemplate('save', addEditFormModal)">
+                    </div>
+                    <div *ngIf="!isAddForm" class="ui-grid-row form-group">
+                        <input type="submit" class="btn btn-default" (click)="hideModal(addEditFormModal)" [value]="'fe.emailTemplates.btnClose' | translate">
+                        <input class="btn btn-primary" type="submit" [disabled]="!form.valid || isInvalidTemplateFile || !isInlineResFormHidden" [value]="'fe.emailTemplates.btnUpdate' | translate" (click)="saveOrUpdateEmailTemplate('update', addEditFormModal)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-dialog [header]="templateName" [(visible)]="isVisResourcesDlg" modal="modal" width="600" height="320" responsive="true">
+        <p-dataGrid [value]="listOfInResTemplateDlg" [paginator]="true" [rows]="4">
+            <header>{{'fe.emailTemplates.headerInlineResourcesDlg' | translate}}</header>
+            <template let-resource pTemplate="item">
+                <div class="ui-g-12 ui-md-3">
+                    <p-panel [style]="{'text-align':'center'}">
+                        <img [src]=" 'data:image/jpg;base64,' + resource.resourceFile" class="img-inline-res-file-dialog" />
+                        <hr class="ui-widget-content">
+                        <div [tooltip]="resource.resourceName" placement="top">{{resource.resourceName | shortText: 10 : '...'}}</div>
+                    </p-panel>
+                </div>
+            </template>
+        </p-dataGrid>
+    </p-dialog>
+    <div bsModal #lgModalDeleteTemplate="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-center dialog-delete-template">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(lgModalDeleteTemplate)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{'fe.emailTemplates.msgDeleteConfirmation' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-class" class="delete-email-template"><b>{{deletedEmailTemplate?.name}}</b></div>
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-default modal-cancel" (click)="hideModal(lgModalDeleteTemplate);$event.stopPropagation()" type="submit" [value]="'fe.emailTemplates.btnCancel' | translate">
+                    <input class="btn btn-primary btn-danger" (click)="deleteEmailTemplate(deletedEmailTemplate, lgModalDeleteTemplate);$event.stopPropagation()" type="submit" [value]="'fe.emailTemplates.btnDelete' | translate">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div bsModal #lgModalRemoveInline="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-center dialog-remove-resource">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(lgModalRemoveInline)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{'fe.emailTemplates.msgRemoveConfirmation' | translate}}:</h4>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="removedInlineResource" class="modal-class text-center">
+                        <img [src]=" 'data:image/jpg;base64,' + removedInlineResource.resourceFile" class="img-res-file-dialog" />
+                        <br>
+                        <div *ngIf="removedInlineResource"><b>{{removedInlineResource.resourceName}}</b></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-default modal-cancel" type="submit" (click)="hideModal(lgModalRemoveInline);$event.stopPropagation()" [value]="'fe.emailTemplates.btnCancel' | translate">
+                    <input class="btn btn-primary btn-danger" type="submit" (click)="removeInlineRes(lgModalRemoveInline);$event.stopPropagation()" [value]="'fe.emailTemplates.btnRemove' | translate">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+export { ActivateUser} from './models/activateUser.model';

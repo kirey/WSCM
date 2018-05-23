@@ -1,0 +1,50 @@
+#cmp-company_panel {
+    // .ui-datatable .ui-datatable-data {
+    //     > tr > td {
+    //         padding: 0;
+    //     }
+        
+    //     tr:hover {
+    //         background-color: rgb(234, 234, 234);
+    //         cursor: pointer;
+    //     }
+    // }
+    
+    .company_list-item-box {
+        cursor: pointer;
+        padding: .75em;
+
+        &.selected_company { 
+            background: #337AB7;
+            color: rgb(255, 255, 255);
+        }
+    }
+
+    .company_panel {
+        border-left: 1px solid rgb(234, 234, 234);
+        height: 100%;
+        
+        .default_company {
+            font-size: 13px;
+            position: relative;
+            top: -3px;
+        }
+    }
+
+    .checkbox {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .edit_default_style-btn {
+        margin-right: 16px;
+    }
+
+    .tab_box {
+        padding-top: 8px;
+    }
+
+    .size_exceded {
+        color: #D9534F;
+    }
+}

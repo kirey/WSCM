@@ -1,0 +1,224 @@
+#cmp-admin-create_report {
+  padding-bottom: 20px; }
+  #cmp-admin-create_report #admin-create_report-wrapper {
+    height: 100%;
+    position: relative; }
+  #cmp-admin-create_report #parameterDescription {
+    resize: vertical; }
+  #cmp-admin-create_report .ui-chkbox-label {
+    margin-bottom: 0;
+    cursor: pointer; }
+  #cmp-admin-create_report .checkbox_translation {
+    margin-bottom: 9px;
+    margin-top: -7px; }
+
+#report-settings .no-top-border.roles {
+  border-top: 0; }
+#report-settings .glyphicon-remove {
+  cursor: pointer;
+  line-height: 1.4; }
+#report-settings .glyphicon-remove:hover {
+  color: #d9534f; }
+#report-settings .report_status {
+  margin-top: 25px; }
+#report-settings .submit {
+  padding-top: 25px; }
+#report-settings .roles_label {
+  margin-left: 15px; }
+#report-settings .label-message {
+  float: right;
+  margin-right: 19px; }
+#report-settings .roles {
+  border-bottom: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 10px 0; }
+#report-settings .file-input-box {
+  float: left;
+  min-height: 1px;
+  width: 300px; }
+#report-settings .file-input-box-middle {
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray; }
+#report-settings .textarea-full_width {
+  width: 100%;
+  max-height: 300px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+#report-settings .file {
+  height: 64px;
+  margin-bottom: 14px;
+  position: relative; }
+  #report-settings .file .file-label {
+    background: #337ab7;
+    border: 1px solid #337ab7;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    float: right;
+    height: 64px;
+    font-size: 22px;
+    margin-bottom: 3px;
+    margin-left: 0px;
+    padding: 11px 0px;
+    position: absolute;
+    width: 100%; }
+    #report-settings .file .file-label div:nth-child(2) {
+      height: 38px;
+      overflow: hidden; }
+  #report-settings .file .hide-input {
+    display: none !important; }
+  #report-settings .file .file-label:hover,
+  #report-settings .file .file-label_disabled {
+    background: #619dd0;
+    border: 1px solid #4489c3; }
+  #report-settings .file .file-label-info {
+    width: 90%;
+    float: left;
+    word-break: break-all;
+    font-size: 14px;
+    padding-left: 10px; }
+  #report-settings .file .file-label-upload-icon {
+    float: right;
+    padding-right: 5px; }
+    #report-settings .file .file-label-upload-icon .glyphicon {
+      position: relative;
+      top: 7px; }
+
+.create_report-field {
+  margin: 18px 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: all .1s; }
+  .create_report-field.cursor-move:hover {
+    transform: scale(1.05); }
+  .create_report-field div:first-child .form-control[disabled] {
+    cursor: inherit; }
+  .create_report-field.fourth_element {
+    clear: both; }
+    .create_report-field.fourth_element .create_report-between-add_icon {
+      left: 2px; }
+  .create_report-field .width-full input {
+    width: 101%; }
+  .create_report-field-remove_icon {
+    padding: 6px 4px; }
+  .create_report-field-move_icon {
+    font-size: 14px;
+    padding: 7px 6px 5px; }
+  .create_report-field .parameter_properties {
+    background: #f8f8f8;
+    border: 1px solid #dedede;
+    padding: 10px;
+    position: relative;
+    top: -2px;
+    width: 100%;
+    z-index: 0; }
+    .create_report-field .parameter_properties .field-name_required {
+      display: inline-block;
+      position: relative;
+      top: -9px; }
+    .create_report-field .parameter_properties .property-box {
+      margin-bottom: 14px;
+      word-wrap: break-word; }
+    .create_report-field .parameter_properties .property-sql-box {
+      margin-bottom: 10px; }
+    .create_report-field .parameter_properties .parameter-type {
+      padding-right: 8px; }
+      .create_report-field .parameter_properties .parameter-type label {
+        margin-bottom: 0; }
+      .create_report-field .parameter_properties .parameter-type .radio {
+        margin: 0; }
+        .create_report-field .parameter_properties .parameter-type .radio:first-child {
+          margin-bottom: 2px; }
+    .create_report-field .parameter_properties .parameter-desc textarea {
+      height: 40px;
+      max-height: 63px;
+      max-width: 100%; }
+    .create_report-field .parameter_properties .parameter-desc div.parameter-desc-showing {
+      word-wrap: break-word; }
+    .create_report-field .parameter_properties .controls {
+      clear: both;
+      color: #337ab7;
+      font-size: 15px;
+      padding-top: 11px; }
+    .create_report-field .parameter_properties .parameter_properties-preview label,
+    .create_report-field .parameter_properties .parameter_properties-edit label {
+      margin-bottom: 0; }
+    .create_report-field .parameter_properties .parameter_properties-preview .property-box,
+    .create_report-field .parameter_properties .parameter_properties-preview .form-group,
+    .create_report-field .parameter_properties .parameter_properties-edit .property-box,
+    .create_report-field .parameter_properties .parameter_properties-edit .form-group {
+      margin-bottom: 7px !important; }
+    .create_report-field .parameter_properties .parameter_properties-preview .heal_label,
+    .create_report-field .parameter_properties .parameter_properties-edit .heal_label {
+      color: #337ab7;
+      font-size: 15px; }
+.create_report-add_icon-row {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  background-color: #66c166;
+  border-color: #66c166;
+  color: #fff;
+  float: left;
+  font-size: 15px;
+  height: 33px;
+  padding: 6px 9px;
+  width: 35px; }
+.create_report-add_row {
+  width: 36px; }
+.create_report-row {
+  border-bottom: 1px solid #dedede;
+  min-height: 61px;
+  padding: 0;
+  position: relative; }
+  .create_report-row-controls {
+    background: #eaeaea;
+    bottom: 0;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    margin: auto 0;
+    padding: 8px 9px;
+    position: absolute;
+    top: 0;
+    width: 27px; }
+  .create_report-row-remove {
+    background: transparent !important;
+    border: none;
+    bottom: 0;
+    color: #ff6662;
+    font-size: 19px;
+    height: 28px;
+    left: 0;
+    margin: auto;
+    padding: 4px 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 27px; }
+  .create_report-row.last {
+    margin-bottom: 10px; }
+.create_report-between-add_row {
+  background: #66c166;
+  border-radius: 50%;
+  bottom: -8px;
+  font-size: 7px;
+  height: 16px;
+  padding: 2px 4px;
+  position: absolute;
+  right: 0;
+  width: 16px;
+  z-index: 1; }
+.create_report-row-padded {
+  padding-left: 33px; }
+.create_report-prev-add_row {
+  border-bottom: 1px solid #dedede;
+  left: 15px;
+  position: relative; }
+
+/*# sourceMappingURL=adminCreateReport.cmp.css.map */

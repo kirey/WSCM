@@ -1,0 +1,1 @@
+{"version":3,"file":"adminCreateReport.routes.js","sourceRoot":"","sources":["adminCreateReport.routes.ts"],"names":[],"mappings":";AAAA,uBAA6B,iBAAiB,CAAC,CAAA;AAG/C,sCAAqC,8CAA8C,CAAC,CAAA;AAEvE,eAAO,GAAwB,qBAAY,CAAC,QAAQ,CAAC;IAC9D;QACI,IAAI,EAAE,EAAE;QACR,SAAS,EAAE,4CAAoB;KAClC;IACD;QACI,IAAI,EAAE,KAAK;QACX,SAAS,EAAE,4CAAoB;KAClC;CACJ,CAAC,CAAC"}

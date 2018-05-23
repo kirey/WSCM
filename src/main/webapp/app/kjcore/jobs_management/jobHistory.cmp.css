@@ -1,0 +1,27 @@
+#cmp-jobs_history .backButton {
+  border-radius: 32px;
+  height: 38px;
+  margin-right: 10px; }
+#cmp-jobs_history .modal-class {
+  overflow-y: scroll;
+  max-height: 730px; }
+#cmp-jobs_history th {
+  cursor: pointer; }
+#cmp-jobs_history .dateSelectorContainer {
+  margin-bottom: 20px; }
+#cmp-jobs_history .dateInput {
+  margin-right: 30px; }
+#cmp-jobs_history .btn-history {
+  margin-left: 20px; }
+#cmp-jobs_history .trace-box {
+  height: 200px;
+  overflow: scroll;
+  resize: vertical; }
+#cmp-jobs_history .no-records-box {
+  height: 20px; }
+#cmp-jobs_history .batch-params-box {
+  height: 150px;
+  overflow: scroll;
+  resize: vertical; }
+
+/*# sourceMappingURL=jobHistory.cmp.css.map */

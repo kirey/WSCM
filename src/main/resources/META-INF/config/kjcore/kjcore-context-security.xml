@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd       
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-4.2.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	<!-- SPRING SECURITY SETUP -->
+	
+ 	<!-- Authentication manager -->
+	<security:authentication-manager id="authenticationManager">
+		<security:authentication-provider user-service-ref="kjcUserAccountsDao">
+			<security:password-encoder ref="encoder" hash="bcrypt" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+		
+	<!-- Disable security -->	
+	<security:http security="none" pattern="/app/**"/>
+    <security:http security="none" pattern="/node_modules/**"/>
+    
+	<!-- HTTP settings -->
+	<security:http 	realm="Protected API" 
+					use-expressions="true"
+					auto-config="false"
+					disable-url-rewriting="true" 
+					create-session="stateless" 
+					entry-point-ref="unauthorizedEntryPoint"
+					authentication-manager-ref="authenticationManager">
+					
+		<!-- Custom Filters -->			
+		<security:custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER" />
+<!-- 	<security:custom-filter ref="csrfHeaderFilter" after="CSRF_FILTER" /> -->
+		<security:custom-filter ref="exceptionHandlerFilter" position="FIRST" />
+
+		<!-- Access Rights -->
+		<!-- ===================================================================================================================================== -->
+		<!-- Unauthenticated access -->
+		
+		<security:intercept-url 				pattern="/rest/users/noAuth/**" 							access="permitAll()" />
+		<security:intercept-url method="GET" 	pattern="/rest/translation/fe/noAuth/**" 					access="permitAll()" />
+		
+		
+		
+		<!-- Authenticated - AnyRole requests -->																		
+		<security:intercept-url 				pattern="/rest/users/**" 									access="isAuthenticated()" />
+		<security:intercept-url method="GET" 	pattern="/rest/reports" 									access="isAuthenticated()" />
+		<security:intercept-url method="GET" 	pattern="/rest/translation/fe/**" 							access="isAuthenticated()" />
+		<security:intercept-url method="GET" 	pattern="/rest/translation/languages/**" 					access="isAuthenticated()" />
+		<security:intercept-url method="GET" 	pattern="/rest/reports/book/**" 							access="isAuthenticated()" />
+		<security:intercept-url method="PUT" 	pattern="/rest/reports/**" 									access="isAuthenticated()" />
+		
+		<!-- Role_Admin level -->
+		<security:intercept-url method="GET" 	pattern="/rest/adminCompanies/company" 						access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')" />
+		<security:intercept-url method="GET" 	pattern="/rest/admin/users/filtered"						access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')" />
+		<security:intercept-url method="GET" 	pattern="/rest/admin/users/role" 							access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')" />
+		
+		<security:intercept-url method="POST"	pattern="/rest/adminCompanies/company/newCompanyCss"		access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')" />
+		<security:intercept-url method="POST" 	pattern="/rest/admin/users"		 							access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')" />
+		
+		<security:intercept-url method="PUT" 	pattern="/rest/adminCompanies/company/**"					access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')" />
+		<security:intercept-url method="PUT" 	pattern="/rest/admin/users/enable" 							access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')" />
+		<security:intercept-url method="PUT" 	pattern="/rest/admin/users" 								access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN')" />
+		
+		
+	
+		<!-- Role_Super_Admin level -->
+		<security:intercept-url pattern="/rest/**" access="hasAnyRole('ROLE_SUPER_ADMIN')" />
+		
+		<!-- ===================================================================================================================================== -->
+		
+		<!-- CSRF settings -->
+		<!-- <security:csrf token-repository-ref="csrfTokenRepository" /> -->			
+		 <security:csrf disabled="true"/>
+		 
+		 <!-- Access denied handler -->
+		 <security:access-denied-handler ref="accessDeniedHandler" />
+	</security:http>
+	
+	 <!-- Security Beans -->
+	<bean name="kjcUserAccountsDao" class="com.kirey.kjcore.data.dao.KjcUserAccountsDao"/>
+	<bean id="authenticationTokenProcessingFilter" class="com.kirey.kjcore.features.security.AuthenticationTokenProcessingFilter" />
+	<bean id="exceptionHandlerFilter" class="com.kirey.kjcore.features.security.ExceptionHandlerFilter" />
+	<bean id="unauthorizedEntryPoint" class="com.kirey.kjcore.features.security.UnauthorizedEntryPoint" />
+	<bean id="accessDeniedHandler"  class="com.kirey.kjcore.features.security.AccessDeniedExceptionHandler"/>
+	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg name="strength" value="11" />
+  	</bean>
+	
+	<!--<bean id="csrfHeaderFilter" class="it.kirey.kfuture.security.CsrfHeaderFilter"/>
+	<bean id="csrfTokenRepository" class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository">
+		<property name="headerName" value="X-XSRF-TOKEN"/>
+	</bean> -->
+</beans>

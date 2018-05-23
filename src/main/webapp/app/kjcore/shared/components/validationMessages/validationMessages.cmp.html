@@ -1,0 +1,9 @@
+<div [ngClass]="{'has-error': errorMessages && errorMessages.length > 0}">
+    <ng-content></ng-content>
+</div>
+
+<div class="validation_messages-box clearfix" *ngIf="errorMessages && errorMessages.length > 0">
+    <div *ngFor="let error of errorMessages" class="message">
+        {{error}}
+    </div>
+</div>

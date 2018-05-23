@@ -1,0 +1,22 @@
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a.active {
+  color: #777 !important;
+  background-color: #eee !important;
+  border-color: transparent !important; }
+
+.padding_sides-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+@media screen and (max-width: 1000px) {
+  .alert_box {
+    bottom: -5px;
+    left: 0;
+    margin: auto;
+    position: fixed;
+    right: 0;
+    width: auto;
+    word-break: break-word;
+    z-index: 999; } }
+
+/*# sourceMappingURL=main.css.map */

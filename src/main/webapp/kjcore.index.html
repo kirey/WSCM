@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>KJCore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <meta charset="UTF-8">
+
+    <!-- CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" type="text/css" href="node_modules/primeui/themes/bootstrap/theme.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="node_modules/primeui/primeui-ng-all.min.css" />-->
+    <link rel="stylesheet" type="text/css" href="node_modules/primeng/resources/primeng.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/primeng/resources/themes/bootstrap/theme.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/jquery-ui-timepicker-addon/src/jquery-ui-timepicker-addon.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/dragula/dist/dragula.css">
+
+    <link href="app/kjcore/main.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="app/kjcore/admin-create_report/adminCreateReport.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/login/login.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/report_management/reportManagement.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/error_log/errorLog.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/shared/components/global_loader/globalLoader.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/class_loading/classLoading.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/scheduler_management/schedulerManagement.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/jobs_management/jobHistory.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/jobs_management/jobs.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/admin-translation/adminTranslation.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/admin-routes/adminRoutes.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/admin-emails/email_configs/adminEmailConfigs.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/admin-emails/email_templates/adminEmailTemplate.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/admin/roles/adminRoles.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/admin/users/adminUsers.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/registration/registration.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/generics/generics.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/password_change/passwordChange.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/shared/components/lazyLoadDropdown/lazyLoadDropdown.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/company_management/companyManagement.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/company_panel/companyPanel.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/footer/footer.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/URL_components/confirm_registration/confirmRegistration.cmp.css">
+    <link rel="stylesheet" type="text/css" href="app/kjcore/monitoring_booked_reports/monitoringBookedReports.cmp.css">
+
+    <!-- JS -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/file-saver/FileSaver.js"></script>
+
+    <!-- Angular -->
+
+    <!--Libs-->
+    <script src="libs/jquery-ui.min.js"></script>
+    <script src="node_modules/jstz/dist/jstz.min.js"></script>
+    <!--<script src="node_modules/jquery-ui/external/jquery-1.12.0/jquery.js"></script>-->
+    <script src="node_modules/jquery-ui-timepicker-addon/src/jquery-ui-timepicker-addon.js"></script>
+    <script src="node_modules/jquery.inputmask/dist/jquery.inputmask.bundle.js"></script>
+
+
+
+    <!-- 2. Configure SystemJS -->
+    <script>
+        (function (global) {
+            // map tells the System loader where to look for things
+            var appFolder = 'app/kjcore';
+            var map = {
+                'app': 'app', // 'this is reference address for Angular to look for files',
+                '@angular': 'node_modules/@angular',
+                'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
+                'rxjs': 'node_modules/rxjs',
+                'primeng': 'node_modules/primeng',
+                'ng2-bootstrap': 'node_modules/ng2-bootstrap',
+                'ng2-dnd': 'node_modules/ng2-dnd',
+                'moment': 'node_modules/moment',
+                'ng2-radio-group': 'node_modules/ng2-radio-group',
+                'ng2-translate': 'node_modules/ng2-translate',
+                'dragula': 'node_modules/dragula/dist',
+                'ng2-dragula': 'node_modules/ng2-dragula',
+                'angular2-color-picker': appFolder + '/shared/directives/angular2-color-picker'
+            };
+            // packages tells the System loader how to load when no filename and/or no extension
+            var packages = {
+                'app': { main: 'kjcore.main.js', defaultExtension: 'js' },
+                'rxjs': { defaultExtension: 'js' },
+                'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
+                'primeng': { defaultExtension: 'js' },
+                'ng2-bootstrap': { main: 'bundles/ng2-bootstrap.umd.js', defaultExtension: 'js' },
+                'ng2-dnd': { main: 'index.js', defaultExtension: 'js' },
+                'moment': { main: 'moment.js', defaultExtension: 'js' },
+                'ng2-radio-group': { main: 'index.js', defaultExtension: 'js' },
+                'ng2-translate': { main: 'bundles/ng2-translate.umd.js', defaultExtension: 'js' },
+                'dragula': { main: 'dragula.js', defaultExtension: 'js' },
+                'ng2-dragula': { main: 'ng2-dragula.js', defaultExtension: 'js' },
+                'angular2-color-picker': {main:'index.js', defaultExtension: 'js'}
+            };
+            var ngPackageNames = [
+                'common',
+                'compiler',
+                'core',
+                'forms',
+                'http',
+                'platform-browser',
+                'platform-browser-dynamic',
+                'router',
+                'router-deprecated',
+                'upgrade',
+            ];
+            // Individual files (~300 requests):
+            function packIndex(pkgName) {
+                packages['@angular/' + pkgName] = { main: 'index.js', defaultExtension: 'js' };
+            }
+            // Bundled (~40 requests):
+            function packUmd(pkgName) {
+                packages['@angular/' + pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+            }
+            // Most environments should use UMD; some (Karma) need the individual index files
+            var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
+            // Add package entries for angular packages
+            ngPackageNames.forEach(setPackageConfig);
+            var config = {
+                map: map,
+                packages: packages
+            };
+            System.config(config);
+
+        })(this);
+
+        System.import('app')
+            .then(null, console.error.bind(console));
+    </script>
+</head>
+
+<body>
+    <!-- Main content container -->
+    <app></app>
+</body>
+
+</html>

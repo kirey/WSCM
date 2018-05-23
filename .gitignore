@@ -1,0 +1,10 @@
+.classpath
+.project
+.settings/
+target/
+src/main/webapp/.vscode/
+.sass-cache
+*npm-debug.log*
+src/main/webapp/*.log
+
+src/main/webapp/node_modules/

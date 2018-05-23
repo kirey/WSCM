@@ -1,0 +1,9 @@
+#cmp-login #login-wrapper {
+  margin: 220px auto 0;
+  width: 290px; }
+  #cmp-login #login-wrapper .login-header {
+    margin-bottom: 32px; }
+  #cmp-login #login-wrapper .break-word {
+    word-wrap: break-word; }
+
+/*# sourceMappingURL=login.cmp.css.map */

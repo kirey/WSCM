@@ -1,0 +1,171 @@
+<div id="cmp-report_management" class="app_content-container-cmp">
+	<div *ngIf="componentAlert.show" class="alert_box">
+		<alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+			<span [innerHTML]="componentAlert.message | translate"></span>
+		</alert>
+	</div>
+	<p-growl [value]="messages"></p-growl>
+	<!-- View content -->
+	<h2 class="view-header">
+		<div class="view-header-sub">
+			{{'fe.reportManagement.mainHeader' | translate}}
+		</div>
+	</h2>
+	<!-- Report list -->
+	<div class="col-md-6 report-list">
+		<!-- Controls -->
+		<div class="col-md-5 nopadding form-group">
+			<input #globalFilter type="text" class="form-control" [placeholder]="'fe.generalComponentContent.search' | translate">
+		</div>
+		<div class="col-md-7 nopadding form-group padding_right-0">
+			<button class="btn btn-success pull-right" (click)="bPrintReportLoading || loadingState || refreshTable()">
+				<span class="glyphicon glyphicon-refresh"></span>
+			</button>
+		</div>
+
+		<div class="container-fluid row" *ngIf="reports">
+			<p-dataTable #dataTable [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [value]="tableReports" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50, 100, 250, 500]"
+			 [globalFilter]="globalFilter" reorderableColumns="true" class="table" selectionMode="single" (onRowSelect)="selectReport($event)" (onRowUnselect)="selectedReport = null">
+				<p-column field="name" [header]="'fe.generalComponentContent.name' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+					<template let-object="rowData" pTemplate="body">
+						{{object.name}}
+					</template>
+				</p-column>
+				<p-column field="description" [header]="'fe.generalComponentContent.description'| translate" sortable="true" [filter]="true" filterMatchMode="contains">
+					<template let-object="rowData" pTemplate="body">
+						{{object.description}}
+					</template>
+				</p-column>
+				<p-column field="type" [header]="'fe.reportManagement.type' | translate" sortable="true" [filter]="true" filterMatchMode="contains" [style]="{'width': '84px'}">
+					<template let-object="rowData" pTemplate="body">
+						{{object.type == 'sync' ? 'Sync' : 'Async'}}
+					</template>
+				</p-column>
+				<p-column *ngIf="_appService.getRouter().url == '/admin/report_management'" field="flEnabled" header="Status" sortable="true" [style]="{'width': '60px'}">
+					<template let-object="rowData" pTemplate="body">
+						<div class="text-center">
+							<button class="status-button" [ngClass]="{'btn':true, 'btn-danger': !object.flEnabled, 'btn-success': object.flEnabled}" (click)="updateReportStatus(object)">
+								<span [ngClass]="{'glyphicon':true, 'glyphicon-remove': !object.flEnabled, 'glyphicon-ok': object.flEnabled}"></span>
+							</button>
+						</div>
+					</template>
+				</p-column>
+				<p-column *ngIf="_appService.getRouter().url == '/admin/report_management'" field="roles" [header]="'fe.reportManagement.roles' | translate" sortable="true" [filter]="true"
+				 filterMatchMode="contains" [style]="{ 'width': '140px' }">
+					<template let-object="rowData" pTemplate="body">
+						<div class="text-center">
+							{{object.roles}}
+						</div>
+					</template>
+				</p-column>
+				<p-column *ngIf="_appService.getRouter().url == '/admin/report_management'" field="operations" [style]="{'width': '84px'}">
+					<template let-object="rowData" pTemplate="body">
+						<button class="btn btn-warning edit-button" (click)="$event.stopPropagation();editReport(object.id)">
+							<span class="glyphicon glyphicon-edit"></span>
+						</button>
+						<button class="btn btn-danger delete-button" (click)="$event.stopPropagation();showModal(deleteModal, 'deleteReport', object)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</template>
+				</p-column>
+			</p-dataTable>
+		</div>
+	</div>
+
+	<div id="report_management-form" *ngIf="reports && selectedReport && form && formLoaded" class="col-md-6">
+		<h3 class="view-sub_header">{{ 'fe.reportManagement.formHeader' | translate }}</h3>
+		<div class="form-box clearfix">
+			<h4 class="form-header padding_sides-15 clearfix">{{selectedReport.key}}
+				<span class="report_type">{{selectedReport.type == 'sync' ? ('fe.reportManagement.synchronous' | translate) : ('fe.reportManagement.asynchronous' | translate)}}</span>
+			</h4>
+			<form [formGroup]="form" novalidate>
+				<div *ngIf="selectedReportParams[0].length > 0">
+					<div *ngFor="let row of selectedReportParams" class="clearfix">
+						<div *ngFor="let column of row; let columnIndex = index " class="col-md-4">
+							<validation-messages [errors]="formErrors" [inputName]="column.key">
+								<label [attr.for]="column.key">{{column.name | capital}}</label>
+								<control-messages [control]="form.controls[column.key]"></control-messages>
+								<div class="form-group position-relative" [ngClass]="{'form-group position-relative': true, 'has-error': !form.controls[column.key].valid}" *ngIf="column.type != 'Timestamp' && column.type != 'Date' && !column.dbTable && !column.dbColumn">
+									<input class="form-control" [formControlName]="column.key" [type]="transformFieldType(column.type)" [placeholder]="column.name | capital">
+								</div>
+
+								<div class="form-group" *ngIf="(column.type=='String' || column.type=='Integer') && column.dbTable && column.dbColumn">
+									<p-dropdown [options]="options[selectedReport.id][column.key]" [formControlName]="column.key" [filter]="true" [style]="{'width':'100%'}" (onChange)="dependencyEventEmitter(column, form.controls[column.key].value)"></p-dropdown>
+								</div>
+
+								<div class="form-group" *ngIf="column.type == 'Timestamp' || column.type == 'Date'">
+									<p-calendar [formControlName]="column.key" readonlyInput="readonlyInput" [yearNavigator]="true" [monthNavigator]="true" yearRange="2016:2030" showTime="showTime"
+									 dateFormat="yy-mm-dd" timeFormat="HH:mm:ss" inputStyleClass="form-control" dataType="string" [showIcon]="true"></p-calendar>
+								</div>
+							</validation-messages>
+						</div>
+						<hr class="form-hr">
+					</div>
+				</div>
+
+				<div class="form-group clearfix col-md-4" [ngClass]="{'has-error': !form.controls['format'].valid}">
+					<label for="format">{{ 'fe.reportManagement.fieldFormat' | translate }}</label>
+					<select formControlName="format" class="form-control" required>
+						<option value="pdf">PDF</option>
+						<option value="xls">Excel</option>
+					</select>
+					<control-messages [control]="form.controls['format']"></control-messages>
+				</div>
+
+				<div class="col-md-4">
+					<div class="form-group" *ngIf="selectedReport.type=='async'" [ngClass]="{'has-error': !form.controls['bookedDate'].valid}">
+						<label for="bookedDate">{{ 'fe.reportManagement.bookedDate' | translate }}:</label>
+						<validation-messages [errors]="formErrors" inputName="bookedDate"></validation-messages>
+						<p-calendar formControlName="bookedDate" [(disabledDates)]="unavailableDates" [minDate]="minDate" [dateFormat]="dateFormat" [maxDate]="maxDate" [readonlyInput]="true" (click)="getUnavailableDates($event)"
+						 [showIcon]="true"></p-calendar>
+						<control-messages [control]="form.controls['bookedDate']"></control-messages>
+					</div>
+				</div>
+
+				<div class="container-fluid row clear-both">
+					<div class="col-md-6 col-md-offset-6 text-right">
+						<span *ngIf="selectedReport.type=='sync'">
+							<button type="button" class="btn btn-primary" [disabled]="!form.valid || bPrintReportLoading" (click)="printReport(false, selectedReport.name)">
+								{{ 'fe.generalComponentContent.download' | translate }}
+							</button>
+							<button *ifBrowser="['Chrome', 'Firefox']" type="button" class="btn btn-primary" [disabled]="!form.valid || bPrintReportLoading || this.form.value.format == 'xls'" (click)="printReport(true, selectedReport.name)">
+								{{ 'fe.generalComponentContent.open' | translate }}
+							</button>
+						</span>
+						<button *ngIf="selectedReport.type=='async'" type="button" class="btn btn-primary" (click)="addBooking()" [disabled]="isDisabledToBook()">
+							{{ 'fe.reportManagement.btnBook' | translate }}
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-md modal-dialog-center">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" aria-label="Close" (click)="hideModal(deleteModal)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+					<h4 class="modal-title">{{'fe.reportManagement.confirmDeletion' | translate}}</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<b>{{'fe.generalComponentContent.name' | translate}}:</b> {{deletingReport.name}}
+					</div>
+					<div>
+						<b>{{'fe.generalComponentContent.description' | translate}}:</b> {{deletingReport.description}}
+					</div>
+					<div>
+						<b>{{'fe.reportManagement.reportType' | translate}}:</b> {{deletingReport.type == 'sync' ? ('fe.reportManagement.synchronous' | translate) : ('fe.reportManagement.asynchronous'
+						| translate)}}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" (click)="hideModal(deleteModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+					<button type="button" class="btn btn-primary" (click)="deleteReport(deletingReport.id, deleteModal)">{{'fe.generalComponentContent.delete' | translate}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

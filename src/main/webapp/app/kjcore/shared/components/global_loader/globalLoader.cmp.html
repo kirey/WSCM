@@ -1,0 +1,17 @@
+<div id="app-global_loader" *ngIf="loaderCounter" [ngStyle]="{'z-index': position ? 1002 : 1031, 'margin-top': position && _appService.initModuleLoaded ? '50px' : 0}">
+	<div class="loader_container">
+		<div id="circularG">
+			<div id="circularG_1" class="circularG"></div>
+			<div id="circularG_2" class="circularG"></div>
+			<div id="circularG_3" class="circularG"></div>
+			<div id="circularG_4" class="circularG"></div>
+			<div id="circularG_5" class="circularG"></div>
+			<div id="circularG_6" class="circularG"></div>
+			<div id="circularG_7" class="circularG"></div>
+			<div id="circularG_8" class="circularG"></div>
+		</div>
+		<div class="loader-message">
+			{{loadingMessage}}
+		</div>
+	</div>
+</div>

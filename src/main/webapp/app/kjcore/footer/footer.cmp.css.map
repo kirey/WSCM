@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,MAAO;EACH,gBAAgB,EAAE,OAAkB;EACpC,UAAU,EAAE,iBAA4B;EACxC,KAAK,EAAE,OAAkB;EACzB,MAAM,EAAE,EAAE;EACV,OAAO,EAAE,UAAU",
+"sources": ["footer.cmp.scss"],
+"names": [],
+"file": "footer.cmp.css"
+}

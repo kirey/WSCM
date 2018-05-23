@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+<!-- 
+	<batch:job id="jobExample_Simple" restartable="true" parent="parentJob">
+		<batch:step id="stepExample">
+			<batch:tasklet>
+				<batch:chunk reader="exampleDBReader" processor="exampleProcessor" writer="exampleFileWriter"
+					 commit-interval="2">
+				</batch:chunk>
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+
+	<bean id="exampleDBReader"
+		class="org.springframework.batch.item.database.HibernateCursorItemReader" scope="step">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="queryString" value="from KjcEmailConfigs"/>
+	</bean>
+
+	<bean id="exampleFileWriter" class="org.springframework.batch.item.file.FlatFileItemWriter"
+		scope="step">
+		<property name="resource" value="#{jobParameters[outputFile]}_#{jobParameters[timeStamp]}.csv" />
+		<property name="lineAggregator">
+			<bean
+				class="org.springframework.batch.item.file.transform.DelimitedLineAggregator">
+				<property name="delimiter" value=";" />
+				<property name="fieldExtractor">
+					<bean
+						class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+						<property name="names"
+							value="id,name,username,password,host,port,utInsert,tsInsert,utUpdate,tsUpdate,emailAddress" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="exampleProcessor" class="com.kirey.kjcore.features.scheduling.jobs.processor.SimpleExampleProcessor" /> -->
+</beans>

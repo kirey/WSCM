@@ -1,0 +1,76 @@
+#cmp-report_management .report-list .delete-button {
+  float: right;
+  width: 30px;
+  padding: 3px !important; }
+#cmp-report_management .report-list .edit-button {
+  float: left;
+  width: 30px;
+  padding: 3px !important; }
+#cmp-report_management .report-list .status-button {
+  width: 30px;
+  padding: 3px !important; }
+#cmp-report_management .report-list .search-span {
+  float: left; }
+#cmp-report_management .report-list .nopadding {
+  padding-left: 0px !important;
+  margin-right: 0px !important; }
+#cmp-report_management .report-list .item {
+  cursor: pointer;
+  font-size: 16px; }
+  #cmp-report_management .report-list .item:nth-child(even) {
+    background: #f9f9f9; }
+  #cmp-report_management .report-list .item td {
+    padding: 10px;
+    vertical-align: middle; }
+  #cmp-report_management .report-list .item:hover {
+    background: #f3f3f3; }
+  #cmp-report_management .report-list .item .col-controls {
+    padding: 0;
+    text-align: center;
+    width: 115px; }
+  #cmp-report_management .report-list .item.item-active {
+    background: #337ab7 !important;
+    color: white; }
+#cmp-report_management .report-list table {
+  margin-bottom: 0; }
+#cmp-report_management .report-list li:first-child td {
+  border: none; }
+#cmp-report_management .report-list .list-refresh_btn {
+  color: #337ab7;
+  cursor: pointer;
+  font-size: 21px;
+  left: 3px;
+  top: 4px; }
+  #cmp-report_management .report-list .list-refresh_btn:hover {
+    color: white !important;
+    text-shadow: 0 0 4px #337ab7, 0 0 4px #337ab7, 0 0 4px #337ab7, 0 0 4px #337ab7; }
+#cmp-report_management .form-box {
+  background: #f8f8f8;
+  margin-top: 22px;
+  padding: 2px 0 10px; }
+  #cmp-report_management .form-box .form-header {
+    border-bottom: 1px solid #e7e7e7;
+    padding-bottom: 10px; }
+    #cmp-report_management .form-box .form-header .report_type {
+      color: #337ab7;
+      float: right; }
+#cmp-report_management .ui-growl {
+  bottom: 0;
+  top: auto; }
+#cmp-report_management .dropdown-input {
+  position: absolute;
+  right: 5px;
+  top: 35px; }
+#cmp-report_management .position-relative {
+  position: relative; }
+
+.disabled-day {
+  background: rgb(217, 83, 79);
+  opacity: 1 !important;
+}
+
+.enable-day {
+  background: #5cb85c;
+}
+
+/*# sourceMappingURL=reportManagement.cmp.css.map */

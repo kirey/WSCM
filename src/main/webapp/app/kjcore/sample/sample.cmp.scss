@@ -1,0 +1,31 @@
+#cmp-sample {
+
+    //To compile scss file, follow tutorial on http://sass-lang.com/documentation/file.SASS_REFERENCE.html
+    //"sass --watch." command needs to be executed in "webapp/app" folder of "KJCore" project to compile scss to regular . 
+    //This is automatically done by the watcher, so no need to execute this command every time
+
+    //css goes here and "sample.cmp.css" needs to be imported in index.html in order for styles to be applied, like this:
+    //<link rel="stylesheet" type="text/css" href="app/sample/sample.cmp.css">
+
+    // Naming convention for classes of elements is basend on defining purpose of the element. For example:
+    // div element is created for containing list of reports 
+    // name it .report_list
+    // if you have any nested elements within .report_list you should nest it in scss also:
+
+    // .report_list {
+    //      .another_element{
+    //       }
+    // }
+
+    // When defining css properties, it is required as convention to order them alphabetic. Example:
+    /*
+    .some_class {
+        background: #333;
+        height: 130px;
+        top: 20px;
+        width: 100px;
+    }
+
+    */
+
+}

@@ -1,0 +1,121 @@
+<div id="cmp-user_panel" class="app_content-container-cmp">
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <h2 class="view-header">
+        <div class="view-header-sub">
+            {{'fe.userPanel.mainHeader' | translate}}
+        </div>
+    </h2>
+
+    <tabset>
+        <tab heading="{{'fe.userPanel.changePassword' | translate}}" (select)="onPasswordTab($event)">
+            <!-- Change user password -->
+            <div class="col-md-4 change_pass">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{'fe.userPanel.changePassword' | translate}}</div>
+                    <div class="panel-body">
+                        <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(userPassword, changePasswordForm)" novalidate>
+                            <div class="form-group">
+                                <label for="old_password">{{'fe.userPanel.oldPassword' | translate}}</label>
+                                <span *ngIf="!userPassword?.oldPassword" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+                                <div class="input-group">
+                                    <input [type]="changePasswordType" class="form-control" id="old_password" name="oldPassword" placeholder="{{'fe.userPanel.oldPassword' | translate}}"
+                                        [(ngModel)]="userPassword.oldPassword" required>
+                                    <div class="input-group-addon cursor-pointer" (click)="changePasswordTogglePasswordVisibility()"><span class="glyphicon glyphicon-eye-open"></span></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="new_password">{{'fe.userPanel.newPassword' | translate}}</label>
+                                <span *ngIf="!userPassword.newPassword" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+                                <input [type]="changePasswordType" class="form-control" id="new_password" name="password" placeholder="{{'fe.userPanel.newPassword' | translate}}"
+                                    [(ngModel)]="userPassword.newPassword" required validateEqual="confirmPassword" reverse="true"
+                                    #password="ngModel">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm_new_password">{{'fe.userPanel.confirmNewPassword' | translate}}</label>
+                                <span *ngIf="(userPassword.newPassword) && (userPassword.confirmPassword) && (userPassword.newPassword!=userPassword.confirmPassword)"
+                                    class="label label-danger pull-right">{{'fe.userPanel.passwordMismatch' | translate}}</span>
+                                <input [type]="changePasswordType" class="form-control" id="confirm_new_password" name="confirmPassword" placeholder="{{'fe.userPanel.confirmNewPassword' | translate}}"
+                                    required validateEqual="password" reverse="false" #confirmPassword="ngModel" [(ngModel)]="userPassword.confirmPassword">
+                            </div>
+                            <div class="form-group" *ngIf="captchaImage && captchaHashed">
+                                <validation-messages [errors]="registrationFormErrors" inputName="captcha">
+                                    <div *ngIf="captchaImage" class="text-center">
+                                        <img class="img-captcha" [src]="'data:image/jpeg;base64,' + captchaImage" />
+                                    </div>
+                                    <span class="label label-danger pull-right" *ngIf="!captcha">{{'fe.generalComponentContent.required' | translate}}</span>
+                                    <label [attr.for]="captcha">{{'fe.generalComponentContent.enterText' | translate}}:</label>
+                                    <div class="input-group">
+                                        <input class="form-control" name="captcha" id="captcha" required  type="text" placeholder="{{'fe.generalComponentContent.captcha' | translate}}" [(ngModel)]="captcha">
+                                        <div class="input-group-addon cursor-pointer" (click)="getCaptcha()"><i class="glyphicon glyphicon-refresh"></i></div>
+                                    </div>
+                                </validation-messages>
+                            </div>
+                            <div class="alert alert-danger break-word" role="alert" *ngIf="!captchaImage && !captchaHashed && captchaError">
+                                {{ captchaError | translate }}
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="!changePasswordForm.valid && !captcha2">{{'fe.generalComponentContent.submit' | translate}}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="{{'fe.userPanel.changeUserData' | translate}}" (select)="onUserDataTab($event)">
+            <!-- Change user data -->
+            <div class="col-md-4 change_pass">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{'fe.userPanel.changeUserData' | translate}}</div>
+                    <div class="panel-body">
+                        <form #changeUserDataForm="ngForm">
+                            <div class="form-group">
+                                <label for="email">{{'fe.generalComponentContent.email' | translate}}</label>
+                                <span *ngIf="!userData.email" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+                                <span *ngIf="userData.email && emailRegex" class="label label-danger pull-right">{{'fe.generalComponentContent.validationMessages.invalidEmailAddress' | translate}}</span>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="{{'fe.generalComponentContent.email' | translate}}"
+                                    [(ngModel)]="userData.email" (ngModelChange)="validateEmail(userData.email)" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lang">{{'fe.userPanel.defaultLanguage' | translate}}</label>
+                                <!--<input type="text" class="form-control" id="lang" name="lang" placeholder="Default language" [(ngModel)]="userData.defaultLang" required>-->
+                                <select [(ngModel)]="userData.defaultLanguage" class="form-control" name="lang">
+                                    <option *ngFor="let l of languages" [ngValue]="l.languageCode">{{l.languageText}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">{{'fe.userPanel.confirmYourPassword' | translate}}</label>
+                                <span *ngIf="!userData.password" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+                                <div class="input-group">
+                                    <input [type]="changeDataPasswordType" class="form-control" id="userDataPasswordd" name="password" placeholder="{{'fe.generalComponentContent.password' | translate}}"
+                                        [(ngModel)]="userData.password" required>
+                                    <div class="input-group-addon cursor-pointer" (click)="changeDataTogglePasswordVisibility()"><span class="glyphicon glyphicon-eye-open"></span></div>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="captchaImage2 && captchaHashed2">
+                                <validation-messages [errors]="registrationFormErrors" inputName="captcha">
+                                    <div class="text-center">
+                                        <img class="img-captcha" [src]="'data:image/jpeg;base64,' + captchaImage2" />
+                                    </div>
+                                    <span class="label label-danger pull-right" *ngIf="!captcha2">{{'fe.generalComponentContent.required' | translate}}</span>
+                                    <label [attr.for]="captcha">{{'fe.generalComponentContent.enterText' | translate}}:</label>
+                                    <div class="input-group">
+                                        <input class="form-control" name="captcha" id="captcha" required  type="text" placeholder="{{'fe.generalComponentContent.captcha' | translate}}" [(ngModel)]="captcha2">
+                                        <div class="input-group-addon cursor-pointer" (click)="getCaptcha2()"><i class="glyphicon glyphicon-refresh"></i></div>
+                                    </div>
+                                </validation-messages>
+                            </div>
+                            <div class="alert alert-danger break-word" role="alert" *ngIf="!captchaImage2 && !captchaHashed2 && captchaError2">
+                                {{ captchaError2 | translate }}
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="!changeUserDataForm.valid && !captcha" (click)="changeUserData(userData)">{{'fe.generalComponentContent.submit' | translate}}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+</div>

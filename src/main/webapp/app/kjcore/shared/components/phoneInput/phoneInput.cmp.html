@@ -1,0 +1,13 @@
+<div class="input-group">
+    <div class="input-group-btn">
+        <button style="border-radius: 0;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"><span class="caret"></span> {{ selectedCountry?.name | capital }} <small class="text-muted">{{ selectedCountry?.phonePrefix }}</small></button>
+        <ul class="dropdown-menu">
+            <li *ngFor="let supportedCountry of supportedCountries" [ngClass]="{'active': selectedCountry==supportedCountry}" (click)="selectedCountry=supportedCountry">
+                <a href="javascript:void(0)">{{ supportedCountry.name | capital }} <small class="text-muted">{{ supportedCountry.phonePrefix }}</small></a>
+            </li>
+        </ul>
+    </div>
+    <input [(ngModel)]="value" [textMask]="{mask: defaultMask, showMask: true, guide: false, keepCharPositions: false}"
+        (blur)="onBlur()" type="text" class="form-control">
+</div>

@@ -1,0 +1,120 @@
+<div id="cmp-placeholder_management" class="app_content-container-cmp">
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <h2 class="view-header">
+        <div class="view-header-sub">
+            {{ 'fe.placeholderManagement.mainHeader' | translate }}
+        </div>
+    </h2>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 clearfix margin-bottom-10">
+                <button class="btn btn-success pull-right" (click)="showModal(placeholderModal, 'addPlaceholder')">{{'fe.placeholderManagement.addPlaceholder' | translate}}</button>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <p-dataTable #dataTable [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [value]="placeholders" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table clearfix">
+                    <p-column field="placeholderCode" [header]="'fe.generalComponentContent.code' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center">{{object.placeholderCode}}</div>
+                        </template>
+                    </p-column>
+                    <p-column field="name" [header]="'fe.generalComponentContent.name' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center">{{object.name}}</div>
+                        </template>
+                    </p-column>
+                    <p-column field="templateText" [header]="'fe.placeholderManagement.templateText' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center">{{object.templateText}}</div>
+                        </template>
+                    </p-column>
+                    <p-column field="operations" [style]="{'width': '112px'}">
+                        <template pTemplate="header">
+                            <button class="btn btn-success" (click)="loadPlaceholders()">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </button>
+                        </template>
+                        <template let-object="rowData" pTemplate="body">
+                            <div class="text-center">
+                                <button class="btn btn-warning" (click)="showModal(placeholderModal, 'editPlaceholder', object)">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                                <button type="button" class="btn btn-danger" (click)="showModal(deletePlaceholderModal, 'deletePlaceholder', object)">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Add/Edit Risk Modal -->
+    <div bsModal #placeholderModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="placeholderModal" aria-hidden="true">
+        <div *ngIf="placeholderForm" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <form [formGroup]="placeholderForm" (ngSubmit)="placeholderFormSubmit(placeholderModal)">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="hideModal(placeholderModal)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                        <h4 class="modal-title">{{ (placeholderForm.controls.id.value?'fe.placeholderManagement.edit':'fe.placeholderManagement.add') | translate}}</h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <div class="form-group">
+                            <validation-messages [errors]="formErrors" inputName="name">
+                                <label for="name">{{ 'fe.generalComponentContent.name' | translate }}</label>
+                                <control-messages [control]="placeholderForm.controls.name"></control-messages>
+                                <input type="text" class="form-control" formControlName="name" placeholder="{{ 'fe.generalComponentContent.name' | translate }}" />
+                            </validation-messages>
+                        </div>
+                        <div class="form-group">
+                            <validation-messages [errors]="formErrors" inputName="placeholderCode">
+                                <label for="placeholderCode">{{ 'fe.generalComponentContent.code' | translate }}</label>
+                                <control-messages [control]="placeholderForm.controls.placeholderCode"></control-messages>
+                                <input type="text" class="form-control" formControlName="placeholderCode" placeholder="{{ 'fe.generalComponentContent.code' | translate }}" />
+                            </validation-messages>
+                        </div>
+                        <div class="form-group">
+                            <label for="templateText">{{ 'fe.placeholderManagement.templateText' | translate }}</label>
+                            <control-messages [control]="placeholderForm.controls.templateText"></control-messages>
+                            <textarea class="form-control" formControlName="templateText" placeholder="{{ 'fe.placeholderManagement.code' | translate }}"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="hideModal(placeholderModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                        <button type="submit" class="btn btn-success" [disabled]="placeholderForm.invalid">{{'fe.generalComponentContent.save' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Risk Modal -->
+    <div bsModal #deletePlaceholderModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deletePlaceholderModal" aria-hidden="true">
+        <div *ngIf="selectedPlaceholder" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(deletePlaceholderModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{ 'fe.generalComponentContent.remove' | translate}}</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <p>Are you sure you want to remove this item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="hideModal(deletePlaceholderModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                    <button type="button" class="btn btn-success" (click)="removePlaceholder(deletePlaceholderModal)">{{'fe.generalComponentContent.remove' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

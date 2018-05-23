@@ -1,0 +1,9 @@
+#cmp-jobs .btnRefresh {
+  margin-bottom: 10px; }
+#cmp-jobs th {
+  cursor: pointer; }
+#cmp-jobs .refresherSpan {
+  display: inline-table;
+  width: 20px; }
+
+/*# sourceMappingURL=jobs.cmp.css.map */

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACI,mCAAe;EACX,UAAU,EAAE,IAAI;AAGpB,sCAAkB;EACd,aAAa,EAAE,IAAI;AAGvB,uCAAmB;EACf,cAAc,EAAE,IAAI;AAGxB,oCAAgB;EACZ,WAAW,EAAE,IAAI;AAGrB,sCAAkB;EACd,aAAa,EAAE,IAAI",
+"sources": ["kjgri.measured_style.cmp.scss"],
+"names": [],
+"file": "kjgri.measured_style.cmp.css"
+}

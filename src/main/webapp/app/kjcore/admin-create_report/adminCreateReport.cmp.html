@@ -1,0 +1,478 @@
+<div id="cmp-admin-create_report" class="app_content-container-cmp">
+	<div *ngIf="componentAlert.show" class="alert_box">
+		<alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+			<span [innerHTML]="componentAlert.message"></span>
+		</alert>
+	</div>
+	<h2 class="view-header clearfix">
+		<div class="view-header-sub">
+			<a class="glyphicon glyphicon-circle-arrow-left return_button" routerLink="/admin/report_management" *ngIf="editPage"></a>
+			{{editPage ? ('fe.generalComponentContent.edit' | translate) : ('fe.adminCreateReport.mainHeader' | translate)}}
+		</div>
+	</h2>
+	<div id="report-settings" class="container-fluid row">
+		<div class="clearfix">
+			<div class="col-md-3 form-group">
+				<validation-messages [errors]="createReportErrors" inputName="reportName">
+					<label for="report-name">{{'fe.generalComponentContent.name' | translate}}</label>
+					<span *ngIf="!reportProfile.name" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+					<input maxlength="100" type="text" class="form-control" id="report-name" placeholder="{{'fe.adminCreateReport.reportName' | translate}}" [(ngModel)]="reportProfile.name">
+				</validation-messages>
+			</div>
+			<div class="col-md-3 form-group">
+				<label for="report-desc">{{'fe.generalComponentContent.description' | translate}}</label>
+				<input maxlength="255" type="text" class="form-control" id="report-desc" placeholder="{{'fe.adminCreateReport.reportDescription' | translate}}" [(ngModel)]="reportProfile.description">
+			</div>
+			<div class="col-md-3 form-group">
+				<label for="report-desc">{{'fe.adminCreateReport.fieldReportType' | translate}}</label>
+				<select class="form-control" [(ngModel)]="reportProfile.type">
+                        <option value="sync">{{'fe.adminCreateReport.optionSync' | translate}}</option>
+                        <option value="async">{{'fe.adminCreateReport.optionAsync' | translate}}</option>
+                    </select>
+			</div>
+			<div class="col-md-1">
+				<label>{{'fe.adminCreateReport.enabled' | translate}}</label>
+				<button [ngClass]="{'btn-danger': !reportProfile.flEnabled, 'btn-success': reportProfile.flEnabled}" (click)="reportProfile.flEnabled = !reportProfile.flEnabled" class="btn delete-button display-block">
+                	<span [ngClass]="{'glyphicon':true, 'glyphicon-remove': !reportProfile.flEnabled, 'glyphicon-ok': reportProfile.flEnabled}"></span>
+                </button>
+			</div>
+			<div class="col-md-2 submit">
+				<span class="pull-right">
+					<button type="button" class="btn btn-primary" *ngIf="!editPage" [disabled]="disableSubmitButton()" (click)="createReportSubmit(reportProfile)">{{'fe.generalComponentContent.create' | translate}}</button>
+					<button type="button" class="btn btn-default" *ngIf="!editPage" (click)="afterSubmitCleanup()">{{'fe.generalComponentContent.clear' | translate}}</button>
+				</span>
+				<span class="pull-right">
+					<button type="button" class="btn btn-primary" *ngIf="editPage" [disabled]="disableSubmitButtonEdit()" (click)="updateReport(reportProfile)">{{'fe.generalComponentContent.update' | translate}}</button>
+					<a class="btn btn-default" routerLink="/admin/report_management" *ngIf="editPage">{{'fe.generalComponentContent.cancel' | translate}}</a>
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<label *ngIf="editFix" class="roles_label">{{'fe.adminCreateReport.reportRoles' | translate}}</label>
+			<div *ngIf="editFix" class="container-fluid" [ngClass]="{'roles': roles}">
+				<div *ngFor="let r of roles" class="col-md-3">
+					<div class="checkbox">
+						<p-checkbox name="roles" [value]="r.name" [label]="r.name" [(ngModel)]="selectedRoles" [disabled]="r.name == _constants.getROLES().SUPER_ADMIN"></p-checkbox>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<label *ngIf="editFix" for="kjcCompany">{{ 'fe.adminCreateReport.reportCompanyLabel' | translate }}</label>
+				<span *ngIf="!selectedCompanies || selectedCompanies?.length==0" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+			</div>
+		</div>
+		<div class="row">
+			<div *ngIf="editFix" [ngClass]="{'container-fluid': true}">
+				<div *ngFor="let company of companies" class="col-md-3">
+					<div class="checkbox">
+						<p-checkbox [value]="company.id" [label]="company.name + (company.code == 'defaultCompany' ? ' (' + ('fe.generalComponentContent.defaultCompany' | translate) + ')' : '')" [(ngModel)]="selectedCompanies"></p-checkbox>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div [ngClass]="{'no-top-border container-fluid clearfix': true, 'roles': roles}">
+				<div class="pull-right">
+					<button class="btn btn-primary" (click)="selectAllCompanies()">{{ 'fe.adminCreateReport.companySelectionLabel' | translate }}</button>
+					<button class="btn btn-default" (click)="clearAllCompanies()">{{ 'fe.adminCreateReport.companyClearSelectionLabel' | translate }}</button>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid" *ngIf="editPage">
+			<div class="clearfix">
+				<div class="clearfix col-md-4 padding_left-0">
+					<label>{{'fe.adminCreateReport.javaValidationClass' | translate}}:</label>
+					<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="clearFileInput(editJavaFile, editClassFile)"></span>
+					<div class="clearfix file">
+						<label for="file-input-java" class="file-label clearfix">
+						<div *ngIf="!reportFiles.java && reportProfile.kjcClasses && reportProfile.kjcClasses != null" class="file-label-info">
+							<div>{{'fe.generalComponentContent.name' | translate}}: <b>{{reportProfile.kjcClasses.name + '.java'}}</b></div>
+						</div>
+						<div *ngIf="reportFiles.java && reportFiles.java.files[0]" class="file-label-info">
+							<div>{{'fe.generalComponentContent.size' | translate}}: <b>{{reportFiles.java.files[0].size | bytes}}</b></div>
+							<div>{{'fe.generalComponentContent.name' | translate}}: <b>{{reportFiles.java.files[0].name}}</b></div>
+						</div>
+						<div class="file-label-upload-icon">
+							<span class="glyphicon glyphicon-upload"></span>
+						</div>
+						</label>
+						<input type="file" id="file-input-java" accept=".java" (change)="onChangeFile($event, 'java')" #editJavaFile>
+					</div>
+
+					<div *ngIf="reportFiles.java">
+						<label>{{'fe.adminCreateReport.classFile' | translate}}:</label>
+						<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="clearFileInput(editClassFile)"></span>
+						<div class="clearfix file">
+							<label for="file-input-class" class="file-label clearfix">
+							<div *ngIf="reportFiles.class && reportFiles.class.files[0]" class="file-label-info">
+								<div>{{'fe.generalComponentContent.size' | translate}}: <b>{{reportFiles.class.files[0].size | bytes}}</b></div>
+								<div>{{'fe.generalComponentContent.name' | translate}}: <b>{{reportFiles.class.files[0].name}}</b></div>
+							</div>
+							<div class="file-label-upload-icon">
+								<span class="glyphicon glyphicon-upload"></span>
+							</div>
+							</label>
+							<input type="file" id="file-input-class" accept=".class" (change)="onChangeFile($event, 'class')" #editClassFile>
+						</div>
+						<div *ngIf="reportFiles.class && !javaClassMatching(reportFiles.class, reportFiles.java)" class="file-error-message file_input-validation_message">{{'fe.adminCreateReport.javaFileNoMatch' | translate}}</div>
+					</div>
+
+					<div class="text-center">
+						<p>{{'fe.generalComponentContent.or' | translate}}</p>
+					</div>
+
+					<div>
+						<p-dropdown [options]="classes" (onChange)="onClassesChange($event, editJavaFile, editClassFile)" [(ngModel)]="reportProfile.kjcClasses" [filter]="true" [style]="{'width':'100%'}"></p-dropdown>
+					</div>
+					<hr class="form-hr">
+					<div>
+						<label for="parameterDescription">{{'fe.adminCreateReport.description' | translate}}</label>
+					</div>
+
+					<div class="form-group">
+						<textarea [disabled]="!reportFiles.java && !reportProfile.kjcClasses" class="form-control textarea-full_width" name="description" id="parameterDescription" [(ngModel)]="reportProfile.kjcClassesDescription" maxlength="1000" rows="5" placeholder="{{'fe.adminCreateReport.description' | translate}}"></textarea>
+					</div>
+				</div>
+				<div class="submit">
+					<button [disabled]="!hasKjcClassesInitially" (click)="deleteValidationClass(reportProfile)" class="btn btn-danger">{{'fe.adminCreateReport.deleteClass' | translate}}</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid" *ngIf="!editPage">
+			<div class="clearfix">
+				<div class="clearfix col-md-4 padding_left-0">
+					<label>{{'fe.adminCreateReport.jrxmlFile' | translate}}:</label>
+					<span *ngIf="!reportFiles.jrxml" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+					<div class="clearfix file">
+						<label for="file-input-jrxml" class="file-label clearfix">
+						<div *ngIf="reportFiles.jrxml" class="file-label-info">
+							<div>{{'fe.generalComponentContent.size' | translate}}: <b>{{reportFiles.jrxml.files[0].size | bytes}}</b></div>
+							<div>{{'fe.generalComponentContent.name' | translate}}: <b>{{reportFiles.jrxml.files[0].name}}</b></div>
+						</div>
+						<div class="file-label-upload-icon">
+							<span class="glyphicon glyphicon-upload"></span>
+						</div>
+						</label>
+						<input type="file" id="file-input-jrxml" accept=".jrxml" (change)="onChangeJrxml($event)">
+					</div>
+
+					<div *ngIf="reportFiles.jrxml">
+						<label>{{'fe.adminCreateReport.jasperFile' | translate}}:</label>
+						<span *ngIf="!reportFiles.jasper" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+						<div class="clearfix file">
+							<label for="file-input-jasper" class="file-label clearfix">
+							<div *ngIf="reportFiles.jasper" class="file-label-info">
+								<div>{{'fe.generalComponentContent.size' | translate}}: <b>{{reportFiles.jasper.files[0].size | bytes}}</b></div>
+								<div>{{'fe.generalComponentContent.name' | translate}}: <b>{{reportFiles.jasper.files[0].name}}</b></div>
+							</div>
+							<div class="file-label-upload-icon">
+								<span class="glyphicon glyphicon-upload"></span>
+							</div>
+							</label>
+							<input type="file" id="file-input-jasper" accept=".jasper" (change)="onChangeFile($event, 'jasper')">
+						</div>
+						<div *ngIf="reportFiles.jasper && !javaClassMatching(reportFiles.jrxml, reportFiles.jasper)" class="file-error-message file_input-validation_message">{{'fe.adminCreateReport.jrxmlFileNoMatch'| translate}}</div>
+					</div>
+
+					<div *ngIf="reportFiles.subreport">
+						<div *ngFor="let subreport of reportFiles?.subreport; let i=index;">
+							<label>{{'fe.adminCreateReport.subreportFile' | translate}} - {{subreport.name}}</label>
+							<span *ngIf="!subreport.file" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+							<div class="file clearfix">
+								<label [attr.for]="'file-input-sub-jasper-'+i" class="file-label clearfix">
+								<div *ngIf="subreport.name && subreport.file" class="file-label-info">
+									<div>{{'fe.generalComponentContent.size' | translate}}: <b>{{subreport.file.size | bytes}}</b></div>
+									<div>{{'fe.generalComponentContent.name' | translate}}: <b>{{subreport.file.name}}</b></div>
+								</div>
+								<div class="file-label-upload-icon">
+									<span class="glyphicon glyphicon-upload"></span>
+								</div>
+								</label>
+								<input type="file" [attr.id]="'file-input-sub-jasper-'+i" accept=".jasper" (change)="onSubFileChange($event, subreport)">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="clearfix col-md-4 file-input-box-middle">
+					<validation-messages [errors]="createReportErrors" inputName="javaValidationClass">
+						<label>{{'fe.adminCreateReport.javaValidationClass' | translate}}:</label>
+						<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="clearFileInput(editJavaFile, editClassFile)"></span>
+						<div class="clearfix file">
+							<label for="file-input-java" class="file-label clearfix">
+						<div *ngIf="reportFiles.java && reportFiles.java.files[0]" class="file-label-info">
+							<div>{{'fe.generalComponentContent.size' | translate}}: <b>{{reportFiles.java.files[0].size | bytes}}</b></div>
+							<div>{{'fe.generalComponentContent.name' | translate}}: <b>{{reportFiles.java.files[0].name}}</b></div>
+						</div>
+						<div class="file-label-upload-icon">
+							<span class="glyphicon glyphicon-upload"></span>
+						</div>
+						</label>
+							<input type="file" id="file-input-java" accept=".java" (change)="onChangeFile($event, 'java')" #editJavaFile>
+						</div>
+
+						<div *ngIf="reportFiles.java && reportFiles.java.files[0]">
+							<label>{{'fe.adminCreateReport.classFile' | translate}}:</label>
+							<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="clearFileInput(editClassFile)"></span>
+							<div class="clearfix file">
+								<label for="file-input-class" class="file-label clearfix">
+							<div *ngIf="reportFiles.class && reportFiles.class.files[0]" class="file-label-info">
+								<div>{{'fe.generalComponentContent.size' | translate}}: <b>{{reportFiles.class.files[0].size | bytes}}</b></div>
+								<div>{{'fe.generalComponentContent.name' | translate}}: <b>{{reportFiles.class.files[0].name}}</b></div>
+							</div>
+							<div class="file-label-upload-icon">
+								<span class="glyphicon glyphicon-upload"></span>
+							</div>
+							</label>
+								<input type="file" id="file-input-class" accept=".class" (change)="onChangeFile($event, 'class')" #editClassFile>
+							</div>
+							<div *ngIf="reportFiles.class && !javaClassMatching(reportFiles.class, reportFiles.java)" class="file-error-message file_input-validation_message">{{'fe.adminCreateReport.javaFileNoMatch' | translate}}</div>
+						</div>
+					</validation-messages>
+
+					<div class="text-center margin_top-15">
+						<p>{{'fe.generalComponentContent.or' | translate}}</p>
+					</div>
+					<div>
+						<p-dropdown [options]="classes" (onChange)="onClassesChange($event, editJavaFile, editClassFile)" [(ngModel)]="reportProfile.kjcClasses" [filter]="true" [style]="{'width':'100%'}"></p-dropdown>
+					</div>
+					<hr class="form-hr">
+					<div>
+						<label for="parameterDescription">{{'fe.adminCreateReport.description' | translate}}</label>
+					</div>
+					<div class="form-group">
+						<validation-messages [errors]="createReportErrors" inputName="validationClassDescription">
+							<textarea class="form-control textarea-full_width" [disabled]="!reportFiles.java && !reportProfile.kjcClasses" name="description" id="parameterDescription" maxlength="1000" rows="5" [(ngModel)]="reportProfile.kjcClassesDescription" placeholder="{{'fe.adminCreateReport.description' | translate}}"></textarea>
+						</validation-messages>
+					</div>
+				</div>
+
+				<div *ngIf="reportFiles.jrxml" class="clearfix col-md-4 padding_right-0">
+					<div *ngIf="isTranslated">
+
+						<validation-messages [errors]="createReportErrors" inputName="csvUpload">
+							<label>{{'fe.adminCreateReport.translationFile' | translate}}:</label>
+							<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="clearFileInput(translationFile)"></span>
+							<div class="clearfix file">
+								<label for="file-input-properties" class="file-label clearfix">
+							<div *ngIf="reportFiles.properties" class="file-label-info">
+								<div>{{'fe.generalComponentContent.size' | translate}}: <b>{{reportFiles.properties.files[0].size | bytes}}</b></div>
+								<div>{{'fe.generalComponentContent.name' | translate}}: <b>{{reportFiles.properties.files[0].name}}</b></div>
+							</div>
+							<div class="file-label-upload-icon">
+								<span class="glyphicon glyphicon-upload"></span>
+							</div>
+							</label>
+								<input type="file" id="file-input-properties" accept=".csv" (change)="onChangeFile($event, 'properties')" #translationFile>
+							</div>
+							<div class="pull-left checkbox_translation" [tooltip]="'fe.adminCreateReport.overrideWarning' | translate" placement="bottom">
+								<p-checkbox id="override" name="override" binary="true" [label]="'fe.adminCreateReport.override' | translate" [(ngModel)]="override"></p-checkbox>
+							</div>
+						</validation-messages>
+					</div>
+					<label *ngIf="reportFiles.jrxml && !isTranslated">{{'fe.adminCreateReport.translationFile' | translate}}:</label>
+					<alert *ngIf="reportFiles.jrxml && !isTranslated" type="warning">
+						{{'fe.adminCreateReport.reportNotTranslatable' | translate}}
+					</alert>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Create report canvas-->
+	<div id="create_report-creating_canvas" class="container-fluid" *ngIf="reportFiles.jrxml || this.editPage">
+		<div class="create_report-prev-add_row row">
+			<!-- Add row in between -->
+			<div class="create_report-between-add_row btn btn-success" *ngIf="!bMoveMode && !currentChangingParameter.bEditMode && reportProfile.kjcReportParameterses[0].length > 0" (click)="addRowBegining(reportProfile.kjcReportParameterses)" [tooltip]="'fe.adminCreateReport.addNewRow' | translate" placement="left">
+				<span class="glyphicon glyphicon-plus"></span>
+			</div>
+		</div>
+
+		<!-- Row -->
+		<div class="create_report-row container-fluid" *ngFor="let fieldRow of reportProfile?.kjcReportParameterses; let row = index" [dragula]="'bag-main'" [dragulaModel]="fieldRow" [ngClass]="{'create_report-row-padded': reportProfile.kjcReportParameterses.length > 1 && fieldRow == 0, 'last': row + 1 == reportProfile.kjcReportParameterses.length}">
+
+			<!-- Field input -->
+			<div class="create_report-field col-md-4" [ngClass]="{'cursor-move': !currentChangingParameter.bEditMode}" *ngFor="let field of fieldRow; let column = index" [attr.position]="row + '-' + column" [ngClass]="{'fourth_element': (column)%3 == 0}">
+
+				<div>
+					<input type="text" maxlength="50" class="form-control" placeholder="{{'fe.adminCreateReport.parameterName' | translate}}" [(ngModel)]="field.name" [disabled]="!isFieldInEditMode(currentChangingParameter, row, column)" (blur)="updateDependencyParamList(field)">
+				</div>
+
+				<!-- Field properties -->
+				<div class="parameter_properties clearfix">
+					<span *ngIf="!field.name" class="label label-danger field-name_required">{{'fe.generalComponentContent.required' | translate}}</span>
+					<div class="parameter_properties-edit" *ngIf="isFieldInEditMode(currentChangingParameter, row, column)">
+						<div class="col-md-6 parameter-type padding_sides-0">
+							<div class="propert-box form-group">
+								<label>{{'fe.adminCreateReport.parameterKey' | translate}}</label>
+								<div>{{field.key}}</div>
+							</div>
+							<div class="property-box form-group">
+								<label>{{'fe.adminCreateReport.fieldParamType' | translate}}</label>
+								<div>
+									{{field.type == 'String' ? 'Text' : field.type}}
+								</div>
+							</div>
+							<div class="property-box form-group">
+								<label for="isRequired">{{'fe.generalComponentContent.mandatory' | translate}}</label>
+								<input type="checkbox" [(ngModel)]="field.isMandatory">
+							</div>
+						</div>
+						<div class="col-md-6 parameter-limit padding_sides-0 clearfix" *ngIf="field.type != 'Date' && field.type != 'Timestamp'">
+							<div class="form-group">
+								<label for="min">Min {{minMaxValueTypeCheck(field.type)}}</label>
+								<input type="number" id="min" class="form-control" [min]="0" [max]="field.maxValue" placeholder="{{'fe.adminCreateReport.minValueLength' | translate}}" (change)="validateMinMax(field)" [(ngModel)]="field.minValue">
+							</div>
+							<div class="form-group">
+								<label for="max">Max {{minMaxValueTypeCheck(field.type)}}</label>
+								<input type="number" id="max" class="form-control" [min]="field.minValue" placeholder="{{'fe.adminCreateReport.minValueLength' | translate}}" (change)="validateMinMax(field)" [(ngModel)]="field.maxValue">
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<!-- SQL type param-->
+						<div *ngIf="field.type == 'String' || field.type == 'Integer'">
+							<hr class="form-hr" />
+							<div class="propert-box form-group">
+								<label class="heal_label">{{ 'fe.adminCreateReport.sqlParam' | translate }}</label>
+								<input type="checkbox" [(ngModel)]="field.isSql" [disabled]="field.dependentParams.length" (ngModelChange)="onSqlChange(field, 'sql')">
+								<div class="help-block" *ngIf="field.dependentParams.length && field.isSql">{{ 'fe.adminCreateReport.dependentParamAlert' | translate }}</div>
+							</div>
+
+							<div *ngIf="field.isSql" class="container-fluid row parameter-desc">
+								<div class="property-sql-box">
+									<label>{{'fe.adminCreateReport.table' | translate}}</label>
+									<div>
+										<p-dropdown [options]="tables" [(ngModel)]="field.dbTable" (ngModelChange)="onTableChange(field)" [filter]="true" [style]="{'width':'100%'}"></p-dropdown>
+									</div>
+								</div>
+								<div class="property-sql-box">
+									<label>{{'fe.adminCreateReport.column' | translate}}</label>
+									<div>
+										<p-dropdown *ngIf="columns" [options]="columns" [(ngModel)]="field.dbColumn" [filter]="true" [style]="{'width':'100%'}"></p-dropdown>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Dependent parameter-->
+						<div *ngIf="field.type == 'String' || field.type == 'Integer'">
+							<hr class="form-hr" />
+							<div class="propert-box form-group">
+								<label class="heal_label">{{ 'fe.adminCreateReport.dependentParameter' | translate }}</label>
+								<input type="checkbox" [(ngModel)]="field.isDependent" [disabled]="field.dependentParams.length || !dependencyParameters.length" (ngModelChange)="onSqlChange(field, 'dep')">
+								<div class="help-block" *ngIf="!dependencyParameters.length">{{ 'fe.adminCreateReport.noDependencyPramsAlert' | translate }}</div>
+								<div class="help-block" *ngIf="field.dependentParams.length && field.isDependent">{{ 'fe.adminCreateReport.dependentParamAlert' | translate }}</div>
+							</div>
+
+							<div *ngIf="field.isDependent" class="container-fluid row parameter-desc">
+								<div class="property-sql-box">
+									<div>
+										<label>{{ 'fe.adminCreateReport.dependencyParameter' | translate }}</label>
+										<p-dropdown *ngIf="columns" [options]="dependencyParameters" [(ngModel)]="field.dependencyParamName" (ngModelChange)="onDependencyParamChange(field)" [filter]="true" [style]="{'width':'100%'}"></p-dropdown>
+									</div>
+								</div>
+								<div class="property-sql-box">
+									<label>{{'fe.adminCreateReport.table' | translate}}</label>
+									<div>
+										<p-dropdown [options]="tables" [(ngModel)]="field.dbTable" (ngModelChange)="onTableChange(field)" [filter]="true" [style]="{'width':'100%'}"></p-dropdown>
+									</div>
+								</div>
+								<div class="property-sql-box">
+									<label>{{'fe.adminCreateReport.column' | translate}}</label>
+									<div>
+										<p-dropdown *ngIf="columns" [options]="columns" [(ngModel)]="field.dbColumn" [filter]="true" [style]="{'width':'100%'}"></p-dropdown>
+									</div>
+								</div>
+								<div class="property-sql-box">
+									<label>{{'fe.adminCreateReport.dependencyFK' | translate}}</label>
+									<div>
+										<p-dropdown *ngIf="columns" [options]="columns" [(ngModel)]="field.parameterDependencyFkColumn" [filter]="true" [style]="{'width':'100%'}"></p-dropdown>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr class="form-hr" />
+
+						<div class="container-fluid row parameter-desc">
+							<label>{{'fe.adminCreateReport.fieldParamDesc' | translate}}</label>
+							<textarea maxlength="255" class="form-control" placeholder="{{'fe.adminCreateReport.fieldParamDesc' | translate}}" [(ngModel)]="field.description"></textarea>
+						</div>
+
+						<div class="container-fluid row controls">
+							<button type="button" class="btn btn-success" [disabled]="!field.name || (!dependencyParameters.length && field.isDependent)" (click)="deactivateEditMode(field)">{{'fe.generalComponentContent.done' | translate}}</button>
+						</div>
+					</div>
+
+					<div class="parameter_properties-preview" *ngIf="!isFieldInEditMode(currentChangingParameter, row, column)">
+						<div class="col-md-6 parameter-type padding_sides-0">
+							<div class="form-group">
+								<label>{{'fe.adminCreateReport.parameterKey' | translate}}</label>
+								<div>{{field.key}}</div>
+							</div>
+							<div class="property-box">
+								<label>{{'fe.adminCreateReport.fieldParamType' | translate}}</label>
+								<div>
+									{{field.type == 'String' ? 'Text' : field.type}}
+								</div>
+							</div>
+
+							<div class="property-box">
+								<label>{{ 'fe.generalComponentContent.required' | translate }}</label>
+								<div>{{field.isMandatory ? ('fe.generalComponentContent.yes' | translate) : ('fe.generalComponentContent.no' | translate)}}</div>
+							</div>
+						</div>
+						<div class="col-md-6 parameter-limit padding_sides-0" *ngIf="field.type != 'Date' && field.type != 'Timestamp'">
+							<div class="form-group" *ngIf="field.minValue">
+								<label for="min">{{'fe.generalComponentContent.min' + minMaxValueTypeCheck(field.type) | translate}}</label>
+								<div>
+									{{field.minValue}}
+								</div>
+							</div>
+							<div class="form-group" *ngIf="field.maxValue">
+								<label for="max">{{'fe.generalComponentContent.min' + minMaxValueTypeCheck(field.type) | translate}}</label>
+								<div>
+									{{field.maxValue}}
+								</div>
+							</div>
+						</div>
+
+						<div class="container-fluid row parameter-desc col-md-12" *ngIf="field.description">
+							<label>{{'fe.adminCreateReport.fieldParamDesc' | translate}}</label>
+							<div class="parameter-desc-showing">
+								{{field.description}}
+							</div>
+						</div>
+
+						<div class="container-fluid row controls text-right" *ngIf="!bMoveMode && !bRowMoveMode && !currentChangingParameter.bEditMode">
+							<button type="button" class="btn btn-primary" (click)="activateEditMode(row, column, field)" [tooltip]="'fe.adminCreateReport.editParameter' | translate" placement="left">{{'fe.generalComponentContent.edit' | translate}}</button>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<!--Row controls -->
+			<div class="create_report-row-controls" *ngIf="reportProfile.kjcReportParameterses.length > 1 && !bMoveMode && !currentChangingParameter.bEditMode && fieldRow == 0" [tooltip]="'fe.adminCreateReport.removeRow' | translate" (click)="removeRow(reportProfile.kjcReportParameterses, row)">
+				<!-- Remove row button -->
+				<button class="create_report-row-remove btn btn-danger" type="button" *ngIf="!bMoveMode">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</div>
+
+			<div class="create_report-between-add_row btn btn-success" *ngIf="showAddRowBetween(reportProfile.kjcReportParameterses, row) && !bMoveMode && !currentChangingParameter.bEditMode" (click)="addRowBetween(reportProfile.kjcReportParameterses, row)" [tooltip]="'fe.adminCreateReport.addNewRowBetween' | translate" placement="left">
+				<!-- Add row in between -->
+				<span class="glyphicon glyphicon-plus"></span>
+			</div>
+		</div>
+
+		<div class="col-md-1 row" *ngIf="isBeforeRowPopulated(reportProfile.kjcReportParameterses) && !bMoveMode && !currentChangingParameter.bEditMode" (click)="addRow(reportProfile.kjcReportParameterses)" [tooltip]="'fe.adminCreateReport.addNewRow' | translate">
+			<!-- Add row button -->
+			<div class="create_report-add_icon-row btn btn-success create_report-add_row">
+				<span class="glyphicon glyphicon-plus"></span>
+			</div>
+		</div>
+	</div>
+</div>

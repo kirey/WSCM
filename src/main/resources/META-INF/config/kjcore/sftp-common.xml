@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="sftpSessionFactory" class="org.springframework.integration.file.remote.session.CachingSessionFactory">
+		<constructor-arg ref="defaultSftpSessionFactory" />
+	</bean>
+
+	<!-- <bean id="defaultSftpSessionFactory"
+		  class="org.springframework.integration.sftp.session.DefaultSftpSessionFactory">
+		<property name="allowUnknownKeys" value="true"></property>
+	    <property name="host" value="109.168.114.43"/>
+	    <property name="privateKey" value="classpath:META-INF/keys/sftpTest"/>
+	    <property name="privateKeyPassphrase" value="springIntegration"/>
+	    <property name="port" value="50605"/>
+	    <property name="user" value="kjgri"/>
+	    <property name="password" value="K1rey1deam" />
+	</bean> -->
+	
+	<bean id="defaultSftpSessionFactory"
+		  class="org.springframework.integration.sftp.session.DefaultSftpSessionFactory">
+		<property name="allowUnknownKeys" value="true"></property>
+	    <property name="host" value="192.168.60.12"/>
+	   <!--  <property name="privateKey" value="classpath:META-INF/keys/sftpTest"/> -->
+	    <!-- <property name="privateKeyPassphrase" value="springIntegration"/> -->
+	    <property name="port" value="22"/>
+	    <property name="user" value="toni"/>
+	    <property name="password" value="toni" />
+	</bean>
+	
+	<bean id="sa" class="com.kirey.wscm.features.scheduling.jobs.tasklet.ServiceActivator"></bean>
+
+
+</beans>

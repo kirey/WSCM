@@ -1,0 +1,29 @@
+#cmp-adminRoutes {
+
+    .label_text {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .delete-button {
+        float: right;
+        width: 30px;
+        padding: 3px !important;
+    }
+
+    .edit-button {
+        float: left;
+        width: 30px;
+        padding: 3px !important;
+    }
+
+    .modal-body {
+      max-height: 50% !important;
+    }
+
+    .modal-body .modal-class {
+      font-size: 15px;
+      text-align: center !important;
+    }
+
+}

@@ -1,0 +1,12 @@
+#cmp-admin_roles .delete-button {
+  float: right;
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin_roles .edit-button {
+  float: left;
+  width: 30px;
+  padding: 3px !important; }
+#cmp-admin_roles .search-span {
+  float: left; }
+#cmp-admin_roles .progress-image {
+  width: 30px; }

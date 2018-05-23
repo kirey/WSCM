@@ -1,0 +1,339 @@
+<div id="cmp-control_panel" class="app_content-container-cmp">
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <h2 class="view-header">
+        <div class="view-header-sub">
+            {{ 'fe.controlPanel.mainHeader' | translate }}
+        </div>
+    </h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h3>{{ 'fe.controlPanel.serverStartupHeader' | translate }}</h3>
+        </div>
+        <div class="col-md-4 text-right">
+            <button class="btn btn-success" (click)="refreshPageVars()">Refresh <span class="glyphicon glyphicon-refresh"></span></button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h4>1. {{ 'fe.controlPanel.sftpDownload' | translate }}</h4>
+            <ul class="list-unstyled min-height-175">
+                <li class="clearfix">
+                    <p-checkbox name="sftpSelectAll" [label]="'fe.controlPanel.selectAll' | translate" binary="true" [(ngModel)]="sftpSelectAll" (onChange)="selectAll($event, 'sftp')"></p-checkbox>
+                    <div class="pull-right">
+                        {{ 'fe.controlPanel.downloadDate' | translate }}
+                    </div>
+                    <div class="pull-right">
+                        {{ 'fe.controlPanel.numberOfFiles' | translate }}
+                        &nbsp;
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="sftp[]" value="DSGD" [label]="'1. ' + ('fe.controlPanel.standardGeolocationsDefinition' | translate)" [(ngModel)]="_cpShared.sftp"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && sftpHistoryDates.DSGD">
+                        {{ sftpHistoryDates.DSGD | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && !sftpHistoryDates.DSGD">
+                        {{ '- - -' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.sftpProgress">
+                        {{ _cpShared.sftpProgress.DSGD }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="sftp[]" value="DSGG" [label]="'2. ' + ('fe.controlPanel.standardGeolocationsGeojson' | translate)" [(ngModel)]="_cpShared.sftp"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && sftpHistoryDates.DSGG">
+                        {{ sftpHistoryDates.DSGG | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && !sftpHistoryDates.DSGG">
+                        {{ '- - -' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.sftpProgress">
+                        {{ _cpShared.sftpProgress.DSGG }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="sftp[]" value="DLSG" [label]="'3. ' + ('fe.controlPanel.landslidesGeojson' | translate)" [(ngModel)]="_cpShared.sftp"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && sftpHistoryDates.DLSG">
+                        {{ sftpHistoryDates.DLSG | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && !sftpHistoryDates.DLSG">
+                        {{ '- - -' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.sftpProgress">
+                        {{ _cpShared.sftpProgress.DLSG }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="sftp[]" value="DFLG" [label]="'4. ' + ('fe.controlPanel.floodingGeojson' | translate)" [(ngModel)]="_cpShared.sftp"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && sftpHistoryDates.DFLG">
+                        {{ sftpHistoryDates.DFLG | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && !sftpHistoryDates.DFLG">
+                        {{ '- - -' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.sftpProgress">
+                        {{ _cpShared.sftpProgress.DFLG }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="sftp[]" value="DSRI" [label]="'5. ' + ('fe.controlPanel.riskIndexFiles' | translate)" [(ngModel)]="_cpShared.sftp"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && sftpHistoryDates.DSRI">
+                        {{ sftpHistoryDates.DSRI | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && !sftpHistoryDates.DSRI">
+                        {{ '- - -' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.sftpProgress">
+                        {{ _cpShared.sftpProgress.DSRI }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="sftp[]" value="DSFM" [label]="'6. ' + ('fe.controlPanel.forecastFiles' | translate)" [(ngModel)]="_cpShared.sftp"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && sftpHistoryDates.DSFM">
+                        {{ sftpHistoryDates.DSFM | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info" *ngIf="sftpHistoryDates && !sftpHistoryDates.DSFM">
+                        {{ '- - -' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.sftpProgress">
+                        {{ _cpShared.sftpProgress.DSFM }}
+                    </div>
+                </li>
+            </ul>
+            <div class="padding-left-20">
+                <button [disabled]="!_cpShared.sftp || _cpShared.sftp.length==0 || _cpShared.isSftp" class="btn btn-primary margin-right-10" (click)="downloadSFTP()">{{ 'fe.generalComponentContent.submit' | translate }}</button>
+                <button [disabled]="!_cpShared.isSftp" class="btn btn-default" (click)="cancelSFTP()">{{ 'fe.generalComponentContent.cancel' | translate }}</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>2. {{ 'fe.controlPanel.insertIntoDB' | translate }}</h4>
+            <ul class="list-unstyled min-height-175">
+                <li class="clearfix">
+                    <p-checkbox name="dbSelectAll" [label]="'fe.controlPanel.selectAll' | translate" binary="true" [(ngModel)]="dbSelectAll" (onChange)="selectAll($event, 'db')"></p-checkbox>
+                    <div class="pull-right">
+                        {{ 'fe.controlPanel.insertDate' | translate }}
+                    </div>
+                    <div class="pull-right" *ngIf="_cpShared.dbProgress">
+                        {{ 'fe.controlPanel.progress' | translate }}
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="db[]" value="IUSGDDB" [label]="'1. ' + ('fe.controlPanel.insertOrUpdate' | translate)" [(ngModel)]="_cpShared.db"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="dbHistoryDates">
+                        {{ dbHistoryDates.IUSGDDB | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.dbProgress">
+                        {{ _cpShared.dbProgress.IUSGDDB }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="db[]" value="ISGGDB" [label]="'2. ' + ('fe.controlPanel.insertStandardGeolocation' | translate)" [(ngModel)]="_cpShared.db"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="dbHistoryDates">
+                        {{ dbHistoryDates.ISGGDB | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.dbProgress">
+                        {{ _cpShared.dbProgress.ISGGDB }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="db[]" value="ILSDDB" [label]="'3. ' + ('fe.controlPanel.insertLandslides' | translate)" [(ngModel)]="_cpShared.db"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="dbHistoryDates">
+                        {{ dbHistoryDates.ILSDDB | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.dbProgress">
+                        {{ _cpShared.dbProgress.ILSDDB }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="db[]" value="IFLDDB" [label]="'4. ' + ('fe.controlPanel.insertFlooding' | translate)" [(ngModel)]="_cpShared.db"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="dbHistoryDates">
+                        {{ dbHistoryDates.IFLDDB | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.dbProgress">
+                        {{ _cpShared.dbProgress.IFLDDB }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="db[]" value="ISRIDB" [label]="'5. ' + ('fe.controlPanel.insertRiskIndex' | translate)" [(ngModel)]="_cpShared.db"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="dbHistoryDates">
+                        {{ dbHistoryDates.ISRIDB | date:'dd-MM-yyyy HH:mm' }}
+                    </div>
+                    <div class="pull-right label label-info margin-right-10" *ngIf="_cpShared.dbProgress">
+                        {{ _cpShared.dbProgress.ISRIDB }}
+                    </div>
+                </li>
+            </ul>
+            <div class="padding-left-20">
+                <button [disabled]="!_cpShared.db || _cpShared.db.length==0 || _cpShared.isDB" class="btn btn-primary margin-right-10" (click)="loadIntoDb()">{{ 'fe.generalComponentContent.submit' | translate }}</button>
+                <button [disabled]="!_cpShared.isDB" class="btn btn-default" (click)="cancelDB()">{{ 'fe.generalComponentContent.cancel' | translate }}</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>3. {{ 'fe.controlPanel.geolocationText' | translate }}</h4>
+            <ul class="list-unstyled min-height-175">
+                <li class="clearfix">
+                    <p-checkbox name="modulesSelectAll" [label]="'fe.controlPanel.selectAll' | translate" binary="true" [(ngModel)]="modulesSelectAll" (onChange)="selectAll($event, 'modules')"></p-checkbox>
+                    <div class="pull-right" *ngIf="_cpShared.modulesProgress">
+                        {{ 'fe.controlPanel.progress' | translate }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="_cpShared.modules[]" value="L1" [label]="'1. ' + ('fe.controlPanel.standardGeolocations' | translate)" [(ngModel)]="_cpShared.modules"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="_cpShared.modulesProgress">
+                        {{ _cpShared.modulesProgress.L1 }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="_cpShared.modules[]" value="RI" [label]="'2. ' + ('fe.controlPanel.riskIndexes' | translate)" [(ngModel)]="_cpShared.modules"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="_cpShared.modulesProgress">
+                        {{ _cpShared.modulesProgress.RI }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="_cpShared.modules[]" value="LLS" [label]="'3. ' + ('fe.controlPanel.landslides' | translate)" [(ngModel)]="_cpShared.modules"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="_cpShared.modulesProgress">
+                        {{ _cpShared.modulesProgress.LLS }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="_cpShared.modules[]" value="LFL" [label]="'4. ' + ('fe.controlPanel.flooding' | translate)" [(ngModel)]="_cpShared.modules"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="_cpShared.modulesProgress">
+                        {{ _cpShared.modulesProgress.LFL }}
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <p-checkbox name="_cpShared.modules[]" value="FIV" [label]="'5. ' + ('fe.controlPanel.fiAndFv' | translate)" [(ngModel)]="_cpShared.modules"></p-checkbox>
+                    <div class="pull-right label label-info" *ngIf="_cpShared.modulesProgress">
+                        {{ _cpShared.modulesProgress.FIV }}
+                    </div>
+                </li>
+                <li>
+                    <p-checkbox name="_cpShared.modules[]" value="TR" [label]="'6. ' + ('fe.controlPanel.translation' | translate)" [(ngModel)]="_cpShared.modules"></p-checkbox>
+                </li>
+            </ul>
+            <div class="padding-left-20">
+                <button [disabled]="!_cpShared.modules || _cpShared.modules.length==0 || _cpShared.isModules" class="btn btn-primary margin-right-10" (click)="loadIntoCache()">{{ 'fe.controlPanel.loadIntoCache' | translate }}</button>
+                <button [disabled]="!_cpShared.isModules" class="btn btn-default margin-right-10" (click)="cancelModules()">{{ 'fe.generalComponentContent.cancel' | translate }}</button>
+                <button [disabled]="!_cpShared.modules || _cpShared.modules.length==0" class="btn btn-danger" (click)="showModal(clearCacheModal)">{{ 'fe.controlPanel.clearCache' | translate }}</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <button [disabled]="(!_cpShared.modules || _cpShared.modules.length==0) && (!_cpShared.sftp || _cpShared.sftp.length==0) && (!_cpShared.db || _cpShared.db.length==0) || _cpShared.isAll" class="btn btn-primary col-md-5 col-md-offset-1" (click)="submitAll()">{{ 'fe.controlPanel.submitAll' | translate }}</button>
+            <button [disabled]="!_cpShared.isAll" class="btn btn-default col-md-offset-1 col-md-5" (click)="cancelAll()">{{ 'fe.generalComponentContent.cancel' | translate }}</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>{{ 'fe.controlPanel.schedulerHeader' | translate }}</h3>
+        </div>
+        <div class="col-md-6">
+            <h4 class="no-margin-bottom">{{ 'fe.controlPanel.alertsSubheader' | translate }}</h4>
+            
+            <div class="row padding-bottom-15">
+                <div [ngClass]="{'col-md-12 col-lg-12 position-relative clearfix': true}">
+                    <p [ngClass]="{'top-5': !nextAlertDate, 'display-inline-block': true}">
+                        {{ 'fe.controlPanel.labelSchedule' | translate }} 
+                        <input (focus)="scheduledMinutesFocused = true" (blur)="scheduledMinutesFocused = false" class="input-style" type="text" name="scheduledMinutes" [(ngModel)]="scheduledMinutes" onlyDecimal />
+                    </p>
+                    <div [ngClass]="{'top-5': !nextAlertDate, 'custom-pull-left': true}">
+                        <button [disabled]="!scheduledMinutes || scheduledMinutes==0" [ngClass]="{'btn': true, 'btn-success': !isScheduled, 'btn-danger': isScheduled}" (click)="startAlert()">{{ (isScheduled?'fe.generalComponentContent.stop':'fe.generalComponentContent.start') | translate }}</button>
+                        <fieldset *ngIf="nextAlertDate">
+                            <legend>{{ 'fe.controlPanel.nextSchedulerTimer' | translate }}</legend>
+                            {{ nextAlertDate | date:'dd-MM-yyyy HH:mm' }}
+                        </fieldset>
+                        <button class="btn btn-primary" (click)="fireAlert()">{{ 'fe.controlPanel.labelFireButton' | translate }}</button>
+                    </div>
+                    <div *ngIf="alertExecuted!==0" [ngClass]="{'label position-relative top-5 margin-right-5': true, 'label-info': alertExecuted===1, 'label-danger': alertExecuted===3, 'label-success': alertExecuted===2}">
+                        {{ (alertExecuted===1?'fe.controlPanel.inProgress':alertExecuted===2?'fe.controlPanel.success':'fe.controlPanel.failed') | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <h4>{{ 'fe.controlPanel.downloadStandardHeader' | translate }}</h4>
+            
+            <div class="row padding-bottom-35">
+                <div class="col-md-12 col-lg-12 position-relative clearfix height-44">
+                    <div [ngClass]="{'top-5': !nextScheduler1Date, 'display-inline-block': true}">
+                        {{ 'fe.controlPanel.labelTimer1' | translate }} 
+                        <div *ngIf="nextScheduler1Date" class="well well-sm display-inline-block text-muted">{{ nextScheduler1Date | date:'dd-MM-yyyy' }}</div>
+                        <p-calendar [(ngModel)]="timer1" readonlyInput="true" showTime="true" hourFormat="24" hourFormat="24" timeOnly="true"></p-calendar> 
+                        <button [ngClass]="{'btn': true, 'btn-success': !timer1Enabled, 'btn-danger': timer1Enabled}" (click)="!timer1Enabled?startScheduler(timer1, 'timer1'):stopScheduler('timer1')">{{ ((!timer1Enabled)?'fe.generalComponentContent.start':'fe.generalComponentContent.stop') | translate }}</button>
+                    </div>
+                    <div *ngIf="filesExecuted.timer1!==0" [ngClass]="{'label position-relative top-5 margin-right-5': true, 'label-info': filesExecuted.timer1===1, 'label-danger': filesExecuted.timer1===3, 'label-success': filesExecuted.timer1===2}">
+                        {{ (filesExecuted.timer1===1?'fe.controlPanel.inProgress':filesExecuted.timer1===2?'fe.controlPanel.success':'fe.controlPanel.failed') | translate }}
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 position-relative clearfix height-44">
+                    <div [ngClass]="{'top-5': !nextScheduler2Date, 'display-inline-block': true}">
+                        {{ 'fe.controlPanel.labelTimer2' | translate }} 
+                        <div *ngIf="nextScheduler2Date" class="well well-sm display-inline-block text-muted">{{ nextScheduler2Date | date:'dd-MM-yyyy' }}</div>
+                        <p-calendar [(ngModel)]="timer2" readonlyInput="true" showTime="true" hourFormat="24" timeOnly="true"></p-calendar> 
+                        <button [ngClass]="{'btn': true, 'btn-success': !timer2Enabled, 'btn-danger': timer2Enabled}" (click)="!timer2Enabled?startScheduler(timer2, 'timer2'):stopScheduler('timer2')">{{ ((!timer2Enabled)?'fe.generalComponentContent.start':'fe.generalComponentContent.stop') | translate }}</button>
+                    </div>
+                    <div *ngIf="filesExecuted.timer2!==0" [ngClass]="{'label position-relative top-5 margin-right-5': true, 'label-info': filesExecuted.timer2===1, 'label-danger': filesExecuted.timer2===3, 'label-success': filesExecuted.timer2===2}">
+                        {{ (filesExecuted.timer2===1?'fe.controlPanel.inProgress':filesExecuted.timer2===2?'fe.controlPanel.success':'fe.controlPanel.failed') | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p-checkbox name="automaticallyLoad" [label]="'fe.controlPanel.selectAutomatically' | translate" binary="true" [(ngModel)]="automaticallyLoad" (onChange)="automaticallyLoadChange($event)"></p-checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-offset-2">
+            <h3>{{ 'fe.controlPanel.clientAffiliationHeader' | translate }}</h3>
+            <button class="btn btn-primary" (click)="connectPoints()">{{ 'fe.controlPanel.affiliateButton' | translate }}</button><span class="label label-info margin-left-10">{{ allGeo }}</span>
+            <h3 class="margin-top-30">{{ 'fe.controlPanel.memoryHeader' | translate }}</h3>
+            <p><strong>{{ 'fe.controlPanel.labelTotalMemory' | translate }}</strong> {{ memory.totalMemory }}MB</p>
+            <p><strong>{{ 'fe.controlPanel.labelUsedMemory' | translate }}</strong> {{ memory.usedMemory }}MB</p>
+            <p><strong>{{ 'fe.controlPanel.labelFreeMemory' | translate }}</strong> {{ memory.freeMemory }}MB</p>
+            <button class="btn btn-primary" (click)="runGC()">{{ 'fe.controlPanel.labelGarbageCollector' | translate }}</button>
+        </div>
+    </div>
+    <!-- Delete Action Modal -->
+    <div bsModal #clearCacheModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="clearCacheModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(clearCacheModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{ 'fe.generalComponentContent.remove' | translate}}</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <p>{{ 'fe.controlPanel.removeMessage' | translate }}</p>
+                    <p *ngIf="_cpShared.modules && _cpShared.modules.includes('L1')">{{ 'fe.controlPanel.removeMessageGeolocation' | translate }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="hideModal(clearCacheModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                    <button type="button" class="btn btn-success" (click)="clearCache(clearCacheModal)">{{'fe.generalComponentContent.remove' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

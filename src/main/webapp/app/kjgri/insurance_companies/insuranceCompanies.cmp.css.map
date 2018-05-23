@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACI,oCAAqC;EACjC,oFAA4D;IACxD,KAAK,EAAE,GAAG",
+"sources": ["insuranceCompanies.cmp.scss"],
+"names": [],
+"file": "insuranceCompanies.cmp.css"
+}

@@ -1,0 +1,184 @@
+<div id="cmp-adminRoutes" class="app_content-container-cmp">
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <h2 class="view-header">
+        <div class="view-header-sub">
+            {{'fe.adminRoutes.mainHeader' | translate}}
+        </div>
+
+    </h2>
+
+    <div class="col-md-3 form-group">
+        <input #globalFilter type="text" class="form-control" [placeholder]="'fe.adminRoutes.search' | translate">
+    </div>
+
+    <div class="col-md-9">
+        <div class="pull-right">
+            <button type="submit" class="btn btn-success" (click)="showModal(adminRoutesModal, 'addRoute')">
+                {{'fe.adminRoutes.addNewRoute' | translate}}
+            </button>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <p-dataTable #adminRoutesDataTable [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [value]="tableRoutes" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50, 100, 250, 500]" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
+            <p-column field="url" [header]="'fe.adminRoutes.url' | translate" sortable="true" [filter]="true" filterMatchMode="contains" [style]="{ 'width': '30%' }">
+                <template let-object="rowData" pTemplate="body">
+                    <div class="text-center">
+                        {{object.url}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="roles" [header]="'fe.adminRoutes.roles' | translate" sortable="true" [filter]="true" filterMatchMode="contains" [style]="{ 'width': '45%' }">
+                <template let-object="rowData" pTemplate="body">
+                    <div class="text-center">
+                        {{object.roles}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="description" [header]="'fe.generalComponentContent.description' | translate" sortable="true" [filter]="true" filterMatchMode="contains" [style]="{ 'width': '25%' }">
+                <template let-object="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="object.description" placement="top">
+                        {{object.description | shortText: 100 : '...'}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="operations" [style]="{'width': '84px'}">
+                <template pTemplate="header">
+                    <span>
+                        <button class="btn btn-success" (click)="getRoutes()">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                    </span>
+                </template>
+                <template let-object="rowData" pTemplate="body">
+                    <button class="btn btn-warning edit-button" (click)="showModal(adminRoutesModal, 'editRoute', object)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                    <button class="btn btn-danger delete-button" (click)="showModal(adminRoutesModal, 'deleteRoute', object)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </template>
+            </p-column>
+        </p-dataTable>
+    </div>
+
+    <div bsModal #adminRoutesModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="adminRoutesModal" aria-hidden="true">
+        <div *ngIf="routeAdding" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(adminRoutesModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{'fe.adminRoutes.addRoute' | translate}}</h4>
+                </div>
+                <form #f="ngForm" (ngSubmit)="postRoute(adminRoutesModal)">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <validation-messages [errors]="formError" inputName="routeName">
+                                <label for="url"> {{'fe.adminRoutes.url' | translate}}</label>
+                                <span *ngIf="!routeAdd?.url" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+                                <input maxlength="255" type="text" name="url" #url="ngModel" [(ngModel)]="routeAdd.url" required class="form-control">
+                            </validation-messages>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="description"> {{'fe.generalComponentContent.description' | translate}}</label>
+                            <span *ngIf="routeAdd?.description && routeAdd?.description.length==300" class="label label-warning pull-right">
+                                {{ 'fe.generalComponentContent.max' | translate }} Reached maximum character limit
+                            </span>
+                            <input maxlength="300" type="text" name="description" #description="ngModel" [(ngModel)]="routeAdd.description" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <div class="container-fluid">
+                                <div *ngFor="let r of roles" class="col-md-6">
+                                    <div class="checkbox">
+                                        <p-checkbox name="roles" [value]="r.name" [label]="r.name" [(ngModel)]="selectedRoles"></p-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" (click)="hideModal(adminRoutesModal);$event.stopPropagation()">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!f.valid" (click)="$event.stopPropagation()">{{'fe.generalComponentContent.submit' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div *ngIf="routeEditing" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(adminRoutesModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{'fe.adminRoutes.editRoute' | translate }}</h4>
+                </div>
+                <form #f1="ngForm" (ngSubmit)="postEditRoute(adminRoutesModal)">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <validation-messages [errors]="formError" inputName="routeName">
+                                <label for="url"> {{'fe.adminRoutes.url' | translate}}</label>
+                                <span *ngIf="!routeEdit?.url" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+                                <input maxlength="255" type="text" name="url" #url="ngModel" [(ngModel)]="routeEdit.url" required class="form-control">
+                            </validation-messages>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="description">{{'fe.generalComponentContent.description' | translate}}</label>
+                            <span *ngIf="routeEdit?.description && routeEdit?.description.length==300" class="label label-warning pull-right">
+                                {{ 'fe.generalComponentContent.max' | translate }} Reached maximum character limit
+                            </span>
+                            <input maxlength="300" type="text" name="description" #description="ngModel" [(ngModel)]="routeEdit.description" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <div class="container-fluid">
+                                <div *ngFor="let r of roles" class="col-md-6">
+                                    <div class="checkbox">
+                                        <p-checkbox name="roles" [value]="r.name" [label]="r.name" [(ngModel)]="selectedRoles"></p-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" (click)="hideModal(adminRoutesModal);$event.stopPropagation()"> {{'fe.generalComponentContent.cancel' | translate}}</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!f1.valid" (click)="$event.stopPropagation()"> {{'fe.generalComponentContent.edit' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div *ngIf="routeDeleting" class="modal-dialog modal-md modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(adminRoutesModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{'fe.adminRoutes.confirmDeleteRoute' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <b>{{'fe.adminRoutes.url' | translate}}:</b> {{routeDelete.url}}
+                    </div>
+                    <div>
+                        <b>{{'fe.adminRoutes.roles' | translate}}:</b>
+                        <span *ngFor="let role of routeDelete.kjcApplicationRoleses; let index = index">{{role.name}}
+                            <span *ngIf="index + 1 < routeDelete.kjcApplicationRoleses.length">, </span>
+                        </span>
+                    </div>
+                    <div>
+                        <b>{{'fe.adminRoutes.description' | translate}}:</b> {{routeDelete.description}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default modal-cancel" (click)="hideModal(adminRoutesModal);$event.stopPropagation()">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                    <button class="btn btn-primary modal-delete" (click)="deleteRoute(adminRoutesModal);$event.stopPropagation()">{{'fe.adminRoutes.confirm' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

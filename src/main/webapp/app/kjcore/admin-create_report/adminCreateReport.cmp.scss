@@ -1,0 +1,350 @@
+@import '../sassMixins';
+
+@mixin removeFieldIcon() {
+    background: #fd8a87;
+    border-color: #fd8a87;
+    padding: 6px 4px;
+}
+
+@mixin moveFieldIcon() {
+    font-size: 14px;
+    padding: 7px 6px 5px;
+}
+
+$greenButtonBackground-color: rgb(102, 193, 102);
+
+#cmp-admin-create_report {
+    padding-bottom: 20px;
+    
+    #admin-create_report-wrapper {
+        height: 100%;
+        position: relative;
+    }
+
+    #parameterDescription {
+        resize: vertical;
+    }
+
+    .ui-chkbox-label {
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+
+    .checkbox_translation {
+        margin-bottom: 9px;
+        margin-top: -7px;
+    }
+}
+
+#report-settings {
+
+    .no-top-border.roles {
+        border-top: 0;
+    }
+
+    .glyphicon-remove {
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+    .glyphicon-remove:hover {
+        color: #d9534f;
+    }
+
+    .report_status {
+        margin-top: 25px;
+    }
+
+    .submit {
+        padding-top: 25px;
+    }
+
+    .roles_label {
+        margin-left: 15px;
+    }
+
+    .label-message {
+        float: right;
+        margin-right: 19px;
+    }
+
+    .roles {
+        border-bottom: 1px solid rgb(211, 211, 211);
+        border-top: 1px solid rgb(211, 211, 211);
+        margin-bottom: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 10px 0;
+    }
+
+    .file-input-box {
+        float: left;
+        min-height: 1px;
+        width: 300px;
+    }
+
+    .file-input-box-middle {
+        border-left: 1px solid rgb(211, 211, 211);
+        border-right: 1px solid rgb(211, 211, 211);
+    }
+
+    .textarea-full_width {
+        width: 100%;
+        max-height: 300px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .file {
+        height: 64px;
+        margin-bottom: 14px;
+        position: relative;
+
+        .file-label {
+            background: #337ab7;
+            border: 1px solid #337ab7;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            float: right;
+            height: 64px;
+            font-size: 22px;
+            margin-bottom: 3px;
+            margin-left: 0px;
+            padding: 11px 0px;
+            position: absolute;
+            width: 100%;
+
+                
+            div:nth-child(2) {
+                height: 38px;
+                overflow: hidden;
+            }
+        }
+
+        .hide-input {
+            display: none !important;
+        }
+
+        .file-label:hover, 
+        .file-label_disabled {
+            background: #619dd0;
+            border: 1px solid #4489c3;
+        }
+
+        .file-label-info {
+            width: 90%;
+            float: left;
+            word-break: break-all;
+            font-size: 14px;
+            padding-left: 10px;
+        }
+
+        .file-label-upload-icon {
+            float: right;
+            padding-right: 5px;
+
+            .glyphicon {
+                position: relative;
+                top: 7px;
+            }
+        }
+    }
+}
+
+.create_report {
+    &-field {
+        margin: 18px 0;
+        padding-left: 20px;
+        padding-right: 20px;
+        transition: all .1s;
+
+        &.cursor-move:hover {
+            transform: scale(1.05);
+        }
+        
+        div:first-child .form-control[disabled] {
+            cursor: inherit;
+        }
+
+        &.fourth_element {
+            clear: both;
+
+            .create_report-between-add_icon {
+                left: 2px;
+            }
+        }
+
+        .width-full {
+            input {
+                width: 101%;
+            }
+        }
+
+        &-remove_icon {
+            padding: 6px 4px;
+        }
+
+        &-move_icon {
+            @include moveFieldIcon();
+        }
+
+        // Properties
+        .parameter_properties {
+            background: rgb(248, 248, 248);
+            border: 1px solid rgb(222, 222, 222);
+            padding: 10px;
+            position: relative;
+            top: -2px;
+            width: 100%;
+            z-index: 0;
+
+            .field-name_required {
+                display: inline-block;
+                position: relative;
+                top: -9px;
+            }
+
+            .property-box {
+                margin-bottom: 14px;
+                word-wrap: break-word;
+            }
+
+            .property-sql-box {
+                margin-bottom: 10px;
+            }
+
+            .parameter-type {
+                padding-right: 8px;
+
+                label {
+                    margin-bottom: 0;
+                }
+
+                .radio {
+                    margin: 0;
+
+                    &:first-child {
+                        margin-bottom: 2px;
+                    }
+                }
+            }
+            
+            .parameter-desc {
+                textarea {
+                    height: 40px;
+                    max-height: 63px;
+                    max-width: 100%;
+                }
+                
+                div.parameter-desc-showing {
+                    word-wrap: break-word;
+                }
+            }
+
+            .controls {
+                clear: both;
+                color: rgb(51, 122, 183);
+                font-size: 15px;
+                padding-top: 11px;
+            }
+
+            .parameter_properties-preview,
+            .parameter_properties-edit {
+                label {
+                    margin-bottom: 0;
+                }
+
+                .property-box, 
+                .form-group {
+                    margin-bottom: 7px !important;
+                }
+
+                .heal_label {
+                    color: rgb(51, 122, 183);
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+    &-add_icon-row {
+        @include border-radius(50%);
+        background-color: $greenButtonBackground-color;
+        border-color: $greenButtonBackground-color;
+        color: #fff;
+        float: left;
+        font-size: 15px;
+        height: 33px;
+        padding: 6px 9px;
+        width: 35px;
+    }
+
+    &-add_row {
+        width: 36px;
+    }
+
+    &-row {
+        border-bottom: 1px solid #dedede;
+        min-height: 61px;
+        padding: 0;
+        position: relative;
+        
+        &-controls {
+            background: rgb(234, 234, 234);
+            bottom: 0;
+            cursor: pointer;
+            height: 100%;
+            left: 0;
+            margin: auto 0;
+            padding: 8px 9px;
+            position: absolute;
+            top: 0;
+            width: 27px;
+        }
+
+        &-remove {
+            background: transparent!important;
+            border: none;
+            bottom: 0;
+            color: rgb(255, 102, 98);
+            font-size: 19px;
+            height: 28px;
+            left: 0;
+            margin: auto;
+            padding: 4px 4px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 27px;
+        }
+
+        &.last {
+            margin-bottom: 10px;
+        }
+    }
+
+    &-between-add_row {
+        background: $greenButtonBackground-color;
+        border-radius: 50%;
+        bottom: -8px;
+        font-size: 7px;
+        height: 16px;
+        padding: 2px 4px;
+        position: absolute;
+        right: 0;
+        width: 16px;
+        z-index: 1;
+    }
+
+    &-row-padded {
+        padding-left: 33px;
+    }
+
+    &-prev-add_row {
+        border-bottom: 1px solid rgb(222, 222, 222);
+        left: 15px;
+        position: relative;
+    }
+}

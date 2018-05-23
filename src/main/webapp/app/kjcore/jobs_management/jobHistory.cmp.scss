@@ -1,0 +1,39 @@
+#cmp-jobs_history{
+    .backButton{
+        border-radius: 32px;
+        height: 38px; 
+        margin-right:10px;  
+    }
+    .modal-class{
+        overflow-y: scroll;
+        max-height: 730px;
+    }
+     th {
+        cursor: pointer;
+    }
+    .dateSelectorContainer{
+        margin-bottom: 20px;
+    }
+    .dateInput{
+        margin-right: 30px;
+    }
+    .btn-history{
+        margin-left: 20px;
+    }
+
+    .trace-box{
+        height: 200px; 
+        overflow:scroll; 
+        resize: vertical;
+    }
+
+    .no-records-box{
+        height: 20px;
+    }
+
+    .batch-params-box{
+        height: 150px; 
+        overflow:scroll; 
+        resize: vertical;
+    }
+}

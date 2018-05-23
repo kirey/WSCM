@@ -1,0 +1,24 @@
+#cmp-company_panel .company_list-item-box {
+  cursor: pointer;
+  padding: .75em; }
+  #cmp-company_panel .company_list-item-box.selected_company {
+    background: #337AB7;
+    color: white; }
+#cmp-company_panel .company_panel {
+  border-left: 1px solid #eaeaea;
+  height: 100%; }
+  #cmp-company_panel .company_panel .default_company {
+    font-size: 13px;
+    position: relative;
+    top: -3px; }
+#cmp-company_panel .checkbox {
+  margin-bottom: 0;
+  margin-top: 0; }
+#cmp-company_panel .edit_default_style-btn {
+  margin-right: 16px; }
+#cmp-company_panel .tab_box {
+  padding-top: 8px; }
+#cmp-company_panel .size_exceded {
+  color: #D9534F; }
+
+/*# sourceMappingURL=companyPanel.cmp.css.map */

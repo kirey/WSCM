@@ -1,0 +1,12 @@
+<div id="cmp-sample" class="app_content-container-cmp">
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+    <h2 class="view-header clearfix">
+        <div class="view-header-sub">
+            {{ 'fe.adminCreateReport.mainHeader' | translate }}
+        </div>
+    </h2>
+</div>

@@ -1,0 +1,59 @@
+/*
+Error: Invalid CSS after "module": expected expression (e.g. 1px, bold), was ".id,"
+        on line 10 of kjcore.app.cmp.ts
+
+5: import { AuthService } from './kjcore/shared/services/auth.service';
+6: 
+7: import { UserInfo, RestResponse } from './kjcore/shared/models';
+8: 
+9: @Component({
+10:     moduleId: module.id,
+11:     selector: 'app',
+12:     templateUrl: 'kjcore.app.cmp.html',
+13: })
+14: 
+15: export class KJCoreAppCmp implements OnInit {
+
+Backtrace:
+kjcore.app.cmp.ts:10
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1189:in `expected'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script/lexer.rb:229:in `expected!'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script/parser.rb:738:in `assert_done'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script/parser.rb:76:in `parse'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script/parser.rb:240:in `parse'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/script.rb:27:in `parse'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:1151:in `parse_script'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:721:in `parse_property'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:692:in `parse_property_or_rule'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:658:in `parse_line'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:536:in `build_tree'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:555:in `block in append_children'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:554:in `each'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:554:in `append_children'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:545:in `block in build_tree'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:538:in `each'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:538:in `build_tree'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:555:in `block in append_children'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:554:in `each'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:554:in `append_children'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:409:in `_to_tree'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:294:in `watch'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin.rb:109:in `method_missing'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:360:in `watch_or_update'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:51:in `process_result'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/base.rb:52:in `parse'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/base.rb:19:in `parse!'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/bin/sass:13:in `<top (required)>'
+C:/Program Files/Ruby23-x64/bin/sass:23:in `load'
+C:/Program Files/Ruby23-x64/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"module\": expected expression (e.g. 1px, bold), was \".id,\"\A         on line 10 of kjcore.app.cmp.ts\A \A 5: import { AuthService } from './kjcore/shared/services/auth.service';\A 6: \A 7: import { UserInfo, RestResponse } from './kjcore/shared/models';\A 8: \A 9: @Component({\A 10:     moduleId: module.id,\A 11:     selector: 'app',\A 12:     templateUrl: 'kjcore.app.cmp.html',\A 13: })\A 14: \A 15: export class KJCoreAppCmp implements OnInit {"; }

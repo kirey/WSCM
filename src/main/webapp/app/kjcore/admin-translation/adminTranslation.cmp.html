@@ -1,0 +1,476 @@
+<div id="cmp-admin-translation" class="app_content-container-cmp">
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <h2 class="view-header">
+
+        <div class="view-header-sub">
+            {{'fe.adminTranslation.mainHeader' | translate}}
+        </div>
+    </h2>
+    <div class="container-fluid filters">
+        <div class="col-md-6 top-margin">
+            <div class="col-md-6 form-group">
+                <span class="label_text">
+                    {{'fe.adminTranslation.section' | translate}}
+                    <span class="pull-right">
+                        <button type="button" class="btn btn-warning button_icon" [disabled]="!selectedSection" (click)="showModal(sectionModal, 'editSection', selectedSection)">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger button_icon" [disabled]="!selectedSection" (click)="showModal(sectionModal, 'deleteSection', selectedSection)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-success button_icon" (click)="addUploadTranslation('sectionAdd')">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </span>
+                </span>
+                <lazyload-dropdown [(ngModel)]="selectedSection" (ngModelChange)="getModules()" [value]="sections" [placeholder]="'fe.generalComponentContent.select' | translate"
+                    [filterPlaceholder]="'fe.generalComponentContent.search' | translate"></lazyload-dropdown>
+                <!--<select [(ngModel)]="selectedSection" (ngModelChange)="getModules()" class="form-control">
+                    <option *ngFor="let t of sections" [ngValue]="t">{{t}}</option>
+                </select>-->
+            </div>
+
+            <div bsModal #sectionModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div *ngIf="sectionEdit" class="modal-dialog modal-md modal-dialog-center">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" aria-label="Close" (click)="hideModal(sectionModal)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                            <h4 class="modal-title">{{'fe.generalComponentContent.edit' | translate }}</h4>
+                        </div>
+                        <form #f5="ngForm" (ngSubmit)="postEditSection(sectionModal)">
+                            <div class="modal-body">
+                                <label for="sectionEdit">{{'fe.adminTranslation.section' | translate }}</label>
+                                <span *ngIf="sectionEdit.errors?.required && sectionEdit.touched" class="label label-danger pull-right">
+                                    {{'fe.generalComponentContent.required' | translate}}
+                                </span>
+                                <div class="input-group">
+                                    <div class="input-group-addon">{{sectionEditingObject.prefix}}</div>
+                                    <input type="text" name="sectionEdit" #sectionEdit="ngModel" [(ngModel)]="sectionEditingObject.edit" required class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default modal-cancel" (click)="hideModal(sectionModal);$event.stopPropagation()">{{'fe.generalComponentContent.cancel' | translate }}</button>
+                                <button type="submit" class="btn btn-primary" [disabled]="!f5.valid" (click)="$event.stopPropagation()">{{'fe.generalComponentContent.confirm' | translate }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div *ngIf="sectionDelete" class="modal-dialog modal-sm modal-dialog-center">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" aria-label="Close" (click)="hideModal(sectionModal)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                            <h4 class="modal-title">{{'fe.adminTranslation.confirmDeleteSection' | translate }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <b>{{'fe.generalComponentContent.name' | translate}}:</b> {{selectedSection}}
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default modal-cancel" (click)="hideModal(sectionModal);$event.stopPropagation()">{{ 'fe.generalComponentContent.cancel' | translate }}</button>
+                            <button class="btn btn-primary modal-delete" (click)="deleteSection(selectedSection, sectionModal);$event.stopPropagation()">{{ 'fe.generalComponentContent.confirm' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <span class="label_text">
+                    {{'fe.adminTranslation.module' | translate}}
+                    <span class="pull-right">
+                        <button type="button" class="btn btn-warning button_icon" [disabled]="!selectedModule" (click)="showModal(moduleModal, 'editModule', selectedModule)">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger button_icon" [disabled]="!selectedModule" (click)="showModal(moduleModal, 'deleteModule')">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                        <button type="submit" class="btn btn-success pull-right button_icon" [disabled]="!selectedSection" (click)="addUploadTranslation('moduleAdd')">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </span>
+                </span>
+                <lazyload-dropdown [(ngModel)]="selectedModule" (ngModelChange)="getTranslations()" [value]="modules" [disabled]="!selectedSection || !modules" [placeholder]="'fe.generalComponentContent.select' | translate"
+                    [filterPlaceholder]="'fe.generalComponentContent.search' | translate"></lazyload-dropdown>
+                <!--<select [(ngModel)]="selectedModule" (ngModelChange)="getTranslations()" [disabled]="!selectedSection || !modules" class="form-control">
+                    <option *ngFor="let m of modules" [ngValue]="m">{{m}}</option>
+                </select>-->
+            </div>
+
+            <div bsModal #moduleModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div *ngIf="moduleEdit" class="modal-dialog modal-md modal-dialog-center">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" aria-label="Close" (click)="hideModal(moduleModal)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                            <h4 class="modal-title">{{'fe.generalComponentContent.edit' | translate}}</h4>
+                        </div>
+                        <form #f4="ngForm" (ngSubmit)="postEditModule(moduleModal)">
+                            <div class="modal-body">
+                                <label for="moduleEdit">{{'fe.adminTranslation.module' | translate}}</label>
+                                <span *ngIf="moduleEdit.errors?.required && moduleEdit.touched" class="label label-danger pull-right">
+                                    {{'fe.generalComponentContent.required' | translate}}
+                                </span>
+                                <div class="input-group">
+                                    <div class="input-group-addon">{{moduleEditingObject.prefix}}</div>
+                                    <input type="text" name="moduleEdit" #moduleEdit="ngModel" [(ngModel)]="moduleEditingObject.edit" required class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default modal-cancel" (click)="hideModal(moduleModal);$event.stopPropagation()">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                                <button type="submit" class="btn btn-primary" [disabled]="!f4.valid" (click)="$event.stopPropagation()">{{'fe.generalComponentContent.confirm' | translate}}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div *ngIf="moduleDelete" class="modal-dialog modal-sm modal-dialog-center">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" aria-label="Close" (click)="hideModal(moduleModal)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                            <h4 class="modal-title">{{'fe.adminTranslation.confirmDeleteModule' | translate}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <b>{{'fe.generalComponentContent.name' | translate}}:</b> {{selectedModule}}
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default modal-cancel" (click)="hideModal(moduleModal);$event.stopPropagation()">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                            <button class="btn btn-primary modal-delete" (click)="deleteModule(selectedModule, moduleModal);$event.stopPropagation()">{{'fe.generalComponentContent.confirm' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-md-offset-3 top-margin">
+            <validation-messages [errors]="fileUploadErrors" inputName="csvUpload">
+                <upload-validator *ngIf="csvFile" [file]="csvFile" [extension]="'csv'"></upload-validator>
+                <span class="label_text">
+                    {{'fe.adminTranslation.translationFile' | translate}}
+                    <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="clearCsvFile()"></span>
+                </span>
+                <label for="csvFileInput" class="file-label clearfix">
+                    <div *ngIf="csvFile" class="file-label-info">
+                        <div>{{'fe.generalComponentContent.size' | translate}}: <b>{{csvFile.size | bytes}}</b></div>
+                        <div>{{'fe.generalComponentContent.name' | translate}}: <b>{{csvFileName}}</b></div>
+                    </div>
+                    <div class="file-label-upload-icon">
+                        <span class="glyphicon glyphicon-upload"></span>
+                    </div>
+                </label>
+                <input class="hide-input" type="file" id="csvFileInput" #csvFileInput accept=".csv" (change)="onChangeCsvFile($event)">
+                <div class="pull-left" tooltip="{{'fe.adminTranslation.overrideWarning' | translate}}" placement="bottom">
+                    <p-checkbox id="override" name="override" binary="true" label="{{'fe.adminTranslation.override' | translate}}" [(ngModel)]="override"></p-checkbox>
+                </div>
+                <button class="btn btn-success bottom-margin pull-right" [disabled]="csvValidate" (click)="postCsvFile()">{{'fe.adminTranslation.translationFileUpload' | translate}}</button>
+            </validation-messages>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div *ngIf="translationsDataUpload.length > 0 && translationsDataUpload[0].source == 'sectionAdd'" class="clearfix">
+            <form #f="ngForm" (ngSubmit)="uploadTranslations()">
+                <table class="form-group table_form">
+                    <tr *ngFor="let t of translationsDataUpload">
+                        <td>
+                            <div>
+                                <label>{{'fe.adminTranslation.section' | translate}}</label>
+                                <span *ngIf="section.errors?.required" class="label label-danger pull-right">
+                                    {{'fe.generalComponentContent.required' | translate}}
+                                </span>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">{{t.prefix}}</div>
+                                <input type="text" name="section" #section="ngModel" [(ngModel)]="t.section" required class="form-control">
+                            </div>
+                        </td>
+                        <td>
+                            <label>{{'fe.adminTranslation.module' | translate}}</label>
+                            <span *ngIf="moduleAdd.errors?.required" class="label label-danger pull-right">
+                                {{'fe.generalComponentContent.required' | translate}}
+                            </span>
+                            <input type="text" name="moduleAdd" #moduleAdd="ngModel" [(ngModel)]="t.moduleAdd" required class="form-control">
+                        </td>
+                        <td>
+                            <label>{{ 'fe.adminTranslation.key' | translate }}</label>
+                            <span *ngIf="keyAdd.errors?.required" class="label label-danger pull-right">
+                                {{'fe.generalComponentContent.required' | translate}}
+                            </span>
+                            <div class="input-group">
+                                <input type="text" name="keyAdd" #keyAdd="ngModel" [(ngModel)]="t.keyAdd" required class="form-control">
+                                <div class="input-group-addon">{{t.suffix}}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <label>{{'fe.adminTranslation.default' | translate}}</label>
+                            <span *ngIf="defaultTranslation.errors?.required" class="label label-danger pull-right">
+                                {{'fe.generalComponentContent.required' | translate}}
+                            </span>
+                            <input type="text" name="defaultTranslation" #defaultTranslation="ngModel" [(ngModel)]="t.defaultTranslation" required class="form-control">
+                        </td>
+                        <td *ngFor="let l of languages">
+                            <label>{{l}}</label>
+                            <input type="text" [(ngModel)]="t.translations[l]" [name]="l" class="form-control">
+                        </td>
+                        <td [ngStyle]="{'width': '5%'}" class="vertical_align-bottom text-right">
+                            <button class="btn btn-danger" (click)="deleteRow(i)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="20" class="text-center">
+                            <button type="submit" [disabled]="!f.valid" class="btn btn-primary">{{'fe.generalComponentContent.submit' | translate}}</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div *ngIf="translationsDataUpload.length > 0 && translationsDataUpload[0].source == 'moduleAdd'" class="clearfix">
+            <form #f1="ngForm" (ngSubmit)="uploadTranslations()">
+                <table class="form-group table_form">
+                    <tr *ngFor="let t of translationsDataUpload; let i = index">
+                        <td>
+                            <label>{{'fe.adminTranslation.module' | translate}}</label>
+                            <span *ngIf="moduleAdd1.errors?.required" class="label label-danger pull-right">
+                                {{'fe.generalComponentContent.required' | translate}}
+                            </span>
+                            <div class="input-group">
+                                <div class="input-group-addon">{{t.prefix}}</div>
+                                <input type="text" name="moduleAdd1" #moduleAdd1="ngModel" [(ngModel)]="t.moduleAdd" required class="form-control">
+                            </div>
+                        </td>
+                        <td>
+                            <label>{{'fe.adminTranslation.key' | translate}}</label>
+                            <span *ngIf="keyAdd1.errors?.required" class="label label-danger pull-right">
+                                {{'fe.generalComponentContent.required' | translate}}
+                            </span>
+                            <div class="input-group">
+                                <input type="text" name="keyAdd1" #keyAdd1="ngModel" [(ngModel)]="t.keyAdd" required class="form-control">
+                                <div class="input-group-addon">{{t.suffix}}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <label>{{'fe.adminTranslation.default' | translate}}</label>
+                            <span *ngIf="defaultTranslation1.errors?.required" class="label label-danger pull-right">
+                                {{'fe.generalComponentContent.required' | translate}}
+                            </span>
+                            <input type="text" name="defaultTranslation1" #defaultTranslation1="ngModel" [(ngModel)]="t.defaultTranslation" required class="form-control">
+                        </td>
+                        <td *ngFor="let l of languages">
+                            <label>{{l}}</label>
+                            <input type="text" [(ngModel)]="t.translations[l]" [name]="l" class="form-control">
+                        </td>
+                        <td [ngStyle]="{'width': '5%'}" class="vertical_align-bottom text-right">
+                            <button class="btn btn-danger" (click)="deleteRow(i)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="20" class="text-center">
+                            <button type="submit" [disabled]="!f1.valid" class="btn btn-primary">{{'fe.generalComponentContent.submit' | translate}}</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div *ngIf="translationsDataUpload.length > 0 && translationsDataUpload[0].source == 'keyAdd'" class="clearfix translation-upload">
+            <form #f2="ngForm" (ngSubmit)="uploadTranslations()" novalidate>
+                <table class="form-group table_form">
+                    <tr *ngFor="let t of translationsDataUpload; let i = index;trackBy: trackByIndex">
+                        <td [ngStyle]="{'width': '40%'}">
+                            <label>{{'fe.adminTranslation.genericName' | translate}}</label>
+                            <span *ngIf="keyAdd2.errors?.required" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+                            <div class="input-group">
+                                <div class="input-group-addon">{{t.prefix}}</div>
+                                <input type="text" name="keyAdd2{{i}}" #keyAdd2="ngModel" [(ngModel)]="t.genericName" required class="form-control">
+                                <div class="input-group-addon">{{t.suffix}}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <label>{{'fe.adminTranslation.default' | translate}}</label>
+                            <span *ngIf="defaultTranslation2.errors?.required" class="label label-danger pull-right">{{'fe.generalComponentContent.required' | translate}}</span>
+                            <input type="text" name="defaultTranslation2{{i}}" #defaultTranslation2="ngModel" [(ngModel)]="t.defaultTranslation" required class="form-control">
+                        </td>
+                        <td *ngFor="let l of languages">
+                            <label>{{l}}</label>
+                            <input type="text" [(ngModel)]="t.translations[l]" [ngModelOptions]="{standalone: true}" class="form-control">
+                        </td>
+                        <td [ngStyle]="{'width': '3%'}" class="vertical_align-bottom text-right">
+                            <button type="button" class="btn btn-danger" (click)="deleteRow(i)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="20" class="text-center">
+                            <button type="submit" [disabled]="!f2.valid" class="btn btn-primary">{{'fe.adminTranslation.submit' | translate}}</button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="col-md-6 col-md-offset-3 form-group">
+                    <validation-messages [errors]="translationUploadErrors" inputName="genericName">
+                    </validation-messages>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-3 form-group">
+        <input #globalFilter type="text" class="form-control" placeholder="{{'fe.generalComponentContent.search' | translate}}">
+    </div>
+
+    <div class="col-md-9">
+        <div class="pull-right">
+            <button class="btn btn-success" [disabled]="!translationsDataUpload.length >= 1" (click)="showModal(addLanguageModal);clickedRow=i">
+                {{'fe.adminTranslation.addNewLanguage' | translate}}
+            </button>
+            <button type="submit" class="btn btn-success" [disabled]="!selectedModule" (click)="addUploadTranslation('keyAdd')">
+                {{'fe.adminTranslation.addNewTranslation' | translate}}
+            </button>
+        </div>
+    </div>
+
+    <div bsModal #addLanguageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(addLanguageModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{'fe.adminTranslation.addLanguage' | translate}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-class">
+                        <label for="language" class="pull-left">{{'fe.adminTranslation.chooseLanguage' | translate}}</label>
+                        <select name="language" [(ngModel)]="selectedLanguage" [disabled]="!sections" class="form-control">
+                            <option *ngFor="let a of languageKeys" [ngValue]="a">{{availableLanguages[a]}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" (click)="hideModal(addLanguageModal);$event.stopPropagation()">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                    <button class="btn btn-primary" [disabled]="!selectedLanguage" (click)="addLanguage(addLanguageModal);$event.stopPropagation()">{{'fe.generalComponentContent.submit' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <p-dataTable #adminTranslationDataTable [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [value]="tableTranslations" [rows]="10" [paginator]="true"
+            [rowsPerPageOptions]="[5, 10, 15, 20, 25, 50, 100, 250, 500]" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
+            <p-column field="genericName" header="Generic name" sortable="true" [filter]="true" filterMatchMode="contains" [style]="{ 'width': '40%' }">
+                <template let-object="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="object.genericName" placement="top">
+                        {{object.genericName}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="defaultTranslation" [header]="'fe.adminTranslation.default' | translate" sortable="true" [filter]="true" filterMatchMode="contains" [style]="{ 'width': '20%' }">
+                <template let-object="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="object.defaultTranslation" placement="top">
+                        {{object.defaultTranslation | shortText: 100 : '...'}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column *ngFor="let l of tableLanguages" [field]="l" [header]="l" sortable="true" [filter]="true" filterMatchMode="contains" [style]="{ 'width': '20%' }">
+                <template let-object="rowData" pTemplate="body">
+                    <div class="text-center" [tooltip]="object[l]" placement="top">
+                        {{object[l] | shortText: 100 : '...'}}
+                    </div>
+                </template>
+            </p-column>
+            <p-column field="operations" [style]="{'width': '84px'}">
+                <template pTemplate="header">
+                    <button class="btn btn-success" [disabled]="!selectedModule" (click)="getTranslations()">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                </template>
+                <template let-object="rowData" pTemplate="body">
+                    <button class="btn btn-warning edit-button" (click)="showModal(translationModal, 'editTranslation', object.genericName)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                    <button class="btn btn-danger delete-button" (click)="showModal(translationModal, 'deleteTranslation', object)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </template>
+            </p-column>
+        </p-dataTable>
+
+        <div bsModal #translationModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div *ngIf="translateEdit" class="modal-dialog modal-md modal-dialog-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="hideModal(translationModal)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                        <h4 class="modal-title">{{'fe.adminTranslation.editing' | translate}} <b>{{translateTempEditingObject.genericName}}</b></h4>
+                    </div>
+                    <form #f3="ngForm" (ngSubmit)="postEditTranslation(translationModal)">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="editGenericName">{{'fe.adminTranslation.genericName' | translate}}</label>
+                                <input type="text" name="editGenericName" #editGenericName="ngModel" [(ngModel)]="translateTempEditingObject.genericName" class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="editDefault">{{'fe.adminTranslation.default' | translate}}</label>
+                                <span *ngIf="editDefault.errors?.required && editDefault.touched" class="label label-danger pull-right">
+                                    {{'fe.generalComponentContent.required' | translate}}
+                                </span>
+                                <input type="text" name="editDefault" #editDefault="ngModel" [(ngModel)]="translateTempEditingObject.defaultTranslation" required class="form-control">
+                            </div>
+                            <div class="form-group" *ngFor="let l of languages">
+                                <label>{{l}}</label>
+                                <input type="text" [(ngModel)]="translateTempEditingObject[l]" [name]="l" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" (click)="hideModal(translationModal);$event.stopPropagation()">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                            <button type="submit" [disabled]="!f3.valid" class="btn btn-primary" (click)="$event.stopPropagation()">{{'fe.generalComponentContent.edit' | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="translateDelete" class="modal-dialog modal-md modal-dialog-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="hideModal(translationModal)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                        <h4 class="modal-title">{{ 'fe.adminTranslation.confirmDeleteTranslation' | translate }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <b>{{'fe.adminTranslation.genericName' | translate}}:</b> {{deleteGenericName.genericName}}
+                        </div>
+                        <div>
+                            <b>{{'fe.adminTranslation.defaultTranslation' | translate}}:</b> {{deleteGenericName.defaultTranslation}}
+                        </div>
+                        <hr>
+                        <div *ngFor="let translation of tableLanguages">
+                            <b>{{translation}} translation:</b> {{deleteGenericName[translation]}}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default modal-cancel" (click)="hideModal(translationModal);$event.stopPropagation()">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                        <button class="btn btn-primary modal-delete" (click)="deleteTranslation(deleteGenericName.genericName, translationModal);$event.stopPropagation()">{{'fe.generalComponentContent.confirm' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

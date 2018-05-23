@@ -1,0 +1,23 @@
+#app-global_loader {
+  background: rgba(255, 255, 255, 0.6);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1031; }
+  #app-global_loader .loader_container {
+    bottom: 0;
+    height: 159px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: -6%; }
+  #app-global_loader .loader-message {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 12px; }
+
+/*# sourceMappingURL=globalLoader.cmp.css.map */

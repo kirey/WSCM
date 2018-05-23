@@ -1,0 +1,367 @@
+<div id="cmp-home" class="app_content-container-cmp kjgri">
+	<!--  Alert  -->
+	<div *ngIf="componentAlert.show" class="alert_box">
+		<alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="_utilityService.setAlert(componentAlert)">
+			<span [innerHTML]="componentAlert.message"></span>
+		</alert>
+	</div>
+
+	<!--  Header title  -->
+	<h2 class="view-header">
+		{{ 'fe.home.welcome' | translate }}
+	</h2>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Side menu for risk selection -->
+			<div class="col-md-2">
+				<!--  Risk types  -->
+				<div class="risk_container">
+					<div class="clearfix">
+						<h4 (click)="selectRFSection('R', risks[0])" class="pull-left break-header">{{ 'fe.home.risks' | translate }}</h4>
+						<h4 (click)="selectRFSection('R')" class="pull-right"><span class="glyphicon glyphicon-{{selectedRFFlagSection == 'R' ? 'minus' : 'plus'}} title-command"></span></h4>
+					</div>
+
+					<div class="panel panel-default" *ngFor="let risk of risks">
+						<div class="panel-heading" (click)="selectRFSection('R', risk)">{{ risk.name }}</div>
+						<div class="panel-body" [ngClass]="{'transition': true}" [ngStyle]="{'max-height': selectedRFFlagSection == 'R' ? '300px' : 0}">
+							<ul class="list-group">
+								<li class="list-group-item" *ngFor="let subtype of risk.dicRiskSubtypeses" (click)="selectSubrisk(subtype, 'R')" [ngClass]="{'active': subtype?.id == selectedSubtype?.id && selectedRFFlag == 'R'}">
+									{{ subtype.name ? subtype.name : ('fe.home.noRisksAvailable' | translate) }}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+				<!--  Forecast types  -->
+				<div *ifRole="[_kjgriConstants.getROLES().GOLD_A, _kjgriConstants.getROLES().PLATINUM_A, _kjgriConstants.getROLES().GOLD_I, _kjgriConstants.getROLES().PLATINUM_I, _kjgriConstants.getROLES().SILVER_I, _kjgriConstants.getROLES().SUPER_ADMIN]">
+					<div class="risk_container">
+						<div class="clearfix">
+							<h4 (click)="selectRFSection('F', forecasts[0])" class="pull-left break-header">{{ 'fe.home.forecasts' | translate }}</h4>
+							<h4 (click)="selectRFSection('F')" class="pull-right"><span class="glyphicon glyphicon-{{selectedRFFlagSection == 'F' ? 'minus' : 'plus'}} title-command"></span></h4>
+						</div>
+
+						<div class="panel panel-default" *ngFor="let forecast of forecasts">
+							<div class="panel-heading" (click)="selectRFSection('F', forecast)">{{ forecast.name }}</div>
+							<div class="panel-body" [ngClass]="{'transition': true}" [ngStyle]="{'max-height': selectedRFFlagSection == 'F' ? '300px' : 0}">
+								<ul class="list-group">
+									<li class="list-group-item" *ngFor="let subtype of forecast.dicRiskSubtypeses" (click)="selectSubrisk(subtype, 'F')" [ngClass]="{'active': subtype?.id == selectedSubtype?.id && selectedRFFlag == 'F'}">
+										{{ subtype.name ? subtype.name : ('fe.home.noRisksAvailable' | translate) }}
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<hr>
+					<!--  Measurement types  -->
+					<div class="risk_container">
+						<div class="clearfix">
+							<h4 (click)="selectRFSection('M')" class="pull-left break-header">{{ 'fe.home.forecastValuesTypes' | translate }}</h4>
+							<h4 (click)="selectRFSection('M')" class="pull-right"><span class="glyphicon glyphicon-{{selectedRFFlagSection == 'M' ? 'minus' : 'plus'}} title-command"></span></h4>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" (click)="selectRFSection('M')">{{ 'fe.home.types' | translate }}</div>
+							<div class="panel-body" [ngClass]="{'transition': true}" [ngStyle]="{'max-height': selectedRFFlagSection == 'M' ? '300px' : 0}">
+								<ul class="list-group">
+									<li class="list-group-item" *ngFor="let measureType of measurementTypes" (click)="selectSubrisk(measureType, 'M')" [ngClass]="{'active': measureType?.id == selectedSubtype?.id && selectedRFFlag == 'M'}">
+										{{ measureType.displayName }}
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button class="btn btn-primary col-md-12 margin-bottom-5" [disabled]="!riskHistory || riskHistory.length == 0" (click)="showChart(riskHistory, chartModal)">{{ 'fe.home.showChart' | translate }}</button>
+				<button class="btn btn-primary col-md-12 margin-bottom-5" [disabled]="!riskHistory || riskHistory.length == 0" (click)="tableModal.show()">{{ 'fe.home.showTable' | translate }}</button>
+			</div>
+			<!-- Map -->
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-6 text-left">
+						<div class="row">
+							<form #searchForm (ngSubmit)="searchAddress()" id="search-form" class="col-md-10">
+								<div class="form-group">
+									<input class="form-control" name="q" [(ngModel)]="q" placeholder="{{ 'fe.home.labelSearchAddress' | translate }}" autocomplete="off" />
+									<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" (click)="clearSearchAddress(true)"></span>
+									<button type="submit" class="btn btn-default search-button">
+										{{ 'fe.generalComponentContent.search' | translate }}
+									</button>
+								</div>
+								<div class="clearfix"></div>
+							</form>
+						</div>
+						<ul *ngIf="searchActiveAddress" class="search-list col-md-10">
+							<li *ngFor="let address of addresses" (click)="selectAddress(address)">
+								{{ address.display_name }}
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-6 text-right" *ngIf="!_appService.isAuthorised([_kjgriConstants.getROLES().ADMIN_I, _kjgriConstants.getROLES().SUBADMIN_I, _kjgriConstants.getROLES().PLATINUM_I, _kjgriConstants.getROLES().GOLD_I, _kjgriConstants.getROLES().SILVER_I])">
+						<h4><span class="smaller-font">{{ 'fe.home.zoomLevelDescription' | translate }}: {{ calculateAllowedZoom() }}</span> &nbsp;&nbsp;&nbsp; {{ 'fe.home.labelZoomLevel' | translate }}: {{ calculateZoom() }}</h4>
+					</div>
+				</div>
+				<div class="map-box">
+					<div id="map"></div>
+
+					<!-- Side bar with index information -->
+					<div class="risk_legend" [ngClass]="{'opened': (mapSelectedRiskIndexes && mapClicked) || (mapSelectedRiskIndexes && selectedCompanyIndex != null && selectedCompanyIndex != undefined) }">
+						<div class="head">
+							<!-- <h4>{{ 'fe.home.risksForLocation' | translate }}:</h4> -->
+							<!-- <div><b>{{ 'fe.home.longitude' | translate }}: </b>{{ mapSelectedRiskIndexes?.longitude }}</div>
+							<div><b>{{ 'fe.home.latitude' | translate }}: </b>{{ mapSelectedRiskIndexes?.latitude }}</div> -->
+							<span class="glyphicon glyphicon-chevron-right exit_icon" (click)="closeRiskLegend()"></span>
+						</div>
+						<!-- <hr class="separator"> -->
+
+						<tabset>
+							<tab [heading]="'fe.home.indexes' | translate">
+								<div class="risk-box">
+									<table class="coordinates-header margin-top-5">
+										<tr>
+											<td>{{ 'fe.home.coordinatesHeader' | translate }}</td>
+											<td>{{ inspectedCoordinates?(inspectedCoordinates[0] | number:'.1-4') + ', ' + (inspectedCoordinates[1] | number:'.1-4'):selectedLocation?.companyLocation?.longitude + ', ' + selectedLocation?.companyLocation?.latitude }}</td>
+										</tr>
+										<tr>
+											<td>{{ 'fe.home.municipalityHeader' | translate }}</td>
+											<td>{{ forecastValueMunicipality?.name }}</td>
+										</tr>
+										<tr>
+											<td>{{ 'fe.home.istatHeader' | translate }}</td>
+											<td>{{ forecastValueMunicipality?.istat }}</td>
+										</tr>
+									</table>
+									<h4><strong>{{ 'fe.home.riskIndexes' | translate }}:</strong></h4>
+									<table class="indexes-table">
+										<tr class="item" *ngFor="let risk of mapSelectedRiskIndexes?.riskIndexValueses">
+											<td class="risk_name">{{ risk.dicRiskSubtypes.name }}:</td>
+											<td class="index_value">{{ risk.value != -1 ? risk.value : 'N/A' }}</td>
+										</tr>
+									</table>
+								</div>
+
+								<div *ifRole="[_kjgriConstants.getROLES().GOLD_A, _kjgriConstants.getROLES().PLATINUM_A, _kjgriConstants.getROLES().GOLD_I, _kjgriConstants.getROLES().PLATINUM_I, _kjgriConstants.getROLES().SILVER_I, _kjgriConstants.getROLES().SUPER_ADMIN]">
+									<hr class="separator">
+									<div *ngIf="mapSelectedRiskIndexes" class="risk-box">
+										<h4><strong>{{ 'fe.home.forecastRiskIndexes' | translate }}:</strong></h4>
+										<p *ngIf="!mapSelectedRiskIndexes.forecastIndexValueses || mapSelectedRiskIndexes.forecastIndexValueses.length==0">{{ 'fe.home.noForecastIndexes' | translate }}</p>
+										<table *ngIf="mapSelectedRiskIndexes.forecastIndexValueses" class="indexes-table">
+											<tr class="item" *ngFor="let risk of mapSelectedRiskIndexes?.forecastIndexValueses">
+												<td class="risk_name">{{ risk.dicRiskSubtypes.name }}:</td>
+												<td class="index_value">{{ risk.value != -1 ? risk.value : 'N/A' }}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</tab>
+							<tab [heading]="'fe.home.forecastValues' | translate">
+								<table class="coordinates-header margin-top-5">
+									<tr>
+										<td>{{ 'fe.home.coordinatesHeader' | translate }}</td>
+										<td>{{ inspectedCoordinates?(inspectedCoordinates[0] | number:'.1-4') + ', ' + (inspectedCoordinates[1] | number:'.1-4'):selectedLocation?.companyLocation?.longitude + ', ' + selectedLocation?.companyLocation?.latitude }}</td>
+									</tr>
+									<tr>
+										<td>{{ 'fe.home.municipalityHeader' | translate }}</td>
+										<td>{{ forecastValueMunicipality?.name }}</td>
+									</tr>
+									<tr>
+										<td>{{ 'fe.home.istatHeader' | translate }}</td>
+										<td>{{ forecastValueMunicipality?.istat }}</td>
+									</tr>
+								</table>
+								<h4><strong>{{ 'fe.home.forecastValues' | translate }}:</strong></h4>
+								<table class="indexes-table" *ngIf="mapSelectedRiskIndexes && !_appService.isAuthorised(_kjgriConstants.getROLES().SILVER_A)">
+									<tr class="item" *ngFor="let measure of measurementTypes">
+										<td class="risk_name">{{ 'fe.home.' + measure.name | translate }} [{{measure.unit}}]:</td>
+										<td class="index_value">{{ mapSelectedRiskIndexes?.forecastMeasuredValueses.length ? mapSelectedRiskIndexes?.forecastMeasuredValueses[0][measure.name] : '' }}</td>
+									</tr>
+								</table>
+							</tab>
+						</tabset>
+					</div>
+
+					<!-- Risk index style legend-->
+					<div class="risk_index-style_legend clearfix">
+						<div class="row" *ngIf="selectedSubtype && selectedSubtype?.unit && (selectedCompany || _appService.isAuthorised([_kjgriConstants.getROLES().ADMIN_I, _kjgriConstants.getROLES().SUBADMIN_I, _kjgriConstants.getROLES().PLATINUM_I, _kjgriConstants.getROLES().GOLD_I, _kjgriConstants.getROLES().SILVER_I]))">
+							<div class="col-md-12">
+								{{ 'fe.home.displayForecastUnit' | translate }}: {{ selectedSubtype.unit }}
+							</div>
+						</div>
+						<div *ifRole="[_kjgriConstants.getROLES().GOLD_A, _kjgriConstants.getROLES().PLATINUM_A, _kjgriConstants.getROLES().SILVER_A, _kjgriConstants.getROLES().SUPER_ADMIN]">
+							<div class="col-md-3 col-xs-4 col-lg-3 item clearfix" *ngFor="let riskStyle of riskIndexStyles">
+								<!-- If Risks are selected -->
+								<div class="range" *ngIf="selectedRFFlag == 'R'"> {{ (selectedSubtype.code != 'GL') ? riskStyle.indexValue : riskStyle.numericIndexValue }}</div>
+								<!-- If Forecast is selected -->
+								<div class="range" *ngIf="selectedRFFlag == 'F'"> {{ riskStyle.riskIndexMin + ' - ' + riskStyle.riskIndexMax }}</div>
+								<!-- If measured value is selected -->
+								<div class="range" *ngIf="selectedRFFlag == 'M'"> {{ riskStyle.valueMin + ' - ' + riskStyle.valueMax }} ({{ riskStyle.dicMeasures?.unit }})</div>
+	
+								<div class="color_box" [ngStyle]="{'background': riskStyle.fill, 'border': '2px solid ' + riskStyle.stroke}"></div>
+								
+								<div class="range">{{ riskStyle.description }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--  Time/Date slider  -->
+				<div class="row padding-top-10">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12 text-left">
+								<div>{{ 'fe.home.labelForecastTime' | translate }}</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-4 position-relative margin-bottom-20">
+								<p-calendar [(ngModel)]="selectedDate" (ngModelChange)="onDateChange()" dateFormat="dd M yy" [showIcon]="true" [minDate]="minDate" [maxDate]="maxDate" readonlyInput="readonlyInput"></p-calendar>
+								<div class="timepicker">
+									<button [disabled]="selectedTime==='' || +selectedTime > 23 || +selectedTime < 0" href="javascript:void(0)" class="btn btn-link arrow text-center" (click)="incrementTime()">
+										<i class="fa fa-arrow-up" aria-hidden="true"></i>
+									</button>
+									<div [ngClass]="{'has-error': +selectedTime > 23 || +selectedTime < 0, 'text-center': true}">
+										<input class="custom-time-box" type="text" [(ngModel)]="selectedTime" (change)="onDateChange()" name="selectedTime" onlyNumber [maxlength]="2" hour />  h
+									</div>
+									<button [disabled]="selectedTime==='' || +selectedTime > 23 || +selectedTime < 0" href="javascript:void(0)" class="btn btn-link arrow text-center" (click)="decrementTime()">
+										<i class="fa fa-arrow-down" aria-hidden="true"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- <div class="slider-box"> -->
+					<!-- <div class="slider-buttons text-center">
+						<div class="btn" [ngClass]="{'btn-primary': selectedDateSlider == 0}" (click)="selecteDateSlider(0)">{{ todayDate | date: 'dd.MM.yyyy.'}}</div>
+						<div class="btn" [ngClass]="{'btn-primary': selectedDateSlider == 1}" (click)="selecteDateSlider(1)">{{ tomorrowDate | date: 'dd.MM.yyyy.'}}</div>
+					</div>
+
+					<p-slider [(ngModel)]="sliderValue" [min]="0" [max]="23" [step]="1" (onChange)="onSliderChange()"></p-slider>
+					<div class="slider-values clearfix">
+						<span class="pull-left">0</span>
+						<span class="current_value">{{ sliderValue }}</span>
+						<span class="pull-right">23</span>
+					</div> -->
+				</div>
+			</div>
+			<!-- Side menu for client search and company view-->
+			<div class="col-md-2">
+				<div *ifRole="[_kjgriConstants.getROLES().GOLD_A, _kjgriConstants.getROLES().PLATINUM_A, _kjgriConstants.getROLES().SILVER_A, _kjgriConstants.getROLES().SUPER_ADMIN]">
+					<!-- <h3>{{ 'fe.home.clientSearch' | translate }}</h3>
+					<form #form="ngForm" (ngSubmit)="clientCompaniesSearch(form.value.name)">
+						<div class="form-group">
+							<input type="text" name="name" class="form-control" ngModel [disabled]="!selectedSubtype">
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary" [disabled]="!selectedSubtype">{{ 'fe.generalComponentContent.filter' | translate }}</button>
+						</div>
+					</form>
+					<hr class="form-hr"> -->
+					<div class="form-group">
+						<lazyload-dropdown [(ngModel)]="selectedCompany" (ngModelChange)="!selectedCompany || loadLocationsByCompany($event, selectedSubtype.id, selectedRFFlag, true)" [label]="'fe.home.selectCompany' | translate" [value]="clientCompanies" [placeholder]="'fe.generalComponentContent.select' | translate" [filterPlaceholder]="'fe.generalComponentContent.search' | translate" display="name" matchingProperty="id" [disabled]="!selectedSubtype" [clear]="true" (onClear)="onCompanyClear()"></lazyload-dropdown>
+					</div>
+					<hr class="form-hr">
+				</div>
+				<div class="panel panel-info location-panel" *ngIf="selectedCompany || selectedLocation || companyLocations">
+					<div class="panel-heading">
+						<h4>{{ selectedCompany ? selectedCompany.name : ('fe.home.companyLocations' | translate) }}</h4>
+					</div>
+					<div class="panel-body">
+						<div class="list-group">
+							<li class="list-group-item" [ngClass]="{'active': !selectedLocation}" (click)="selectLocation(null, true)">
+								<h4 class="list-group-item-heading">{{ 'fe.home.showAllLocations' | translate }}</h4>
+							</li>
+							<li class="list-group-item" *ngFor="let location of companyLocations;" [ngClass]="{'active': selectedLocation?.companyLocation?.id == location?.companyLocation?.id}" (click)="selectLocation(location)">
+								<div class="form-group">
+									<h4 class="list-group-item-heading"> {{ location.companyLocation.name }} </h4>
+									<p class="list-group-item-text"> <b>{{ 'fe.home.address' | translate }}:</b> {{ location.companyLocation.address }} </p>
+									<p class="list-group-item-text"> <b>{{ 'fe.home.zipCode' | translate }}:</b> {{ location.companyLocation.zipCode }} </p>
+								</div>
+								<button class="btn btn-warning" *ngIf="_appService.isAuthorised([_kjgriConstants.getROLES().PLATINUM_I, _kjgriConstants.getROLES().GOLD_I, _kjgriConstants.getROLES().SILVER_I]) || location.consentToView && !_appService.isAuthorised([_kjgriConstants.getROLES().GOLD_A, _kjgriConstants.getROLES().SILVER_A])" (click)="goToHistory(location, selectedCompany)">{{ 'fe.home.historyBtn' | translate }}</button>
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--  Chart modal  -->
+	<div bsModal #chartModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-center">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" aria-label="Close" (click)="hideModal(chartModal)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+					<h4 class="modal-title">
+						<span *ngIf="selectedRFFlag == 'R'">{{ 'fe.home.riskMeasurementHistory' | translate }}</span>
+						<span *ngIf="selectedRFFlag == 'F'">{{ 'fe.home.forecastIndexHistory' | translate }}</span>
+						<span *ngIf="selectedRFFlag == 'M'">{{ 'fe.home.forecastValues' | translate }}</span> chart
+					</h4>
+				</div>
+				<div class="modal-body" *ngIf="chartData">
+					<p-chart type="line" [data]="chartData"></p-chart>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--  Table modal  -->
+	<div bsModal #tableModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tableModal" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-center">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" aria-label="Close" (click)="tableModal.hide()">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+					<h4 class="modal-title">
+						<span *ngIf="selectedRFFlag == 'R'">{{ 'fe.home.riskMeasurementHistory' | translate }}</span>
+						<span *ngIf="selectedRFFlag == 'F'">{{ 'fe.home.forecastIndexHistory' | translate }}</span>
+						<span *ngIf="selectedRFFlag == 'M'">{{ 'fe.home.forecastValues' | translate }}</span> table
+					</h4>
+				</div>
+				<div class="modal-body">
+					<!-- Risk history table -->
+					<h4>
+						<span *ngIf="selectedRFFlag == 'R'">{{ 'fe.home.riskMeasurementHistory' | translate }}</span>
+						<span *ngIf="selectedRFFlag == 'F'">{{ 'fe.home.forecastIndexHistory' | translate }}</span>
+						<span *ngIf="selectedRFFlag == 'M'">{{ 'fe.home.forecastValues' | translate }}</span> :
+						<b *ngIf="selectedRFFlag != 'M'"> {{ selectedSubtype?.name }}</b>
+						<b *ngIf="selectedRFFlag == 'M'"> {{ selectedSubtype?.displayName }}</b>
+					</h4>
+					<p-dataTable [value]="riskHistory" [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" class="table">
+						<p-column [field]="selectedRFFlag == 'R'?'dataMeasurementTimestamp':'targetTimestamp'" sortable="true" [header]="(selectedRFFlag == 'R' ? 'fe.home.measurmentDate' : 'fe.home.targetDate') | translate">
+							<template let-risk="rowData" pTemplate="body">
+								<div class="text-center">
+									<span *ngIf="selectedRFFlag == 'R'">
+										{{ risk.measurementDate | date: 'yyyy' }}
+									</span>
+									<span *ngIf="selectedRFFlag == 'F' || selectedRFFlag == 'M'">
+										{{ risk.targetTimestamp | date: 'dd.MM.yyyy. HH:mm' }}
+									</span>
+								</div>
+							</template>
+						</p-column>
+						<p-column [header]="'fe.home.value' | translate">
+							<template let-risk="rowData" pTemplate="body">
+								<div *ngIf="selectedRFFlag == 'R'" class="text-center">
+									{{ risk.indexValue == -1 ? 'N/A' : risk.indexValue }}
+								</div>
+								<div *ngIf="selectedRFFlag == 'F'" class="text-center">
+									{{ risk.value == -1 ? 'N/A' : risk.value }}
+								</div>
+								<div *ngIf="selectedRFFlag == 'M'" class="text-center">
+									{{ risk.value }}
+								</div>
+							</template>
+						</p-column>
+					</p-dataTable>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

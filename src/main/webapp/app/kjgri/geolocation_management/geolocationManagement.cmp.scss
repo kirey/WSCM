@@ -1,0 +1,32 @@
+#cmp-geolocation_management {
+    .geolocation_table {
+        .location_marker {
+            color: #0275d8;
+            font-size: 22px;
+        }
+
+        & .ui-state-highlight .location_marker {
+            color: #fff;
+        }
+    }
+
+    #map {
+        border: 1px solid #dadada;
+        height: 560px;
+    }
+
+    .inspected_geolocation-info {
+        background: #e4e4e4;
+        border: 1px solid #ddd;
+        padding: 12px 0;
+        position: relative;
+
+        .clear_btn {
+            cursor: pointer;
+            font-size: 17px;
+            position: absolute;
+            right: 4px;
+            top: 1px;
+        }
+    }
+}

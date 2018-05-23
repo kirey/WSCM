@@ -1,0 +1,52 @@
+/*
+Error: Invalid CSS after "": expected selector, was "{"version":3,"f..."
+        on line 1 of kjcore.app.module.js.map
+
+1: {"version":3,"file":"kjcore.app.module.js","sourceRoot":"","sources":["kjcore.app.module.ts"],"names":[],"mappings":";;;;;;;;;;AAAA,qBAAyB,eAAe,CAAC,CAAA;AACzC,iCAA8B,2BAA2B,CAAC,CAAA;AAC1D,uBAAuD,iBAAiB,CAAC,CAAA;AAEzE,qBAAiD,eAAe,CAAC,CAAA;AAEjE,oBAAoB;AACpB,+BAA6B,kBAAkB,CAAC,CAAA,CAAC,WAAW;AAC5D,2BAA0B,yBAAyB,CAAC,CAAA;AAEpD,+BAA8B,wCAAwC,CAAC,CAAA;AAEvE,6BAA4B,uCAAuC,CAAC,CAAA;AAEpE,4BAA2B,sCAAsC,CAAC,CAAA;AAClE,gCAA+B,0CAA0C,CAAC,CAAA;AAC1E,gCAA+B,0CAA0C,CAAC,CAAA;AAE1E,gCAAgC,iCAAiC,CAAC,CAAA;AAElE,2BAA0B,qBAAqB,CAAC,CAAA;AAChD,4BAA+B,4BAA4B,CAAC,CAAA;AAC5D,2BAA8B,0BAA0B,CAAC,CAAA;AAEzD,2BAAwB,qBAAqB,CAAC,CAAA;AAE9C,0BAA0B,oBAAoB,CAAC,CAAA;AAqC/C;IAAA;IAAyB,CAAC;IAnC1B;QAAC,eAAQ,CAAC;YACN,OAAO,EAAE;gBACL,gCAAa;gBACb,sBAAS;gBACT,oBAAO;gBACP,8BAAa;aAChB;YACD,YAAY,EAAE;gBACV,6BAAY;aACf;YACD,SAAS,EAAE,CAAC,6BAAY,CAAC;YACzB,SAAS,EAAE;gBACP,sBAAS;gBACT,4BAAc;gBACd,0BAAa;gBACb,wBAAU;gBACV,0BAAW;gBACX,gCAAc;gBACd,qBAAS;gBACT;oBACI,OAAO,EAAE,yBAAgB;oBACzB,QAAQ,EAAE,6BAAoB;iBACjC;gBACD;oBACI,OAAO,EAAE,WAAI;oBACb,UAAU,EAAE,UACR,OAAmB,EACnB,cAA8B,EAC9B,cAA8B;wBAC9B,OAAA,IAAI,iCAAe,CAAC,OAAO,EAAE,cAAc,EAAE,cAAc,CAAC;oBAA5D,CAA4D;oBAChE,IAAI,EAAE,CAAC,iBAAU,EAAE,qBAAc,EAAE,gCAAc,CAAC;iBACrD;aACJ;SACJ,CAAC;;iBAAA;IAEuB,gBAAC;AAAD,CAAC,AAA1B,IAA0B;AAAb,iBAAS,YAAI,CAAA"}
+
+Backtrace:
+kjcore.app.module.js.map:1
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1189:in `expected'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1125:in `expected'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1105:in `expr!'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/scss/static_parser.rb:20:in `parse_selector'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:427:in `visit_rule'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `block in with_base'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `with_base'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `visit'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:169:in `block in visit_children'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:168:in `visit_children'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:188:in `visit_root'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:159:in `visit'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:8:in `visit'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:294:in `watch'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/plugin.rb:109:in `method_missing'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:360:in `watch_or_update'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:51:in `process_result'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/base.rb:52:in `parse'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/lib/sass/exec/base.rb:19:in `parse!'
+C:/Program Files/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.22/bin/sass:13:in `<top (required)>'
+C:/Program Files/Ruby23-x64/bin/sass:23:in `load'
+C:/Program Files/Ruby23-x64/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"\": expected selector, was \"{\"version\":3,\"f...\"\A         on line 1 of kjcore.app.module.js.map\A \A 1: {\"version\":3,\"file\":\"kjcore.app.module.js\",\"sourceRoot\":\"\",\"sources\":[\"kjcore.app.module.ts\"],\"names\":[],\"mappings\":\";;;;;;;;;;AAAA,qBAAyB,eAAe,CAAC,CAAA;AACzC,iCAA8B,2BAA2B,CAAC,CAAA;AAC1D,uBAAuD,iBAAiB,CAAC,CAAA;AAEzE,qBAAiD,eAAe,CAAC,CAAA;AAEjE,oBAAoB;AACpB,+BAA6B,kBAAkB,CAAC,CAAA,CAAC,WAAW;AAC5D,2BAA0B,yBAAyB,CAAC,CAAA;AAEpD,+BAA8B,wCAAwC,CAAC,CAAA;AAEvE,6BAA4B,uCAAuC,CAAC,CAAA;AAEpE,4BAA2B,sCAAsC,CAAC,CAAA;AAClE,gCAA+B,0CAA0C,CAAC,CAAA;AAC1E,gCAA+B,0CAA0C,CAAC,CAAA;AAE1E,gCAAgC,iCAAiC,CAAC,CAAA;AAElE,2BAA0B,qBAAqB,CAAC,CAAA;AAChD,4BAA+B,4BAA4B,CAAC,CAAA;AAC5D,2BAA8B,0BAA0B,CAAC,CAAA;AAEzD,2BAAwB,qBAAqB,CAAC,CAAA;AAE9C,0BAA0B,oBAAoB,CAAC,CAAA;AAqC/C;IAAA;IAAyB,CAAC;IAnC1B;QAAC,eAAQ,CAAC;YACN,OAAO,EAAE;gBACL,gCAAa;gBACb,sBAAS;gBACT,oBAAO;gBACP,8BAAa;aAChB;YACD,YAAY,EAAE;gBACV,6BAAY;aACf;YACD,SAAS,EAAE,CAAC,6BAAY,CAAC;YACzB,SAAS,EAAE;gBACP,sBAAS;gBACT,4BAAc;gBACd,0BAAa;gBACb,wBAAU;gBACV,0BAAW;gBACX,gCAAc;gBACd,qBAAS;gBACT;oBACI,OAAO,EAAE,yBAAgB;oBACzB,QAAQ,EAAE,6BAAoB;iBACjC;gBACD;oBACI,OAAO,EAAE,WAAI;oBACb,UAAU,EAAE,UACR,OAAmB,EACnB,cAA8B,EAC9B,cAA8B;wBAC9B,OAAA,IAAI,iCAAe,CAAC,OAAO,EAAE,cAAc,EAAE,cAAc,CAAC;oBAA5D,CAA4D;oBAChE,IAAI,EAAE,CAAC,iBAAU,EAAE,qBAAc,EAAE,gCAAc,CAAC;iBACrD;aACJ;SACJ,CAAC;;iBAAA;IAEuB,gBAAC;AAAD,CAAC,AAA1B,IAA0B;AAAb,iBAAS,YAAI,CAAA\"}"; }

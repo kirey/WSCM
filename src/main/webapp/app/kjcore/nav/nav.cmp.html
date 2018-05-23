@@ -1,0 +1,59 @@
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" routerLink="home"><img class="navigation-app_logo-img" [src]="_appService.applicationData.applicationLogoUrl"></a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li *ngFor="let menuItem of (_navService.menuData | routesFilter: _authService.userRoutes)" dropdown>
+					<a [routerLink]="menuItem.route" *ngIf="!menuItem.dropdown">{{menuItem.title | translate}}</a>
+					<a role="button" aria-haspopup="true" aria-expanded="false" *ngIf="menuItem.dropdown" dropdownToggle>{{menuItem.title | translate}}<span class="caret"></span></a>
+
+					<ul role="menu" class="dropdown-menu" *ngIf="menuItem.dropdown && menuItem.dropdown.length > 0" dropdownMenu>
+						<li role="menuitem" [ngClass]="{'dropdown-submenu': subMenuItem?.submenu}" *ngFor="let subMenuItem of (menuItem.dropdown | routesFilter: _authService.userRoutes)">
+							<a role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-item" *ngIf="!subMenuItem.submenu?.length>0" [attr.tabindex]="'-1'" [routerLink]="subMenuItem.route">{{subMenuItem.title | translate}}</a>
+							<input type="button" class="btn btn-link navigation-submenu_head" role="button" aria-haspopup="true" aria-expanded="false" *ngIf="subMenuItem.submenu?.length>0"
+							 [attr.tabindex]="'-1'" value="{{subMenuItem.title | translate}}" />
+
+							<ul *ngIf="subMenuItem.submenu" role="menu" class="dropdown-menu">
+								<li *ngFor="let item of (subMenuItem.submenu | routesFilter: _authService.userRoutes)">
+									<a class="dropdown-item" tabindex="-1" [routerLink]="item.route">{{item.title | translate}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<!-- Language selection -->
+				<li class="dropdown" dropdown>
+					<a id="languageDropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" dropdownToggle aria-haspopup="true" aria-expanded="false">{{ _appService.defaultLanguageName }} <span class="caret"></span></a>
+					<ul id="languages-dropdown" dropdownMenu role="menu" aria-labelledby="languageDropdown">
+						<li *ngFor="let lang of _appService.availableLanguages" role="menuitem" [ngClass]="{'active_lang': lang.languageName == _appService.defaultLanguageName}">
+							<a class="dropdown-item language cursor-pointer" [ngClass]="{'active_lang': _appService.defaultLanguage == lang.languageCode}" (click)="matchDefaultLanguage(lang.languageCode) || changeLanguage(lang.languageCode)">{{ lang.languageName }}</a>
+						</li>
+					</ul>
+				</li>
+				<!-- User dropdown -->
+				<li class="dropdown" dropdown>
+					<a id="userPanelDropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" dropdownToggle aria-haspopup="true" aria-expanded="false">{{_appService.userProfile.userName}}<span class="caret"></span></a>
+					<div class="navigation-company_logo-img" [style.background-image]="'url(' + _appService.userProfile.companyLogo + ')' | safeStyle"></div>
+					<ul id="languages-dropdown" dropdownMenu role="menu" aria-labelledby="userPanelDropdown">
+						<li><a routerLink="user_panel" *ngIf="checkRoute('user_panel')">{{ 'fe.navigation.userPanel' | translate }}</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a class="logout-link" (click)="logout()">{{ 'fe.navigation.logout'  | translate }}</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-md-1"></div>
+</nav>

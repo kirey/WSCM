@@ -1,0 +1,261 @@
+<div id="cmp-action_management" class="app_content-container-cmp">
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <h2 class="view-header">
+        <div class="view-header-sub">
+            {{'fe.actionManagement.mainHeader' | translate}}
+        </div>
+    </h2>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <!-- Disabled from 08.01.2018 -->
+                <!-- <span class="label_text">
+                    <span class="pull-right">
+                        <button type="button" class="btn btn-warning button_icon" [disabled]="!selectedRisk" (click)="showModal(riskModal, 'editRisk')">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-success button_icon" (click)="showModal(riskModal, 'addRisk')">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger button_icon" [disabled]="!selectedRisk" (click)="showModal(deleteRiskModal)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                    </span>
+                </span> -->
+                <lazyload-dropdown [label]="'fe.actionManagement.risk' | translate" [(ngModel)]="selectedRisk" (ngModelChange)="onRisksChange()" [value]="risks" [placeholder]="'fe.generalComponentContent.select' | translate"
+                    [filterPlaceholder]="'fe.generalComponentContent.search' | translate" display="name"></lazyload-dropdown>
+            </div>
+            <div class="col-md-6 form-group">
+                <!-- Disabled from 08.01.2018 -->
+                <!-- <span class="label_text">
+                    <span class="pull-right">
+                        <button type="button" class="btn btn-warning button_icon" [disabled]="!selectedRiskSubtype" (click)="showModal(riskSubtypeModal, 'editSubtypeRisk')">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-success button_icon" [disabled]="!selectedRisk" (click)="showModal(riskSubtypeModal, 'addSubtypeRisk')">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger button_icon" [disabled]="!selectedRiskSubtype" (click)="showModal(deleteSubRiskModal)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                    </span>
+                </span> -->
+                <lazyload-dropdown [label]="'fe.actionManagement.riskSubtype' | translate" [(ngModel)]="selectedRiskSubtype" (ngModelChange)="onSubRisksChange()" [value]="subRisks" [placeholder]="'fe.generalComponentContent.select' | translate"
+                    [filterPlaceholder]="'fe.generalComponentContent.search' | translate" display="name"></lazyload-dropdown>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{'fe.actionManagement.subHeader' | translate}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <p-dataTable #dataTable [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [value]="actions" [rows]="10" [paginator]="true" [rowsPerPageOptions]="pageSizes" [globalFilter]="globalFilter" reorderableColumns="true" class="table">
+            <p-column field="name" [header]="'fe.generalComponentContent.name' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-object="rowData" pTemplate="body">
+                    <div class="text-center">{{object.name}}</div>
+                </template>
+            </p-column>
+            <p-column field="description" [header]="'fe.generalComponentContent.description' | translate" sortable="true" [filter]="true" filterMatchMode="contains">
+                <template let-object="rowData" pTemplate="body">
+                    <div class="text-center">{{object.description}}</div>
+                </template>
+            </p-column>
+            <p-column field="operations" [style]="{'width': '112px'}">
+                <template pTemplate="header">
+                    <button [disabled]="!selectedRisk || !selectedRiskSubtype" class="btn btn-success" (click)="showModal(actionModal, 'addAction')">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </template>
+                <template let-object="rowData" pTemplate="body">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-warning" (click)="showModal(actionModal, 'editAction', object)">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger" (click)="showModal(deleteActionModal, 'deleteAction', object)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </template>
+            </p-column>
+        </p-dataTable>
+    </div>
+    <!-- Add/Edit Risk Modal -->
+    <div bsModal #riskModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="riskModal" aria-hidden="true">
+        <div *ngIf="riskForm" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <form [formGroup]="riskForm" (ngSubmit)="riskFormSubmit(riskModal)">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="hideModal(riskModal)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                        <h4 class="modal-title">{{ (riskForm.controls.id.value?'fe.actionManagement.edit':'fe.actionManagement.add') | translate}} risk</h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <div class="form-group">
+                            <label for="name">{{ 'fe.generalComponentContent.name' | translate }}</label>
+                            <control-messages [control]="riskForm.controls.name"></control-messages>
+                            <input type="text" class="form-control" formControlName="name" placeholder="{{ 'fe.generalComponentContent.name' | translate }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="name">{{ 'fe.actionManagement.code' | translate }}</label>
+                            <control-messages [control]="riskForm.controls.code"></control-messages>
+                            <input type="text" class="form-control" formControlName="code" placeholder="{{ 'fe.actionManagement.code' | translate }}" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="hideModal(riskModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                        <button type="submit" class="btn btn-success" [disabled]="riskForm.invalid">{{'fe.generalComponentContent.save' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Risk Modal -->
+    <div bsModal #deleteRiskModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteRiskModal" aria-hidden="true">
+        <div *ngIf="selectedRisk" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(deleteRiskModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{ 'fe.generalComponentContent.remove' | translate}}</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <p>Are you sure you want to remove this item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="hideModal(deleteRiskModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                    <button type="button" class="btn btn-success" (click)="removeRisk(deleteRiskModal)">{{'fe.generalComponentContent.remove' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add/Edit Risk Subtype Modal -->
+    <div bsModal #riskSubtypeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="riskSubtypeModal" aria-hidden="true">
+        <div *ngIf="riskSubtypeForm" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <form [formGroup]="riskSubtypeForm" (ngSubmit)="riskSubtypeFormSubmit(riskSubtypeModal)">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="hideModal(riskSubtypeModal)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                        <h4 class="modal-title">{{ (riskSubtypeForm.controls.id.value?'fe.actionManagement.edit':'fe.actionManagement.add') | translate}} risk subtype</h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <div class="form-group">
+                            <label for="name">{{ 'fe.generalComponentContent.name' | translate }}</label>
+                            <control-messages [control]="riskSubtypeForm.controls.name"></control-messages>
+                            <input type="text" class="form-control" formControlName="name" placeholder="{{ 'fe.generalComponentContent.name' | translate }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="name">{{ 'fe.actionManagement.code' | translate }}</label>
+                            <control-messages [control]="riskSubtypeForm.controls.code"></control-messages>
+                            <input type="text" class="form-control" formControlName="code" placeholder="{{ 'fe.actionManagement.code' | translate }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="usage">{{ 'fe.actionManagement.usage' | translate }}</label>
+                            <control-messages [control]="riskSubtypeForm.controls.usage"></control-messages>
+                            <div class="col-md-12">
+                                <p-radioButton name="usage" value="R" label="Risks" formControlName="usage"></p-radioButton>
+                            </div>
+                            <div class="col-md-12">
+                                <p-radioButton name="usage" value="RF" label="Forecasts and Risks" formControlName="usage"></p-radioButton>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="hideModal(riskSubtypeModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                        <button type="submit" class="btn btn-success" [disabled]="riskSubtypeForm.invalid">{{'fe.generalComponentContent.save' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete SubRisk Modal -->
+    <div bsModal #deleteSubRiskModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteSubRiskModal" aria-hidden="true">
+        <div *ngIf="selectedRiskSubtype" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(deleteSubRiskModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{ 'fe.generalComponentContent.remove' | translate}}</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <p>Are you sure you want to remove this item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="hideModal(deleteSubRiskModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                    <button type="button" class="btn btn-success" (click)="removeSubRisk(deleteSubRiskModal)">{{'fe.generalComponentContent.remove' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add/Edit Action Modal -->
+    <div bsModal #actionModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="actionModal" aria-hidden="true">
+        <div *ngIf="actionForm" class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <form [formGroup]="actionForm" (ngSubmit)="actionFormSubmit(actionModal)">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-label="Close" (click)="hideModal(actionModal)">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                        <h4 class="modal-title">{{ (actionForm.controls.id.value?'fe.actionManagement.edit':'fe.actionManagement.add') | translate}} action</h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <div class="form-group">
+                            <p><strong>{{ 'fe.actionManagement.risk' | translate }}</strong> <br>{{ selectedRisk?.name }}</p>
+                        </div>
+                        <div class="form-group">
+                            <p><strong>{{ 'fe.actionManagement.riskSubtype' | translate }}</strong> <br>{{ selectedRiskSubtype?.name }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">{{ 'fe.generalComponentContent.name' | translate }}</label>
+                            <control-messages [control]="actionForm.controls.name"></control-messages>
+                            <input type="text" class="form-control" formControlName="name" placeholder="{{ 'fe.generalComponentContent.name' | translate }}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="name">{{ 'fe.generalComponentContent.description' | translate }}</label>
+                            <control-messages [control]="actionForm.controls.description"></control-messages>
+                            <textarea class="form-control action_description" formControlName="description" placeholder="{{ 'fe.generalComponentContent.description' | translate }}"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="hideModal(actionModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                        <button type="submit" class="btn btn-success" [disabled]="actionForm.invalid">{{'fe.generalComponentContent.save' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Action Modal -->
+    <div bsModal #deleteActionModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="deleteActionModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideModal(deleteActionModal)">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <h4 class="modal-title">{{ 'fe.generalComponentContent.remove' | translate}}</h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <p>Are you sure you want to remove this item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="hideModal(deleteActionModal)">{{'fe.generalComponentContent.cancel' | translate}}</button>
+                    <button type="button" class="btn btn-success" (click)="removeAction(deleteActionModal)">{{'fe.generalComponentContent.remove' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

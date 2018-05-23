@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" 
+	updateCheck="true"
+	monitoring="autodetect" 
+	dynamicConfig="true">
+
+	<diskStore path="java.io.tmpdir" />
+
+	<cache name="security" 
+		maxEntriesLocalHeap="10000"
+		maxEntriesLocalDisk="100000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="1000" timeToLiveSeconds="2000"
+		memoryStoreEvictionPolicy="LFU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<cache name="testCache" 
+		maxEntriesLocalHeap="0"
+		maxEntriesLocalDisk="0" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="1000" timeToLiveSeconds="2000"
+		memoryStoreEvictionPolicy="LFU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="emailConfigsCache" 
+		maxEntriesLocalHeap="10000"
+		maxEntriesLocalDisk="1000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="1000" timeToLiveSeconds="2000"
+		memoryStoreEvictionPolicy="LFU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	<cache name="emailTemplateCache" 
+		maxEntriesLocalHeap="10000"
+		maxEntriesLocalDisk="1000" 
+		eternal="false" 
+		diskSpoolBufferSizeMB="20"
+		timeToIdleSeconds="1000" timeToLiveSeconds="2000"
+		memoryStoreEvictionPolicy="LFU" 
+		transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+</ehcache>

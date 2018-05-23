@@ -1,0 +1,87 @@
+<div id="cmp-geolocation_management" class="app_content-container-cmp">
+    <!-- Alert -->
+    <div *ngIf="componentAlert.show" class="alert_box">
+        <alert [type]="componentAlert.type" [dismissible]="componentAlert.dismissible" (close)="this._utilityService.setAlert(this.componentAlert)">
+            <span [innerHTML]="componentAlert.message"></span>
+        </alert>
+    </div>
+
+    <!-- Main header -->
+    <h2 class="view-header">
+        <div class="view-header-sub">
+            {{'fe.geolocationManagement.mainHeader' | translate}}
+        </div>
+    </h2>
+
+    <div>
+        <div class="col-md-4">
+            <!--  Filter form  -->
+            <div class="component-filter_box">
+                <form #filterForm="ngForm" (ngSubmit)="loadGeolocations(filterForm.value.istat)">
+                    <div class="col-md-6 form-group">
+                        <label for="filter-istat" class="control-label">{{'fe.geolocationManagement.istat' | translate}}</label>
+                        <label *ngIf="!filterForm.valid" class="label label-danger pull-right">{{ 'fe.generalComponentContent.required' | translate }}</label>
+                        <input type="text" name="istat" id="filter-istat" [placeholder]="'fe.geolocationManagement.istat' | translate" class="form-control" required ngModel />
+                    </div>
+                    <div class="col-md-offset-9 col-md-3 clearfix">
+                        <button type="submit" class="btn btn-primary pull-right" [disabled]="!filterForm.valid">{{ 'fe.generalComponentContent.search' | translate }}</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Geolocations table -->
+            <p-dataTable [value]="geolocations" [emptyMessage]="'fe.generalComponentContent.noResultsFound' | translate" [rows]="dataTableConfig.rows" [paginator]="dataTableConfig.paginator" [pageLinks]="dataTableConfig.pageLinks" [rowsPerPageOptions]="dataTableConfig.rowsPerPageOptions" [reorderableColumns]="dataTableConfig.reorderableColumns" class="table" selectionMode="single" (onRowSelect)="selectGeolocation($event.data)" dataKey="id" [selection]="selectedGeolocation" class="table geolocation_table">
+                <p-column field="istat" sortable="true" [header]="'fe.geolocationManagement.istat' | translate">
+                </p-column>
+                <p-column field="sub" [header]="'fe.geolocationManagement.sub' | translate">
+                </p-column>
+                <p-column field="operations" [style]="{'width': '60px', 'text-align': 'center'}">
+                    <template pTemplate="header">
+                        <span>
+                            <button class="btn btn-success" [disabled]="!filterForm.valid" (click)="loadGeolocations(filterForm.value.istat)">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                        </button>
+                        </span>
+                    </template>
+                    <template let-geolocation="rowData" pTemplate="body">
+                        <span class="glyphicon glyphicon-map-marker location_marker"></span>
+                    </template>
+                </p-column>
+            </p-dataTable>
+        </div>
+
+        <div class="col-md-8">
+            <!--  Map  -->
+            <div id="map"></div>
+
+            <!--  Inspected geolocation info box  -->
+            <div class="inspected_geolocation-info" *ngIf="selectedGeolocation">
+                <div class="clearfix info_row">
+                    <div class="col-md-2 form-group">
+                        <label>{{ 'fe.generalComponentContent.name' | translate }}</label>
+                        <div> {{ selectedGeolocation.name }}</div>
+                    </div>
+                    <!-- <div class="col-md-2 form-group">
+                        <label>{{ 'fe.geolocationManagement.longitude' | translate }}</label>
+                        <div> {{ selectedGeolocation.longitude }}</div>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <label>{{ 'fe.geolocationManagement.latitude' | translate }}</label>
+                        <div> {{ selectedGeolocation.latitude }}</div>
+                    </div> -->
+                    <div class="col-md-2">
+                            <label>{{'fe.geolocationManagement.istat' | translate}}</label>
+                            <div> {{ selectedGeolocation.istat }}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <label>{{'fe.geolocationManagement.sub' | translate}}</label>
+                            <div> {{ selectedGeolocation.sub }}</div>
+                        </div>
+                </div>
+
+                <!--  Clear button  -->
+                <div class="clear_btn" (click)="clearInspectedGeolocation()"><span class="glyphicon glyphicon-remove"></span></div>
+            </div>
+        </div>
+    </div>
+</div>

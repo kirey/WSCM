@@ -1,0 +1,1 @@
+export { PasswordChange} from './models/passwordChange.model';
