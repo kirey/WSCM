@@ -166,7 +166,7 @@ public class KjcUserAccountsDao extends KjcBaseDao implements UserDetailsService
 			existingUser.setPassword(instance.getPassword());
 			this.changePassword(existingUser);
 		}
-		userAccountDao.merge(instance.getUserAccounts());
+//		userAccountDao.merge(instance.getUserAccounts());
 	}
 
 	/**A method used to save new token to a user account to database

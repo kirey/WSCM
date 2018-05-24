@@ -43,7 +43,8 @@
 		<security:intercept-url 				pattern="/rest/common/users/noAuth/**" 						access="permitAll()" />
 		<security:intercept-url method="GET" 	pattern="/rest/translation/fe/noAuth/**" 					access="permitAll()" />
 		<security:intercept-url 				pattern="/rest/usersMobile/noAuth/**" 						access="permitAll()" />
-		<security:intercept-url 				pattern="/rest/admin/home/pin/**" 						access="permitAll()" />
+		<security:intercept-url 				pattern="/rest/admin/home/pin/**" 							access="permitAll()" />
+		<security:intercept-url 				pattern="/rest/content/**" 									access="permitAll()" />
 	
 		
 		<!-- Authenticated - AnyRole requests -->																		

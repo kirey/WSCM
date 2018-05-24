@@ -56,7 +56,7 @@
 	<!-- <jee:jndi-lookup id="dataSource" jndi-name="jdbc.KFUTURE" expected-type="javax.sql.DataSource" /> -->
 	
 	<!-- get the datasoure from jndi -->
-	<jee:jndi-lookup id="dataSource" jndi-name="jdbc.KJGRI" expected-type="javax.sql.DataSource" />
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc.WSCM" expected-type="javax.sql.DataSource" />
 	
 	<!-- Transaction management -->
 	<tx:annotation-driven transaction-manager="transactionManager" />

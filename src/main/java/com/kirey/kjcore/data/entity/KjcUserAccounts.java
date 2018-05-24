@@ -64,7 +64,7 @@ public class KjcUserAccounts implements java.io.Serializable, UserDetails {
 	private Long accountExpiryDate;
 	private KjcCompanies kjcCompanies;
 	private boolean isOnlineUser = true;
-	private UserAccounts userAccounts;
+//	private UserAccounts userAccounts;
 	private String firstName;
 	private String lastName;
 	private String securityNumber;
@@ -384,14 +384,14 @@ public class KjcUserAccounts implements java.io.Serializable, UserDetails {
 		this.isOnlineUser = isOnlineUser;
 	}
 
-	@OneToOne(mappedBy = "kjcUserAccounts")
-	public UserAccounts getUserAccounts() {
-		return userAccounts;
-	}
-
-	public void setUserAccounts(UserAccounts userAccounts) {
-		this.userAccounts = userAccounts;
-	}
+//	@OneToOne(mappedBy = "kjcUserAccounts")
+//	public UserAccounts getUserAccounts() {
+//		return userAccounts;
+//	}
+//
+//	public void setUserAccounts(UserAccounts userAccounts) {
+//		this.userAccounts = userAccounts;
+//	}
 
 	@Column(name = "FIRST_NAME", unique = false, nullable = false)
 	public String getFirstName() {
