@@ -20,7 +20,7 @@ public class ContentDao extends KjcBaseDao {
 	}
 
 	public Content getBasicTemplate(String page) {
-		String hql = "from Content cont where cont.page = :page and cont.position = 'P0'";
+		String hql = "from Content cont where cont.page = :page and cont.position = 'P1'";
 		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).uniqueResult();
 		return content;
 	}
