@@ -5,7 +5,7 @@
 	version="3.1">
 	<display-name>WSCM</display-name>
 	<welcome-file-list>
-        <welcome-file>kjcore.index.html</welcome-file>
+        <welcome-file>wscm/dist/index.html</welcome-file>
     </welcome-file-list>
 
 	<context-param>

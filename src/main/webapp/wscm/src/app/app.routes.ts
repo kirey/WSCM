@@ -1,10 +1,10 @@
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { NestoComponent } from './nesto/nesto.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'nesto', component: NestoComponent },
+    { path: 'home', component: HomeComponent },
+
+    { path: '**', component: HomeComponent }
 ];
 
-export const AppRoutes: any = RouterModule.forRoot(routes);
+export const AppRoutes: any = RouterModule.forRoot(routes, { useHash: true });
