@@ -16,7 +16,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kubris.documentManagement.data.dao.BaseDao;
 
 
 /**
@@ -26,7 +25,7 @@ import com.kubris.documentManagement.data.dao.BaseDao;
 @Transactional
 public class KjcBaseDao {
 
-	protected static Log log = LogFactory.getLog(BaseDao.class);
+	protected static Log log = LogFactory.getLog(KjcBaseDao.class);
 	protected Class<?> entityClass;
 
 	@Autowired
