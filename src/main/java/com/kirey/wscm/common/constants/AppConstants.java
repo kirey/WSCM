@@ -4,7 +4,7 @@ package com.kirey.wscm.common.constants;
  * Constants for application.
  *
  */
-public class AppConstants extends com.kirey.kjcore.common.constants.AppConstants {
+public class AppConstants {
 	
 	//APPLICATION_ROLE
 	public static final String ROLE_ADMIN_A = "ROLE_ADMIN_A";

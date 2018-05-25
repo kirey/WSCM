@@ -4,15 +4,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kirey.kjcore.api.dto.RestResponseDto;
-import com.kirey.kjcore.data.entity.KjcEmailConfigs;
+import com.kirey.wscm.api.dto.RestResponseDto;
+import com.kirey.wscm.api.dto.UserAccount;
 import com.kirey.wscm.data.dao.ContentDao;
 import com.kirey.wscm.data.entity.Content;
 
@@ -23,29 +28,7 @@ public class TestController {
 	@Autowired
 	private ContentDao contentDao;
 	
-	@RequestMapping(value = "/basic/{page}", method = RequestMethod.GET)
-	public ResponseEntity<RestResponseDto> getBasicTemplate(@PathVariable String page) {
-
-		Content basicTemplate = contentDao.getBasicTemplate(page);
-		
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto(basicTemplate, HttpStatus.OK.value()), HttpStatus.OK);
-	}
 	
-	@RequestMapping(value = "/basic/html/{page}", method = RequestMethod.GET)
-	public String getHtmlForBasicTemplate(@PathVariable String page) {
-
-		String basicHtml = contentDao.getHtmlForBasicTemplate(page);
-		
-		return basicHtml;
-	}
-	
-	@RequestMapping(value = "/basic/css/{page}", method = RequestMethod.GET)
-	public String getCssForBasicTemplate(@PathVariable String page) {
-
-		String css = contentDao.getCssForBasicTemplate(page);
-		
-		return css;
-	}
 	
 	@RequestMapping(value = "/html/{page}/{position}", method = RequestMethod.GET)
 	public String getHtmlForPosition(@PathVariable String page, @PathVariable String position) {
@@ -75,7 +58,15 @@ public class TestController {
 
 		contentDao.merge(content);
 		
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited new content", HttpStatus.OK.value()), HttpStatus.OK);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited content", HttpStatus.OK.value()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{page}/{position}", method = RequestMethod.GET)
+	public Content getContentByPagePosition(@PathVariable String page, @PathVariable String position) {
+
+		Content content = contentDao.getContentByPagePosition(page, position);
+		
+		return content;
 	}
 
 }

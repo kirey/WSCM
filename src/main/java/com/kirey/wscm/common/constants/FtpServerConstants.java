@@ -1,6 +1,6 @@
 package com.kirey.wscm.common.constants;
 
-public class FtpServerConstants extends com.kirey.kjcore.common.constants.FtpServerConstants{
+public class FtpServerConstants {
 
 
 	/**

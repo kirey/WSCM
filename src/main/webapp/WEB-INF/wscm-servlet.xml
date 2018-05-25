@@ -10,17 +10,19 @@
 
 	<!-- KFuture package scan -->
 	<context:component-scan base-package="com.kirey.wscm.api.restcontrollers" />
+	<mvc:default-servlet-handler />
+    <mvc:annotation-driven />
 	
-	<!-- Import KJCore servlet content -->
-	<import resource="kjcore-servlet.xml"/>
+	<!-- Import KJCore servlet content
+	<import resource="kjcore-servlet.xml"/>  -->
 
-	<!-- AOP Translator config -->
+	<!-- AOP Translator config 
 	<aop:config proxy-target-class="true">
 		<aop:aspect id="translateAspect" ref="interceptorTranslator">
 			<aop:pointcut id="translatePoint"
 				expression="execution(* com.kirey.wscm.api..*.*(..))" />
 			<aop:around method="aroundMethod" pointcut-ref="translatePoint" />
 		</aop:aspect>
-	</aop:config>
+	</aop:config> -->
 	
 </beans>

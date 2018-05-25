@@ -19,7 +19,7 @@ import com.kirey.wscm.common.constants.AppConstants;
  * Class containing utility methods used in multiple classes.
  *
  */
-public class Utilities extends com.kirey.kjcore.common.util.Utilities{
+public class Utilities {
 
 	/**
 	 * private constructor.

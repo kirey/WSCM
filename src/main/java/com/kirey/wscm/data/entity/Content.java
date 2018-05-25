@@ -58,7 +58,7 @@ public class Content implements Serializable{
 		this.language = language;
 	}
 	
-	@Column(name = "html", unique = false, nullable = true)
+	@Column(name = "html", unique = false, nullable = true, length = 10000)
 	public String getHtml() {
 		return html;
 	}
@@ -66,7 +66,7 @@ public class Content implements Serializable{
 		this.html = html;
 	}
 	
-	@Column(name = "css", unique = false, nullable = true)
+	@Column(name = "css", unique = false, nullable = true, length = 10000)
 	public String getCss() {
 		return css;
 	}

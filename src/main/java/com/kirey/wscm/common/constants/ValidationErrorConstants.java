@@ -5,7 +5,7 @@ package com.kirey.wscm.common.constants;
  * @author dumeljicj
  *
  */
-public class ValidationErrorConstants extends com.kirey.kjcore.common.constants.ValidationErrorConstants {
+public class ValidationErrorConstants {
 	
 	public static final String VALIDATION_BUSINESS_MAX_NUM_OF_ACCOUNTS = "njamb.validation.business.maxNumOfAccounts.bljab";
 	public static final String VALIDATION_BUSINESS_ROLE_PLATINUM_A_UNIQUE = "njamb.validation.business.rolePlatinumAUnique.bljab";
