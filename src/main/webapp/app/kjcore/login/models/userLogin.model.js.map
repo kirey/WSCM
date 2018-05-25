@@ -1,1 +1,0 @@
-{"version":3,"file":"userLogin.model.js","sourceRoot":"","sources":["userLogin.model.ts"],"names":[],"mappings":";AAAA;IAKI,mBAAY,QAAgB,EAAE,QAAgB,EAAE,OAAe;QAC3D,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;QACzB,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;QACzB,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;IAC3B,CAAC;IACL,gBAAC;AAAD,CAAC,AAVD,IAUC;AAVY,iBAAS,YAUrB,CAAA"}

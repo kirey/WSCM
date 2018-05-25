@@ -1,1 +1,0 @@
-{"version":3,"file":"restResponse.model.js","sourceRoot":"","sources":["restResponse.model.ts"],"names":[],"mappings":";AAEA;IASI;QACI,IAAI,CAAC,OAAO,GAAG,EAAE,CAAC;QAClB,IAAI,CAAC,UAAU,GAAG,IAAI,CAAC;QACvB,IAAI,CAAC,SAAS,GAAG,EAAE,CAAC;QACpB,IAAI,CAAC,MAAM,GAAG,EAAE,CAAC;IACrB,CAAC;IACL,mBAAC;AAAD,CAAC,AAfD,IAeC;AAfY,oBAAY,eAexB,CAAA"}

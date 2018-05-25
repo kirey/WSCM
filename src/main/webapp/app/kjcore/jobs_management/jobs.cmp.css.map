@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACI,qBAAW;EACP,aAAa,EAAC,IAAI;AAEtB,YAAG;EACC,MAAM,EAAE,OAAO;AAEnB,wBAAc;EACV,OAAO,EAAE,YAAY;EACrB,KAAK,EAAE,IAAI",
-"sources": ["jobs.cmp.scss"],
-"names": [],
-"file": "jobs.cmp.css"
-}

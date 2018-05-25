@@ -1,1 +1,0 @@
-{"version":3,"file":"searchQueryParams.model.js","sourceRoot":"","sources":["searchQueryParams.model.ts"],"names":[],"mappings":";;;;;;AAAA,uBAAsC,2BAA2B,CAAC,CAAA;AAElE;IAAuC,qCAAqB;IAIxD,2BAAY,IAAY,EAAE,IAAY;QAClC,iBAAO,CAAC;QAER,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACrB,CAAC;IACL,wBAAC;AAAD,CAAC,AAVD,CAAuC,8BAAqB,GAU3D;AAVY,yBAAiB,oBAU7B,CAAA"}

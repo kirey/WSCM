@@ -1,1 +1,0 @@
-export { Role } from './models/role.model';

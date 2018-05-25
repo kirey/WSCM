@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACI,+BAAe;EACX,KAAK,EAAE,KAAK;EACZ,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,cAAc;AAG3B,6BAAa;EACT,KAAK,EAAE,IAAI;EACX,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,cAAc;AAG3B,6BAAa;EACT,KAAK,EAAE,IAAI;AAGf,gCAAgB;EACZ,KAAK,EAAE,IAAI",
-"sources": ["adminRoles.cmp.scss"],
-"names": [],
-"file": "adminRoles.cmp.css"
-}

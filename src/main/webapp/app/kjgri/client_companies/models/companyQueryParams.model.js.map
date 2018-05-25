@@ -1,1 +1,0 @@
-{"version":3,"file":"companyQueryParams.model.js","sourceRoot":"","sources":["companyQueryParams.model.ts"],"names":[],"mappings":";;;;;;AAAA,uBAAsC,2BAA2B,CAAC,CAAA;AAElE;IAAwC,sCAAqB;IAGzD,4BAAY,IAAY,EAAE,IAAY;QAClC,iBAAO,CAAC;QAER,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACrB,CAAC;IACL,yBAAC;AAAD,CAAC,AATD,CAAwC,8BAAqB,GAS5D;AATY,0BAAkB,qBAS9B,CAAA"}

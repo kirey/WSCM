@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACI,4BAAa;EACT,UAAU,EAAE,IAAI;AAEpB,2BAAY;EACR,SAAS,EAAE,UAAU",
-"sources": ["kjgri.userPanel.cmp.scss"],
-"names": [],
-"file": "kjgri.userPanel.cmp.css"
-}

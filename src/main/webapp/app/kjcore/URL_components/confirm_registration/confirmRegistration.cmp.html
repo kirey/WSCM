@@ -1,7 +1,0 @@
-<div id="cmp-confirmRegistration" class="app_content-container-cmp">
-    <div *ngIf="confirmRegistrationAlert.show" class="view-header-alert_box text-center col-md-4 col-md-offset-4">
-        <alert [type]="confirmRegistrationAlert.type" [dismissible]="false" (close)="this._utilityService.setAlert(this.confirmRegistrationAlert)">
-            <span [innerHTML]="confirmRegistrationAlert.message"></span>
-        </alert>
-    </div>
-</div>
