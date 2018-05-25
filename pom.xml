@@ -10,18 +10,18 @@
 
 	<properties>
 		<project.name>WSCM</project.name>
-		<spring.version>4.2.4.RELEASE</spring.version>
-		<spring.batch.version>3.0.7.RELEASE</spring.batch.version>
+		<spring.version>5.0.5.RELEASE</spring.version>
+		<spring.batch.version>4.0.1.RELEASE</spring.batch.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<security.version>4.0.3.RELEASE</security.version>
-		<hibernate.version>5.1.0.Final</hibernate.version>
+		<security.version>5.0.0.RELEASE</security.version>
+		<hibernate.version>5.3.0.Final</hibernate.version>
 		<powermock.version>1.7.0</powermock.version>
 		<sonar.exclusions>
 			src/main/webapp/**/*,
 			src/main/java/com/kirey/kjcore/**/*
 		</sonar.exclusions>
 
-		<spring.integration.version>4.3.12.RELEASE</spring.integration.version>
+		<spring.integration.version>5.0.4.RELEASE</spring.integration.version>
 	</properties>
 
 	<dependencies>
@@ -99,27 +99,27 @@
 			<artifactId>spring-batch-infrastructure</artifactId>
 			<version>${spring.batch.version}</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-core -->
 		<dependency>
-		    <groupId>org.springframework.integration</groupId>
-		    <artifactId>spring-integration-core</artifactId>
-		    <version>${spring.integration.version}</version>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-core</artifactId>
+			<version>${spring.integration.version}</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-file -->
 		<dependency>
-		    <groupId>org.springframework.integration</groupId>
-		    <artifactId>spring-integration-file</artifactId>
-		    <version>${spring.integration.version}</version>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-file</artifactId>
+			<version>${spring.integration.version}</version>
 		</dependency>
-				<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-sftp -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-sftp -->
 		<dependency>
-		    <groupId>org.springframework.integration</groupId>
-		    <artifactId>spring-integration-sftp</artifactId>
-		    <version>${spring.integration.version}</version>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-sftp</artifactId>
+			<version>${spring.integration.version}</version>
 		</dependency>
-				
+
 
 		<!--Email -->
 
@@ -187,6 +187,12 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.4.1.Final</version>
 		</dependency>
+		
+<!-- 		<dependency> -->
+<!--             <groupId>org.hibernate</groupId> -->
+<!--             <artifactId>hibernate-entitymanager</artifactId> -->
+<!--             <version>${hibernate.version}</version> -->
+<!--         </dependency> -->
 
 
 
@@ -194,27 +200,27 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.8.3</version>
+			<version>2.9.4</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate5 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-hibernate5</artifactId>
-			<version>2.8.3</version>
+			<version>2.9.4</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.8.3</version>
+			<version>2.9.4</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.8.3</version>
+			<version>2.9.4</version>
 		</dependency>
 
 
@@ -234,12 +240,12 @@
 			<version>1.4</version>
 		</dependency>
 
-		
+
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
-		    <groupId>org.postgresql</groupId>
-		    <artifactId>postgresql</artifactId>
-		    <version>9.4.1212</version>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4.1212</version>
 		</dependency>
 
 
@@ -315,37 +321,34 @@
 			<version>2.10.2</version>
 		</dependency>
 
-		
+
 		<!-- SFTP https://mvnrepository.com/artifact/com.jcraft/jsch -->
-	 	<dependency>
-		    <groupId>com.jcraft</groupId>
-		    <artifactId>jsch</artifactId>
-		    <version>0.1.54</version>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
 		</dependency>
-		
-		
-		
-		
+
+
+
+
 		<!-- FtpClent https://mvnrepository.com/artifact/commons-net/commons-net -->
 		<dependency>
-		    <groupId>commons-net</groupId>
-		    <artifactId>commons-net</artifactId>
-		    <version>3.3</version>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.3</version>
 		</dependency>
-		
+
 		<!-- Csv parser https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
-	<!-- 	<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-csv</artifactId>
-		    <version>1.4</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.apache.commons</groupId> <artifactId>commons-csv</artifactId> 
+			<version>1.4</version> </dependency> -->
 
 		<!-- Csv parser univocity -->
 		<dependency>
-		    <groupId>com.univocity</groupId>
-		    <artifactId>univocity-parsers</artifactId>
-		    <version>2.5.8</version>
-		    <type>jar</type>
+			<groupId>com.univocity</groupId>
+			<artifactId>univocity-parsers</artifactId>
+			<version>2.5.8</version>
+			<type>jar</type>
 		</dependency>
 
 		<dependency>
@@ -366,7 +369,7 @@
 			<artifactId>modelmapper</artifactId>
 			<version>0.7.4</version>
 		</dependency>
-		
+
 		<!-- GeoJson -->
 		<dependency>
 			<groupId>de.grundid.opendatalab</groupId>
@@ -374,79 +377,65 @@
 			<version>1.8</version>
 		</dependency>
 
-		<dependency>
-			<groupId>myjars</groupId>
-			<artifactId>controllocf</artifactId>
-			<version>1.0</version>
-		</dependency>
-
-		
-		<dependency>
-			<groupId>myjars</groupId>
-			<artifactId>ojdbc</artifactId>
-			<version>7.0</version>
-		</dependency>
-		
 		<!-- Apache commons IO -->
-	<dependency>
-		<groupId>commons-io</groupId>
-		<artifactId>commons-io</artifactId>
-		<version>2.4</version>
-	</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
 
-	<dependency>
-		<groupId>org.powermock</groupId>
-		<artifactId>powermock-module-junit4</artifactId>
-		<version>${powermock.version}</version>
-		<scope>test</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.powermock</groupId>
-		<artifactId>powermock-api-mockito</artifactId>
-		<version>${powermock.version}</version>
-		<scope>test</scope>
-	</dependency>
-
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.12</version>
-		<scope>test</scope>
-	</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
 
 
-	<dependency>
-		<groupId>org.jsoup</groupId>
-		<artifactId>jsoup</artifactId>
-		<version>1.9.2</version>
-	</dependency>
-       
-       <!-- https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core -->
-	<dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core</artifactId>
-            <version>1.19</version>
-        </dependency>
-       
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-annprocess</artifactId>
-            <version>1.19</version>
-	</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.9.2</version>
+		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core -->
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-core</artifactId>
+			<version>1.19</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-generator-annprocess</artifactId>
+			<version>1.19</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.17</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+		<dependency>
+		    <groupId>com.opencsv</groupId>
+		    <artifactId>opencsv</artifactId>
+		    <version>4.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+		<dependency>
+		    <groupId>joda-time</groupId>
+		    <artifactId>joda-time</artifactId>
+		    <version>2.9.9</version>
+		</dependency>
+		
+		
+		
 	</dependencies>
-
-
-
-	<repositories>
-		<repository>
-			<id>repo</id>
-			<url>file://${project.basedir}\repo</url>
-		</repository>
-	</repositories>
-
-
-
+	
 	<build>
 		<finalName>${project.name}</finalName>
 		<plugins>
@@ -468,8 +457,22 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.hibernate.orm.tooling</groupId>
+				<artifactId>hibernate-enhance-maven-plugin</artifactId>
+				<version>${hibernate.version}</version>
+				<executions>
+					<execution>
+						<configuration>
+							<enableLazyInitialization>true</enableLazyInitialization>
+						</configuration>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 		</plugins>
 	</build>
-
 </project>

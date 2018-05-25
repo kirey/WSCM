@@ -5,7 +5,7 @@ package com.kirey.wscm.common.constants;
  * @author dumeljicj
  *
  */
-public class ResponseMessagesConstants extends com.kirey.kjcore.common.constants.ResponseMessagesConstants{
+public class ResponseMessagesConstants {
 
 	
 	/**

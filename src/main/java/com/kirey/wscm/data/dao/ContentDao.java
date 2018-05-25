@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kirey.kjcore.data.dao.KjcBaseDao;
 import com.kirey.wscm.data.entity.Content;
 
 @Repository(value = "contentDao")
@@ -47,6 +46,12 @@ public class ContentDao extends KjcBaseDao {
 		String hql = "select cont.css from Content cont where cont.page = :page and cont.position = :position";
 		String css = (String) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).uniqueResult();
 		return css;
+	}
+
+	public Content getContentByPagePosition(String page, String position) {
+		String hql = "from Content cont where cont.page = :page and cont.position = :position";
+		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).uniqueResult();
+		return content;
 	}
 
 }

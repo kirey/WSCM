@@ -12,10 +12,10 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 		<!-- KJCore configuration -->
-            classpath:/META-INF/config/kjcore/jobs/job*.xml
-            classpath:/META-INF/config/kjcore/kjcore-context.xml
-            classpath:/META-INF/config/kjcore/kjcore-context-mail.xml
-            classpath:/META-INF/config/kjcore/kjcore-schedulers-config.xml
+<!--             classpath:/META-INF/config/kjcore/jobs/job*.xml -->
+<!--             classpath:/META-INF/config/kjcore/kjcore-context.xml -->
+<!--             classpath:/META-INF/config/kjcore/kjcore-context-mail.xml -->
+<!--             classpath:/META-INF/config/kjcore/kjcore-schedulers-config.xml -->
 <!--              classpath:/META-INF/config/kjcore/ehcache.xml -->
             <!-- classpath:/META-INF/config/kjcore/kJCore-context-persistence.xml -->
             <!-- classpath:/META-INF/config/kjcore/kJCore-context-security.xml -->
@@ -27,7 +27,7 @@
 			classpath:/META-INF/config/wscm/wscm-context.xml
             classpath:/META-INF/config/wscm/wscm-context-security.xml
             classpath:/META-INF/config/wscm/wscm-context-persistence.xml
-            classpath:/META-INF/config/wscm/wscm-schedulers-config.xml
+<!--             classpath:/META-INF/config/wscm/wscm-schedulers-config.xml -->
 
         </param-value>
 	</context-param>
