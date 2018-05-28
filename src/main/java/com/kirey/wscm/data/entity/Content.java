@@ -22,6 +22,7 @@ public class Content implements Serializable{
 	private String language;
 	private String html;
 	private String css;
+	private byte[] cssFile;
 	
 	@Id
 	@SequenceGenerator(name = "content_gen", sequenceName = "seq_content", allocationSize = 1, initialValue = 1)
@@ -72,6 +73,14 @@ public class Content implements Serializable{
 	}
 	public void setCss(String css) {
 		this.css = css;
+	}
+	
+	@Column(name = "css_file", nullable = true)
+	public byte[] getCssFile() {
+		return cssFile;
+	}
+	public void setCssFile(byte[] cssFile) {
+		this.cssFile = cssFile;
 	}
 	
 	
