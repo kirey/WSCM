@@ -17,8 +17,8 @@
             classpath:/META-INF/config/kjcore/kjcore-context-mail.xml
             classpath:/META-INF/config/kjcore/kjcore-schedulers-config.xml
              classpath:/META-INF/config/kjcore/ehcache.xml
-            classpath:/META-INF/config/kjcore/kJCore-context-persistence.xml
-            classpath:/META-INF/config/kjcore/kJCore-context-security.xml
+            classpath:/META-INF/config/kjcore/kjcore-context-persistence.xml
+            classpath:/META-INF/config/kjcore/kjcore-context-security.xml
             classpath:/META-INF/config/kjcore/sftp-common.xml
             classpath:/META-INF/config/kjcore/sftp-integration-sftp.xml
             
