@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kirey.kjcore.common.constants.AppConstants;
 import com.kirey.kjcore.common.util.Utilities;
 import com.kirey.kjcore.data.dao.KjcApplicationRolesDao;
 import com.kirey.kjcore.data.entity.KjcApplicationRoles;
-import com.kirey.wscm.common.constants.AppConstants;
 
 @Service
 public class UserRoleService {

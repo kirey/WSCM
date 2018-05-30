@@ -32,10 +32,9 @@ import com.kirey.kjcore.common.util.Utilities;
 import com.kirey.kjcore.data.entity.KjcApplicationRoles;
 import com.kirey.kjcore.data.entity.KjcUrlRoutes;
 import com.kirey.kjcore.data.entity.KjcUserAccounts;
+import com.kirey.kjcore.data.entity.UserAccounts;
 import com.kirey.kjcore.features.exception.customexceptions.SecurityUnauthorizedException;
 import com.kirey.kjcore.features.security.SecurityUtils;
-import com.kirey.wscm.data.dao.UserAccountsDao;
-import com.kirey.wscm.data.entity.UserAccounts;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;

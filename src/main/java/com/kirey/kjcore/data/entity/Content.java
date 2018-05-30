@@ -1,4 +1,4 @@
-package com.kirey.wscm.data.entity;
+package com.kirey.kjcore.data.entity;
 
 import java.io.Serializable;
 
@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "content")
@@ -22,6 +23,10 @@ public class Content implements Serializable{
 	private String language;
 	private String html;
 	private String css;
+	private byte[] cssFile;
+	
+	@Transient
+	private String connected;
 	
 	@Id
 	@SequenceGenerator(name = "content_gen", sequenceName = "seq_content", allocationSize = 1, initialValue = 1)
@@ -58,7 +63,7 @@ public class Content implements Serializable{
 		this.language = language;
 	}
 	
-	@Column(name = "html", unique = false, nullable = true)
+	@Column(name = "html", unique = false, nullable = true, length = 10000)
 	public String getHtml() {
 		return html;
 	}
@@ -66,12 +71,28 @@ public class Content implements Serializable{
 		this.html = html;
 	}
 	
-	@Column(name = "css", unique = false, nullable = true)
+	@Column(name = "css", unique = false, nullable = true, length = 10000)
 	public String getCss() {
 		return css;
 	}
 	public void setCss(String css) {
 		this.css = css;
+	}
+	
+	@Column(name = "css_file", nullable = true)
+	public byte[] getCssFile() {
+		return cssFile;
+	}
+	public void setCssFile(byte[] cssFile) {
+		this.cssFile = cssFile;
+	}
+	
+	@Transient
+	public String getConnected() {
+		return connected;
+	}
+	public void setConnected(String connected) {
+		this.connected = connected;
 	}
 	
 	

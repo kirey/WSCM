@@ -1,4 +1,4 @@
-package com.kirey.wscm.data.entity;
+package com.kirey.kjcore.data.entity;
 // Generated Feb 27, 2017 3:27:59 PM by Hibernate Tools 5.2.0.Beta1
 
 import java.util.Date;

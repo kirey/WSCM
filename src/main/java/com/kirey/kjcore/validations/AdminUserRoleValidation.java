@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kirey.kjcore.api.dto.ValidationErrorDto;
+import com.kirey.kjcore.common.constants.AppConstants;
 import com.kirey.kjcore.common.constants.ValidationErrorConstants;
 import com.kirey.kjcore.common.util.Utilities;
 import com.kirey.kjcore.data.compositedao.UserRoleService;
@@ -17,7 +18,6 @@ import com.kirey.kjcore.data.dao.KjcUserAccountsDao;
 import com.kirey.kjcore.data.entity.KjcApplicationRoles;
 import com.kirey.kjcore.data.entity.KjcUserAccounts;
 import com.kirey.kjcore.features.exception.customexceptions.BusinessValidationException;
-import com.kirey.wscm.common.constants.AppConstants;
 
 /**A component used to handle user role administration validation
  * @author

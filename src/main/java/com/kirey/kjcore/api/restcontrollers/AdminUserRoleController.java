@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kirey.kjcore.api.dto.RestResponseDto;
+import com.kirey.kjcore.common.constants.AppConstants;
 import com.kirey.kjcore.common.constants.ResponseMessagesConstants;
 import com.kirey.kjcore.common.util.Utilities;
 import com.kirey.kjcore.data.compositedao.CompaniesService;
@@ -24,7 +25,6 @@ import com.kirey.kjcore.data.dao.KjcUserAccountsDao;
 import com.kirey.kjcore.data.entity.KjcApplicationRoles;
 import com.kirey.kjcore.data.entity.KjcUserAccounts;
 import com.kirey.kjcore.validations.AdminUserRoleValidation;
-import com.kirey.wscm.common.constants.AppConstants;
 
 /**Rest controller used for user administration for KJCore
  * @author 

@@ -7,6 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/integration/sftp http://www.springframework.org/schema/integration/sftp/spring-integration-sftp.xsd">
 
+<!-- 
 	<import resource="sftp-common.xml"/>
 	
 	<int:gateway id="gw" service-interface="com.kirey.wscm.features.scheduling.jobs.tasklet.SftpGateway"
@@ -21,9 +22,9 @@
 		remote-file-separator="/"
 		expression="payload"
 		reply-channel="toSplitterLS">
-		<!-- <int-sftp:request-handler-advice-chain>
+		<int-sftp:request-handler-advice-chain>
 			<int:retry-advice />
-		</int-sftp:request-handler-advice-chain> -->
+		</int-sftp:request-handler-advice-chain>
 	</int-sftp:outbound-gateway>		
 
 
@@ -41,6 +42,6 @@
 	 </int:splitter>
 
 	<int:channel id="splittedLS"/>
-	
+	 -->
     
 </beans>

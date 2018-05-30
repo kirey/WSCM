@@ -38,6 +38,7 @@ import org.springframework.web.client.RestTemplate;
 import com.kirey.kjcore.api.dto.RestResponseDto;
 import com.kirey.kjcore.api.dto.TokenTransfer;
 import com.kirey.kjcore.api.dto.UserLogin;
+import com.kirey.kjcore.common.constants.AppConstants;
 import com.kirey.kjcore.common.constants.ResponseMessagesConstants;
 import com.kirey.kjcore.common.constants.SecurityErrorConstants;
 import com.kirey.kjcore.common.util.Utilities;
@@ -57,7 +58,6 @@ import com.kirey.kjcore.features.security.Captcha;
 import com.kirey.kjcore.features.security.CaptchaCache;
 import com.kirey.kjcore.features.security.SecurityUtils;
 import com.kirey.kjcore.validations.RegistrationValidation;
-import com.kirey.wscm.common.constants.AppConstants;
 
 /**Rest controller for pages that are accessible without logging in
  * @author 

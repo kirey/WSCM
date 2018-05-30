@@ -1,6 +1,4 @@
-package com.kirey.wscm.api.restcontrollers;
-
-import java.util.List;
+package com.kirey.kjcore.api.restcontrollers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kirey.kjcore.api.dto.RestResponseDto;
-import com.kirey.kjcore.data.entity.KjcEmailConfigs;
-import com.kirey.wscm.data.dao.ContentDao;
-import com.kirey.wscm.data.entity.Content;
+import com.kirey.kjcore.data.dao.ContentDao;
+import com.kirey.kjcore.data.entity.Content;
 
-@RestController(value = "testController")
+@RestController(value = "adminContentManagementController")
 @RequestMapping(value = "/rest/content")
-public class TestController {
-	
+public class AdminContentManagementController {
+
+
 	@Autowired
 	private ContentDao contentDao;
 	
@@ -77,5 +75,4 @@ public class TestController {
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited new content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
-
 }

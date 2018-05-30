@@ -3,7 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-	<display-name>WSCM</display-name>
+	<display-name>KJCORE</display-name>
 	<welcome-file-list>
         <welcome-file>kjcore.index.html</welcome-file>
     </welcome-file-list>
@@ -16,18 +16,18 @@
             classpath:/META-INF/config/kjcore/kjcore-context.xml
             classpath:/META-INF/config/kjcore/kjcore-context-mail.xml
             classpath:/META-INF/config/kjcore/kjcore-schedulers-config.xml
-<!--              classpath:/META-INF/config/kjcore/ehcache.xml -->
-            <!-- classpath:/META-INF/config/kjcore/kJCore-context-persistence.xml -->
-            <!-- classpath:/META-INF/config/kjcore/kJCore-context-security.xml -->
-            <!-- classpath:/META-INF/config/kjcore/sftp-common.xml -->
-            <!-- classpath:/META-INF/config/kjcore/sftp-integration-sftp.xml -->
+             classpath:/META-INF/config/kjcore/ehcache.xml
+            classpath:/META-INF/config/kjcore/kJCore-context-persistence.xml
+            classpath:/META-INF/config/kjcore/kJCore-context-security.xml
+            classpath:/META-INF/config/kjcore/sftp-common.xml
+            classpath:/META-INF/config/kjcore/sftp-integration-sftp.xml
             
             
 			<!-- wscm configuration -->
-			classpath:/META-INF/config/wscm/wscm-context.xml
-            classpath:/META-INF/config/wscm/wscm-context-security.xml
-            classpath:/META-INF/config/wscm/wscm-context-persistence.xml
-            classpath:/META-INF/config/wscm/wscm-schedulers-config.xml
+<!-- 			classpath:/META-INF/config/wscm/wscm-context.xml -->
+<!--             classpath:/META-INF/config/wscm/wscm-context-security.xml -->
+<!--             classpath:/META-INF/config/wscm/wscm-context-persistence.xml -->
+<!--             classpath:/META-INF/config/wscm/wscm-schedulers-config.xml -->
 
         </param-value>
 	</context-param>
@@ -35,12 +35,12 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>wscm</servlet-name>
+		<servlet-name>kjcore</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>wscm</servlet-name>
+		<servlet-name>kjcore</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<filter>

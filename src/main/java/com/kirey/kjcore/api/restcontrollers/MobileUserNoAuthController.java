@@ -25,12 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kirey.kjcore.api.dto.RestResponseDto;
 import com.kirey.kjcore.api.dto.TokenTransfer;
 import com.kirey.kjcore.api.dto.UserLogin;
+import com.kirey.kjcore.common.constants.AppConstants;
 import com.kirey.kjcore.common.constants.SecurityErrorConstants;
 import com.kirey.kjcore.data.dao.KjcUserAccountsDao;
 import com.kirey.kjcore.data.entity.KjcUserAccounts;
 import com.kirey.kjcore.features.exception.customexceptions.SecurityUnauthorizedException;
 import com.kirey.kjcore.features.security.SecurityUtils;
-import com.kirey.wscm.common.constants.AppConstants;
 
 /**
  * Rest controller for requests that are accessible without logging in

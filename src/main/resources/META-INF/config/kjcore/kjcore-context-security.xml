@@ -42,8 +42,7 @@
 		
 		<security:intercept-url 				pattern="/rest/users/noAuth/**" 							access="permitAll()" />
 		<security:intercept-url method="GET" 	pattern="/rest/translation/fe/noAuth/**" 					access="permitAll()" />
-		
-		
+		<security:intercept-url 			 	pattern="/rest/content/**" 									access="permitAll()" />
 		
 		<!-- Authenticated - AnyRole requests -->																		
 		<security:intercept-url 				pattern="/rest/users/**" 									access="isAuthenticated()" />

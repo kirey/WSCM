@@ -1,10 +1,10 @@
-package com.kirey.wscm.data.dao;
+package com.kirey.kjcore.data.dao;
 
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.kirey.kjcore.data.dao.KjcBaseDao;
-import com.kirey.wscm.data.entity.UserAccounts;
+import com.kirey.kjcore.data.entity.UserAccounts;
 
 /**
  * Dao object for domain model class UserAccounts.

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kirey.kjcore.common.constants.AppConstants;
 import com.kirey.kjcore.data.entity.KjcApplicationRoles;
-import com.kirey.wscm.common.constants.AppConstants;
 
 /**
  * Dao object for domain model class KjcApplicationRoles.
