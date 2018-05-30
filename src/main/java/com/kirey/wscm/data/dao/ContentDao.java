@@ -1,5 +1,7 @@
 package com.kirey.wscm.data.dao;
 
+import java.util.List;
+
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,14 @@ public class ContentDao extends KjcBaseDao {
 		String hql = "from Content cont where cont.page = :page and cont.position = :position";
 		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).uniqueResult();
 		return content;
+	}
+
+	
+	public List<Content> findByPageLang(String page, String lang) {
+		String hql = "from Content cont where cont.page = :page and cont.language = :lang";
+		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("lang", lang).list();
+		return listContent;
+		
 	}
 
 }

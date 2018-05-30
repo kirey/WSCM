@@ -65,13 +65,13 @@ public class TestController {
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/{page}/{position}", method = RequestMethod.GET)
-	public Content getContentByPagePosition(@PathVariable String page, @PathVariable String position) {
-
-		Content content = contentDao.getContentByPagePosition(page, position);
-		
-		return content;
-	}
+//	@RequestMapping(value = "/{page}/{position}", method = RequestMethod.GET)
+//	public Content getContentByPagePosition(@PathVariable String page, @PathVariable String position) {
+//
+//		Content content = contentDao.getContentByPagePosition(page, position);
+//		
+//		return content;
+//	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> upload(@RequestParam("file") MultipartFile file) {
@@ -95,6 +95,17 @@ public class TestController {
 		Content content = contentDao.findById(1);
 		
 		return content.getCssFile();
+	}
+	
+	@RequestMapping(value = "/{page}/{lang}", method = RequestMethod.GET)
+	public List<Content> getByPageLang(@PathVariable String page, @PathVariable String lang) {
+
+		List<Content> listContent = contentDao.findByPageLang(page, lang);
+		for (Content content : listContent) {
+			String connected = content.getCss() + "\n" + content.getHtml();
+			content.setConnected(connected);
+		}
+		return listContent;
 	}
 	
 	

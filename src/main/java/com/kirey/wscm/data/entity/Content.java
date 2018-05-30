@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "content")
@@ -23,6 +24,9 @@ public class Content implements Serializable{
 	private String html;
 	private String css;
 	private byte[] cssFile;
+	
+	@Transient
+	private String connected;
 	
 	@Id
 	@SequenceGenerator(name = "content_gen", sequenceName = "seq_content", allocationSize = 1, initialValue = 1)
@@ -81,6 +85,14 @@ public class Content implements Serializable{
 	}
 	public void setCssFile(byte[] cssFile) {
 		this.cssFile = cssFile;
+	}
+	
+	@Transient
+	public String getConnsected() {
+		return connected;
+	}
+	public void setConnected(String connected) {
+		this.connected = connected;
 	}
 	
 	
