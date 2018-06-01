@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACI,+BAAa;EACT,MAAM,EAAE,UAAU;EAClB,KAAK,EAAE,KAAK",
-"sources": ["activateUser.cmp.scss"],
-"names": [],
-"file": "activateUser.cmp.css"
-}

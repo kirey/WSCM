@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACI,mCAAa;EACT,aAAa,EAAE,GAAG;EAClB,KAAK,EAAE,IAAI;EACX,SAAS,EAAE,IAAI;EACf,MAAM,EAAE,IAAI;EACZ,OAAO,EAAE,OAAO;EAChB,QAAQ,EAAE,QAAQ;EAClB,KAAK,EAAE,IAAI;AAGf,4DAAsC;EAClC,WAAW,EAAE,MAAM;AAGvB,0CAAoB;EAChB,SAAS,EAAE,IAAI;EACf,SAAS,EAAE,IAAI",
-"sources": ["kjgri.action.cmp.scss"],
-"names": [],
-"file": "kjgri.action.cmp.css"
-}
