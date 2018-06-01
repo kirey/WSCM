@@ -9,6 +9,7 @@ import { KJCoreAppCmp } from './kjcore.app.cmp'; // Main cmp
 import { NavModule } from './kjcore/nav/nav.module';
 import { FooterModule } from './kjcore/footer/footer.module';
 
+
 import { UtilityModule } from './kjcore/shared/modules/utility.module';
 
 import { AuthService } from './kjcore/shared/services/auth.service';
