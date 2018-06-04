@@ -75,29 +75,29 @@ public class AdminContentManagementController {
 //		return content;
 //	}
 
-	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RestResponseDto> upload(@RequestParam("file") MultipartFile file) {
-		
-		Content content = contentDao.findById(2);
-		
-		try {
-			content.setCssFile(file.getBytes());
-			contentDao.merge(content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully uploaded!", HttpStatus.OK.value()), HttpStatus.OK);
-	}
+//	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<RestResponseDto> upload(@RequestParam("file") MultipartFile file) {
+//		
+//		Content content = contentDao.findById(2);
+//		
+//		try {
+//			content.setCssFile(file.getBytes());
+//			contentDao.merge(content);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully uploaded!", HttpStatus.OK.value()), HttpStatus.OK);
+//	}
 	
-	@RequestMapping(value = "/cssFile", method = RequestMethod.GET)
-	public byte[] getCssFile() {
-
-		Content content = contentDao.findById(1);
-		
-		return content.getCssFile();
-	}
+//	@RequestMapping(value = "/cssFile", method = RequestMethod.GET)
+//	public byte[] getCssFile() {
+//
+//		Content content = contentDao.findById(1);
+//		
+//		return content.getCssFile();
+//	}
 	
 	/*-----------------------------------------------------------------*/
 	
@@ -168,13 +168,13 @@ public class AdminContentManagementController {
 		Map<String, Object> root = templateEngine.buildContentAsMap(listContents, contents);
 	
 		
-		String procesedHtmlWithCss = templateEngine.getProcesedHTMLwihtCSS(content.getHtml(), content.getCss(), root);
+		String procesedHtmlWithCss = templateEngine.getProcesedHTMLwithCSSandScript(content.getHtml(), content.getCss(), content.getScript(), root);
 		
 		return procesedHtmlWithCss;
 	}
 	
 	@RequestMapping(value = "/test/{page}/{position}/{lang}", method = RequestMethod.GET)
-	public Content getByPagePositionLangDynamicContent(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
+	public String getByPagePositionLangDynamicContent(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
 
 		Content content = contentDao.findByPagePositionLang(page, position, lang);
 
@@ -187,19 +187,15 @@ public class AdminContentManagementController {
 
 		List<Object> contents = new ArrayList<>();
 		contents.add(kjcCompany);
+		
 		String encoded = Base64.getEncoder().encodeToString(kjcCompany.getCompanyLogo());
 		contents.add("\"data:image/jpg;base64, " + encoded + "\"");
 
 		Map<String, Object> root = templateEngine.buildContentAsMap(listContents, contents);
 
-		String procesedHtmlWithCss = templateEngine.getProcesedHTMLwihtCSS(content.getHtml(), content.getCss(), root);
+		String htmlWithCssAndScript = templateEngine.getProcesedHTMLwithCSSandScript(content.getHtml(), content.getCss(), content.getScript(), root);
 		
-		
-		
-		String cleanString = procesedHtmlWithCss.replaceAll("\r", "").replaceAll("\n", "");
-
-		content.setConnected(cleanString);
-		return content;
+		return htmlWithCssAndScript;
 	}
 
 	

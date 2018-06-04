@@ -23,7 +23,7 @@ public class Content implements Serializable{
 	private String language;
 	private String html;
 	private String css;
-	private byte[] cssFile;
+	private String script;
 	
 	@Transient
 	private String connected;
@@ -79,14 +79,14 @@ public class Content implements Serializable{
 		this.css = css;
 	}
 	
-	@Column(name = "css_file", nullable = true)
-	public byte[] getCssFile() {
-		return cssFile;
-	}
-	public void setCssFile(byte[] cssFile) {
-		this.cssFile = cssFile;
-	}
 	
+	@Column(name = "script", unique = false, nullable = true, length = 10000)
+	public String getScript() {
+		return script;
+	}
+	public void setScript(String script) {
+		this.script = script;
+	}
 	@Transient
 	public String getConnected() {
 		return connected;

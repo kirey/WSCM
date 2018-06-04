@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.kirey.kjcore.common.constants.AppConstants;
+
 import freemarker.template.Template;
 
 @Service
@@ -35,16 +37,28 @@ public class TemplateEngine {
 	}
 	
 	
-	public String getProcesedHTMLwihtCSS(String html, String css, Map<String, Object> root) {
-		String htmlWithCss = null;
+	public String getProcesedHTMLwithCSSandScript(String html, String css, String script, Map<String, Object> root) {
+		StringBuilder sb = new StringBuilder();
 		try (Writer out = new StringWriter()){
 			Template template = new Template("templ", html, null);
 			template.process(root, out);
-			htmlWithCss = css + "\n" + out.toString();
+			
+			if(css != null) {
+				sb.append(AppConstants.STYLE_OPEN_TAG);
+				sb.append(css);
+				sb.append(AppConstants.STYLE_CLOSE_TAG);
+			}
+			sb.append(out.toString());
+			if(script != null) {
+				sb.append(AppConstants.SCRIPT_OPEN_TAG);
+				sb.append(script);
+				sb.append(AppConstants.SCRIPT_CLOSE_TAG);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return htmlWithCss;
+		return sb.toString();
 	}
 
 }

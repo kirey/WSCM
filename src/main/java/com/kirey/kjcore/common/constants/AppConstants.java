@@ -35,6 +35,11 @@ public class AppConstants {
 	
 	public static final String MOBILE_TOKEN_PREFIX = "M";
 	public static final int DEFAULT_COMPANY_LOCATION_ID = 2;
+	
+	public static final String STYLE_OPEN_TAG = "<style>";
+	public static final String STYLE_CLOSE_TAG = "</style>";
+	public static final String SCRIPT_OPEN_TAG = "<script>";
+	public static final String SCRIPT_CLOSE_TAG = "</script>";
 
 	/*
 	 * PROCESS TYPE
@@ -165,6 +170,8 @@ public class AppConstants {
 	 * Mobile controller
 	 */
 	public static final String MOBILE_TOKEN_PERMITTED_PATH = "/rest/usersMobile";
+
+	
 	protected AppConstants() {
 		super();
 	}
