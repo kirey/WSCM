@@ -1,7 +1,14 @@
 package com.kirey.kjcore.api.restcontrollers;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +24,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kirey.kjcore.api.dto.RestResponseDto;
 import com.kirey.kjcore.data.dao.ContentDao;
+import com.kirey.kjcore.data.dao.KjcCompaniesDao;
+import com.kirey.kjcore.data.dao.KjcPackagesDao;
 import com.kirey.kjcore.data.entity.Content;
+import com.kirey.kjcore.data.entity.KjcCompanies;
+import com.kirey.kjcore.data.entity.KjcPackages;
+import com.kirey.kjcore.features.template.TemplateEngine;
+
+import freemarker.template.Template;
+
 
 @RestController(value = "adminContentManagementController")
 @RequestMapping(value = "/rest/content")
@@ -27,7 +42,14 @@ public class AdminContentManagementController {
 	@Autowired
 	private ContentDao contentDao;
 	
+	@Autowired
+	private KjcPackagesDao kjcPackagesDao;
 	
+	@Autowired
+	private TemplateEngine templateEngine;
+	
+	@Autowired
+	private KjcCompaniesDao kjcCompaniesDao;
 	
 	@RequestMapping(value = "/html/{page}/{position}", method = RequestMethod.GET)
 	public String getHtmlForPosition(@PathVariable String page, @PathVariable String position) {
@@ -43,21 +65,6 @@ public class AdminContentManagementController {
 		String css = contentDao.getCssForPosition(page, position);
 		
 		return css;
-	}
-	
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<RestResponseDto> addNewContent(@RequestBody Content content) {
-
-		contentDao.attachDirty(content);
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully added new content", HttpStatus.OK.value()), HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ResponseEntity<RestResponseDto> editContent(@RequestBody Content content) {
-
-		contentDao.merge(content);
-		
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
 //	@RequestMapping(value = "/{page}/{position}", method = RequestMethod.GET)
@@ -92,6 +99,16 @@ public class AdminContentManagementController {
 		return content.getCssFile();
 	}
 	
+	/*-----------------------------------------------------------------*/
+	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public List<Content> getAll() {
+
+		List<Content> listContent = contentDao.findAll();
+		
+		return listContent;
+	}
+	
 	@RequestMapping(value = "/{page}/{lang}", method = RequestMethod.GET)
 	public List<Content> getByPageLang(@PathVariable String page, @PathVariable String lang) {
 
@@ -111,5 +128,79 @@ public class AdminContentManagementController {
 		content.setConnected(connected);
 		return content;
 	}
+	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ResponseEntity<RestResponseDto> addNewContent(@RequestBody Content content) {
+
+		contentDao.attachDirty(content);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully added new content", HttpStatus.OK.value()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public ResponseEntity<RestResponseDto> editContent(@RequestBody Content content) {
+
+		contentDao.merge(content);
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited content", HttpStatus.OK.value()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<RestResponseDto> deleteContent(@PathVariable Integer id){
+		Content content = contentDao.findById(id);
+		contentDao.delete(content);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted content", HttpStatus.OK.value()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	public Object test() throws Exception {
+		Content content = contentDao.findById(3);
+		List<KjcPackages> packages = kjcPackagesDao.findAll();
+		
+		List<List<?>> listContents = new ArrayList<>();
+		listContents.add(packages);
+		
+		
+		KjcCompanies kjcCompany = kjcCompaniesDao.findDefaultCompanyWithCss();
+		
+		List<Object> contents = new ArrayList<>();
+		contents.add(kjcCompany);
+		
+		Map<String, Object> root = templateEngine.buildContentAsMap(listContents, contents);
+	
+		
+		String procesedHtmlWithCss = templateEngine.getProcesedHTMLwihtCSS(content.getHtml(), content.getCss(), root);
+		
+		return procesedHtmlWithCss;
+	}
+	
+	@RequestMapping(value = "/test/{page}/{position}/{lang}", method = RequestMethod.GET)
+	public Content getByPagePositionLangDynamicContent(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
+
+		Content content = contentDao.findByPagePositionLang(page, position, lang);
+
+		List<KjcPackages> packages = kjcPackagesDao.findAll();
+
+		List<List<?>> listContents = new ArrayList<>();
+		listContents.add(packages);
+
+		KjcCompanies kjcCompany = kjcCompaniesDao.findDefaultCompanyWithCss();
+
+		List<Object> contents = new ArrayList<>();
+		contents.add(kjcCompany);
+		String encoded = Base64.getEncoder().encodeToString(kjcCompany.getCompanyLogo());
+		contents.add("\"data:image/jpg;base64, " + encoded + "\"");
+
+		Map<String, Object> root = templateEngine.buildContentAsMap(listContents, contents);
+
+		String procesedHtmlWithCss = templateEngine.getProcesedHTMLwihtCSS(content.getHtml(), content.getCss(), root);
+		
+		
+		
+		String cleanString = procesedHtmlWithCss.replaceAll("\r", "").replaceAll("\n", "");
+
+		content.setConnected(cleanString);
+		return content;
+	}
+
 	
 }

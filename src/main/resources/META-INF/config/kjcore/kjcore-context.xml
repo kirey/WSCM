@@ -27,6 +27,7 @@
 	<context:component-scan base-package="com.kirey.kjcore.features.classloading" />
 	<context:component-scan base-package="com.kirey.kjcore.features.security" />
 	<context:component-scan base-package="com.kirey.kjcore.validations" />
+	<context:component-scan base-package="com.kirey.kjcore.features.template" />
 
    	<!-- Property file  -->
 	<context:property-placeholder location="classpath:application.properties" />
