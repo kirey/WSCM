@@ -8,9 +8,15 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
+      
+      
+      <security:authentication-manager id="authenticationManager">
+		<security:authentication-provider user-service-ref="wscmUserAccountsDao">
+			<security:password-encoder ref="encoder" hash="bcrypt" />
+		</security:authentication-provider>
+	</security:authentication-manager>             
                    
-                   
-
+<!--  
 	<security:authentication-manager id="authenticationManager">
 		<security:authentication-provider>
 			<security:user-service>
@@ -18,7 +24,7 @@
 				<security:user name="user" authorities="ROLE_USER" password="{bcrypt}$2a$04$FuqlkX70/2CMbSI0MraHz.k4mDkd.U1iU7Sk9i47MKoiioqR1o4Te" />
 			</security:user-service>
 		</security:authentication-provider>
-	</security:authentication-manager>
+	</security:authentication-manager> -->
 	
 		<!-- HTTP settings -->
 	<security:http 	realm="Protected API" 
@@ -29,14 +35,16 @@
 					entry-point-ref="unauthorizedEntryPoint"
 					authentication-manager-ref="authenticationManager">
 					
-
+				
 
 		<!-- Access Rights -->
 		<!-- ===================================================================================================================================== -->
 		
 		<security:intercept-url  	pattern="/rest/content/test" 								access="permitAll()" />
 		<security:intercept-url  	pattern="/rest/content/testSecurity"						access="hasAnyRole('ROLE_ADMIN')" />
-		<security:intercept-url  	pattern="/**" 										access="permitAll()" />
+		<security:intercept-url  	pattern="/rest/content/testRole"							access="hasAnyRole('ROLE_USER')" />
+		
+		<security:intercept-url  	pattern="/**" 												access="permitAll()" />
 		<!-- ===================================================================================================================================== -->
 
 		 
@@ -58,5 +66,6 @@
 	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 		<constructor-arg name="strength" value="11" />
   	</bean>
+  	<bean id="wscmUserAccountsDao" class="com.kirey.wscm.data.dao.WscmUserAccountsDao" />
 	
 </beans>

@@ -29,6 +29,30 @@ public class TestController {
 	@Autowired
 	private TemplateEngine templateEngine;
 	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+
+		System.out.println("test");
+		
+		return "test";
+	}
+	
+	@RequestMapping(value = "/testSecurity", method = RequestMethod.GET)
+	public String testSecurity() {
+
+		System.out.println("testSecurity");
+		
+		return "testSercurituy";
+	}
+	
+	@RequestMapping(value = "/testRole", method = RequestMethod.GET)
+	public String testRole() {
+
+		System.out.println("testRole");
+		
+		return "testRole";
+	}
+	
 	
 	@RequestMapping(value = "/html/{page}/{position}", method = RequestMethod.GET)
 	public String getHtmlForPosition(@PathVariable String page, @PathVariable String position) {
