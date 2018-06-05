@@ -249,6 +249,14 @@ public class AppConstants {
 	public static final String UPPER_LETTERS_REGEX = ".*([A-Z]).*";
 	public static final String NUMBER_REGEX = ".*\\d.*";
 	
+	/**
+	 * WSCM
+	 */
+	public static final String STYLE_OPEN_TAG = "<style>";
+	public static final String STYLE_CLOSE_TAG = "</style>";
+	public static final String SCRIPT_OPEN_TAG = "<script>";
+	public static final String SCRIPT_CLOSE_TAG = "</script>";
+	
 	
 	/**
 	 * Constructor from superClass.

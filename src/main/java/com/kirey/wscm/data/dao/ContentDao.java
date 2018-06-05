@@ -11,7 +11,7 @@ import com.kirey.wscm.data.entity.Content;
 
 @Repository(value = "contentDao")
 public class ContentDao extends KjcBaseDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -64,4 +64,9 @@ public class ContentDao extends KjcBaseDao {
 		
 	}
 
+	public Content findByPagePositionLang(String page, String position, String lang) {
+		String hql = "from Content cont where cont.page = :page and cont.position = :position and cont.language = :lang";
+		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).setParameter("lang", lang).uniqueResult();
+		return content;
+	}
 }

@@ -14,8 +14,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "content")
 public class Content implements Serializable{
-
-	private static final long serialVersionUID = -8690896830405732886L;
+private static final long serialVersionUID = -8690896830405732886L;
 	
 	private Integer id;
 	private String page;
@@ -23,7 +22,7 @@ public class Content implements Serializable{
 	private String language;
 	private String html;
 	private String css;
-	private byte[] cssFile;
+	private String script;
 	
 	@Transient
 	private String connected;
@@ -79,22 +78,21 @@ public class Content implements Serializable{
 		this.css = css;
 	}
 	
-	@Column(name = "css_file", nullable = true)
-	public byte[] getCssFile() {
-		return cssFile;
-	}
-	public void setCssFile(byte[] cssFile) {
-		this.cssFile = cssFile;
-	}
 	
+	@Column(name = "script", unique = false, nullable = true, length = 10000)
+	public String getScript() {
+		return script;
+	}
+	public void setScript(String script) {
+		this.script = script;
+	}
 	@Transient
-	public String getConnsected() {
+	public String getConnected() {
 		return connected;
 	}
 	public void setConnected(String connected) {
 		this.connected = connected;
 	}
-	
 	
 	
 

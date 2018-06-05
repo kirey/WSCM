@@ -24,14 +24,19 @@ import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.api.dto.UserAccount;
 import com.kirey.wscm.data.dao.ContentDao;
 import com.kirey.wscm.data.entity.Content;
+import com.kirey.wscm.data.service.TemplateEngine;
 
 @RestController(value = "testController")
 @RequestMapping(value = "/rest/content")
 public class TestController {
 	
+
 	@Autowired
 	private ContentDao contentDao;
 	
+	
+	@Autowired
+	private TemplateEngine templateEngine;
 	
 	
 	@RequestMapping(value = "/html/{page}/{position}", method = RequestMethod.GET)
@@ -50,6 +55,37 @@ public class TestController {
 		return css;
 	}
 	
+	
+	/*-----------------------------------------------------------------*/
+	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public List<Content> getAll() {
+
+		List<Content> listContent = contentDao.findAll();
+		
+		return listContent;
+	}
+	
+	@RequestMapping(value = "/{page}/{lang}", method = RequestMethod.GET)
+	public List<Content> getByPageLang(@PathVariable String page, @PathVariable String lang) {
+
+		List<Content> listContent = contentDao.findByPageLang(page, lang);
+		for (Content content : listContent) {
+			String connected = content.getCss() + "\n" + content.getHtml();
+			content.setConnected(connected);
+		}
+		return listContent;
+	}
+	
+	@RequestMapping(value = "/{page}/{position}/{lang}", method = RequestMethod.GET)
+	public Content getByPagePositionLang(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
+
+		Content content = contentDao.findByPagePositionLang(page, position, lang);
+		String connected = content.getCss() + "\n" + content.getHtml();
+		content.setConnected(connected);
+		return content;
+	}
+	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<RestResponseDto> addNewContent(@RequestBody Content content) {
 
@@ -65,48 +101,40 @@ public class TestController {
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
-//	@RequestMapping(value = "/{page}/{position}", method = RequestMethod.GET)
-//	public Content getContentByPagePosition(@PathVariable String page, @PathVariable String position) {
-//
-//		Content content = contentDao.getContentByPagePosition(page, position);
-//		
-//		return content;
-//	}
-
-	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RestResponseDto> upload(@RequestParam("file") MultipartFile file) {
-		
-		Content content = contentDao.findById(2);
-		
-		try {
-			content.setCssFile(file.getBytes());
-			contentDao.merge(content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully uploaded!", HttpStatus.OK.value()), HttpStatus.OK);
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<RestResponseDto> deleteContent(@PathVariable Integer id){
+		Content content = contentDao.findById(id);
+		contentDao.delete(content);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/cssFile", method = RequestMethod.GET)
-	public byte[] getCssFile() {
-
-		Content content = contentDao.findById(1);
-		
-		return content.getCssFile();
-	}
 	
-	@RequestMapping(value = "/{page}/{lang}", method = RequestMethod.GET)
-	public List<Content> getByPageLang(@PathVariable String page, @PathVariable String lang) {
+	@RequestMapping(value = "/test/{page}/{position}/{lang}", method = RequestMethod.GET)
+	public String getByPagePositionLangDynamicContent(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
 
-		List<Content> listContent = contentDao.findByPageLang(page, lang);
-		for (Content content : listContent) {
-			String connected = content.getCss() + "\n" + content.getHtml();
-			content.setConnected(connected);
-		}
-		return listContent;
+		/*
+		Content content = contentDao.findByPagePositionLang(page, position, lang);
+
+		List<KjcPackages> packages = kjcPackagesDao.findAll();
+
+		List<List<?>> listContents = new ArrayList<>();
+		listContents.add(packages);
+
+		KjcCompanies kjcCompany = kjcCompaniesDao.findDefaultCompanyWithCss();
+
+		List<Object> contents = new ArrayList<>();
+		contents.add(kjcCompany);
+		
+		String encoded = Base64.getEncoder().encodeToString(kjcCompany.getCompanyLogo());
+		contents.add("\"data:image/jpg;base64, " + encoded + "\"");
+
+		Map<String, Object> root = templateEngine.buildContentAsMap(listContents, contents);
+
+		String htmlWithCssAndScript = templateEngine.getProcesedHTMLwithCSSandScript(content.getHtml(), content.getCss(), content.getScript(), root);
+		*/
+		return null;//htmlWithCssAndScript;
 	}
+
 	
 	
 }
