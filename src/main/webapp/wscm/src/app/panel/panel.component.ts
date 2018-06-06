@@ -1,27 +1,26 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AppService } from '../shared/services/app.service';
+import { PanelService } from './panel.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-panel',
+  templateUrl: './panel.component.html',
+  styleUrls: ['./panel.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class HomeComponent implements OnInit {
+export class PanelComponent implements OnInit {
 
-  constructor(public appService: AppService, public sanitizer: DomSanitizer) { }
+  constructor(public panelService: PanelService, public sanitizer: DomSanitizer) { }
 
   style: any;
   template: any;
   script: any;
 
   ngOnInit() {
-    console.log('yey');
 
     // Get TEMPLATE
-    this.appService.getContent('html', 'home', 'P1', 'EN')
+    this.panelService.getContent('html', 'home', 'P1', 'EN')
       .subscribe(
         res => {
           console.log(res);
@@ -32,7 +31,7 @@ export class HomeComponent implements OnInit {
       );
 
     // Get SCRIPT
-    this.appService.getContent('script', 'home', 'P1', 'EN')
+    this.panelService.getContent('script', 'home', 'P1', 'EN')
       .subscribe(
         res => {
           console.log(res);

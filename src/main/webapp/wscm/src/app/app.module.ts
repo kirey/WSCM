@@ -8,17 +8,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutes } from './app.routes';
 
 // Services
-import { AppService } from './shared/services/app.service';
+import { PanelService } from './panel/panel.service';
 
 // Components
-import { HomeComponent } from './home/home.component';
+import { PanelComponent } from './panel/panel.component';
 import { AppComponent } from './app.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    PanelComponent
   ],
   imports: [
     AppRoutes,
@@ -29,7 +29,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule
   ],
   providers: [
-    AppService
+    PanelService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
