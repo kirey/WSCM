@@ -1,6 +1,8 @@
 package com.kirey.wscm.api.restcontrollers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.ContentDao;
+import com.kirey.wscm.data.dao.IpAddressDao;
+import com.kirey.wscm.data.dao.WscmUserAccountsDao;
 import com.kirey.wscm.data.entity.Content;
+import com.kirey.wscm.data.entity.IpAddress;
+import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.TemplateEngine;
 
 @RestController(value = "testController")
@@ -28,6 +34,12 @@ public class TestController {
 	
 	@Autowired
 	private TemplateEngine templateEngine;
+	
+	@Autowired
+	private IpAddressDao IpAddressDao;
+	
+	@Autowired
+	private WscmUserAccountsDao wscmUserAccountsDao;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
@@ -111,6 +123,34 @@ public class TestController {
 		content.setConnected(sb.toString());
 		return content.getConnected();
 	}
+	@RequestMapping(value = "/html/{page}/{position}/{lang}", method = RequestMethod.GET)
+	public String getHtmlCssByPagePositionLang(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
+
+		Content content = contentDao.findByPagePositionLang(page, position, lang);
+		StringBuilder sb = new StringBuilder();
+		if(content.getCss() != null) {
+			sb.append(AppConstants.STYLE_OPEN_TAG);
+			sb.append(content.getCss());
+			sb.append(AppConstants.STYLE_CLOSE_TAG);
+		}
+		sb.append(content.getHtml());
+		
+		content.setConnected(sb.toString());
+		return content.getConnected();
+	}
+	
+	@RequestMapping(value = "/script/{page}/{position}/{lang}", method = RequestMethod.GET)
+	public String getScriptByPagePositionLang(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
+
+		Content content = contentDao.findByPagePositionLang(page, position, lang);
+		StringBuilder sb = new StringBuilder();
+		sb.append(AppConstants.SCRIPT_OPEN_TAG);
+		sb.append(content.getScript());
+		sb.append(AppConstants.SCRIPT_CLOSE_TAG);
+		
+		content.setConnected(sb.toString());
+		return content.getConnected();
+	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<RestResponseDto> addNewContent(@RequestBody Content content) {
@@ -138,27 +178,25 @@ public class TestController {
 	@RequestMapping(value = "/test/{page}/{position}/{lang}", method = RequestMethod.GET)
 	public String getByPagePositionLangDynamicContent(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
 
-		/*
+		
 		Content content = contentDao.findByPagePositionLang(page, position, lang);
 
-		List<KjcPackages> packages = kjcPackagesDao.findAll();
+		List<IpAddress> listAddresses = IpAddressDao.findAll();
 
 		List<List<?>> listContents = new ArrayList<>();
-		listContents.add(packages);
+		listContents.add(listAddresses);
 
-		KjcCompanies kjcCompany = kjcCompaniesDao.findDefaultCompanyWithCss();
+		WscmUserAccounts user = wscmUserAccountsDao.findById(1);
 
 		List<Object> contents = new ArrayList<>();
-		contents.add(kjcCompany);
+		contents.add(user);
 		
-		String encoded = Base64.getEncoder().encodeToString(kjcCompany.getCompanyLogo());
-		contents.add("\"data:image/jpg;base64, " + encoded + "\"");
 
 		Map<String, Object> root = templateEngine.buildContentAsMap(listContents, contents);
 
 		String htmlWithCssAndScript = templateEngine.getProcesedHTMLwithCSSandScript(content.getHtml(), content.getCss(), content.getScript(), root);
-		*/
-		return null;//htmlWithCssAndScript;
+		
+		return htmlWithCssAndScript;
 	}
 
 	

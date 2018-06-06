@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +17,7 @@ import com.kirey.wscm.data.entity.WscmRoles;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 
 @Repository(value = "wscmUserAccountsDao")
+@Scope("singleton")
 public class WscmUserAccountsDao extends KjcBaseDao implements UserDetailsService{
 	
 	@Autowired
@@ -23,6 +26,13 @@ public class WscmUserAccountsDao extends KjcBaseDao implements UserDetailsServic
 	public WscmUserAccountsDao() {
 		log = LogFactory.getLog(WscmUserAccountsDao.class);
 		entityClass = WscmUserAccounts.class;
+	}
+	
+	public WscmUserAccounts findByUsernameWithIp(String username) {
+		String hql = "from WscmUserAccounts ua where ua.username = :username";
+		WscmUserAccounts user = (WscmUserAccounts) sessionFactory.getCurrentSession().createQuery(hql).setParameter("username", username).uniqueResult();
+		Hibernate.initialize(user.getIpAddresses());
+		return user;
 	}
 
 	@Override
