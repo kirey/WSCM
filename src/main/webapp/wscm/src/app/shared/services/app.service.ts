@@ -11,7 +11,7 @@ export class AppService {
 
   baseUrl = "rest/content/";
 
-  getContent(page: String, position: String) {
-    return this._http.get(this.baseUrl + page + '/' + position).pipe(map(res => res.json()));
+  getContent(type: String, page: String, position: String, lang: String) {
+    return this._http.get(this.baseUrl + type + '/' + page + '/' + position + '/' + lang).pipe(map(res => res));
   }
 }

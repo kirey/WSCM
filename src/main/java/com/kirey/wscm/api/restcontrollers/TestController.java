@@ -144,9 +144,9 @@ public class TestController {
 
 		Content content = contentDao.findByPagePositionLang(page, position, lang);
 		StringBuilder sb = new StringBuilder();
-		sb.append(AppConstants.SCRIPT_OPEN_TAG);
+//		sb.append(AppConstants.SCRIPT_OPEN_TAG);
 		sb.append(content.getScript());
-		sb.append(AppConstants.SCRIPT_CLOSE_TAG);
+//		sb.append(AppConstants.SCRIPT_CLOSE_TAG);
 		
 		content.setConnected(sb.toString());
 		return content.getConnected();
