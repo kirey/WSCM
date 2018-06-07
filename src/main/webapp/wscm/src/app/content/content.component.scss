@@ -1,0 +1,10 @@
+@import '../app.component.scss';
+
+#content {
+    mat-expansion-panel-header {
+        background-color: $primary;
+    }
+    .mat-expansion-panel-header-title, .mat-expansion-panel-header-description, .mat-expansion-indicator::after {
+        color: #fff;
+    }
+}
