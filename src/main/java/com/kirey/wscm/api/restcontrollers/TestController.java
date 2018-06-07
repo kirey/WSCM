@@ -106,6 +106,14 @@ public class TestController {
 		return listContent;
 	}
 	
+	@RequestMapping(value = "/{page}", method = RequestMethod.GET)
+	public List<Content> getByPageLang(@PathVariable String page) {
+
+		List<Content> listContent = contentDao.findByPage(page);
+		
+		return listContent;
+	}
+	
 	@RequestMapping(value = "/{page}/{position}/{lang}", method = RequestMethod.GET)
 	public String getByPagePositionLang(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
 

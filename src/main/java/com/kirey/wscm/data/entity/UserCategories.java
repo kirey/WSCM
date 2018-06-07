@@ -14,19 +14,19 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_ip_address")
-public class UserIpAddress implements Serializable{
+@Table(name = "user_categories")
+public class UserCategories implements Serializable{
 
-	private static final long serialVersionUID = -8597033906921078802L;
+	private static final long serialVersionUID = -8422809548816237743L;
 	
 	private Integer id;
 	private WscmUserAccounts userAccount;
-	private IpAddress ipAddress;
-	private Integer noRequests;
+	private Categories categories;
+	private Integer weight;
 	
 	@Id
-	@SequenceGenerator(name = "user_ip_address_gen", sequenceName = "seq_user_ip_address", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_ip_address_gen")
+	@SequenceGenerator(name = "user_categories_gen", sequenceName = "seq_user_categories", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_categories_gen")
 	@Column(name = "ID", unique = true, nullable = false, precision = 10, scale = 0)
 	public Integer getId() {
 		return id;
@@ -45,23 +45,24 @@ public class UserIpAddress implements Serializable{
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ip_address", nullable = true)
-	public IpAddress getIpAddress() {
-		return ipAddress;
+	@JoinColumn(name = "categories", nullable = true)
+	public Categories getCategories() {
+		return categories;
 	}
-	public void setIpAddress(IpAddress ipAddress) {
-		this.ipAddress = ipAddress;
+	public void setCategories(Categories categories) {
+		this.categories = categories;
 	}
 	
-	@Column(name = "no_requests")
-	public Integer getNoRequests() {
-		return noRequests;
+	@Column(name = "weight", nullable = true)
+	public Integer getWeight() {
+		return weight;
 	}
-	public void setNoRequests(Integer noRequests) {
-		this.noRequests = noRequests;
+	public void setWeight(Integer weight) {
+		this.weight = weight;
 	}
+	
+	
 	
 	
 
-	
 }

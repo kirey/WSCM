@@ -31,7 +31,7 @@ public class WscmUserAccountsDao extends KjcBaseDao implements UserDetailsServic
 	public WscmUserAccounts findByUsernameWithIp(String username) {
 		String hql = "from WscmUserAccounts ua where ua.username = :username";
 		WscmUserAccounts user = (WscmUserAccounts) sessionFactory.getCurrentSession().createQuery(hql).setParameter("username", username).uniqueResult();
-		Hibernate.initialize(user.getIpAddresses());
+		Hibernate.initialize(user.getUserIpAddress());
 		return user;
 	}
 

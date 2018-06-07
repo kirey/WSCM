@@ -30,6 +30,7 @@ public class WscmUserAccounts implements UserDetails{
 	private String role;
 	
 	private List<UserIpAddress> userIpAddress = new ArrayList<>();
+	private List<UserCategories> userCategorieses = new ArrayList<>();
 	
 	@Transient
     private List<WscmRoles> wscmRoles;
@@ -77,6 +78,14 @@ public class WscmUserAccounts implements UserDetails{
 	}
 	public void setUserIpAddress(List<UserIpAddress> userIpAddress) {
 		this.userIpAddress = userIpAddress;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+	public List<UserCategories> getUserCategorieses() {
+		return userCategorieses;
+	}
+	public void setUserCategorieses(List<UserCategories> userCategorieses) {
+		this.userCategorieses = userCategorieses;
 	}
 	@Transient
 	public List<WscmRoles> getWscmRoles() {
