@@ -7,6 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutes } from './app.routes';
 
+// Modules
+import { MaterialModule } from './shared/modules/material.module';
+
 // Services
 import { PanelService } from './panel/panel.service';
 
@@ -25,12 +28,13 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
-    AppRoutes,
     BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutes,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    MaterialModule
   ],
   providers: [
     PanelService
