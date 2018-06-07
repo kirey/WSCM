@@ -1,6 +1,7 @@
 package com.kirey.wscm.api.restcontrollers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
@@ -187,9 +189,12 @@ public class TestController {
 		listContents.add(listAddresses);
 
 		WscmUserAccounts user = wscmUserAccountsDao.findById(1);
-
+		HashMap<String, String>	map = new HashMap<>();
+		map.put("hash", "1234marina3212");
 		List<Object> contents = new ArrayList<>();
 		contents.add(user);
+		contents.add(map);
+		
 		
 
 		Map<String, Object> root = templateEngine.buildContentAsMap(listContents, contents);
