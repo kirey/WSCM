@@ -1,6 +1,8 @@
 package com.kirey.wscm.data.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -21,7 +24,9 @@ public class IpAddress implements Serializable{
 	
 	private Integer id;
 	private String address;
-	private WscmUserAccounts wscmUserAccounts;
+	
+	private List<UserIpAddress> userIpAddresses = new ArrayList<>();
+	
 	
 	@Id
 	@SequenceGenerator(name = "ipAddress_gen", sequenceName = "seq_ip_address", allocationSize = 1, initialValue = 1)
@@ -42,14 +47,16 @@ public class IpAddress implements Serializable{
 		this.address = address;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "wscm_user_accounts", nullable = false)
-	public WscmUserAccounts getWscmUserAccounts() {
-		return wscmUserAccounts;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ipAddress")
+	public List<UserIpAddress> getUserIpAddresses() {
+		return userIpAddresses;
 	}
-	public void setWscmUserAccounts(WscmUserAccounts wscmUserAccounts) {
-		this.wscmUserAccounts = wscmUserAccounts;
+	public void setUserIpAddresses(List<UserIpAddress> userIpAddresses) {
+		this.userIpAddresses = userIpAddresses;
 	}
+
+	
+	
 	
 	
 	

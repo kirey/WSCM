@@ -69,4 +69,10 @@ public class ContentDao extends KjcBaseDao {
 		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).setParameter("lang", lang).uniqueResult();
 		return content;
 	}
+
+	public List<Content> findByPage(String page) {
+		String hql = "from Content cont where cont.page = :page";
+		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).list();
+		return listContent;
+	}
 }
