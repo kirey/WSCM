@@ -20,23 +20,12 @@ export class PanelComponent implements OnInit {
   ngOnInit() {
 
     // Get TEMPLATE
-    this.panelService.getContent('html', 'home', 'P1', 'EN')
+    this.panelService.getContent('home', 'P2', 'EN')
       .subscribe(
         res => {
           console.log(res);
           let t = res['_body'];
           this.template = this.sanitizer.bypassSecurityTrustHtml(t);
-        },
-        err => console.log(err)
-      );
-
-    // Get SCRIPT
-    this.panelService.getContent('script', 'home', 'P1', 'EN')
-      .subscribe(
-        res => {
-          console.log(res);
-          let s = res['_body'];
-          this.script = this.sanitizer.bypassSecurityTrustScript(s);
         },
         err => console.log(err)
       );

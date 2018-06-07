@@ -1,10 +1,12 @@
 import { Routes, RouterModule } from '@angular/router';
-import { PanelComponent } from './panel/panel.component';
+import { ContentComponent } from './content/content.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-    { path: 'panel', component: PanelComponent },
+    { path: 'content', component: ContentComponent },
+    { path: 'home', component: HomeComponent },
 
-    { path: '**', component: PanelComponent }
+    { path: '**', component: HomeComponent }
 ];
 
 export const AppRoutes: any = RouterModule.forRoot(routes, { useHash: true });

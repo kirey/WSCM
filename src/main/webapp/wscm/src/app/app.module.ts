@@ -13,12 +13,16 @@ import { PanelService } from './panel/panel.service';
 // Components
 import { PanelComponent } from './panel/panel.component';
 import { AppComponent } from './app.component';
+import { ContentComponent } from './content/content.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PanelComponent
+    PanelComponent,
+    ContentComponent,
+    HomeComponent
   ],
   imports: [
     AppRoutes,

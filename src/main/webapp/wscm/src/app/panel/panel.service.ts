@@ -11,7 +11,7 @@ export class PanelService {
 
     baseUrl = "rest/content/";
 
-    getContent(type: String, page: String, position: String, lang: String) {
-        return this._http.get(this.baseUrl + type + '/' + page + '/' + position + '/' + lang).pipe(map(res => res));
+    getContent(page: String, position: String, lang: String) {
+        return this._http.get(this.baseUrl + 'test/' + page + '/' + position + '/' + lang).pipe(map(res => res));
     }
 }
