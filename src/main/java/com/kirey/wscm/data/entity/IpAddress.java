@@ -26,6 +26,7 @@ public class IpAddress implements Serializable{
 	private String address;
 	
 	private List<UserIpAddress> userIpAddresses = new ArrayList<>();
+	private List<IpAddressCategories> ipAddressCategorieses = new ArrayList<>();
 	
 	
 	@Id
@@ -54,11 +55,12 @@ public class IpAddress implements Serializable{
 	public void setUserIpAddresses(List<UserIpAddress> userIpAddresses) {
 		this.userIpAddresses = userIpAddresses;
 	}
-
 	
-	
-	
-	
-	
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ipAddress")
+	public List<IpAddressCategories> getIpAddressCategorieses() {
+		return ipAddressCategorieses;
+	}
+	public void setIpAddressCategorieses(List<IpAddressCategories> ipAddressCategorieses) {
+		this.ipAddressCategorieses = ipAddressCategorieses;
+	}
 }

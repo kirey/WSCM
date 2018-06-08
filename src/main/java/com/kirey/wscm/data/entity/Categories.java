@@ -25,6 +25,7 @@ public class Categories implements Serializable{
 	private String description;
 	
 	private List<UserCategories> userCategorieses = new ArrayList<>();
+	private List<IpAddressCategories> ipAddressCategorieses = new ArrayList<>();
 	
 	@Id
 	@SequenceGenerator(name = "categories_gen", sequenceName = "seq_categories", allocationSize = 1, initialValue = 1)
@@ -59,6 +60,14 @@ public class Categories implements Serializable{
 	}
 	public void setUserCategorieses(List<UserCategories> userCategorieses) {
 		this.userCategorieses = userCategorieses;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+	public List<IpAddressCategories> getIpAddressCategorieses() {
+		return ipAddressCategorieses;
+	}
+	public void setIpAddressCategorieses(List<IpAddressCategories> ipAddressCategorieses) {
+		this.ipAddressCategorieses = ipAddressCategorieses;
 	}
 	
 	

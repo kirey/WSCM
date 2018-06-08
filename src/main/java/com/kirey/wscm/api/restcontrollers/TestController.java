@@ -17,9 +17,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
+import com.kirey.wscm.data.dao.CategoriesDao;
 import com.kirey.wscm.data.dao.ContentDao;
 import com.kirey.wscm.data.dao.IpAddressDao;
 import com.kirey.wscm.data.dao.WscmUserAccountsDao;
+import com.kirey.wscm.data.entity.Categories;
 import com.kirey.wscm.data.entity.Content;
 import com.kirey.wscm.data.entity.IpAddress;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
@@ -38,13 +40,20 @@ public class TestController {
 	private TemplateEngine templateEngine;
 	
 	@Autowired
-	private IpAddressDao IpAddressDao;
+	private IpAddressDao ipAddressDao;
+	
+	@Autowired
+	private CategoriesDao categoriesDao;
 	
 	@Autowired
 	private WscmUserAccountsDao wscmUserAccountsDao;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
+		
+		List<IpAddress> listIp = ipAddressDao.findByUser(1);
+		String ipAddress = "192.168.60.21";
+		List<Categories> listCategories = categoriesDao.findCategoriesByIp(ipAddress); 
 
 		System.out.println("test");
 		
@@ -191,7 +200,7 @@ public class TestController {
 		
 		Content content = contentDao.findByPagePositionLang(page, position, lang);
 
-		List<IpAddress> listAddresses = IpAddressDao.findAll();
+		List<IpAddress> listAddresses = ipAddressDao.findAll();
 
 		List<List<?>> listContents = new ArrayList<>();
 		listContents.add(listAddresses);

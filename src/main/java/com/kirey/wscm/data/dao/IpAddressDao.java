@@ -1,5 +1,7 @@
 package com.kirey.wscm.data.dao;
 
+import java.util.List;
+
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +18,12 @@ public class IpAddressDao extends KjcBaseDao {
 	public IpAddressDao() {
 		log = LogFactory.getLog(IpAddressDao.class);
 		entityClass = IpAddress.class;
+	}
+
+	
+	public List<IpAddress> findByUser(int userId) {
+		String hql = "select uip.ipAddress from UserIpAddress uip where uip.userAccount.id = :userId";
+		List<IpAddress> listIp = sessionFactory.getCurrentSession().createQuery(hql).setParameter("userId", userId).list();
+		return listIp;
 	}
 }
