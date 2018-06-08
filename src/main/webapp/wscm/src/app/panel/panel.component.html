@@ -1,5 +1,31 @@
-<router-outlet></router-outlet>
-<button mat-raised-button>Basic</button>
-<button mat-raised-button color="primary">Primary</button>
-<button mat-raised-button color="accent">Accent</button>
-<button mat-raised-button color="warn">Warn</button>
+<div id="content2" class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+      <mat-sidenav-container>
+        <!-- <img src="http://localhost:8080/wscm/#/src/assets/logo.png" alt=""> -->
+        <mat-list>
+          <a mat-button routerLink=".">Home</a>
+        </mat-list>
+        <mat-list>
+          <a mat-button routerLink=".">Content</a>
+        </mat-list>
+        <mat-list>
+          <a mat-button routerLink=".">Link</a>
+        </mat-list>
+        <mat-list>
+          <a mat-button routerLink=".">Link</a>
+        </mat-list>
+        <mat-list>
+          <a mat-button routerLink=".">Link</a>
+        </mat-list>
+      </mat-sidenav-container>
+    </div>
+    <div class="col-lg-9">
+      <router-outlet></router-outlet>
+      <button mat-raised-button>Basic</button>
+      <button mat-raised-button color="primary">Primary</button>
+      <button mat-raised-button color="accent">Accent</button>
+      <button mat-raised-button color="warn">Warn</button>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { PanelService } from './panel.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
+
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',

@@ -6,6 +6,10 @@ import { MatButtonModule } from '@angular/material';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+
+
 
 
 
@@ -16,14 +20,18 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatButtonToggleModule,
     MatInputModule,
     MatExpansionModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSidenavModule,
+    MatListModule
   ],
   exports: [
     MatButtonModule,
     MatButtonToggleModule,
     MatInputModule,
     MatExpansionModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSidenavModule,
+    MatListModule
   ],
   declarations: []
 })
