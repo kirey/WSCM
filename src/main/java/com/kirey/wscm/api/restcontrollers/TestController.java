@@ -54,6 +54,7 @@ public class TestController {
 		List<IpAddress> listIp = ipAddressDao.findByUser(1);
 		String ipAddress = "192.168.60.21";
 		List<Categories> listCategories = categoriesDao.findCategoriesByIp(ipAddress); 
+		List<Content> listContents = contentDao.findContentByCategory(1);
 
 		System.out.println("test");
 		

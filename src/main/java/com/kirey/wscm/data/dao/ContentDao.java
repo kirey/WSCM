@@ -75,4 +75,10 @@ public class ContentDao extends KjcBaseDao {
 		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).list();
 		return listContent;
 	}
+
+	public List<Content> findContentByCategory(int categoryId) {
+		String hql = "select cc.content from ContentCategories cc where cc.categories.id = :categoryId";
+		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("categoryId", categoryId).list();
+		return listContent;
+	}
 }

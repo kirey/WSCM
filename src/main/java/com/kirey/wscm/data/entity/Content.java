@@ -1,12 +1,16 @@
 package com.kirey.wscm.data.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -23,6 +27,8 @@ private static final long serialVersionUID = -8690896830405732886L;
 	private String html;
 	private String css;
 	private String script;
+	
+	private List<ContentCategories> contentCategorieses = new ArrayList<>();
 	
 	@Transient
 	private String connected;
@@ -92,6 +98,14 @@ private static final long serialVersionUID = -8690896830405732886L;
 	}
 	public void setConnected(String connected) {
 		this.connected = connected;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "content")
+	public List<ContentCategories> getContentCategorieses() {
+		return contentCategorieses;
+	}
+	public void setContentCategorieses(List<ContentCategories> contentCategorieses) {
+		this.contentCategorieses = contentCategorieses;
 	}
 	
 	
