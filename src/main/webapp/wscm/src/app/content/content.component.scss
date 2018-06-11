@@ -1,10 +1,20 @@
 @import '../app.component.scss';
 
 #content {
+    width: 80%;
+    margin: 200px auto;
+
+
+    // Expansion Panel
     mat-expansion-panel-header {
         background-color: $primary;
     }
     .mat-expansion-panel-header-title, .mat-expansion-panel-header-description, .mat-expansion-indicator::after {
         color: #fff;
+    }
+
+    // Tabs
+    .mat-tab-labels {
+        justify-content: center;
     }
 }
