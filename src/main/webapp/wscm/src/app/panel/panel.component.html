@@ -1,23 +1,37 @@
 <div id="panel">
   <div id="sidebar-content">
-  <mat-sidenav-container>
-    <mat-list>
-      <mat-icon>home</mat-icon>
-      <a mat-button routerLink=".">Home</a>
-    </mat-list>
-    <mat-list>
-        <i class="material-icons">
+    <mat-sidenav-container>
+
+      <mat-nav-list>
+        <a mat-list-item routerLink=".">
+          <mat-icon>home</mat-icon>Home</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-list-item routerLink=".">
+          <i class="material-icons">
             vertical_split
-            </i>
-      <a mat-button routerLink=".">Content</a>
-    </mat-list>
-    <mat-list>
-      <a mat-button routerLink=".">Link</a>
-    </mat-list>
-    <mat-list>
-      <a mat-button routerLink=".">Link</a>
-    </mat-list>
-  </mat-sidenav-container>
-</div>
+          </i> Content</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-list-item routerLink=".">
+          <i class="material-icons">
+            code
+          </i> Link</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-list-item routerLink=".">
+          <i class="material-icons">
+            favorite
+          </i>Link</a>
+      </mat-nav-list>
+      <mat-nav-list>
+
+        <a mat-list-item routerLink=".">
+          <i class="material-icons">
+            language
+          </i>Link</a>
+      </mat-nav-list>
+    </mat-sidenav-container>
+  </div>
   <router-outlet></router-outlet>
 </div>
