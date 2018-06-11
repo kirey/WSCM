@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "user_ip_address")
 public class UserIpAddress implements Serializable{
@@ -20,7 +22,9 @@ public class UserIpAddress implements Serializable{
 	private static final long serialVersionUID = -8597033906921078802L;
 	
 	private Integer id;
+	@JsonManagedReference(value = "wscmUserIpAddress")
 	private WscmUserAccounts userAccount;
+	@JsonManagedReference(value="ipAddressUserIpAddresses")
 	private IpAddress ipAddress;
 	private Integer noRequests;
 	
