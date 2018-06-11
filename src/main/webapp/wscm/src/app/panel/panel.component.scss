@@ -6,16 +6,31 @@
     min-height: 900px;
   }
   mat-list {
-    padding-left: 20%;
+    padding-bottom: 5px;
+    box-shadow:
+    inset 0px 11px 8px -10px $primary,
+    inset 0px -11px 8px -10px $primary;
+  }
+  mat-list:hover {
+    box-shadow:
+    inset 0px 11px 8px -10px #CCC,
+    inset 0px -11px 8px -10px #CCC;
+    transition: 1s;
   }
   a {
     text-decoration: none;
     color: white;
     text-transform: uppercase;
     padding: 5px 10px;
+    font-size: 1em;
+  }
+  .fa.fa-home {
+    font-size: 30px;
+    color: white;
   }
 .col-lg-3 {
   padding-left: 0;
 }
 }
+
 

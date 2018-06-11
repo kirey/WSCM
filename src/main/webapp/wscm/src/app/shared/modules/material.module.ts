@@ -9,6 +9,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatGridListModule,
     MatSidenavModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIconModule
   ],
   exports: [
     MatButtonModule,
@@ -30,7 +32,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatGridListModule,
     MatSidenavModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIconModule
   ],
   declarations: []
 })
