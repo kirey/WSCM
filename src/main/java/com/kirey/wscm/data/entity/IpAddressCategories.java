@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "ip_address_categories")
 public class IpAddressCategories implements Serializable {
@@ -20,7 +22,9 @@ public class IpAddressCategories implements Serializable {
 	private static final long serialVersionUID = 3069243249385409036L;
 	
 	private Integer id;
+	@JsonManagedReference(value="ipAddressCategories")
 	private IpAddress ipAddress;
+	@JsonManagedReference(value="categoriesIpAddressCategorieses")
 	private Categories categories;
 	private Integer weight;
 	

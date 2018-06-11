@@ -16,21 +16,21 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "user_categories")
-public class UserCategories implements Serializable{
+@Table(name = "links_categories")
+public class LinksCategories implements Serializable {
 
-	private static final long serialVersionUID = -8422809548816237743L;
+	private static final long serialVersionUID = 4579307772400776798L;
 	
 	private Integer id;
-	@JsonManagedReference(value = "wscmUserCategorieses")
-	private WscmUserAccounts userAccount;
-	@JsonManagedReference(value="categoriesUserCategories")
+	@JsonManagedReference(value="linksCategories")
+	private Links link;
+	@JsonManagedReference(value="categoriesLinksCategories")
 	private Categories categories;
 	private Integer weight;
 	
 	@Id
-	@SequenceGenerator(name = "user_categories_gen", sequenceName = "seq_user_categories", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_categories_gen")
+	@SequenceGenerator(name = "links_categories_gen", sequenceName = "seq_links_categories", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "links_categories_gen")
 	@Column(name = "ID", unique = true, nullable = false, precision = 10, scale = 0)
 	public Integer getId() {
 		return id;
@@ -40,14 +40,13 @@ public class UserCategories implements Serializable{
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "wscm_user_accounts", nullable = true)
-	public WscmUserAccounts getUserAccount() {
-		return userAccount;
+	@JoinColumn(name = "link", nullable = true)
+	public Links getLink() {
+		return link;
 	}
-	public void setUserAccount(WscmUserAccounts userAccount) {
-		this.userAccount = userAccount;
+	public void setLink(Links link) {
+		this.link = link;
 	}
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categories", nullable = true)
 	public Categories getCategories() {
@@ -64,8 +63,6 @@ public class UserCategories implements Serializable{
 	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
-	
-	
 	
 	
 

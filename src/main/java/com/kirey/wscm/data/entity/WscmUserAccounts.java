@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "wscm_user_accounts")
 public class WscmUserAccounts implements UserDetails{
@@ -29,8 +31,13 @@ public class WscmUserAccounts implements UserDetails{
 	private String password;
 	private String role;
 	
+	@JsonBackReference(value = "wscmUserIpAddress")
 	private List<UserIpAddress> userIpAddress = new ArrayList<>();
+	
+	@JsonBackReference(value = "wscmUserCategorieses")
 	private List<UserCategories> userCategorieses = new ArrayList<>();
+	
+	@JsonBackReference(value = "wscmUserLinkses")
 	private List<UserLinks> userLinkses = new ArrayList<>();
 	
 	@Transient

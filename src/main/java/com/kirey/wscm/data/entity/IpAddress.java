@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "ip_address")
 public class IpAddress implements Serializable{
@@ -25,8 +27,13 @@ public class IpAddress implements Serializable{
 	private Integer id;
 	private String address;
 	
+	@JsonBackReference(value="ipAddressUserIpAddresses")
 	private List<UserIpAddress> userIpAddresses = new ArrayList<>();
+	
+	@JsonBackReference(value="ipAddressCategories")
 	private List<IpAddressCategories> ipAddressCategorieses = new ArrayList<>();
+	
+	@JsonBackReference(value="ipAddressLinks")
 	private List<IpAddressLinks> ipAddressLinkses = new ArrayList<>();
 	
 	

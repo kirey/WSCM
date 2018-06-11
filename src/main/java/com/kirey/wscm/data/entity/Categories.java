@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "categories")
 public class Categories implements Serializable{
@@ -24,9 +26,17 @@ public class Categories implements Serializable{
 	private String categoryName;
 	private String description;
 	
+	@JsonBackReference(value="categoriesUserCategories")
 	private List<UserCategories> userCategorieses = new ArrayList<>();
+	
+	@JsonBackReference(value="categoriesIpAddressCategorieses")
 	private List<IpAddressCategories> ipAddressCategorieses = new ArrayList<>();
+	
+	@JsonBackReference(value="categoriesContentCategorieses")
 	private List<ContentCategories> contentCategorieses = new ArrayList<>();
+	
+	@JsonBackReference(value="categoriesLinksCategories")
+	private List<LinksCategories> linksCategorieses = new ArrayList<>();
 	
 	@Id
 	@SequenceGenerator(name = "categories_gen", sequenceName = "seq_categories", allocationSize = 1, initialValue = 1)
@@ -77,6 +87,14 @@ public class Categories implements Serializable{
 	}
 	public void setContentCategorieses(List<ContentCategories> contentCategorieses) {
 		this.contentCategorieses = contentCategorieses;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+	public List<LinksCategories> getLinksCategorieses() {
+		return linksCategorieses;
+	}
+	public void setLinksCategorieses(List<LinksCategories> linksCategorieses) {
+		this.linksCategorieses = linksCategorieses;
 	}
 	
 	

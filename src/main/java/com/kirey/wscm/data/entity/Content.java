@@ -15,6 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "content")
 public class Content implements Serializable{
@@ -28,6 +30,7 @@ private static final long serialVersionUID = -8690896830405732886L;
 	private String css;
 	private String script;
 	
+	@JsonBackReference(value="contentCategories")
 	private List<ContentCategories> contentCategorieses = new ArrayList<>();
 	
 	@Transient
