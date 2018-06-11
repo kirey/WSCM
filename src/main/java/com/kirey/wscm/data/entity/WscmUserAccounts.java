@@ -40,6 +40,9 @@ public class WscmUserAccounts implements UserDetails{
 	@JsonBackReference(value = "wscmUserLinkses")
 	private List<UserLinks> userLinkses = new ArrayList<>();
 	
+	@JsonBackReference(value= "userNotificationsSent")
+	private List<NotificationsSent> notificationsSent = new ArrayList<>();
+	
 	@Transient
     private List<WscmRoles> wscmRoles;
 	
@@ -104,6 +107,14 @@ public class WscmUserAccounts implements UserDetails{
 		this.userLinkses = userLinkses;
 	}
 	
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+	public List<NotificationsSent> getNotificationsSent() {
+		return notificationsSent;
+	}
+	public void setNotificationsSent(List<NotificationsSent> notificationsSent) {
+		this.notificationsSent = notificationsSent;
+	}
 	@Transient
 	public List<WscmRoles> getWscmRoles() {
 		return wscmRoles;

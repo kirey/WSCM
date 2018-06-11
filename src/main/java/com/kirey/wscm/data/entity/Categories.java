@@ -38,6 +38,9 @@ public class Categories implements Serializable{
 	@JsonBackReference(value="categoriesLinksCategories")
 	private List<LinksCategories> linksCategorieses = new ArrayList<>();
 	
+	@JsonBackReference(value="categoriesNotificationCatiegorieses")
+	private List<NotificationCategories> notificationCatiegorieses = new ArrayList<>();
+	
 	@Id
 	@SequenceGenerator(name = "categories_gen", sequenceName = "seq_categories", allocationSize = 1, initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categories_gen")
@@ -95,6 +98,14 @@ public class Categories implements Serializable{
 	}
 	public void setLinksCategorieses(List<LinksCategories> linksCategorieses) {
 		this.linksCategorieses = linksCategorieses;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+	public List<NotificationCategories> getNotificationCatiegorieses() {
+		return notificationCatiegorieses;
+	}
+	public void setNotificationCatiegorieses(List<NotificationCategories> notificationCatiegorieses) {
+		this.notificationCatiegorieses = notificationCatiegorieses;
 	}
 	
 	
