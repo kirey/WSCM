@@ -1,28 +1,23 @@
-<div id="panel" class="container-fluid">
-  <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-      <mat-sidenav-container>
-        <mat-list>
-          <a mat-button routerLink=".">Home</a>
-        </mat-list>
-        <mat-list>
-          <a mat-button routerLink=".">Content</a>
-        </mat-list>
-        <mat-list>
-          <a mat-button routerLink=".">Link</a>
-        </mat-list>
-        <mat-list>
-<mat-icon>home</mat-icon>
-          <a mat-button routerLink=".">Link</a>
-        </mat-list>
-        <mat-list>
-          <a mat-button routerLink=".">Link</a>
-        </mat-list>
-      </mat-sidenav-container>
-    </div>
-    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-      <router-outlet></router-outlet>
-
-    </div>
-  </div>
+<div id="panel">
+  <div id="sidebar-content">
+  <mat-sidenav-container>
+    <mat-list>
+      <mat-icon>home</mat-icon>
+      <a mat-button routerLink=".">Home</a>
+    </mat-list>
+    <mat-list>
+        <i class="material-icons">
+            vertical_split
+            </i>
+      <a mat-button routerLink=".">Content</a>
+    </mat-list>
+    <mat-list>
+      <a mat-button routerLink=".">Link</a>
+    </mat-list>
+    <mat-list>
+      <a mat-button routerLink=".">Link</a>
+    </mat-list>
+  </mat-sidenav-container>
+</div>
+  <router-outlet></router-outlet>
 </div>
