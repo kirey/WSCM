@@ -26,4 +26,11 @@ public class IpAddressDao extends KjcBaseDao {
 		List<IpAddress> listIp = sessionFactory.getCurrentSession().createQuery(hql).setParameter("userId", userId).list();
 		return listIp;
 	}
+
+
+	public IpAddress findByAddress(String address) {
+		String hql = "from IpAddress ip where ip.address = :address";
+		IpAddress ipAddress = (IpAddress) sessionFactory.getCurrentSession().createQuery(hql).setParameter("address", address).uniqueResult();
+		return ipAddress;
+	}
 }

@@ -1,5 +1,10 @@
 package com.kirey.wscm.security;
 
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.kirey.wscm.data.entity.WscmUserAccounts;
+
 /**
  * @author paunovicm
  *
@@ -7,8 +12,8 @@ package com.kirey.wscm.security;
 
 public class SecurityUtils {
 	
-	/*
-	public static UserAccount getUserFromContext() {
+	
+	public static WscmUserAccounts getUserFromContext() {
 
 		SecurityContext securityContext = SecurityContextHolder.getContext();
 		Object details = null;
@@ -19,13 +24,13 @@ public class SecurityUtils {
 			details = null;
 		}
 
-		UserAccount user = null;
-		if (details != null && details instanceof UserAccount) {
-			user = (UserAccount) details;
+		WscmUserAccounts user = null;
+		if (details != null && details instanceof WscmUserAccounts) {
+			user = (WscmUserAccounts) details;
 		}
 
 		return user;
 	}
-	*/
+	
 
 }
