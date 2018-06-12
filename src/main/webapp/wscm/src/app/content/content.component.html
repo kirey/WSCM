@@ -8,18 +8,19 @@
           {{position.position}}
         </mat-panel-title>
         <mat-panel-description>
-          {{position.page}}
+          {{position.page | uppercase}}
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <!-- Code inside expansion panel -->
+
       <!-- Tab - Material -->
-      <mat-tab-group>
+      <mat-tab-group color="warn">
         <mat-tab label="HTML">
           <ng-template mat-tab-label>
             HTML
           </ng-template>
-          <div class="demo-tab-content">
+          <div class="tabs-content">
             {{position.html}}
           </div>
         </mat-tab>
@@ -27,7 +28,7 @@
           <ng-template mat-tab-label>
             CSS
           </ng-template>
-          <div class="demo-tab-content">
+          <div class="tabs-content">
             {{position.css}}
           </div>
         </mat-tab>
@@ -35,8 +36,20 @@
           <ng-template mat-tab-label>
             JavaScript
           </ng-template>
-          <div class="demo-tab-content">
-            {{position.script}}
+          <div class="tabs-content">
+            <div>
+              <span class="tabs-icons">
+                <i class="material-icons">
+                  vertical_split
+                </i>
+                <i class="material-icons">
+                  vertical_split
+                </i>
+              </span>
+              <div>
+                {{position.script}}
+              </div>
+            </div>
           </div>
         </mat-tab>
       </mat-tab-group>

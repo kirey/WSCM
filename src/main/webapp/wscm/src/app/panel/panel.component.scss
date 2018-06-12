@@ -1,6 +1,13 @@
 @import '../app.component.scss';
 
 #panel {
+
+  min-width: 100%;
+
+  .router-outlet {
+    width: 100%;
+  }
+
   #sidebar-content {
     margin-left: 0;
     text-align: left;
