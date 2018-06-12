@@ -16,27 +16,36 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "user_ip_address")
-public class UserIpAddress implements Serializable{
+@Table(name = "notifications_sent")
+public class NotificationsSent implements Serializable {
 
-	private static final long serialVersionUID = -8597033906921078802L;
+	private static final long serialVersionUID = 6377011504621903145L;
 	
 	private Integer id;
-	@JsonManagedReference(value = "wscmUserIpAddress")
+	@JsonManagedReference(value="notificationsSent")
+	private Notifications notification;
+	@JsonManagedReference(value= "userNotificationsSent")
 	private WscmUserAccounts userAccount;
-	@JsonManagedReference(value="ipAddressUserIpAddresses")
-	private IpAddress ipAddress;
-	private Integer noRequests;
+	private Integer weight;
 	
 	@Id
-	@SequenceGenerator(name = "user_ip_address_gen", sequenceName = "seq_user_ip_address", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_ip_address_gen")
+	@SequenceGenerator(name = "notifications_sent_gen", sequenceName = "seq_notifications_sent", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notifications_sent_gen")
 	@Column(name = "ID", unique = true, nullable = false, precision = 10, scale = 0)
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "notifications", nullable = true)
+	public Notifications getNotification() {
+		return notification;
+	}
+	public void setNotification(Notifications notification) {
+		this.notification = notification;
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -48,24 +57,16 @@ public class UserIpAddress implements Serializable{
 		this.userAccount = userAccount;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ip_address", nullable = true)
-	public IpAddress getIpAddress() {
-		return ipAddress;
+	
+	@Column(name = "weight", nullable = true)
+	public Integer getWeight() {
+		return weight;
 	}
-	public void setIpAddress(IpAddress ipAddress) {
-		this.ipAddress = ipAddress;
+	public void setWeight(Integer weight) {
+		this.weight = weight;
 	}
 	
-	@Column(name = "no_requests")
-	public Integer getNoRequests() {
-		return noRequests;
-	}
-	public void setNoRequests(Integer noRequests) {
-		this.noRequests = noRequests;
-	}
 	
 	
 
-	
 }

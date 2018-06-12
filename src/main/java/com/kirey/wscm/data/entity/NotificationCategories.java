@@ -16,21 +16,21 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "user_categories")
-public class UserCategories implements Serializable{
+@Table(name = "notification_categories")
+public class NotificationCategories implements Serializable{
 
-	private static final long serialVersionUID = -8422809548816237743L;
+	private static final long serialVersionUID = -1875012379857995340L;
 	
 	private Integer id;
-	@JsonManagedReference(value = "wscmUserCategorieses")
-	private WscmUserAccounts userAccount;
-	@JsonManagedReference(value="categoriesUserCategories")
+	@JsonManagedReference(value="notificationCategorieses")
+	private Notifications notification;
+	@JsonManagedReference(value="categoriesNotificationCatiegorieses")
 	private Categories categories;
 	private Integer weight;
 	
 	@Id
-	@SequenceGenerator(name = "user_categories_gen", sequenceName = "seq_user_categories", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_categories_gen")
+	@SequenceGenerator(name = "notification_categories_gen", sequenceName = "seq_notification_categories", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notification_categories_gen")
 	@Column(name = "ID", unique = true, nullable = false, precision = 10, scale = 0)
 	public Integer getId() {
 		return id;
@@ -40,12 +40,12 @@ public class UserCategories implements Serializable{
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "wscm_user_accounts", nullable = true)
-	public WscmUserAccounts getUserAccount() {
-		return userAccount;
+	@JoinColumn(name = "notifications", nullable = true)
+	public Notifications getNotification() {
+		return notification;
 	}
-	public void setUserAccount(WscmUserAccounts userAccount) {
-		this.userAccount = userAccount;
+	public void setNotification(Notifications notification) {
+		this.notification = notification;
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -64,8 +64,6 @@ public class UserCategories implements Serializable{
 	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
-	
-	
 	
 	
 

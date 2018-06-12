@@ -257,6 +257,10 @@ public class AppConstants {
 	public static final String SCRIPT_OPEN_TAG = "<script>";
 	public static final String SCRIPT_CLOSE_TAG = "</script>";
 	
+	public static final String NOTIFICATION_TYPE_SOCKET = "socket";
+	public static final String NOTIFICATION_TYPE_EMAIL = "email";
+	public static final String NOTIFICATION_TYPE_MOBILE = "mobile";
+	
 	
 	/**
 	 * Constructor from superClass.

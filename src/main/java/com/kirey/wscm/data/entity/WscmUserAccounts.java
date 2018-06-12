@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "wscm_user_accounts")
 public class WscmUserAccounts implements UserDetails{
@@ -29,9 +31,17 @@ public class WscmUserAccounts implements UserDetails{
 	private String password;
 	private String role;
 	
+	@JsonBackReference(value = "wscmUserIpAddress")
 	private List<UserIpAddress> userIpAddress = new ArrayList<>();
+	
+	@JsonBackReference(value = "wscmUserCategorieses")
 	private List<UserCategories> userCategorieses = new ArrayList<>();
+	
+	@JsonBackReference(value = "wscmUserLinkses")
 	private List<UserLinks> userLinkses = new ArrayList<>();
+	
+	@JsonBackReference(value= "userNotificationsSent")
+	private List<NotificationsSent> notificationsSent = new ArrayList<>();
 	
 	@Transient
     private List<WscmRoles> wscmRoles;
@@ -97,6 +107,14 @@ public class WscmUserAccounts implements UserDetails{
 		this.userLinkses = userLinkses;
 	}
 	
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+	public List<NotificationsSent> getNotificationsSent() {
+		return notificationsSent;
+	}
+	public void setNotificationsSent(List<NotificationsSent> notificationsSent) {
+		this.notificationsSent = notificationsSent;
+	}
 	@Transient
 	public List<WscmRoles> getWscmRoles() {
 		return wscmRoles;

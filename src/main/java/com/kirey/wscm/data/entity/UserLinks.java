@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "user_links")
 public class UserLinks implements Serializable {
@@ -21,7 +23,9 @@ public class UserLinks implements Serializable {
 	private static final long serialVersionUID = 2417078553998693629L;
 	
 	private Integer id;
+	@JsonManagedReference(value = "wscmUserLinkses")
 	private WscmUserAccounts userAccount;
+	@JsonManagedReference(value="linksUserLinks")
 	private Links link;
 	private Integer noRequests;
 	private Date tsInsert;
