@@ -9,25 +9,26 @@
   }
 
   #sidebar-content {
+    background: linear-gradient(to bottom, $primary, $accent);
     margin-left: 0;
     text-align: left;
     background-color: $primary;
     min-height: 100vh;
     width: 19vw;
   }
-  mat-nav-list {
-    overflow: hidden;
-  }
   mat-sidenav-container {
-    background-color: $primary;
+    background: linear-gradient(to bottom, $primary, $accent);
     min-height: 100vh;
     width: 15vw;
     margin: 0 20px;
     text-align: left;
   }
+
+
+  // List link style
   mat-nav-list {
     padding-bottom: 5px;
-    box-shadow: inset 0px 11px 8px -10px $primary, inset 0px -11px 8px -10px $primary;
+    overflow: hidden;
   }
   mat-nav-list:hover {
     box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
@@ -41,5 +42,32 @@
   .material-icons {
     color: white;
     margin-right: 10px;
+  }
+
+
+  // User image - info
+  #placeholderUser {
+    background-image: url("../../assets/client.png");
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-top: 20px;
+    background-repeat: no-repeat;
+  }
+  #userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  p {
+    color: white;
+  }
+  hr {
+    background-color: white;
+    width: 97%;
+    opacity: 0.6;
   }
 }
