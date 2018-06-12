@@ -15,8 +15,8 @@
     box-shadow: 0 5px 2px -1px rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .14), 0 5px 10px 3px rgba(0, 0, 0, .12);
   }
   mat-sidenav-container {
-    background: linear-gradient(to bottom, $primary, $accent);
-    min-height: 100vh;
+    background: transparent;
+    min-height: auto;
     width: 280px;
     margin: 0 20px;
     text-align: left;
