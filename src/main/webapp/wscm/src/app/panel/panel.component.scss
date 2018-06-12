@@ -1,13 +1,9 @@
 @import '../app.component.scss';
-
 #panel {
-
   min-width: 100%;
-
   .router-outlet {
     width: 100%;
   }
-
   #sidebar-content {
     background: linear-gradient(to bottom, $primary, $accent);
     margin-left: 0;
@@ -15,6 +11,7 @@
     background-color: $primary;
     min-height: 100vh;
     width: 20vw;
+    box-shadow: 0 5px 2px -1px rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .14), 0 5px 10px 3px rgba(0, 0, 0, .12);
   }
   mat-sidenav-container {
     background: linear-gradient(to bottom, $primary, $accent);
@@ -22,10 +19,7 @@
     width: 15vw;
     margin: 0 20px;
     text-align: left;
-  }
-
-
-  // List link style
+  } // List link style
   mat-nav-list {
     padding-bottom: 5px;
     overflow: hidden;
@@ -42,10 +36,7 @@
   .material-icons {
     color: white;
     margin-right: 10px;
-  }
-
-
-  // User image - info
+  } // User image - info
   #placeholderUser {
     background-image: url("../../assets/client.png");
     height: 50px;
