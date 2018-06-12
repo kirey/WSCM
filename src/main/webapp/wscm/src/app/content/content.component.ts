@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ContentService } from './content.service';
 
 @Component({
   selector: 'app-content',
@@ -8,9 +9,19 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(public contentService: ContentService) { }
+
+  positions: any;
 
   ngOnInit() {
+    this.contentService.getPositions('home')
+      .subscribe(
+        res => {
+          console.log(res);
+          this.positions = res;
+        },
+        err => console.log(err)
+      )
   }
 
 }
