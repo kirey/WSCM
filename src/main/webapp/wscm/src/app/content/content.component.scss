@@ -9,8 +9,14 @@
     mat-expansion-panel-header {
         background-color: $primary;
     }
-    .mat-expansion-panel-header-title, .mat-expansion-panel-header-description, .mat-expansion-indicator::after {
+    .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
         color: #fff;
+    }
+    .mat-expansion-indicator::after {
+        color: $primary;
+    }
+    mat-expansion-panel-header {
+        background: linear-gradient(to right, $primary, $accent)!important;
     }
 
     // Tabs
