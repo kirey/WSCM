@@ -19,5 +19,24 @@
     }
     .tabs-content {
         min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
+    }
+    .tabs-icons {
+        align-self: flex-end;
+    }
+    .tabs-icons>i {
+        color: $primary;
+        font-size: 28px;
+        margin-top: 10px;
+    }
+    .tabs-icons>i:hover {
+        color: $warn;
+        cursor: pointer;
+    }
+    .tabs-text {
+        padding: 50px 0;
     }
 }

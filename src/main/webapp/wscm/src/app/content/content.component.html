@@ -20,35 +20,62 @@
           <ng-template mat-tab-label>
             HTML
           </ng-template>
+          <!-- Tabs Content -->
           <div class="tabs-content">
-            {{position.html}}
+            <!-- Icons -->
+            <span class="tabs-icons">
+              <i matTooltip="Edit position" matTooltipPosition="above" class="material-icons">
+                edit
+              </i>
+              <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
+                delete
+              </i>
+            </span>
+            <!-- Text -->
+            <div class="tabs-text">
+              {{position.html}}
+            </div>
           </div>
         </mat-tab>
         <mat-tab label="CSS">
           <ng-template mat-tab-label>
             CSS
           </ng-template>
+          <!-- Tabs Content -->
           <div class="tabs-content">
-            {{position.css}}
+            <!-- Icons -->
+            <span class="tabs-icons">
+              <i matTooltip="Edit position" matTooltipPosition="above" class="material-icons">
+                edit
+              </i>
+              <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
+                delete
+              </i>
+            </span>
+            <!-- Text -->
+            <div class="tabs-text">
+              {{position.css}}
+            </div>
           </div>
         </mat-tab>
         <mat-tab label="JavaScript">
           <ng-template mat-tab-label>
             JavaScript
           </ng-template>
+          <!-- Tabs Content -->
           <div class="tabs-content">
-            <div>
-              <span class="tabs-icons">
-                <i class="material-icons">
-                  vertical_split
-                </i>
-                <i class="material-icons">
-                  vertical_split
-                </i>
-              </span>
-              <div>
-                {{position.script}}
-              </div>
+            <!-- Icons -->
+            <span class="tabs-icons">
+              <i matTooltip="Edit position" matTooltipPosition="above" class="material-icons">
+                edit
+              </i>
+              <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
+                delete
+              </i>
+            </span>
+            <!-- Text -->
+            <div class="tabs-text">
+              {{position.script}}
             </div>
           </div>
         </mat-tab>
