@@ -2,7 +2,7 @@
   <!-- Accordion -->
   <mat-accordion *ngIf="positions" color="accent">
     <!-- Expansion panel START -->
-    <mat-expansion-panel *ngFor="let position of positions">
+    <mat-expansion-panel *ngFor="let position of positions" (closed)="closePanel()">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{position.position}}
@@ -24,16 +24,21 @@
           <div class="tabs-content">
             <!-- Icons -->
             <span class="tabs-icons">
-              <i matTooltip="Edit position" matTooltipPosition="above" class="material-icons">
-                edit
-              </i>
+              <!-- Toggle -->
+              <mat-slide-toggle color="warn" (change)="toggled($event, 'html')" matTooltipPosition="above">{{ toggleText }}</mat-slide-toggle>
               <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
                 delete
               </i>
             </span>
             <!-- Text -->
             <div class="tabs-text">
-              {{position.html}}
+              <form class="form">
+                <mat-form-field class="textarea">
+                  <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.html" [disabled]="!enableEditing.html">
+                    {{position.html}}
+                  </textarea>
+                </mat-form-field>
+              </form>
             </div>
           </div>
         </mat-tab>
@@ -45,16 +50,17 @@
           <div class="tabs-content">
             <!-- Icons -->
             <span class="tabs-icons">
-              <i matTooltip="Edit position" matTooltipPosition="above" class="material-icons">
-                edit
-              </i>
+              <!-- Toggle -->
+              <mat-slide-toggle color="warn" (change)="toggled($event, 'css')" matTooltipPosition="above">{{ toggleText }}</mat-slide-toggle>
               <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
                 delete
               </i>
             </span>
             <!-- Text -->
             <div class="tabs-text">
-              {{position.css}}
+              <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.css" [disabled]="!enableEditing.css">
+                {{position.css}}
+              </textarea>
             </div>
           </div>
         </mat-tab>
@@ -66,16 +72,20 @@
           <div class="tabs-content">
             <!-- Icons -->
             <span class="tabs-icons">
-              <i matTooltip="Edit position" matTooltipPosition="above" class="material-icons">
-                edit
-              </i>
+              <!-- Toggle -->
+              <mat-slide-toggle color="warn" (change)="toggled($event, 'script')" matTooltipPosition="above">{{ toggleText }}</mat-slide-toggle>
+              <!-- Icon -->
               <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
                 delete
               </i>
             </span>
             <!-- Text -->
             <div class="tabs-text">
-              {{position.script}}
+              <mat-form-field class="textarea">
+                <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.script" [disabled]="!enableEditing.script">
+                  {{position.script}}
+                </textarea>
+              </mat-form-field>
             </div>
           </div>
         </mat-tab>
