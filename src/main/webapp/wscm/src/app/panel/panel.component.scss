@@ -1,34 +1,32 @@
 @import '../app.component.scss';
-
 #panel {
-
   min-width: 100%;
-
   .router-outlet {
     width: 100%;
   }
-
   #sidebar-content {
     background: linear-gradient(to bottom, $primary, $accent);
     margin-left: 0;
     text-align: left;
     background-color: $primary;
     min-height: 100vh;
-    width: 19vw;
+    width: 320px;
+    padding-right: 15px;
+    box-shadow: 0 5px 2px -1px rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .14), 0 5px 10px 3px rgba(0, 0, 0, .12);
   }
   mat-sidenav-container {
-    background: linear-gradient(to bottom, $primary, $accent);
-    min-height: 100vh;
-    width: 15vw;
+    background: transparent;
+    min-height: auto;
+    width: 280px;
     margin: 0 20px;
     text-align: left;
   }
-
 
   // List link style
   mat-nav-list {
     padding-bottom: 5px;
     overflow: hidden;
+    // margin-right: 15px;
   }
   mat-nav-list:hover {
     box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
@@ -43,7 +41,6 @@
     color: white;
     margin-right: 10px;
   }
-
 
   // User image - info
   #placeholderUser {
@@ -67,7 +64,7 @@
   }
   hr {
     background-color: white;
-    width: 97%;
+    width: 100%;
     opacity: 0.6;
   }
 }
