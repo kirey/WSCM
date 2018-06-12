@@ -10,19 +10,23 @@
     text-align: left;
     background-color: $primary;
     min-height: 100vh;
-    width: 20vw;
+    width: 320px;
+    padding-right: 15px;
     box-shadow: 0 5px 2px -1px rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .14), 0 5px 10px 3px rgba(0, 0, 0, .12);
   }
   mat-sidenav-container {
     background: linear-gradient(to bottom, $primary, $accent);
     min-height: 100vh;
-    width: 15vw;
+    width: 280px;
     margin: 0 20px;
     text-align: left;
-  } // List link style
+  }
+
+  // List link style
   mat-nav-list {
     padding-bottom: 5px;
     overflow: hidden;
+    // margin-right: 15px;
   }
   mat-nav-list:hover {
     box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
@@ -36,7 +40,9 @@
   .material-icons {
     color: white;
     margin-right: 10px;
-  } // User image - info
+  }
+
+  // User image - info
   #placeholderUser {
     background-image: url("../../assets/client.png");
     height: 50px;
@@ -58,7 +64,7 @@
   }
   hr {
     background-color: white;
-    width: 97%;
+    width: 100%;
     opacity: 0.6;
   }
 }
