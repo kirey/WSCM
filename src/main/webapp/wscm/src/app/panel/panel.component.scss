@@ -35,4 +35,23 @@
     color: white;
     margin-right: 10px;
   }
+  #placeholderUser {
+    background-image: url("../../assets/client.png");
+    // background-size: cover;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    margin-top: 20px;
+    margin-left: 20px;
+    border: 3px solid #CCC;
+  }
+  p {
+    color: white;
+    padding-left: 20px;
+  }
+  hr {
+    background-color: white;
+    width: 97%;
+    opacity: 0.6;
+  }
 }
