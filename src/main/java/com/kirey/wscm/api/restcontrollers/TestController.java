@@ -1,10 +1,18 @@
 package com.kirey.wscm.api.restcontrollers;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +28,14 @@ import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.CategoriesDao;
 import com.kirey.wscm.data.dao.ContentDao;
 import com.kirey.wscm.data.dao.IpAddressDao;
+import com.kirey.wscm.data.dao.NotificationsDao;
 import com.kirey.wscm.data.dao.WscmUserAccountsDao;
 import com.kirey.wscm.data.entity.Categories;
 import com.kirey.wscm.data.entity.Content;
 import com.kirey.wscm.data.entity.IpAddress;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.TemplateEngine;
+import com.kirey.wscm.email.MailService;
 
 @RestController(value = "testController")
 @RequestMapping(value = "/rest/content")
@@ -47,6 +57,12 @@ public class TestController {
 	
 	@Autowired
 	private WscmUserAccountsDao wscmUserAccountsDao;
+	
+	@Autowired
+	private MailService mailService;
+	
+	@Autowired
+	private NotificationsDao notificationsDao;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
@@ -222,6 +238,25 @@ public class TestController {
 		return htmlWithCssAndScript;
 	}
 
-	
+	@RequestMapping(value = "/email", method = RequestMethod.GET)
+	public ResponseEntity<RestResponseDto> sendEmail() throws Exception {
+		List<IpAddress> listAddresses = ipAddressDao.findAll();
+		WscmUserAccounts user = wscmUserAccountsDao.findById(1);
+		Map<String, Object> templateModel = new HashMap<>();
+		templateModel.put("korisnik", "milos");
+		templateModel.put("ipAddress", listAddresses.get(0));
+		templateModel.put("user", user);
+		
+		File file = new File("c:\\image009.jpg");
+		InputStream is = new FileInputStream(file);
+		byte[] b = IOUtils.toByteArray(is);
+		
+		Map<String, byte[]> attachmentFiles = new HashMap<>();
+		attachmentFiles.put("attachment.jpg", b);
+		
+		mailService.sendDefaultEmail("test", "m.paunovic@dyntechdoo.com", "test", templateModel, attachmentFiles);
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Mail sent!", HttpStatus.OK.value()), HttpStatus.OK);
+	}
 	
 }

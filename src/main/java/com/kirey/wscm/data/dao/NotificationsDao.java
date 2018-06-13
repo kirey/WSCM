@@ -18,4 +18,12 @@ public class NotificationsDao extends KjcBaseDao {
 		entityClass = Notifications.class;
 	}
 
+	
+	public String findTemplateByName(String notificationName) {
+		String hql = "from Notifications notif where notif.name = :notifName";
+		Notifications notification = (Notifications) sessionFactory.getCurrentSession().createQuery(hql).setParameter("notifName", notificationName).uniqueResult();
+		String notificationTemplate = notification.getNotificationTemplate(); 
+		return notificationTemplate;
+	}
+
 }

@@ -25,6 +25,7 @@ public class Notifications implements Serializable {
 	private static final long serialVersionUID = 692766633137113003L;
 	
 	private Integer id;
+	private String name;
 	private String notificationTemplate;
 	private String notificationType;
 	private DicEvent dicEvent;
@@ -46,7 +47,15 @@ public class Notifications implements Serializable {
 		this.id = id;
 	}
 	
-	@Column(name = "notification_template", unique = false, nullable = false)
+	@Column(name = "name", unique = false, nullable = false)
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Column(name = "notification_template", unique = false, nullable = false, length = 10000)
 	public String getNotificationTemplate() {
 		return notificationTemplate;
 	}

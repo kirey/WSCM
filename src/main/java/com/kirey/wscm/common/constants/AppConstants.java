@@ -1,5 +1,7 @@
 package com.kirey.wscm.common.constants;
 
+import javax.mail.internet.InternetAddress;
+
 /**
  * Constants for application.
  *
@@ -260,6 +262,7 @@ public class AppConstants {
 	public static final String NOTIFICATION_TYPE_SOCKET = "socket";
 	public static final String NOTIFICATION_TYPE_EMAIL = "email";
 	public static final String NOTIFICATION_TYPE_MOBILE = "mobile";
+	public static final String APPLICATION_EMAIL = "cecanda.kir@gmail.com";
 	
 	
 	/**

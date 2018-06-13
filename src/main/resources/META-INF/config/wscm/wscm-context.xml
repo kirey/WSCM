@@ -14,8 +14,61 @@
 	<context:component-scan base-package="com.kirey.wscm.api.pagemappers" />
 	<context:component-scan base-package="com.kirey.wscm.validations" />
 	<context:component-scan base-package="com.kirey.wscm.data.service" />
-
-
+	<context:component-scan base-package="com.kirey.wscm.email" />
+	
+	
+		<!-- email configuration -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="cecanda.kir@gmail.com" />
+		<property name="password" value="kirey2019" />
+			
+		<property name="javaMailProperties">
+		   <props>
+	       	      <prop key="mail.smtp.auth">true</prop>
+	       	      <prop key="mail.smtp.starttls.enable">true</prop>
+	       	      <prop key="mail.smtp.ssl.trust">*</prop>
+	       	   </props>
+		</property>
+	</bean>
+		
+	<bean id="mailService" class="com.kirey.wscm.email.MailService">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+	
+	
+	<!-- email configuration 
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="cecanda.kir@gmail.com" />
+		<property name="password" value="kirey2019" />
+			
+		<property name="javaMailProperties">
+		   <props>
+	       	      <prop key="mail.smtp.auth">true</prop>
+	       	      <prop key="mail.smtp.starttls.enable">true</prop>
+	       	      <prop key="mail.smtp.ssl.trust">*</prop>
+	       	   </props>
+		</property>
+	</bean>
+		
+	<bean id="mailService" class="com.kirey.wscm.email.MailService">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+	
+	<bean id="freemarkerConfiguration"
+		class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+		<property name="preTemplateLoaders">
+			<list>
+				<ref bean="databaseTemplateLoader" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean name="databaseTemplateLoader" class="com.kirey.wscm.email.EmailDatabaseTemplateLoader" />
+-->
 	<!-- AOP logging config 
 	<aop:config proxy-target-class="true">
 		<aop:aspect id="loggingAspect" ref="interceptorLogging">
