@@ -20,16 +20,18 @@
     width: 280px;
     margin: 0 20px;
     text-align: left;
-  }
-
-  // User image - info
+  } // User image - info
   #placeholderUser {
     background-image: url("../../assets/client.png");
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    margin-top: 20px;
+    margin: 20px 0;
     background-repeat: no-repeat;
+  }
+  div#placeholderUser:hover {
+    opacity: 0.8;
+    transition: 1s;
   }
   #userInfo {
     display: flex;
@@ -46,9 +48,7 @@
     background-color: white;
     width: 100%;
     opacity: 0.6;
-  }
-
-  // List link style
+  } // List link style
   mat-nav-list {
     padding-bottom: 5px;
     overflow: hidden;
@@ -66,6 +66,4 @@
     color: white;
     margin-right: 10px;
   }
-
-
 }
