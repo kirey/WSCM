@@ -18,6 +18,8 @@ import { PanelComponent } from './panel/panel.component';
 import { AppComponent } from './app.component';
 import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { LanguagesComponent } from './languages/languages.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     PanelComponent,
     ContentComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    LanguagesComponent
   ],
   imports: [
     BrowserModule,

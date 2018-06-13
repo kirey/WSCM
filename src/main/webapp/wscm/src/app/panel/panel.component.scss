@@ -22,26 +22,6 @@
     text-align: left;
   }
 
-  // List link style
-  mat-nav-list {
-    padding-bottom: 5px;
-    overflow: hidden;
-    // margin-right: 15px;
-  }
-  mat-nav-list:hover {
-    box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
-    transition: 1s;
-  }
-  a {
-    text-decoration: none;
-    color: white;
-    text-transform: uppercase;
-  }
-  .material-icons {
-    color: white;
-    margin-right: 10px;
-  }
-
   // User image - info
   #placeholderUser {
     background-image: url("../../assets/client.png");
@@ -67,4 +47,25 @@
     width: 100%;
     opacity: 0.6;
   }
+
+  // List link style
+  mat-nav-list {
+    padding-bottom: 5px;
+    overflow: hidden;
+  }
+  mat-nav-list:hover {
+    box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
+    transition: 1s;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+  }
+  .material-icons {
+    color: white;
+    margin-right: 10px;
+  }
+
+
 }
