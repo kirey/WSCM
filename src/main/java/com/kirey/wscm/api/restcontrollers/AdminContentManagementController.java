@@ -1,5 +1,6 @@
 package com.kirey.wscm.api.restcontrollers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kirey.wscm.api.dto.CategoryWeight;
+import com.kirey.wscm.api.dto.ContentDto;
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.data.dao.CategoriesDao;
 import com.kirey.wscm.data.dao.ContentCategoriesDao;
@@ -45,40 +48,72 @@ public class AdminContentManagementController {
 	
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<RestResponseDto> addNewContent(@RequestParam Integer categoryId, @RequestParam Integer weight, @RequestBody Content content) {
+	public ResponseEntity<RestResponseDto> addNewContent(@RequestBody ContentDto contentDto) {
 
-		Content savedContent = (Content) contentDao.merge(content);
-		Categories category = categoriesDao.findById(categoryId);
 		
-		ContentCategories contentCategories = new ContentCategories();
-		contentCategories.setContent(savedContent);
-		contentCategories.setCategories(category);
-		contentCategories.setWeight(weight);
-		contentCategoriesDao.attachDirty(contentCategories);
+		Content savedContent = (Content) contentDao.merge(contentDto.getContent());
+		
+		List<CategoryWeight> listCategoryWeight = contentDto.getListCategoryWeight();
+		for (CategoryWeight categoryWeight : listCategoryWeight) {
+			Categories category = categoriesDao.findById(categoryWeight.getCategoryId());
+			
+			ContentCategories contentCategories = new ContentCategories();
+			contentCategories.setContent(savedContent);
+			contentCategories.setCategories(category);
+			contentCategories.setWeight(categoryWeight.getWeight());
+			contentCategoriesDao.attachDirty(contentCategories);
+		}
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully added new content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/milos/test", method = RequestMethod.GET)
+	public ContentDto milosTest() {
+		
+		Content content = contentDao.findById(1);
+		
+		List<CategoryWeight> listCategoryWeight = new ArrayList<>();
+		CategoryWeight catW1 = new CategoryWeight();
+		catW1.setCategoryId(1);
+		catW1.setWeight(4);
+		listCategoryWeight.add(catW1);
+		
+		CategoryWeight catW2 = new CategoryWeight();
+		catW2.setCategoryId(2);
+		catW2.setWeight(6);
+		listCategoryWeight.add(catW2);
+		
+		ContentDto contentDto = new ContentDto();
+		contentDto.setContent(content);
+		contentDto.setListCategoryWeight(listCategoryWeight);
+		return contentDto;
+	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ResponseEntity<RestResponseDto> editContent(@RequestParam Integer categoryId, @RequestParam Integer weight, @RequestBody Content content) {
+	public ResponseEntity<RestResponseDto> editContent(@RequestBody ContentDto contentDto) {
 
-		Content savedContent = (Content) contentDao.merge(content);
-		Categories category = categoriesDao.findById(categoryId);
-
-		ContentCategories contentCategories = contentCategoriesDao.findByContentCategory(savedContent.getId(), categoryId);
-		if (contentCategories != null) {
-			contentCategories.setContent(savedContent);
-			contentCategories.setCategories(category);
-			contentCategories.setWeight(weight);
-			contentCategoriesDao.merge(contentCategories);
-		} else {
-			contentCategories = new ContentCategories();
-			contentCategories.setContent(savedContent);
-			contentCategories.setCategories(category);
-			contentCategories.setWeight(weight);
-			contentCategoriesDao.attachDirty(contentCategories);
+		Content savedContent = (Content) contentDao.merge(contentDto.getContent());
+		
+		List<CategoryWeight> listCategoryWeight = contentDto.getListCategoryWeight();
+		for (CategoryWeight categoryWeight : listCategoryWeight) {
+			Categories category = categoriesDao.findById(categoryWeight.getCategoryId());
+			
+			ContentCategories contentCategories = contentCategoriesDao.findByContentCategory(savedContent.getId(), categoryWeight.getCategoryId());
+			if (contentCategories == null) {
+				contentCategories = new ContentCategories();
+				contentCategories.setContent(savedContent);
+				contentCategories.setCategories(category);
+				contentCategories.setWeight(categoryWeight.getWeight());
+				contentCategoriesDao.attachDirty(contentCategories);
+			}else {
+				contentCategories.setContent(savedContent);
+				contentCategories.setCategories(category);
+				contentCategories.setWeight(categoryWeight.getWeight());
+				contentCategoriesDao.merge(contentCategories);
+			}
+			
 		}
-
+	
 		return new ResponseEntity<RestResponseDto>(
 				new RestResponseDto("Successfully edited content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
