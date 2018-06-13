@@ -4,8 +4,17 @@
     width: 80%;
     margin: 200px auto;
 
+    button {
+        width: 80px;
+        align-self: flex-end;
+    }
 
     // Expansion Panel
+    .mat-expansion-panel-body {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 50px;
+    }
     mat-expansion-panel-header {
         background-color: $primary;
     }
@@ -20,6 +29,10 @@
     }
 
     // Tabs
+    .tabs-container {
+        display: flex;
+        flex-direction: column;
+    }
     .mat-tab-labels {
         justify-content: center;
     }
@@ -39,7 +52,8 @@
         color: $primary;
         font-size: 28px;
         padding: 0!important;
-        margin-left: 10px;
+        margin: 0;
+        margin-top: 10px;
     }
     .tabs-icons>i:hover {
         color: $accent;
@@ -51,5 +65,27 @@
     }
     .textarea {
         width: 100%;
+    }
+
+    //Categories
+    .categories {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 50px;
+    }
+    .categories-form-field {
+        width: 60%;
+    }
+    .label {
+        width: 60%;
+        margin-top: 20px;
+        text-align: left;
+        color: #bdbdbd;
+    }
+    mat-slider {
+        width: 60%;
+        margin-bottom: 20px;
     }
 }

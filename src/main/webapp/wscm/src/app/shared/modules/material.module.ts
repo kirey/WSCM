@@ -12,6 +12,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+
 
 @NgModule({
   imports: [
@@ -26,7 +31,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatTabsModule,
     MatIconModule,
     MatTooltipModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatSliderModule
   ],
   exports: [
     MatButtonModule,
@@ -39,7 +48,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatTabsModule,
     MatIconModule,
     MatTooltipModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatSliderModule
   ],
   declarations: []
 })

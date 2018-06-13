@@ -2,7 +2,7 @@
   <!-- Accordion -->
   <mat-accordion *ngIf="positions" color="accent">
     <!-- Expansion panel START -->
-    <mat-expansion-panel *ngFor="let position of positions">
+    <mat-expansion-panel *ngFor="let position of positions" (closed)="panelClosed()">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{position.position}}
@@ -14,83 +14,102 @@
 
       <!-- Code inside expansion panel -->
 
-      <!-- Tab - Material -->
-      <mat-tab-group color="warn">
-        <mat-tab label="HTML">
-          <ng-template mat-tab-label>
-            HTML
-          </ng-template>
-          <!-- Tabs Content -->
-          <div class="tabs-content">
-            <!-- Icons -->
-            <span class="tabs-icons">
-              <!-- Toggle -->
-              <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
-                delete
-              </i>
-            </span>
-            <!-- Text -->
-            <div class="tabs-text">
-              <form class="form">
-                <mat-form-field class="textarea">
-                  <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.html">
+      <!-- Tabs - Material -->
+      <div *ngIf="step == 1" class="tabs-container">
+        <mat-tab-group color="warn">
+          <mat-tab label="HTML">
+            <ng-template mat-tab-label>
+              HTML
+            </ng-template>
+            <!-- Tabs Content -->
+            <div class="tabs-content">
+              <!-- Icons -->
+              <span class="tabs-icons">
+                <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
+                  delete
+                </i>
+              </span>
+              <!-- Text -->
+              <div class="tabs-text">
+                <form class="form">
+                  <mat-form-field class="textarea">
+                    <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.html">
                     {{position.html}}
                   </textarea>
-                </mat-form-field>
-              </form>
+                  </mat-form-field>
+                </form>
+              </div>
             </div>
-          </div>
-        </mat-tab>
-        <mat-tab label="CSS">
-          <ng-template mat-tab-label>
-            CSS
-          </ng-template>
-          <!-- Tabs Content -->
-          <div class="tabs-content">
-            <!-- Icons -->
-            <span class="tabs-icons">
-              <!-- Toggle -->
-              <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
-                delete
-              </i>
-            </span>
-            <!-- Text -->
-            <div class="tabs-text">
-              <form class="form">
+          </mat-tab>
+          <mat-tab label="CSS">
+            <ng-template mat-tab-label>
+              CSS
+            </ng-template>
+            <!-- Tabs Content -->
+            <div class="tabs-content">
+              <!-- Icons -->
+              <span class="tabs-icons">
+                <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
+                  delete
+                </i>
+              </span>
+              <!-- Text -->
+              <div class="tabs-text">
+                <form class="form">
+                  <mat-form-field class="textarea">
+                    <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.css">
+                      {{position.css}}
+                    </textarea>
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="JavaScript">
+            <ng-template mat-tab-label>
+              JavaScript
+            </ng-template>
+            <!-- Tabs Content -->
+            <div class="tabs-content">
+              <!-- Icons -->
+              <span class="tabs-icons">
+                <!-- Icon -->
+                <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
+                  delete
+                </i>
+              </span>
+              <!-- Text -->
+              <div class="tabs-text">
                 <mat-form-field class="textarea">
-                  <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.css">
-                        {{position.css}}
-                      </textarea>
-                </mat-form-field>
-              </form>
-            </div>
-          </div>
-        </mat-tab>
-        <mat-tab label="JavaScript">
-          <ng-template mat-tab-label>
-            JavaScript
-          </ng-template>
-          <!-- Tabs Content -->
-          <div class="tabs-content">
-            <!-- Icons -->
-            <span class="tabs-icons">
-              <!-- Toggle -->
-              <!-- Icon -->
-              <i matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
-                delete
-              </i>
-            </span>
-            <!-- Text -->
-            <div class="tabs-text">
-              <mat-form-field class="textarea">
-                <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.script">
+                  <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.script">
                   {{position.script}}
                 </textarea>
-              </mat-form-field>
+                </mat-form-field>
+              </div>
             </div>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
+          </mat-tab>
+        </mat-tab-group>
+        <button mat-raised-button color="warn" (click)="next(position)">Next</button>
+      </div>
+      <!-- Tabs - END -->
+
+      <!-- Form -->
+      <div class="categories" *ngIf="step == 2">
+        <h5 class="label">Select category</h5>
+        <mat-form-field class="categories-form-field">
+          <mat-select [(ngModel)]="selectedCategory" placeholder="Category name">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{category.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- Slider -->
+        <h5 class="label">Select weight for category</h5>
+        <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [(ngModel)]="selectedWeight">
+        </mat-slider>
+        <button mat-raised-button color="warn" (click)="save()">Save</button>
+      </div>
+      <!-- Form - END -->
     </mat-expansion-panel>
     <!-- Expansion panel END -->
   </mat-accordion>

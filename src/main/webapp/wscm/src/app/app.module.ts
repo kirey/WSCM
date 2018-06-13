@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -32,6 +33,7 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     AppRoutes,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule
