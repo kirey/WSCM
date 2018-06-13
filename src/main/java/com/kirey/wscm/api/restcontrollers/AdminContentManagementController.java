@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -80,6 +81,25 @@ public class AdminContentManagementController {
 
 		return new ResponseEntity<RestResponseDto>(
 				new RestResponseDto("Successfully edited content", HttpStatus.OK.value()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{page}/{lang}", method = RequestMethod.GET)
+	public List<Content> getByPageLang(@PathVariable String page, @PathVariable String lang) {
+
+		List<Content> listContent = contentDao.findByPageLang(page, lang);
+		for (Content content : listContent) {
+			String connected = content.getCss() + "\n" + content.getHtml();
+			content.setConnected(connected);
+		}
+		return listContent;
+	}
+	
+	@RequestMapping(value = "/{page}", method = RequestMethod.GET)
+	public List<Content> getByPageLang(@PathVariable String page) {
+
+		List<Content> listContent = contentDao.findByPage(page);
+		
+		return listContent;
 	}
 
 }

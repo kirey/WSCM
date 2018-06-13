@@ -9,7 +9,7 @@ export class ContentService {
 
     constructor(private _http: Http) { }
 
-    baseUrl = "rest/content/";
+    baseUrl = 'rest/admin/content/';
 
     // Get array of positions
     getPositions(page: String) {
@@ -18,6 +18,11 @@ export class ContentService {
 
     // Get content of position
     getContent(page: String, position: String, lang: String) {
-        return this._http.get(this.baseUrl + 'test/' + page + '/' + position + '/' + lang).pipe(map(res => res));
+        return this._http.get(this.baseUrl + page + '/' + position + '/' + lang).pipe(map(res => res));
+    }
+
+    // Update position
+    updateContent(obj: Object) {
+        return this._http.post(this.baseUrl, obj).pipe(map(res => res));
     }
 }
