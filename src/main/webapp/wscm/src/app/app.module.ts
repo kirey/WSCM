@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -18,6 +19,8 @@ import { PanelComponent } from './panel/panel.component';
 import { AppComponent } from './app.component';
 import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { LanguagesComponent } from './languages/languages.component';
 
 
 @NgModule({
@@ -25,13 +28,16 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     PanelComponent,
     ContentComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    LanguagesComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutes,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule

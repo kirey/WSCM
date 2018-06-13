@@ -1,3 +1,18 @@
 $primary: #009688;
 $accent: #64FFDA;
 $warn: #FFEE58;
+
+// Flexbox classes
+.flex {
+    display: flex;
+}
+.column {
+    flex-direction: column;
+}
+.wrap {
+    flex-wrap: wrap;
+}
+.center {
+    align-items: center;
+    justify-content: center;
+}
