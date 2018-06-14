@@ -26,20 +26,20 @@ public class Categories implements Serializable{
 	private String categoryName;
 	private String description;
 	
-	@JsonBackReference(value="categoriesUserCategories")
-	private List<UserCategories> userCategorieses = new ArrayList<>();
-	
-	@JsonBackReference(value="categoriesIpAddressCategorieses")
-	private List<IpAddressCategories> ipAddressCategorieses = new ArrayList<>();
-	
-	@JsonBackReference(value="categoriesContentCategorieses")
-	private List<ContentCategories> contentCategorieses = new ArrayList<>();
-	
-	@JsonBackReference(value="categoriesLinksCategories")
-	private List<LinksCategories> linksCategorieses = new ArrayList<>();
-	
-	@JsonBackReference(value="categoriesNotificationCatiegorieses")
-	private List<NotificationCategories> notificationCatiegorieses = new ArrayList<>();
+//	@JsonBackReference(value="categoriesUserCategories")
+//	private List<UserCategories> userCategorieses = new ArrayList<>();
+//	
+//	@JsonBackReference(value="categoriesIpAddressCategorieses")
+//	private List<IpAddressCategories> ipAddressCategorieses = new ArrayList<>();
+//	
+//	@JsonBackReference(value="categoriesContentCategorieses")
+//	private List<ContentCategories> contentCategorieses = new ArrayList<>();
+//	
+//	@JsonBackReference(value="categoriesLinksCategories")
+//	private List<LinksCategories> linksCategorieses = new ArrayList<>();
+//	
+//	@JsonBackReference(value="categoriesNotificationCatiegorieses")
+//	private List<NotificationCategories> notificationCatiegorieses = new ArrayList<>();
 	
 	@Id
 	@SequenceGenerator(name = "categories_gen", sequenceName = "seq_categories", allocationSize = 1, initialValue = 1)
@@ -68,45 +68,45 @@ public class Categories implements Serializable{
 		this.description = description;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	public List<UserCategories> getUserCategorieses() {
-		return userCategorieses;
-	}
-	public void setUserCategorieses(List<UserCategories> userCategorieses) {
-		this.userCategorieses = userCategorieses;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	public List<IpAddressCategories> getIpAddressCategorieses() {
-		return ipAddressCategorieses;
-	}
-	public void setIpAddressCategorieses(List<IpAddressCategories> ipAddressCategorieses) {
-		this.ipAddressCategorieses = ipAddressCategorieses;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	public List<ContentCategories> getContentCategorieses() {
-		return contentCategorieses;
-	}
-	public void setContentCategorieses(List<ContentCategories> contentCategorieses) {
-		this.contentCategorieses = contentCategorieses;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	public List<LinksCategories> getLinksCategorieses() {
-		return linksCategorieses;
-	}
-	public void setLinksCategorieses(List<LinksCategories> linksCategorieses) {
-		this.linksCategorieses = linksCategorieses;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	public List<NotificationCategories> getNotificationCatiegorieses() {
-		return notificationCatiegorieses;
-	}
-	public void setNotificationCatiegorieses(List<NotificationCategories> notificationCatiegorieses) {
-		this.notificationCatiegorieses = notificationCatiegorieses;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+//	public List<UserCategories> getUserCategorieses() {
+//		return userCategorieses;
+//	}
+//	public void setUserCategorieses(List<UserCategories> userCategorieses) {
+//		this.userCategorieses = userCategorieses;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+//	public List<IpAddressCategories> getIpAddressCategorieses() {
+//		return ipAddressCategorieses;
+//	}
+//	public void setIpAddressCategorieses(List<IpAddressCategories> ipAddressCategorieses) {
+//		this.ipAddressCategorieses = ipAddressCategorieses;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+//	public List<ContentCategories> getContentCategorieses() {
+//		return contentCategorieses;
+//	}
+//	public void setContentCategorieses(List<ContentCategories> contentCategorieses) {
+//		this.contentCategorieses = contentCategorieses;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+//	public List<LinksCategories> getLinksCategorieses() {
+//		return linksCategorieses;
+//	}
+//	public void setLinksCategorieses(List<LinksCategories> linksCategorieses) {
+//		this.linksCategorieses = linksCategorieses;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+//	public List<NotificationCategories> getNotificationCatiegorieses() {
+//		return notificationCatiegorieses;
+//	}
+//	public void setNotificationCatiegorieses(List<NotificationCategories> notificationCatiegorieses) {
+//		this.notificationCatiegorieses = notificationCatiegorieses;
+//	}
 	
 	
 	

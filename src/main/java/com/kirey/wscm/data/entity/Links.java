@@ -25,12 +25,12 @@ public class Links implements Serializable {
 	private Integer id;
 	private String url;
 	
-	@JsonBackReference(value="linksUserLinks")
-	private List<UserLinks> userLinkses = new ArrayList<>();
-	@JsonBackReference(value="linksIpAddressLinkses")
-	private List<IpAddressLinks> ipAddressLinkses = new ArrayList<>();
-	@JsonBackReference(value="linksCategories")
-	private List<LinksCategories> linksCategorieses = new ArrayList<>();
+//	@JsonBackReference(value="linksUserLinks")
+//	private List<UserLinks> userLinkses = new ArrayList<>();
+//	@JsonBackReference(value="linksIpAddressLinkses")
+//	private List<IpAddressLinks> ipAddressLinkses = new ArrayList<>();
+//	@JsonBackReference(value="linksCategories")
+//	private List<LinksCategories> linksCategorieses = new ArrayList<>();
 	
 	@Id
 	@SequenceGenerator(name = "links_gen", sequenceName = "seq_links", allocationSize = 1, initialValue = 1)
@@ -51,29 +51,29 @@ public class Links implements Serializable {
 		this.url = url;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
-	public List<UserLinks> getUserLinkses() {
-		return userLinkses;
-	}
-	public void setUserLinkses(List<UserLinks> userLinkses) {
-		this.userLinkses = userLinkses;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
-	public List<IpAddressLinks> getIpAddressLinkses() {
-		return ipAddressLinkses;
-	}
-	public void setIpAddressLinkses(List<IpAddressLinks> ipAddressLinkses) {
-		this.ipAddressLinkses = ipAddressLinkses;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
-	public List<LinksCategories> getLinksCategorieses() {
-		return linksCategorieses;
-	}
-	public void setLinksCategorieses(List<LinksCategories> linksCategorieses) {
-		this.linksCategorieses = linksCategorieses;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
+//	public List<UserLinks> getUserLinkses() {
+//		return userLinkses;
+//	}
+//	public void setUserLinkses(List<UserLinks> userLinkses) {
+//		this.userLinkses = userLinkses;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
+//	public List<IpAddressLinks> getIpAddressLinkses() {
+//		return ipAddressLinkses;
+//	}
+//	public void setIpAddressLinkses(List<IpAddressLinks> ipAddressLinkses) {
+//		this.ipAddressLinkses = ipAddressLinkses;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
+//	public List<LinksCategories> getLinksCategorieses() {
+//		return linksCategorieses;
+//	}
+//	public void setLinksCategorieses(List<LinksCategories> linksCategorieses) {
+//		this.linksCategorieses = linksCategorieses;
+//	}
 
 	
 	

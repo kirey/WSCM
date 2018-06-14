@@ -23,9 +23,9 @@ public class IpAddressLinks implements Serializable {
 	private static final long serialVersionUID = -8068666752381211189L;
 	
 	private Integer id;
-	@JsonManagedReference(value="ipAddressLinks")
+//	@JsonManagedReference(value="ipAddressLinks")
 	private IpAddress ipAddress;
-	@JsonManagedReference(value="linksIpAddressLinkses")
+//	@JsonManagedReference(value="linksIpAddressLinkses")
 	private Links link;
 	private Integer noRequests;
 	private Date tsInsert;

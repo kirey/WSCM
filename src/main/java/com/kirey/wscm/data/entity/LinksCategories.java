@@ -22,9 +22,9 @@ public class LinksCategories implements Serializable {
 	private static final long serialVersionUID = 4579307772400776798L;
 	
 	private Integer id;
-	@JsonManagedReference(value="linksCategories")
+//	@JsonManagedReference(value="linksCategories")
 	private Links link;
-	@JsonManagedReference(value="categoriesLinksCategories")
+//	@JsonManagedReference(value="categoriesLinksCategories")
 	private Categories categories;
 	private Integer weight;
 	

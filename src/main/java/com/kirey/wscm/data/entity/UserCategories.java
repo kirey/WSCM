@@ -22,9 +22,9 @@ public class UserCategories implements Serializable{
 	private static final long serialVersionUID = -8422809548816237743L;
 	
 	private Integer id;
-	@JsonManagedReference(value = "wscmUserCategorieses")
+//	@JsonManagedReference(value = "wscmUserCategorieses")
 	private WscmUserAccounts userAccount;
-	@JsonManagedReference(value="categoriesUserCategories")
+//	@JsonManagedReference(value="categoriesUserCategories")
 	private Categories categories;
 	private Integer weight;
 	

@@ -22,9 +22,9 @@ public class NotificationsSent implements Serializable {
 	private static final long serialVersionUID = 6377011504621903145L;
 	
 	private Integer id;
-	@JsonManagedReference(value="notificationsSent")
+//	@JsonManagedReference(value="notificationsSent")
 	private Notifications notification;
-	@JsonManagedReference(value= "userNotificationsSent")
+//	@JsonManagedReference(value= "userNotificationsSent")
 	private WscmUserAccounts userAccount;
 	private Integer weight;
 	

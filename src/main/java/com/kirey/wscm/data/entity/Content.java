@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "content")
@@ -30,8 +32,8 @@ private static final long serialVersionUID = -8690896830405732886L;
 	private String css;
 	private String script;
 	
-	@JsonBackReference(value="contentCategories")
-	private List<ContentCategories> contentCategorieses = new ArrayList<>();
+//	@JsonManagedReference(value="contentCategoriesCon")
+//	private List<ContentCategories> contentCategorieses = new ArrayList<>();
 	
 	@Transient
 	private String connected;
@@ -103,13 +105,14 @@ private static final long serialVersionUID = -8690896830405732886L;
 		this.connected = connected;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "content")
-	public List<ContentCategories> getContentCategorieses() {
-		return contentCategorieses;
-	}
-	public void setContentCategorieses(List<ContentCategories> contentCategorieses) {
-		this.contentCategorieses = contentCategorieses;
-	}
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "content")
+//	public List<ContentCategories> getContentCategorieses() {
+//		return contentCategorieses;
+//	}
+//	public void setContentCategorieses(List<ContentCategories> contentCategorieses) {
+//		this.contentCategorieses = contentCategorieses;
+//	}
 	
 	
 

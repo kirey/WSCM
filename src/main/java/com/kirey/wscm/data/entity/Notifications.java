@@ -30,11 +30,11 @@ public class Notifications implements Serializable {
 	private String notificationType;
 	private DicEvent dicEvent;
 	
-	@JsonBackReference(value="notificationCategorieses")
-	private List<NotificationCategories> notificationCategorieses = new ArrayList<>();
-	
-	@JsonBackReference(value="notificationsSent")
-	private List<NotificationsSent> notificationsSent = new ArrayList<>();
+//	@JsonBackReference(value="notificationCategorieses")
+//	private List<NotificationCategories> notificationCategorieses = new ArrayList<>();
+//	
+//	@JsonBackReference(value="notificationsSent")
+//	private List<NotificationsSent> notificationsSent = new ArrayList<>();
 	
 	@Id
 	@SequenceGenerator(name = "notifications_gen", sequenceName = "seq_notifications", allocationSize = 1, initialValue = 1)
@@ -80,21 +80,21 @@ public class Notifications implements Serializable {
 		this.dicEvent = dicEvent;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "notification")
-	public List<NotificationCategories> getNotificationCategorieses() {
-		return notificationCategorieses;
-	}
-	public void setNotificationCategorieses(List<NotificationCategories> notificationCategorieses) {
-		this.notificationCategorieses = notificationCategorieses;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "notification")
-	public List<NotificationsSent> getNotificationsSent() {
-		return notificationsSent;
-	}
-	public void setNotificationsSent(List<NotificationsSent> notificationsSent) {
-		this.notificationsSent = notificationsSent;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "notification")
+//	public List<NotificationCategories> getNotificationCategorieses() {
+//		return notificationCategorieses;
+//	}
+//	public void setNotificationCategorieses(List<NotificationCategories> notificationCategorieses) {
+//		this.notificationCategorieses = notificationCategorieses;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "notification")
+//	public List<NotificationsSent> getNotificationsSent() {
+//		return notificationsSent;
+//	}
+//	public void setNotificationsSent(List<NotificationsSent> notificationsSent) {
+//		this.notificationsSent = notificationsSent;
+//	}
 	
 	
 	

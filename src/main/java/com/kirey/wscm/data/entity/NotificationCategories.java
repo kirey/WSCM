@@ -22,9 +22,9 @@ public class NotificationCategories implements Serializable{
 	private static final long serialVersionUID = -1875012379857995340L;
 	
 	private Integer id;
-	@JsonManagedReference(value="notificationCategorieses")
+//	@JsonManagedReference(value="notificationCategorieses")
 	private Notifications notification;
-	@JsonManagedReference(value="categoriesNotificationCatiegorieses")
+//	@JsonManagedReference(value="categoriesNotificationCatiegorieses")
 	private Categories categories;
 	private Integer weight;
 	

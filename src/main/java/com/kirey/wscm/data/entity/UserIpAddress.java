@@ -22,9 +22,9 @@ public class UserIpAddress implements Serializable{
 	private static final long serialVersionUID = -8597033906921078802L;
 	
 	private Integer id;
-	@JsonManagedReference(value = "wscmUserIpAddress")
+//	@JsonManagedReference(value = "wscmUserIpAddress")
 	private WscmUserAccounts userAccount;
-	@JsonManagedReference(value="ipAddressUserIpAddresses")
+//	@JsonManagedReference(value="ipAddressUserIpAddresses")
 	private IpAddress ipAddress;
 	private Integer noRequests;
 	

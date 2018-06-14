@@ -28,12 +28,7 @@ public class WscmUserAccountsDao extends KjcBaseDao implements UserDetailsServic
 		entityClass = WscmUserAccounts.class;
 	}
 	
-	public WscmUserAccounts findByUsernameWithIp(String username) {
-		String hql = "from WscmUserAccounts ua where ua.username = :username";
-		WscmUserAccounts user = (WscmUserAccounts) sessionFactory.getCurrentSession().createQuery(hql).setParameter("username", username).uniqueResult();
-		Hibernate.initialize(user.getUserIpAddress());
-		return user;
-	}
+	
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -22,9 +23,9 @@ public class ContentCategories implements Serializable {
 	private static final long serialVersionUID = -8659944682511011666L;
 	
 	private Integer id;
-	@JsonManagedReference(value="contentCategories")
+//	@JsonBackReference(value="contentCategoriesCon")
 	private Content content;
-	@JsonManagedReference(value="categoriesContentCategorieses")
+//	@JsonManagedReference(value="categoriesContentCategorieses")
 	private Categories categories;
 	private Integer weight;
 	

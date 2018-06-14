@@ -23,9 +23,9 @@ public class UserLinks implements Serializable {
 	private static final long serialVersionUID = 2417078553998693629L;
 	
 	private Integer id;
-	@JsonManagedReference(value = "wscmUserLinkses")
+//	@JsonManagedReference(value = "wscmUserLinkses")
 	private WscmUserAccounts userAccount;
-	@JsonManagedReference(value="linksUserLinks")
+//	@JsonManagedReference(value="linksUserLinks")
 	private Links link;
 	private Integer noRequests;
 	private Date tsInsert;

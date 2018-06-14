@@ -32,17 +32,17 @@ public class WscmUserAccounts implements UserDetails{
 	private String email;
 	private String role;
 	
-	@JsonBackReference(value = "wscmUserIpAddress")
-	private List<UserIpAddress> userIpAddress = new ArrayList<>();
-	
-	@JsonBackReference(value = "wscmUserCategorieses")
-	private List<UserCategories> userCategorieses = new ArrayList<>();
-	
-	@JsonBackReference(value = "wscmUserLinkses")
-	private List<UserLinks> userLinkses = new ArrayList<>();
-	
-	@JsonBackReference(value= "userNotificationsSent")
-	private List<NotificationsSent> notificationsSent = new ArrayList<>();
+//	@JsonBackReference(value = "wscmUserIpAddress")
+//	private List<UserIpAddress> userIpAddress = new ArrayList<>();
+//	
+//	@JsonBackReference(value = "wscmUserCategorieses")
+//	private List<UserCategories> userCategorieses = new ArrayList<>();
+//	
+//	@JsonBackReference(value = "wscmUserLinkses")
+//	private List<UserLinks> userLinkses = new ArrayList<>();
+//	
+//	@JsonBackReference(value= "userNotificationsSent")
+//	private List<NotificationsSent> notificationsSent = new ArrayList<>();
 	
 	@Transient
     private List<WscmRoles> wscmRoles;
@@ -92,38 +92,38 @@ public class WscmUserAccounts implements UserDetails{
 	}
 	
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
-	public List<UserIpAddress> getUserIpAddress() {
-		return userIpAddress;
-	}
-	public void setUserIpAddress(List<UserIpAddress> userIpAddress) {
-		this.userIpAddress = userIpAddress;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
-	public List<UserCategories> getUserCategorieses() {
-		return userCategorieses;
-	}
-	public void setUserCategorieses(List<UserCategories> userCategorieses) {
-		this.userCategorieses = userCategorieses;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
-	public List<UserLinks> getUserLinkses() {
-		return userLinkses;
-	}
-	public void setUserLinkses(List<UserLinks> userLinkses) {
-		this.userLinkses = userLinkses;
-	}
-	
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
-	public List<NotificationsSent> getNotificationsSent() {
-		return notificationsSent;
-	}
-	public void setNotificationsSent(List<NotificationsSent> notificationsSent) {
-		this.notificationsSent = notificationsSent;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+//	public List<UserIpAddress> getUserIpAddress() {
+//		return userIpAddress;
+//	}
+//	public void setUserIpAddress(List<UserIpAddress> userIpAddress) {
+//		this.userIpAddress = userIpAddress;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+//	public List<UserCategories> getUserCategorieses() {
+//		return userCategorieses;
+//	}
+//	public void setUserCategorieses(List<UserCategories> userCategorieses) {
+//		this.userCategorieses = userCategorieses;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+//	public List<UserLinks> getUserLinkses() {
+//		return userLinkses;
+//	}
+//	public void setUserLinkses(List<UserLinks> userLinkses) {
+//		this.userLinkses = userLinkses;
+//	}
+//	
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+//	public List<NotificationsSent> getNotificationsSent() {
+//		return notificationsSent;
+//	}
+//	public void setNotificationsSent(List<NotificationsSent> notificationsSent) {
+//		this.notificationsSent = notificationsSent;
+//	}
 	@Transient
 	public List<WscmRoles> getWscmRoles() {
 		return wscmRoles;

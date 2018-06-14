@@ -22,9 +22,9 @@ public class IpAddressCategories implements Serializable {
 	private static final long serialVersionUID = 3069243249385409036L;
 	
 	private Integer id;
-	@JsonManagedReference(value="ipAddressCategories")
+//	@JsonManagedReference(value="ipAddressCategories")
 	private IpAddress ipAddress;
-	@JsonManagedReference(value="categoriesIpAddressCategorieses")
+//	@JsonManagedReference(value="categoriesIpAddressCategorieses")
 	private Categories categories;
 	private Integer weight;
 	
