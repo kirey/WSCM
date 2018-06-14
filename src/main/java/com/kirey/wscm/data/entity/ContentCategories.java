@@ -23,7 +23,7 @@ public class ContentCategories implements Serializable {
 	private static final long serialVersionUID = -8659944682511011666L;
 	
 	private Integer id;
-//	@JsonBackReference(value="contentCategoriesCon")
+	@JsonBackReference(value="contentCategoriesCon")
 	private Content content;
 //	@JsonManagedReference(value="categoriesContentCategorieses")
 	private Categories categories;

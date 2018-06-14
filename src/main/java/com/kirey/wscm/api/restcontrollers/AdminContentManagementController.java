@@ -48,20 +48,16 @@ public class AdminContentManagementController {
 	
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<RestResponseDto> addNewContent(@RequestBody ContentDto contentDto) {
+	public ResponseEntity<RestResponseDto> addNewContent(@RequestBody Content content) {
 
 		
-		Content savedContent = (Content) contentDao.merge(contentDto.getContent());
+		Content savedContent = (Content) contentDao.merge(content);
 		
-		List<CategoryWeight> listCategoryWeight = contentDto.getListCategoryWeight();
-		for (CategoryWeight categoryWeight : listCategoryWeight) {
-			Categories category = categoriesDao.findById(categoryWeight.getCategoryId());
+		List<ContentCategories> contentCategorieses = content.getContentCategorieses();
+		for (ContentCategories contentCategory : contentCategorieses) {
+				contentCategory.setContent(savedContent);
+				contentCategoriesDao.attachDirty(contentCategory);
 			
-			ContentCategories contentCategories = new ContentCategories();
-			contentCategories.setContent(savedContent);
-			contentCategories.setCategories(category);
-			contentCategories.setWeight(categoryWeight.getWeight());
-			contentCategoriesDao.attachDirty(contentCategories);
 		}
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully added new content", HttpStatus.OK.value()), HttpStatus.OK);
@@ -90,28 +86,25 @@ public class AdminContentManagementController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ResponseEntity<RestResponseDto> editContent(@RequestBody ContentDto contentDto) {
+	public ResponseEntity<RestResponseDto> editContent(@RequestBody Content content) {
 
-		Content savedContent = (Content) contentDao.merge(contentDto.getContent());
 		
-		List<CategoryWeight> listCategoryWeight = contentDto.getListCategoryWeight();
-		for (CategoryWeight categoryWeight : listCategoryWeight) {
-			Categories category = categoriesDao.findById(categoryWeight.getCategoryId());
-			
-			ContentCategories contentCategories = contentCategoriesDao.findByContentCategory(savedContent.getId(), categoryWeight.getCategoryId());
+		Content savedContent = (Content) contentDao.merge(content);
+		List<ContentCategories> contentCategorieses = content.getContentCategorieses();
+		for (ContentCategories contentCategory : contentCategorieses) {
+			ContentCategories contentCategories = contentCategoriesDao.findByContentCategory(savedContent.getId(), contentCategory.getCategories().getId());
 			if (contentCategories == null) {
 				contentCategories = new ContentCategories();
 				contentCategories.setContent(savedContent);
-				contentCategories.setCategories(category);
-				contentCategories.setWeight(categoryWeight.getWeight());
+				contentCategories.setCategories(contentCategory.getCategories());
+				contentCategories.setWeight(contentCategory.getWeight());
 				contentCategoriesDao.attachDirty(contentCategories);
 			}else {
 				contentCategories.setContent(savedContent);
-				contentCategories.setCategories(category);
-				contentCategories.setWeight(categoryWeight.getWeight());
+				contentCategories.setCategories(contentCategory.getCategories());
+				contentCategories.setWeight(contentCategory.getWeight());
 				contentCategoriesDao.merge(contentCategories);
 			}
-			
 		}
 	
 		return new ResponseEntity<RestResponseDto>(
@@ -132,7 +125,7 @@ public class AdminContentManagementController {
 	@RequestMapping(value = "/{page}", method = RequestMethod.GET)
 	public List<Content> getByPageLang(@PathVariable String page) {
 
-		List<Content> listContent = contentDao.findByPage(page);
+		List<Content> listContent = contentDao.findByPageAndInitCategories(page);
 		
 		return listContent;
 	}

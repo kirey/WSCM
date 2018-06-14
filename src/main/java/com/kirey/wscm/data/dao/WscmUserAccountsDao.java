@@ -47,4 +47,12 @@ public class WscmUserAccountsDao extends KjcBaseDao implements UserDetailsServic
 		return user;
 	}
 
+
+
+	public WscmUserAccounts findByEmail(String email) {
+		String hql = "from WscmUserAccounts ua where ua.email = :email";
+		WscmUserAccounts user = (WscmUserAccounts) sessionFactory.getCurrentSession().createQuery(hql).setParameter("email", email).uniqueResult();
+		return user;
+	}
+
 }
