@@ -32,8 +32,8 @@ private static final long serialVersionUID = -8690896830405732886L;
 	private String css;
 	private String script;
 	
-//	@JsonManagedReference(value="contentCategoriesCon")
-//	private List<ContentCategories> contentCategorieses = new ArrayList<>();
+	@JsonManagedReference(value="contentCategoriesCon")
+	private List<ContentCategories> contentCategorieses = new ArrayList<>();
 	
 	@Transient
 	private String connected;
@@ -105,14 +105,14 @@ private static final long serialVersionUID = -8690896830405732886L;
 		this.connected = connected;
 	}
 	
-//	@JsonIgnore
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "content")
-//	public List<ContentCategories> getContentCategorieses() {
-//		return contentCategorieses;
-//	}
-//	public void setContentCategorieses(List<ContentCategories> contentCategorieses) {
-//		this.contentCategorieses = contentCategorieses;
-//	}
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "content")
+	public List<ContentCategories> getContentCategorieses() {
+		return contentCategorieses;
+	}
+	public void setContentCategorieses(List<ContentCategories> contentCategorieses) {
+		this.contentCategorieses = contentCategorieses;
+	}
 	
 	
 

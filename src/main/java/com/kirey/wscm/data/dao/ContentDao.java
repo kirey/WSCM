@@ -3,6 +3,7 @@ package com.kirey.wscm.data.dao;
 import java.util.List;
 
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -79,6 +80,15 @@ public class ContentDao extends KjcBaseDao {
 	public List<Content> findContentByCategory(int categoryId) {
 		String hql = "select cc.content from ContentCategories cc where cc.categories.id = :categoryId";
 		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("categoryId", categoryId).list();
+		return listContent;
+	}
+
+	public List<Content> findByPageAndInitCategories(String page) {
+		String hql = "from Content cont where cont.page = :page";
+		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).list();
+		for (Content content : listContent) {
+			Hibernate.initialize(content.getContentCategorieses());
+		}
 		return listContent;
 	}
 }
