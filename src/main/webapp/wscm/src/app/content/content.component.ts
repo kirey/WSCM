@@ -18,6 +18,8 @@ export class ContentComponent implements OnInit {
   selectedPosition: any;
   selectedCategory: string;
   selectedWeight: number;
+  listCategoryWeight: Array<Object> = [];
+  objectCategoryWeight: Object;
 
   panelClosed() {
     this.step = 1;
@@ -29,9 +31,48 @@ export class ContentComponent implements OnInit {
   }
   back() {
     this.step = 1;
+    this.listCategoryWeight = [];
   }
+
+  // Select category -checkbox
+  checked(ev, id, index) {
+    if (ev.checked) {
+      if (this.listCategoryWeight.length == 0) {
+        this.listCategoryWeight.push({ 'categoryId': id });
+      }
+      else {
+        for (let i = 0; i < this.listCategoryWeight.length; i++) {
+          if (this.listCategoryWeight[i]['categoryId'] !== id) {
+            this.listCategoryWeight.push({ 'categoryId': id });
+          }
+        }
+      }
+    }
+    else {
+      let index = this.listCategoryWeight.findIndex(item => item['categoryId'] === id);
+      this.listCategoryWeight.splice(index, 1);
+    }
+    console.log(this.listCategoryWeight);
+  }
+
+  // Slider for each category
+  sliderChange(ev, id, index) {
+    console.log(ev.value);
+    console.log(id);
+    console.log(index);
+
+    if (this.listCategoryWeight.length !== 0) {
+      for (let i = 0; i < this.listCategoryWeight.length; i++) {
+        if (this.listCategoryWeight[i]['categoryId'] === id) {
+          this.listCategoryWeight[i]['weight'] = ev.value;
+        }
+      }
+    }
+    console.log(this.listCategoryWeight);
+
+  }
+
   save() {
-    this.selectedPosition['contentCategorieses'] = null;
 
     this.contentService.updateContent(this.selectedPosition, this.selectedWeight.toString(), this.selectedCategory.toString())
       .subscribe(
@@ -40,17 +81,6 @@ export class ContentComponent implements OnInit {
         },
         err => console.log(err)
       )
-  }
-
-  checked(ev, id) {
-    console.log(ev.checked);
-    console.log(id);
-  }
-
-  sliderChange(ev, categoryId) {
-    console.log(ev);
-    console.log(categoryId);
-
   }
 
   ngOnInit() {

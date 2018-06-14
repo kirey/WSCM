@@ -97,11 +97,11 @@
       <div class="categories" *ngIf="step == 2">
         <h5 class="label">Select category & weight for each category</h5>
         <div class="categories-box">
-          <div *ngFor="let category of categories">
-            <mat-checkbox color="warn" (change)="checked($event, category.id)" labelPosition="after">
+          <div *ngFor="let category of categories; let i = index">
+            <mat-checkbox color="warn" (change)="checked($event, category.id, i)" labelPosition="after">
               {{category.description}}
             </mat-checkbox>
-            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id)">
+            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id, i)">
             </mat-slider>
           </div>
 
