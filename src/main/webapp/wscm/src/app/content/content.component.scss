@@ -7,6 +7,14 @@
     button {
         width: 80px;
         align-self: flex-end;
+        margin-left: 5px;
+    }
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 50px;
     }
 
     // Expansion Panel
@@ -75,17 +83,19 @@
         justify-content: center;
         padding-top: 50px;
     }
-    .categories-form-field {
-        width: 60%;
+    .categories-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
     }
     .label {
-        width: 60%;
         margin-top: 20px;
         text-align: left;
         color: #bdbdbd;
     }
     mat-slider {
-        width: 60%;
-        margin-bottom: 20px;
+        margin-left: 20px;
+        width: 180px;
     }
 }

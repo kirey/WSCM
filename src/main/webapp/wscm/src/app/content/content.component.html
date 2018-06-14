@@ -95,19 +95,21 @@
 
       <!-- Form -->
       <div class="categories" *ngIf="step == 2">
-        <h5 class="label">Select category</h5>
-        <mat-form-field class="categories-form-field">
-          <mat-select [(ngModel)]="selectedCategory" placeholder="Category name">
-            <mat-option *ngFor="let category of categories" [value]="category.id">
+        <h5 class="label">Select category & weight for each category</h5>
+        <div class="categories-box">
+          <div *ngFor="let category of categories">
+            <mat-checkbox color="warn" (change)="checked($event, category.id)" labelPosition="after">
               {{category.description}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Slider -->
-        <h5 class="label">Select weight for category</h5>
-        <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [(ngModel)]="selectedWeight">
-        </mat-slider>
-        <button mat-raised-button color="warn" (click)="save()">Save</button>
+            </mat-checkbox>
+            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id)">
+            </mat-slider>
+          </div>
+
+        </div>
+        <div class="buttons">
+          <button mat-button (click)="back()">Back</button>
+          <button mat-raised-button color="warn" (click)="save()">Save</button>
+        </div>
       </div>
       <!-- Form - END -->
     </mat-expansion-panel>

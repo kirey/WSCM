@@ -27,6 +27,9 @@ export class ContentComponent implements OnInit {
     this.step = 2;
     this.selectedPosition = obj;
   }
+  back() {
+    this.step = 1;
+  }
   save() {
     this.selectedPosition['contentCategorieses'] = null;
 
@@ -37,6 +40,17 @@ export class ContentComponent implements OnInit {
         },
         err => console.log(err)
       )
+  }
+
+  checked(ev, id) {
+    console.log(ev.checked);
+    console.log(id);
+  }
+
+  sliderChange(ev, categoryId) {
+    console.log(ev);
+    console.log(categoryId);
+
   }
 
   ngOnInit() {
