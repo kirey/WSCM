@@ -17,10 +17,16 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.web.accept.ServletPathExtensionContentNegotiationStrategy;
 
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.common.constants.ErrorConstants;
 import com.kirey.wscm.data.dao.NotificationsDao;
+import com.kirey.wscm.data.dao.NotificationsSentDao;
+import com.kirey.wscm.data.dao.WscmUserAccountsDao;
+import com.kirey.wscm.data.entity.Notifications;
+import com.kirey.wscm.data.entity.NotificationsSent;
+import com.kirey.wscm.data.entity.WscmUserAccounts;
 
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
@@ -35,6 +41,12 @@ public class MailService {
 	@Autowired
 	private NotificationsDao notificationsDao;
 	
+	@Autowired
+	private WscmUserAccountsDao wscmUserAccountsDao;
+	
+	@Autowired
+	private NotificationsSentDao notificationsSentDao;
+	
 	private JavaMailSender mailSender;
 	
 	public void setMailSender(JavaMailSender mailSender) {
@@ -43,7 +55,8 @@ public class MailService {
 	
 	public void sendDefaultEmail(String templateName, String emailTo, String subject, Map<String, Object> templateModel, Map<String, byte[]> attachmentFiles)  {
 	
-		String templateString = notificationsDao.findTemplateByName(templateName);
+		Notifications notification = notificationsDao.findNotificationByName(templateName);
+		String templateString = notification.getNotificationTemplate(); 
 		String emailContent = this.processTemplateContent(templateModel, templateString);
 		 MimeMessage message = mailSender.createMimeMessage();
 
@@ -64,6 +77,12 @@ public class MailService {
 		}
 
 		mailSender.send(message);
+		
+		WscmUserAccounts user = wscmUserAccountsDao.findByEmail(emailTo);
+		NotificationsSent sentNotification = new NotificationsSent();
+		sentNotification.setNotification(notification);
+		sentNotification.setUserAccount(user);
+		notificationsSentDao.attachDirty(sentNotification);
 		
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

@@ -1,6 +1,7 @@
 package com.kirey.wscm.data.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class NotificationsSent implements Serializable {
 	private Notifications notification;
 //	@JsonManagedReference(value= "userNotificationsSent")
 	private WscmUserAccounts userAccount;
-	private Integer weight;
+	private Date tsInsert;
 	
 	@Id
 	@SequenceGenerator(name = "notifications_sent_gen", sequenceName = "seq_notifications_sent", allocationSize = 1, initialValue = 1)
@@ -58,12 +59,13 @@ public class NotificationsSent implements Serializable {
 	}
 	
 	
-	@Column(name = "weight", nullable = true)
-	public Integer getWeight() {
-		return weight;
+	@Column(name = "ts_insert", nullable = false, length = 29)
+	@org.hibernate.annotations.CreationTimestamp
+	public Date getTsInsert() {
+		return this.tsInsert;
 	}
-	public void setWeight(Integer weight) {
-		this.weight = weight;
+	public void setTsInsert(Date tsInsert) {
+		this.tsInsert = tsInsert;
 	}
 	
 	
