@@ -41,15 +41,17 @@ export class ContentComponent implements OnInit {
         this.listCategoryWeight.push({ 'categoryId': id });
       }
       else {
+        let push: boolean = false;
         for (let i = 0; i < this.listCategoryWeight.length; i++) {
-          if (this.listCategoryWeight[i]['categoryId'] !== id) {
-            this.listCategoryWeight.push({ 'categoryId': id });
+          if (this.listCategoryWeight[i]['categoryId'] != id) {
+            push = true;
           }
         }
+        if (push) this.listCategoryWeight.push({ 'categoryId': id });
       }
     }
     else {
-      let index = this.listCategoryWeight.findIndex(item => item['categoryId'] === id);
+      let index = this.listCategoryWeight.findIndex(item => item['categoryId'] == id);
       this.listCategoryWeight.splice(index, 1);
     }
     console.log(this.listCategoryWeight);
@@ -57,10 +59,6 @@ export class ContentComponent implements OnInit {
 
   // Slider for each category
   sliderChange(ev, id, index) {
-    console.log(ev.value);
-    console.log(id);
-    console.log(index);
-
     if (this.listCategoryWeight.length !== 0) {
       for (let i = 0; i < this.listCategoryWeight.length; i++) {
         if (this.listCategoryWeight[i]['categoryId'] === id) {
@@ -69,6 +67,9 @@ export class ContentComponent implements OnInit {
       }
     }
     console.log(this.listCategoryWeight);
+  }
+
+  categorySelected() {
 
   }
 
