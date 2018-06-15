@@ -12,16 +12,20 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.api.dto.UserAccount;
 import com.kirey.wscm.common.constants.AppConstants;
+import com.kirey.wscm.data.dao.WscmUserAccountsDao;
+import com.kirey.wscm.data.entity.WscmUserAccounts;
 
 
 /**
@@ -37,13 +41,16 @@ public class AuthController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
+	@Autowired
+	private WscmUserAccountsDao wscmUserAccountsDao;
+	
 	/**
 	 * Method used for authenticate user
 	 * @param userAccount
 	 * @return
 	 */
 	@RequestMapping(value = "/authentication", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> createUser(@RequestBody UserAccount userAccount) {
+	public ResponseEntity<Object> createUser(@RequestBody UserAccount userAccount, @CookieValue("JSESSIONID") String cookie) {
 		
 		Authentication authentication = null;
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -51,8 +58,10 @@ public class AuthController {
 
 		authentication = this.authenticationManager.authenticate(authenticationToken);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		WscmUserAccounts wscmUser = (WscmUserAccounts) authentication.getPrincipal();
 		
-		
+		wscmUser.setSessionId(cookie);
+
 		return new ResponseEntity<Object>(null, HttpStatus.OK);
 	}
 	

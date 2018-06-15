@@ -31,6 +31,7 @@ public class WscmUserAccounts implements UserDetails{
 	private String password;
 	private String email;
 	private String role;
+	private String socketSessionId;
 	
 //	@JsonBackReference(value = "wscmUserIpAddress")
 //	private List<UserIpAddress> userIpAddress = new ArrayList<>();
@@ -95,7 +96,14 @@ public class WscmUserAccounts implements UserDetails{
 	}
 	
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+	@Column(name = "socket_session_id", unique = false, nullable = true)
+	public String getSocketSessionId() {
+		return socketSessionId;
+	}
+	public void setSocketSessionId(String socketSessionId) {
+		this.socketSessionId = socketSessionId;
+	}
+	//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
 //	public List<UserIpAddress> getUserIpAddress() {
 //		return userIpAddress;
 //	}

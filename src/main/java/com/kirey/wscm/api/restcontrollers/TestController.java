@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
@@ -36,6 +37,9 @@ import com.kirey.wscm.data.entity.IpAddress;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.TemplateEngine;
 import com.kirey.wscm.email.MailService;
+import com.kirey.wscm.security.SecurityUtils;
+import com.kirey.wscm.websocket.CounterHandler;
+
 
 @RestController(value = "testController")
 @RequestMapping(value = "/rest/content")
@@ -62,7 +66,7 @@ public class TestController {
 	private MailService mailService;
 	
 	@Autowired
-	private NotificationsDao notificationsDao;
+    private CounterHandler counterHandler;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
@@ -71,6 +75,8 @@ public class TestController {
 		String ipAddress = "192.168.60.21";
 		List<Categories> listCategories = categoriesDao.findCategoriesByIp(ipAddress); 
 		List<Content> listContents = contentDao.findContentByCategory(1);
+		
+		WscmUserAccounts user = SecurityUtils.getUserFromContext();
 
 		System.out.println("test");
 		
@@ -255,6 +261,24 @@ public class TestController {
 		attachmentFiles.put("attachment.jpg", b);
 		
 		mailService.sendDefaultEmail("test", "m.paunovic@dyntechdoo.com", "test", templateModel, attachmentFiles);
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Mail sent!", HttpStatus.OK.value()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/socket", method = RequestMethod.GET)
+	public ResponseEntity<RestResponseDto> socketTest() {
+		
+		List<WscmUserAccounts> usersByCategory = wscmUserAccountsDao.findUsersByCategory("insurance");
+		
+		for(WebSocketSession activeSession : counterHandler.getAllSessions()) {
+			for (WscmUserAccounts wscmUserAccounts : usersByCategory) {
+				if(activeSession.getId().equals(wscmUserAccounts.getSocketSessionId())) {
+					counterHandler.getFilteredSessions().add(activeSession);
+				}
+			}
+		}
+		
+		counterHandler.sendNotificationToFilteredUsers();
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Mail sent!", HttpStatus.OK.value()), HttpStatus.OK);
 	}

@@ -55,4 +55,12 @@ public class WscmUserAccountsDao extends KjcBaseDao implements UserDetailsServic
 		return user;
 	}
 
+
+
+	public List<WscmUserAccounts> findUsersByCategory(String categoryName) {
+		String hql = "select uc.userAccount from UserCategories uc where uc.categories.categoryName = :name";
+		List<WscmUserAccounts> users = sessionFactory.getCurrentSession().createQuery(hql).setParameter("name", categoryName).list();
+		return users;
+	}
+
 }
