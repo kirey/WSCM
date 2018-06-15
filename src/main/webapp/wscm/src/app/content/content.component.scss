@@ -89,6 +89,15 @@
         align-items: flex-start;
         margin-top: 20px;
     }
+    .selected-categories-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .selected-categories-box>span {
+        margin: 5px 0;
+        font-size: 16px;
+    }
     .label {
         margin-top: 20px;
         text-align: left;
@@ -97,5 +106,18 @@
     mat-slider {
         margin-left: 20px;
         width: 180px;
+    }
+    .unselect-icon {
+        color: $primary;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 26px;
+        margin-left: 10px;
+        height: auto;
+        width: auto;
+    }
+    .unselect-icon:hover {
+        color: #bdbdbd;
+        cursor: pointer;
     }
 }

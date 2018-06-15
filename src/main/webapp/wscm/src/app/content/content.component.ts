@@ -11,10 +11,10 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 export class ContentComponent implements OnInit {
 
   constructor(public contentService: ContentService) { }
-
   positions: any;
   categories: any;
   step: number = 1;
+  currentList: Array<Object> = [];
   selectedPosition: any;
   selectedCategory: string;
   selectedWeight: number;
@@ -32,6 +32,16 @@ export class ContentComponent implements OnInit {
   back() {
     this.step = 1;
     this.listCategoryWeight = [];
+  }
+
+  checkboxValue(id) {
+    for (let i = 0; i < this.currentList.length; i++) {
+      console.log(i);
+      if (this.currentList[i]['categories']['id'] === id) {
+        return true;
+      }
+      return false;
+    }
   }
 
   // Select category -checkbox
@@ -70,7 +80,7 @@ export class ContentComponent implements OnInit {
   }
 
   categorySelected() {
-
+    return true;
   }
 
   save() {

@@ -95,16 +95,23 @@
 
       <!-- Form -->
       <div class="categories" *ngIf="step == 2">
-        <h5 class="label">Select category & weight for each category</h5>
+        <h5 class="label">Select categories for this position</h5>
         <div class="categories-box">
           <div *ngFor="let category of categories; let i = index">
             <mat-checkbox color="warn" (change)="checked($event, category.id, i)" labelPosition="after">
               {{category.description}}
             </mat-checkbox>
-            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id, i)">
-            </mat-slider>
+            <!-- <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id, i)">
+            </mat-slider> -->
           </div>
 
+        </div>
+        <h5 class="label">Selected categories</h5>
+        <div>
+          <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box">
+            <span>{{selected.categories.description}}</span>
+            <mat-icon class="unselect-icon">close</mat-icon>
+          </div>
         </div>
         <div class="buttons">
           <button mat-button (click)="back()">Back</button>
