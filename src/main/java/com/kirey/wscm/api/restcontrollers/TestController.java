@@ -6,9 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.imageio.ImageIO;
 
@@ -34,6 +36,7 @@ import com.kirey.wscm.data.dao.WscmUserAccountsDao;
 import com.kirey.wscm.data.entity.Categories;
 import com.kirey.wscm.data.entity.Content;
 import com.kirey.wscm.data.entity.IpAddress;
+import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.TemplateEngine;
 import com.kirey.wscm.email.MailService;
@@ -67,6 +70,9 @@ public class TestController {
 	
 	@Autowired
     private CounterHandler counterHandler;
+	
+	@Autowired
+	private NotificationsDao notificationsDao;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
@@ -266,19 +272,42 @@ public class TestController {
 	}
 	
 	@RequestMapping(value = "/socket", method = RequestMethod.GET)
-	public ResponseEntity<RestResponseDto> socketTest() {
+	public ResponseEntity<RestResponseDto> socketTest() throws Exception {
+		
+		
+		Notifications notification = notificationsDao.findNotificationByName("testSocket");
+		String templateString = notification.getNotificationTemplate(); 
+		Map<String, Object> templateModel = new HashMap<>();
+		List<IpAddress> listAddresses = ipAddressDao.findAll();
+		WscmUserAccounts user = wscmUserAccountsDao.findById(1);
+		File file = new File("c:\\image009.jpg");
+		InputStream is = new FileInputStream(file);
+		byte[] b = IOUtils.toByteArray(is);
+		byte[] encoded = Base64.getEncoder().encode(b);
+		templateModel.put("korisnik", "milos");
+		templateModel.put("ipAddress", listAddresses.get(0));
+		templateModel.put("user", user);
+		templateModel.put("slika", new String(encoded));
+		String notificationContent = mailService.processTemplateContent(templateModel, templateString);
+		
+		
+		
+		
 		
 		List<WscmUserAccounts> usersByCategory = wscmUserAccountsDao.findUsersByCategory("insurance");
 		
 		for(WebSocketSession activeSession : counterHandler.getAllSessions()) {
 			for (WscmUserAccounts wscmUserAccounts : usersByCategory) {
 				if(activeSession.getId().equals(wscmUserAccounts.getSocketSessionId())) {
-					counterHandler.getFilteredSessions().add(activeSession);
+					Optional<WebSocketSession> exist = counterHandler.getFilteredSessions().stream().filter(e -> !e.getId().equals(activeSession.getId())).findAny();
+					if(!exist.isPresent()) {
+						counterHandler.getFilteredSessions().add(activeSession);	
+					}
 				}
 			}
 		}
 		
-		counterHandler.sendNotificationToFilteredUsers();
+		counterHandler.sendNotificationToFilteredUsers(notificationContent);
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Mail sent!", HttpStatus.OK.value()), HttpStatus.OK);
 	}

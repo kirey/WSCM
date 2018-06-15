@@ -47,11 +47,11 @@ public class CounterHandler extends TextWebSocketHandler {
 		}
 	}
 	
-	public void sendNotificationToFilteredUsers() {
+	public void sendNotificationToFilteredUsers(String content) {
 		for (WebSocketSession session : filteredSessions) {
 			if (session != null && session.isOpen()) {
 				try {
-					session.sendMessage(new TextMessage("message to user that belongs to category: insurance"));
+					session.sendMessage(new TextMessage(content));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
