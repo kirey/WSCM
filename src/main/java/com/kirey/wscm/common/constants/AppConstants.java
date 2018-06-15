@@ -264,6 +264,11 @@ public class AppConstants {
 	public static final String NOTIFICATION_TYPE_MOBILE = "mobile";
 	public static final String APPLICATION_EMAIL = "cecanda.kir@gmail.com";
 	
+	public static final String FIREBASE_SERVERKEY = "alerts.firebase.serverkey";
+	public static final String FIREBASE_SEND_ALERT_URL = "alerts.firebase.sendAlertUrl";
+	public static final String FIREBASE_SUBSCRIBE_PART1_URL = "alerts.firebase.subscribeURLpart1";
+	public static final String FIREBASE_SUBSCRIBE_PART2_URL = "alerts.firebase.subscribeURLpart2";
+	
 	
 	/**
 	 * Constructor from superClass.

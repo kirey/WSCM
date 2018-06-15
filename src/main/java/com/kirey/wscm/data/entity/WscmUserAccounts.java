@@ -47,6 +47,9 @@ public class WscmUserAccounts implements UserDetails{
 	@Transient
     private List<WscmRoles> wscmRoles;
 	
+	@Transient
+	private String sessionId;
+	
 	
 	@Id
 	@SequenceGenerator(name = "wscmUserAccounts_gen", sequenceName = "seq_wscm_user_accounts", allocationSize = 1, initialValue = 1)
@@ -164,6 +167,15 @@ public class WscmUserAccounts implements UserDetails{
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	@Transient
+	public String getSessionId() {
+		return sessionId;
+	}
+	@Transient
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 	
 	
