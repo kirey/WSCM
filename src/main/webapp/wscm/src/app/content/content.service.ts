@@ -28,15 +28,15 @@ export class ContentService {
     }
 
     // Update position
-    updateContent(obj: Object, weight: string, category: string) {
-        let params = new HttpParams()
-            .set('categoryId', category)
-            .set('weight', weight);
+    updateContent(obj: Object) {
+        // let params = new HttpParams()
+        //     .set('categoryId', category)
+        //     .set('weight', weight);
 
-        let options = { params: params, headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        let options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
 
 
-        return this._http.post(this.baseUrl, obj, options).pipe(map(res => res));
+        return this._http.post(this.baseUrl + '/edit', obj, options).pipe(map(res => res));
     }
 }

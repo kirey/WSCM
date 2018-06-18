@@ -24,6 +24,7 @@ import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LanguagesComponent } from './languages/languages.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { LanguagesComponent } from './languages/languages.component';
     HomeComponent,
     LoginComponent,
     LanguagesComponent,
-    FilterPipe
+    FilterPipe,
+    SchedulerComponent
   ],
   imports: [
     BrowserModule,

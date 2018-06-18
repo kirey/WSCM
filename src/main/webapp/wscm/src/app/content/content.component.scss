@@ -103,10 +103,6 @@
         text-align: left;
         color: #bdbdbd;
     }
-    mat-slider {
-        margin-left: 20px;
-        width: 180px;
-    }
     .unselect-icon {
         color: $primary;
         font-size: 20px;
@@ -119,5 +115,24 @@
     .unselect-icon:hover {
         color: #bdbdbd;
         cursor: pointer;
+    }
+    // Sliders - Step 3
+    .sliders {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 50px;
+    }
+    mat-slider {
+        width: 200px;
+        margin-bottom: 15px;
+    }
+    .sliders>div>h6 {
+        font-size: 17px;
+        color: #bdbdbd;
+    }
+    .sliders>h5 {
+        margin-bottom: 50px;
     }
 }

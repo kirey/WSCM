@@ -14,6 +14,7 @@
 
       <!-- Code inside expansion panel -->
 
+      <!-- S T E P 1 -->
       <!-- Tabs - Material -->
       <div *ngIf="step == 1" class="tabs-container">
         <mat-tab-group color="warn">
@@ -89,10 +90,11 @@
             </div>
           </mat-tab>
         </mat-tab-group>
-        <button mat-raised-button color="warn" (click)="next(position)">Next</button>
+        <button mat-raised-button color="warn" (click)="next(position, 1)">Next</button>
       </div>
       <!-- Tabs - END -->
 
+      <!-- S T E P 2 -->
       <!-- Form -->
       <div class="categories" *ngIf="step == 2">
         <h5 class="label">Select categories for this position</h5>
@@ -101,8 +103,6 @@
             <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after">
               {{category.description}}
             </mat-checkbox>
-            <!-- <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id, i)">
-            </mat-slider> -->
           </div>
 
         </div>
@@ -119,11 +119,25 @@
           </h6>
         </ng-template>
         <div class="buttons">
-          <button mat-button (click)="back()">Back</button>
-          <button mat-raised-button color="warn" (click)="save()">Save</button>
+          <button mat-button (click)="back(2)">Back</button>
+          <button mat-raised-button color="warn" (click)="next(selectedPosition, 2)">Next</button>
         </div>
       </div>
       <!-- Form - END -->
+
+      <!-- S T E P 3 -->
+      <div *ngIf="step == 3" class="sliders">
+        <h5 class="label">Select weight for each category</h5>
+        <div *ngFor="let item of listCategoryWeight">
+          <h6>{{item.categories.description}}</h6>
+          <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [(ngModel)]="item.weight">
+          </mat-slider>
+        </div>
+        <div class="buttons">
+          <button mat-button (click)="back(3)">Back</button>
+          <button mat-raised-button color="warn" (click)="save()">Save</button>
+        </div>
+      </div>
     </mat-expansion-panel>
     <!-- Expansion panel END -->
   </mat-accordion>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ContentService } from './content.service';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { SnackBarService } from './../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-content',
@@ -10,7 +10,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 })
 export class ContentComponent implements OnInit {
 
-  constructor(public contentService: ContentService) { }
+  constructor(public contentService: ContentService, public snackbar: SnackBarService) { }
   positions: any;
   categories: any;
   step: number = 1;
@@ -21,25 +21,39 @@ export class ContentComponent implements OnInit {
     this.step = 1;
   }
 
-  next(obj) {
-    this.step = 2;
-    this.selectedPosition = obj;
-    for (let item of this.selectedPosition.contentCategorieses) {
-      this.listCategoryWeight.push(item);
+  next(obj, step) {
+    switch (step) {
+      case 1:
+        this.step = 2;
+        this.selectedPosition = obj;
+        for (let item of this.selectedPosition.contentCategorieses) {
+          this.listCategoryWeight.push(item);
+        }
+        break;
+      case 2:
+        this.step = 3;
+        break;
     }
     console.log(this.listCategoryWeight);
   }
-  back() {
-    this.step = 1;
-    this.listCategoryWeight = [];
+  back(currentStep) {
+    switch (currentStep) {
+      case 2:
+        this.step = 1;
+        this.listCategoryWeight = [];
+        break;
+      case 3:
+        this.step = 2;
+        break;
+    }
   }
 
   // Select category -checkbox
   checked(ev, categories) {
     if (ev.checked) {
       if (this.listCategoryWeight.length == 0) {
-        this.listCategoryWeight.push({ categories, 'weight': null });
-        this.selectedPosition.contentCategorieses.push({ categories, 'weight': null });
+        this.listCategoryWeight.push({ categories, 'weight': 1 });
+        this.selectedPosition.contentCategorieses.push({ categories, 'weight': 1 });
       }
       else {
         let push: boolean = false;
@@ -49,8 +63,8 @@ export class ContentComponent implements OnInit {
           }
         }
         if (push) {
-          this.listCategoryWeight.push({ categories, 'weight': null });
-          this.selectedPosition.contentCategorieses.push({ categories, 'weight': null });
+          this.listCategoryWeight.push({ categories, 'weight': 1 });
+          this.selectedPosition.contentCategorieses.push({ categories, 'weight': 1 });
         }
       }
     }
@@ -63,6 +77,7 @@ export class ContentComponent implements OnInit {
     }
     console.log(this.listCategoryWeight);
   }
+  // Remove from list 'Selected categories'
   unchecked(position) {
     if (this.listCategoryWeight.length > 0) {
       let index = this.listCategoryWeight.findIndex(item => item['categories'] == position.categories);
@@ -74,29 +89,16 @@ export class ContentComponent implements OnInit {
     console.log(this.listCategoryWeight);
   }
 
-  // Slider for each category
-  sliderChange(ev, id, index) {
-    if (this.listCategoryWeight.length !== 0) {
-      for (let i = 0; i < this.listCategoryWeight.length; i++) {
-        if (this.listCategoryWeight[i]['categoryId'] === id) {
-          this.listCategoryWeight[i]['weight'] = ev.value;
-        }
-      }
-    }
-    console.log(this.listCategoryWeight);
-  }
-  manageCategories(positions) {
-    console.log(positions);
-  }
-
   save() {
-    // this.contentService.updateContent(this.selectedPosition, this.selectedWeight.toString(), this.selectedCategory.toString())
-    //   .subscribe(
-    //     res => {
-    //       console.log(res);
-    //     },
-    //     err => console.log(err)
-    //   )
+    this.selectedPosition['contentCategorieses'] = this.listCategoryWeight;
+
+    this.contentService.updateContent(this.selectedPosition)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => console.log(err)
+      )
   }
 
   ngOnInit() {
