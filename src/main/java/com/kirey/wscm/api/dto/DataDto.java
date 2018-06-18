@@ -1,7 +1,6 @@
 package com.kirey.wscm.api.dto;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 /**
  * Class used to keep data for notification payload part

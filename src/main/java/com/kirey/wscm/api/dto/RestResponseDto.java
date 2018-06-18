@@ -1,8 +1,6 @@
 package com.kirey.wscm.api.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Custom DTO used for rest responses and validation

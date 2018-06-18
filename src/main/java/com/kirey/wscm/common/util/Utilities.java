@@ -18,7 +18,9 @@ import com.kirey.wscm.common.constants.AppConstants;
 /**
  * Class containing utility methods used in multiple classes.
  *
+ * @author paunovicm
  */
+
 public class Utilities {
 
 	/**

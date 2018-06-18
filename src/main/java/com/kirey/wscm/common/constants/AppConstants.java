@@ -1,7 +1,5 @@
 package com.kirey.wscm.common.constants;
 
-import javax.mail.internet.InternetAddress;
-
 /**
  * Constants for application.
  *

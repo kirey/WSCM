@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kirey.wscm.data.entity.Links;
 
+/**
+ * @author paunovicm
+ *
+ */
+
 @Repository(value = "linksDao")
 public class LinksDao extends KjcBaseDao {
 	
@@ -18,6 +23,11 @@ public class LinksDao extends KjcBaseDao {
 		entityClass = Links.class;
 	}
 
+	/**
+	 * Method for getting {@link Links} by url
+	 * @param url
+	 * @return {@link Links}
+	 */
 	public Links findByUrl(String url) {
 		String hql = "from Links l where l.url = :url";
 		Links link = (Links) sessionFactory.getCurrentSession().createQuery(hql).setParameter("url", url).uniqueResult();

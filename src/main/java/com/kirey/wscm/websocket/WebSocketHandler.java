@@ -6,11 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -20,10 +17,14 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.kirey.wscm.data.dao.WscmUserAccountsDao;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.ContentService;
-import com.kirey.wscm.security.UnauthorizedEntryPoint;
+
+/**
+ * @author paunovicm
+ *
+ */
 
 @Component
-public class CounterHandler extends TextWebSocketHandler {
+public class WebSocketHandler extends TextWebSocketHandler {
 	
 	@Autowired
 	private WscmUserAccountsDao wscmUserAccountsDao;
@@ -34,7 +35,8 @@ public class CounterHandler extends TextWebSocketHandler {
 	List<WebSocketSession> allSessions = new CopyOnWriteArrayList<>();
 	List<WebSocketSession> filteredSessions = new ArrayList<>();
 
-	
+	// ****UNUSED****
+	//Example method
 	public void counterIncrementedCallback(int counter) {
 		for (WebSocketSession session : allSessions) {
 			System.out.println("Trying to send:" + counter);
@@ -51,6 +53,10 @@ public class CounterHandler extends TextWebSocketHandler {
 		}
 	}
 	
+	/**
+	 * Method for sending a WebSocket message to specific users
+	 * @param content
+	 */
 	public void sendNotificationToFilteredUsers(String content) {
 		for (WebSocketSession session : filteredSessions) {
 			if (session != null && session.isOpen()) {
@@ -79,7 +85,6 @@ public class CounterHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("Connection established");
-		System.out.println("-------------------------------------------------- " + session.getHandshakeHeaders());
 		allSessions.add(session);
 		Principal principal =  session.getPrincipal();
 		if(principal != null) {
@@ -94,14 +99,8 @@ public class CounterHandler extends TextWebSocketHandler {
 	}
 	
 	
-
+	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-		System.out.println(status.getReason());
-		System.out.println(status.getCode());
-		System.out.println(session.getRemoteAddress());
-		System.out.println(session.getId());
-		System.out.println(session.getHandshakeHeaders());
-		System.out.println(session.getHandshakeHeaders().getFirst("Cookie"));
 		filteredSessions.remove(session);
 		allSessions.remove(session);
 	}

@@ -1,21 +1,15 @@
 package com.kirey.wscm.api.restcontrollers;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
-import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
-import org.jsoup.select.Evaluator.IsEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
@@ -42,8 +35,12 @@ import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.TemplateEngine;
 import com.kirey.wscm.email.MailService;
 import com.kirey.wscm.security.SecurityUtils;
-import com.kirey.wscm.websocket.CounterHandler;
+import com.kirey.wscm.websocket.WebSocketHandler;
 
+/**
+ * @author paunovicm
+ *
+ */
 
 @RestController(value = "testController")
 @RequestMapping(value = "/rest/content")
@@ -70,7 +67,7 @@ public class TestController {
 	private MailService mailService;
 	
 	@Autowired
-    private CounterHandler counterHandler;
+    private WebSocketHandler counterHandler;
 	
 	@Autowired
 	private NotificationsDao notificationsDao;

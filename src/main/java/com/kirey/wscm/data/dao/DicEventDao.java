@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kirey.wscm.data.entity.DicEvent;
 
+/**
+ * @author paunovicm
+ *
+ */
+
 @Repository(value = "dicEventDao")
 public class DicEventDao extends KjcBaseDao {
 	

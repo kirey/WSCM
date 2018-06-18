@@ -8,7 +8,14 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kirey.wscm.data.entity.Categories;
 import com.kirey.wscm.data.entity.Content;
+
+/**
+ * @author paunovicm
+ *
+ */
+
 
 @Repository(value = "contentDao")
 public class ContentDao extends KjcBaseDao {
@@ -39,25 +46,48 @@ public class ContentDao extends KjcBaseDao {
 		return css;
 	}
 
+	/**
+	 * Method for getting html from {@link Content} by page and position
+	 * @param page
+	 * @param position
+	 * @return String html
+	 */
 	public String getHtmlForPosition(String page, String position) {
 		String hql = "select cont.html from Content cont where cont.page = :page and cont.position = :position";
 		String html = (String) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).uniqueResult();
 		return html;
 	}
 	
+	/**
+	 * Method for getting css from {@link Content} by page and position
+	 * @param page
+	 * @param position
+	 * @return String css
+	 */
 	public String getCssForPosition(String page, String position) {
 		String hql = "select cont.css from Content cont where cont.page = :page and cont.position = :position";
 		String css = (String) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).uniqueResult();
 		return css;
 	}
 
+	/**
+	 * Method for getting {@link Content} by page and position
+	 * @param page
+	 * @param position
+	 * @return {@link Content}
+	 */
 	public Content getContentByPagePosition(String page, String position) {
 		String hql = "from Content cont where cont.page = :page and cont.position = :position";
 		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).uniqueResult();
 		return content;
 	}
 
-	
+	/**
+	 * Method for getting {@link List} of {@link Content} by page and language
+	 * @param page
+	 * @param lang
+	 * @return {@link List}<{@link Content}>
+	 */
 	public List<Content> findByPageLang(String page, String lang) {
 		String hql = "from Content cont where cont.page = :page and cont.language = :lang";
 		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("lang", lang).list();
@@ -65,24 +95,46 @@ public class ContentDao extends KjcBaseDao {
 		
 	}
 
+	/**
+	 * Method for getting {@link Content} by page, position and language
+	 * @param page
+	 * @param position
+	 * @param lang
+	 * @return {@link Content}
+	 */
 	public Content findByPagePositionLang(String page, String position, String lang) {
 		String hql = "from Content cont where cont.page = :page and cont.position = :position and cont.language = :lang";
 		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).setParameter("lang", lang).uniqueResult();
 		return content;
 	}
 
+	/**
+	 * Method for getting {@link List} of {@link Content} by page
+	 * @param page
+	 * @return {@link List}<{@link Content}>
+	 */
 	public List<Content> findByPage(String page) {
 		String hql = "from Content cont where cont.page = :page";
 		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).list();
 		return listContent;
 	}
 
+	/**
+	 * Method for getting {@link List} of {@link Content} by category id
+	 * @param categoryId
+	 * @return {@link List}<{@link Content}>
+	 */
 	public List<Content> findContentByCategory(int categoryId) {
 		String hql = "select cc.content from ContentCategories cc where cc.categories.id = :categoryId";
 		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("categoryId", categoryId).list();
 		return listContent;
 	}
 
+	/**
+	 * Method for getting {@link List} of {@link Content} by page with all {@link Categories} initialized
+	 * @param page
+	 * @return {@link List}<{@link Content}>
+	 */
 	public List<Content> findByPageAndInitCategories(String page) {
 		String hql = "from Content cont where cont.page = :page";
 		List<Content> listContent = sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).list();

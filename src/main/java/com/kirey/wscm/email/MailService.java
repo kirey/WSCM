@@ -1,8 +1,8 @@
 package com.kirey.wscm.email;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -10,17 +10,11 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-import org.springframework.web.accept.ServletPathExtensionContentNegotiationStrategy;
 
 import com.kirey.wscm.common.constants.AppConstants;
-import com.kirey.wscm.common.constants.ErrorConstants;
 import com.kirey.wscm.data.dao.NotificationsDao;
 import com.kirey.wscm.data.dao.NotificationsSentDao;
 import com.kirey.wscm.data.dao.WscmUserAccountsDao;
@@ -28,12 +22,12 @@ import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.entity.NotificationsSent;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 
-import freemarker.core.ParseException;
-import freemarker.template.Configuration;
-import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateNotFoundException;
+
+/**
+ * @author paunovicm
+ *
+ */
 
 @Service
 public class MailService {
@@ -53,6 +47,14 @@ public class MailService {
 		this.mailSender = mailSender;
 	}
 	
+	/**
+	 * Method for sending email to User. After sending e-mail new {@link NotificationsSent} is created and stored into DB
+	 * @param templateName - name of {@link Notifications} in which template is stored
+	 * @param emailTo - who is e-mailed
+	 * @param subject - subject of the message
+	 * @param templateModel - the holder of the variables visible from the template (name-value pairs); 
+	 * @param attachmentFiles - {@link HashMap} contains attachment name as key and attachment file as value
+	 */
 	public void sendDefaultEmail(String templateName, String emailTo, String subject, Map<String, Object> templateModel, Map<String, byte[]> attachmentFiles)  {
 	
 		Notifications notification = notificationsDao.findNotificationByName(templateName);
@@ -89,7 +91,12 @@ public class MailService {
 		}
 	}
 	
-	
+	/**
+	 * Method for getting email content by processing {@link Template}
+	 * @param model - the holder of the variables visible from the template (name-value pairs); 
+	 * @param templateName - template source code which need to be processed
+	 * @return {@link String} emailContent
+	 */
 	public String processTemplateContent(Map<String, Object> model, String templateName) {
 		
 		StringBuilder sb = new StringBuilder();

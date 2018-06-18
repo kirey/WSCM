@@ -13,6 +13,11 @@ import com.kirey.wscm.data.entity.UserIpAddress;
 import com.kirey.wscm.data.entity.UserLinks;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 
+/**
+ * @author paunovicm
+ *
+ */
+
 @Service
 public class ContentService {
 	
@@ -25,6 +30,15 @@ public class ContentService {
 	@Autowired
 	private IpAddressLinksDao ipAddressLinksDao;
 
+	/**
+	 * Method for creating or updating relations between:
+	 * <p> - {@link WscmUserAccounts} and {@link IpAddress} (entity: {@link UserIpAddress}) 
+	 * <p> - {@link WscmUserAccounts} and {@link Links} (entity: {@link UserLinks})
+	 * <p> - {@link IpAddress} and {@link Links} (entity: {@link IpAddressLinks})
+	 * @param link
+	 * @param ipAddress
+	 * @param user
+	 */
 	public void createOrUpdateRelations(Links link, IpAddress ipAddress, WscmUserAccounts user) {
 		if(user != null) {
 			UserIpAddress userIpAddress = userIpAddressDao.findByUserAddress(user, ipAddress); 

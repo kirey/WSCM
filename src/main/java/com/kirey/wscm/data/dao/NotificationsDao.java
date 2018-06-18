@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kirey.wscm.data.entity.Notifications;
 
+/**
+ * @author paunovicm
+ *
+ */
+
 @Repository(value = "notificationsDao")
 public class NotificationsDao extends KjcBaseDao {
 	
@@ -18,7 +23,11 @@ public class NotificationsDao extends KjcBaseDao {
 		entityClass = Notifications.class;
 	}
 
-	
+	/**
+	 * Method for getting {@link Notifications} by notification name
+	 * @param notificationName
+	 * @return {@link Notifications}
+	 */
 	public Notifications findNotificationByName(String notificationName) {
 		String hql = "from Notifications notif where notif.name = :notifName";
 		Notifications notification = (Notifications) sessionFactory.getCurrentSession().createQuery(hql).setParameter("notifName", notificationName).uniqueResult();

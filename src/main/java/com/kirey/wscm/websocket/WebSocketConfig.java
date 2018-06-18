@@ -12,13 +12,18 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+/**
+ * @author paunovicm
+ *
+ */
+
 @Configuration
 @EnableWebSocket
 @EnableScheduling
 public class WebSocketConfig implements WebSocketConfigurer {
 
     @Autowired
-    CounterHandler counterHandler;
+    WebSocketHandler counterHandler;
 
 
 	
