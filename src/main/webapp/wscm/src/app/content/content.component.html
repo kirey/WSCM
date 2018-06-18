@@ -107,12 +107,17 @@
 
         </div>
         <h5 class="label">Selected categories</h5>
-        <div>
+        <div *ngIf="selectedPosition.contentCategorieses.length > 0; else nodata">
           <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box">
             <span>{{selected.categories.description}}</span>
             <mat-icon class="unselect-icon" (click)="unchecked(selected)">close</mat-icon>
           </div>
         </div>
+        <ng-template #nodata>
+          <h6>
+            <i>No selected categories.</i>
+          </h6>
+        </ng-template>
         <div class="buttons">
           <button mat-button (click)="back()">Back</button>
           <button mat-raised-button color="warn" (click)="save()">Save</button>
