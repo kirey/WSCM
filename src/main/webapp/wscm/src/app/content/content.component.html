@@ -2,7 +2,7 @@
   <!-- Accordion -->
   <mat-accordion *ngIf="positions" color="accent">
     <!-- Expansion panel START -->
-    <mat-expansion-panel *ngFor="let position of positions" (closed)="panelClosed()">
+    <mat-expansion-panel *ngFor="let position of positions" (closed)="resetData()">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{position.position}}
@@ -128,11 +128,18 @@
       <!-- S T E P 3 -->
       <div *ngIf="step == 3" class="sliders">
         <h5 class="label">Select weight for each category</h5>
-        <div *ngFor="let item of listCategoryWeight">
-          <h6>{{item.categories.description}}</h6>
-          <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [(ngModel)]="item.weight">
-          </mat-slider>
+        <div *ngIf="listCategoryWeight.length > 0; else nodata">
+          <div *ngFor="let item of listCategoryWeight">
+            <h6>{{item.categories.description}}</h6>
+            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [(ngModel)]="item.weight">
+            </mat-slider>
+          </div>
         </div>
+        <ng-template #nodata>
+          <h6>
+            <i>No selected categories.</i>
+          </h6>
+        </ng-template>
         <div class="buttons">
           <button mat-button (click)="back(3)">Back</button>
           <button mat-raised-button color="warn" (click)="save()">Save</button>

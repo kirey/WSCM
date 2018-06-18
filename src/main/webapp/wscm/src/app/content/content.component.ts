@@ -17,8 +17,21 @@ export class ContentComponent implements OnInit {
   selectedPosition: any;
   listCategoryWeight: Array<Object> = [];
 
-  panelClosed() {
+  // Get Positions
+  getPositions() {
+    this.contentService.getPositions('home')
+      .subscribe(
+        res => {
+          console.log(res);
+          this.positions = res;
+        },
+        err => console.log(err)
+      );
+  }
+  // Reset Data
+  resetData() {
     this.step = 1;
+    this.listCategoryWeight = [];
   }
 
   next(obj, step) {
@@ -95,22 +108,18 @@ export class ContentComponent implements OnInit {
     this.contentService.updateContent(this.selectedPosition)
       .subscribe(
         res => {
-          console.log(res);
+          console.log(res)
+          this.snackbar.openSnackBar('Success', res['data']);
+          this.getPositions();
+          this.resetData();
+
         },
         err => console.log(err)
       )
   }
 
   ngOnInit() {
-    // Get Positions
-    this.contentService.getPositions('home')
-      .subscribe(
-        res => {
-          console.log(res);
-          this.positions = res;
-        },
-        err => console.log(err)
-      );
+    this.getPositions();
 
     // Get Categories
     this.contentService.getCategories()
