@@ -15,6 +15,7 @@ import java.util.Optional;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
+import org.jsoup.select.Evaluator.IsEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -299,8 +300,8 @@ public class TestController {
 		for(WebSocketSession activeSession : counterHandler.getAllSessions()) {
 			for (WscmUserAccounts wscmUserAccounts : usersByCategory) {
 				if(activeSession.getId().equals(wscmUserAccounts.getSocketSessionId())) {
-					Optional<WebSocketSession> exist = counterHandler.getFilteredSessions().stream().filter(e -> !e.getId().equals(activeSession.getId())).findAny();
-					if(!exist.isPresent()) {
+					boolean exist = counterHandler.getFilteredSessions().stream().anyMatch(e -> e.getId().equals(activeSession.getId()));
+					if(!exist) {
 						counterHandler.getFilteredSessions().add(activeSession);	
 					}
 				}

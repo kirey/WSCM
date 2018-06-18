@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -17,6 +20,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.kirey.wscm.data.dao.WscmUserAccountsDao;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.ContentService;
+import com.kirey.wscm.security.UnauthorizedEntryPoint;
 
 @Component
 public class CounterHandler extends TextWebSocketHandler {
@@ -76,13 +80,17 @@ public class CounterHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("Connection established");
 		System.out.println("-------------------------------------------------- " + session.getHandshakeHeaders());
-//		this.session = session;
 		allSessions.add(session);
 		Principal principal =  session.getPrincipal();
-		UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
-		WscmUserAccounts user = (WscmUserAccounts) token.getPrincipal();
-		user.setSocketSessionId(session.getId());
-		wscmUserAccountsDao.merge(user);
+		if(principal != null) {
+			UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
+			WscmUserAccounts user = (WscmUserAccounts) token.getPrincipal();
+			user.setSocketSessionId(session.getId());
+			wscmUserAccountsDao.merge(user);
+		}else {
+//			 throw new AuthenticationCredentialsNotFoundException("not found");
+		}
+		
 	}
 	
 	
