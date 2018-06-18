@@ -110,7 +110,7 @@
         <div>
           <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box">
             <span>{{selected.categories.description}}</span>
-            <mat-icon class="unselect-icon">close</mat-icon>
+            <mat-icon class="unselect-icon" (click)="unchecked(selected)">close</mat-icon>
           </div>
         </div>
         <div class="buttons">

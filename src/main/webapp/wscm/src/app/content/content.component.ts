@@ -14,12 +14,8 @@ export class ContentComponent implements OnInit {
   positions: any;
   categories: any;
   step: number = 1;
-  currentList: Array<Object> = [];
   selectedPosition: any;
-  selectedCategory: string;
-  selectedWeight: number;
   listCategoryWeight: Array<Object> = [];
-  objectCategoryWeight: Object;
 
   panelClosed() {
     this.step = 1;
@@ -28,27 +24,22 @@ export class ContentComponent implements OnInit {
   next(obj) {
     this.step = 2;
     this.selectedPosition = obj;
+    for (let item of this.selectedPosition.contentCategorieses) {
+      this.listCategoryWeight.push(item);
+    }
+    console.log(this.listCategoryWeight);
   }
   back() {
     this.step = 1;
     this.listCategoryWeight = [];
   }
 
-  checkboxValue(id) {
-    for (let i = 0; i < this.currentList.length; i++) {
-      console.log(i);
-      if (this.currentList[i]['categories']['id'] === id) {
-        return true;
-      }
-      return false;
-    }
-  }
-
   // Select category -checkbox
   checked(ev, categories) {
     if (ev.checked) {
       if (this.listCategoryWeight.length == 0) {
-        this.listCategoryWeight.push({ categories });
+        this.listCategoryWeight.push({ categories, 'weight': null });
+        this.selectedPosition.contentCategorieses.push({ categories, 'weight': null });
       }
       else {
         let push: boolean = false;
@@ -57,12 +48,28 @@ export class ContentComponent implements OnInit {
             push = true;
           }
         }
-        if (push) this.listCategoryWeight.push({ categories });
+        if (push) {
+          this.listCategoryWeight.push({ categories, 'weight': null });
+          this.selectedPosition.contentCategorieses.push({ categories, 'weight': null });
+        }
       }
     }
     else {
       let index = this.listCategoryWeight.findIndex(item => item['categories'] == categories);
       this.listCategoryWeight.splice(index, 1);
+
+      let index2 = this.selectedPosition['contentCategorieses'].findIndex(item => item['categories'] == categories);
+      this.selectedPosition['contentCategorieses'].splice(index2, 1);
+    }
+    console.log(this.listCategoryWeight);
+  }
+  unchecked(position) {
+    if (this.listCategoryWeight.length > 0) {
+      let index = this.listCategoryWeight.findIndex(item => item['categories'] == position.categories);
+      this.listCategoryWeight.splice(index, 1);
+
+      let index2 = this.selectedPosition['contentCategorieses'].findIndex(item => item['categories'] == position.categories);
+      this.selectedPosition['contentCategorieses'].splice(index2, 1);
     }
     console.log(this.listCategoryWeight);
   }
@@ -78,20 +85,18 @@ export class ContentComponent implements OnInit {
     }
     console.log(this.listCategoryWeight);
   }
-
-  categorySelected() {
-    return true;
+  manageCategories(positions) {
+    console.log(positions);
   }
 
   save() {
-
-    this.contentService.updateContent(this.selectedPosition, this.selectedWeight.toString(), this.selectedCategory.toString())
-      .subscribe(
-        res => {
-          console.log(res);
-        },
-        err => console.log(err)
-      )
+    // this.contentService.updateContent(this.selectedPosition, this.selectedWeight.toString(), this.selectedCategory.toString())
+    //   .subscribe(
+    //     res => {
+    //       console.log(res);
+    //     },
+    //     err => console.log(err)
+    //   )
   }
 
   ngOnInit() {
