@@ -95,19 +95,28 @@
 
       <!-- Form -->
       <div class="categories" *ngIf="step == 2">
-        <h5 class="label">Select category</h5>
-        <mat-form-field class="categories-form-field">
-          <mat-select [(ngModel)]="selectedCategory" placeholder="Category name">
-            <mat-option *ngFor="let category of categories" [value]="category.id">
+        <h5 class="label">Select categories for this position</h5>
+        <div class="categories-box">
+          <div *ngFor="let category of categories | filter : selectedPosition.contentCategorieses: 'categories'">
+            <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after">
               {{category.description}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Slider -->
-        <h5 class="label">Select weight for category</h5>
-        <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [(ngModel)]="selectedWeight">
-        </mat-slider>
-        <button mat-raised-button color="warn" (click)="save()">Save</button>
+            </mat-checkbox>
+            <!-- <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id, i)">
+            </mat-slider> -->
+          </div>
+
+        </div>
+        <h5 class="label">Selected categories</h5>
+        <div>
+          <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box">
+            <span>{{selected.categories.description}}</span>
+            <mat-icon class="unselect-icon">close</mat-icon>
+          </div>
+        </div>
+        <div class="buttons">
+          <button mat-button (click)="back()">Back</button>
+          <button mat-raised-button color="warn" (click)="save()">Save</button>
+        </div>
       </div>
       <!-- Form - END -->
     </mat-expansion-panel>

@@ -14,6 +14,9 @@ import { MaterialModule } from './shared/modules/material.module';
 // Services
 import { PanelService } from './panel/panel.service';
 
+// Pipes
+import { FilterPipe } from './shared/pipes/filter.pipe';
+
 // Components
 import { PanelComponent } from './panel/panel.component';
 import { AppComponent } from './app.component';
@@ -30,7 +33,8 @@ import { LanguagesComponent } from './languages/languages.component';
     ContentComponent,
     HomeComponent,
     LoginComponent,
-    LanguagesComponent
+    LanguagesComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

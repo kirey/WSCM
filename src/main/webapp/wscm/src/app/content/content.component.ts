@@ -11,13 +11,15 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 export class ContentComponent implements OnInit {
 
   constructor(public contentService: ContentService) { }
-
   positions: any;
   categories: any;
   step: number = 1;
+  currentList: Array<Object> = [];
   selectedPosition: any;
   selectedCategory: string;
   selectedWeight: number;
+  listCategoryWeight: Array<Object> = [];
+  objectCategoryWeight: Object;
 
   panelClosed() {
     this.step = 1;
@@ -27,8 +29,61 @@ export class ContentComponent implements OnInit {
     this.step = 2;
     this.selectedPosition = obj;
   }
+  back() {
+    this.step = 1;
+    this.listCategoryWeight = [];
+  }
+
+  checkboxValue(id) {
+    for (let i = 0; i < this.currentList.length; i++) {
+      console.log(i);
+      if (this.currentList[i]['categories']['id'] === id) {
+        return true;
+      }
+      return false;
+    }
+  }
+
+  // Select category -checkbox
+  checked(ev, categories) {
+    if (ev.checked) {
+      if (this.listCategoryWeight.length == 0) {
+        this.listCategoryWeight.push({ categories });
+      }
+      else {
+        let push: boolean = false;
+        for (let i = 0; i < this.listCategoryWeight.length; i++) {
+          if (this.listCategoryWeight[i]['categoryId'] != categories.id) {
+            push = true;
+          }
+        }
+        if (push) this.listCategoryWeight.push({ categories });
+      }
+    }
+    else {
+      let index = this.listCategoryWeight.findIndex(item => item['categories'] == categories);
+      this.listCategoryWeight.splice(index, 1);
+    }
+    console.log(this.listCategoryWeight);
+  }
+
+  // Slider for each category
+  sliderChange(ev, id, index) {
+    if (this.listCategoryWeight.length !== 0) {
+      for (let i = 0; i < this.listCategoryWeight.length; i++) {
+        if (this.listCategoryWeight[i]['categoryId'] === id) {
+          this.listCategoryWeight[i]['weight'] = ev.value;
+        }
+      }
+    }
+    console.log(this.listCategoryWeight);
+  }
+
+  categorySelected() {
+    return true;
+  }
+
   save() {
-    this.selectedPosition['contentCategorieses'] = null;
 
     this.contentService.updateContent(this.selectedPosition, this.selectedWeight.toString(), this.selectedCategory.toString())
       .subscribe(
