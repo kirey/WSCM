@@ -1,5 +1,7 @@
 package com.kirey.wscm.data.dao;
 
+import java.util.List;
+
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,17 @@ public class ContentCategoriesDao extends KjcBaseDao {
 	public ContentCategories findByContentCategory(Integer contentId, Integer categoryId) {
 		String hql = "from ContentCategories cc where cc.categories.id = :categoryId and cc.content.id = :contentId";
 		ContentCategories contentCategories = (ContentCategories) sessionFactory.getCurrentSession().createQuery(hql).setParameter("categoryId", categoryId).setParameter("contentId", contentId).uniqueResult();
+		return contentCategories;
+	}
+
+	/**
+	 * Method used for getting {@link List} of {@link ContentCategories} by content id
+	 * @param contentId
+	 * @return {@link List}<{@link ContentCategories}>
+	 */
+	public List<ContentCategories> findByContent(Integer contentId) {
+		String hql = "from ContentCategories cc where cc.content.id = :contentId";
+		 List<ContentCategories> contentCategories = sessionFactory.getCurrentSession().createQuery(hql).setParameter("contentId", contentId).list();
 		return contentCategories;
 	}
 

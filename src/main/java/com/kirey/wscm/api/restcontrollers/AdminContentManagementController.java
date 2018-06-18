@@ -83,7 +83,23 @@ public class AdminContentManagementController {
 
 		
 		Content savedContent = (Content) contentDao.merge(content);
+		
+		List<ContentCategories> contentCategoriesFromDb = contentCategoriesDao.findByContent(savedContent.getId());
+		
 		List<ContentCategories> contentCategorieses = content.getContentCategorieses();
+		
+		for (ContentCategories contentCategoryDb : contentCategoriesFromDb) {
+			boolean exist = false;
+			for (ContentCategories contentCategory : contentCategorieses) {
+				if(contentCategoryDb.getCategories().getId().equals(contentCategory.getCategories().getId())) {
+					exist = true;
+				}
+			}
+			if(!exist) {
+				contentCategoriesDao.delete(contentCategoryDb);
+			}
+		}
+		
 		for (ContentCategories contentCategory : contentCategorieses) {
 			ContentCategories contentCategories = contentCategoriesDao.findByContentCategory(savedContent.getId(), contentCategory.getCategories().getId());
 			if (contentCategories == null) {
