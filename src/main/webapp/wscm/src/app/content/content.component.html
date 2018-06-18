@@ -97,7 +97,7 @@
       <div class="categories" *ngIf="step == 2">
         <h5 class="label">Select categories for this position</h5>
         <div class="categories-box">
-          <div *ngFor="let category of categories | filter : selectedPosition.contentCategorieses">
+          <div *ngFor="let category of categories | filter : selectedPosition.contentCategorieses: 'categories'">
             <mat-checkbox color="warn" (change)="checked($event, category.id)" labelPosition="after">
               {{category.description}}
             </mat-checkbox>
