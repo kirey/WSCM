@@ -98,7 +98,7 @@
         <h5 class="label">Select categories for this position</h5>
         <div class="categories-box">
           <div *ngFor="let category of categories | filter : selectedPosition.contentCategorieses: 'categories'">
-            <mat-checkbox color="warn" (change)="checked($event, category.id)" labelPosition="after">
+            <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after">
               {{category.description}}
             </mat-checkbox>
             <!-- <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id, i)">

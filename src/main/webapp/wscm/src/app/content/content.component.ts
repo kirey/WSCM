@@ -45,23 +45,23 @@ export class ContentComponent implements OnInit {
   }
 
   // Select category -checkbox
-  checked(ev, id, index) {
+  checked(ev, categories) {
     if (ev.checked) {
       if (this.listCategoryWeight.length == 0) {
-        this.listCategoryWeight.push({ 'categoryId': id });
+        this.listCategoryWeight.push({ categories });
       }
       else {
         let push: boolean = false;
         for (let i = 0; i < this.listCategoryWeight.length; i++) {
-          if (this.listCategoryWeight[i]['categoryId'] != id) {
+          if (this.listCategoryWeight[i]['categoryId'] != categories.id) {
             push = true;
           }
         }
-        if (push) this.listCategoryWeight.push({ 'categoryId': id });
+        if (push) this.listCategoryWeight.push({ categories });
       }
     }
     else {
-      let index = this.listCategoryWeight.findIndex(item => item['categoryId'] == id);
+      let index = this.listCategoryWeight.findIndex(item => item['categories'] == categories);
       this.listCategoryWeight.splice(index, 1);
     }
     console.log(this.listCategoryWeight);
