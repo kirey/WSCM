@@ -1,16 +1,13 @@
 package com.kirey.wscm.api.restcontrollers;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
@@ -33,9 +30,17 @@ import com.kirey.wscm.data.dao.WscmUserAccountsDao;
 import com.kirey.wscm.data.entity.Categories;
 import com.kirey.wscm.data.entity.Content;
 import com.kirey.wscm.data.entity.IpAddress;
+import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.TemplateEngine;
 import com.kirey.wscm.email.MailService;
+import com.kirey.wscm.security.SecurityUtils;
+import com.kirey.wscm.websocket.WebSocketHandler;
+
+/**
+ * @author paunovicm
+ *
+ */
 
 @RestController(value = "testController")
 @RequestMapping(value = "/rest/content")
@@ -62,6 +67,9 @@ public class TestController {
 	private MailService mailService;
 	
 	@Autowired
+    private WebSocketHandler counterHandler;
+	
+	@Autowired
 	private NotificationsDao notificationsDao;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -71,6 +79,8 @@ public class TestController {
 		String ipAddress = "192.168.60.21";
 		List<Categories> listCategories = categoriesDao.findCategoriesByIp(ipAddress); 
 		List<Content> listContents = contentDao.findContentByCategory(1);
+		
+		WscmUserAccounts user = SecurityUtils.getUserFromContext();
 
 		System.out.println("test");
 		
@@ -255,6 +265,47 @@ public class TestController {
 		attachmentFiles.put("attachment.jpg", b);
 		
 		mailService.sendDefaultEmail("test", "m.paunovic@dyntechdoo.com", "test", templateModel, attachmentFiles);
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Mail sent!", HttpStatus.OK.value()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/socket", method = RequestMethod.GET)
+	public ResponseEntity<RestResponseDto> socketTest() throws Exception {
+		
+		
+		Notifications notification = notificationsDao.findNotificationByName("testSocket");
+		String templateString = notification.getNotificationTemplate(); 
+		Map<String, Object> templateModel = new HashMap<>();
+		List<IpAddress> listAddresses = ipAddressDao.findAll();
+		WscmUserAccounts user = wscmUserAccountsDao.findById(1);
+		File file = new File("c:\\image009.jpg");
+		InputStream is = new FileInputStream(file);
+		byte[] b = IOUtils.toByteArray(is);
+		byte[] encoded = Base64.getEncoder().encode(b);
+		templateModel.put("korisnik", "milos");
+		templateModel.put("ipAddress", listAddresses.get(0));
+		templateModel.put("user", user);
+		templateModel.put("slika", new String(encoded));
+		String notificationContent = mailService.processTemplateContent(templateModel, templateString);
+		
+		
+		
+		
+		
+		List<WscmUserAccounts> usersByCategory = wscmUserAccountsDao.findUsersByCategory("insurance");
+		
+		for(WebSocketSession activeSession : counterHandler.getAllSessions()) {
+			for (WscmUserAccounts wscmUserAccounts : usersByCategory) {
+				if(activeSession.getId().equals(wscmUserAccounts.getSocketSessionId())) {
+					boolean exist = counterHandler.getFilteredSessions().stream().anyMatch(e -> e.getId().equals(activeSession.getId()));
+					if(!exist) {
+						counterHandler.getFilteredSessions().add(activeSession);	
+					}
+				}
+			}
+		}
+		
+		counterHandler.sendNotificationToFilteredUsers(notificationContent);
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Mail sent!", HttpStatus.OK.value()), HttpStatus.OK);
 	}

@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kirey.wscm.data.entity.LinksCategories;
 
+/**
+ * @author paunovicm
+ *
+ */
+
 @Repository(value = "linksCategoriesDao")
 public class LinksCategoriesDao extends KjcBaseDao {
 	

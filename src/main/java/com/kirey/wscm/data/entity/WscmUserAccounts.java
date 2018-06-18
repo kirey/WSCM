@@ -1,24 +1,19 @@
 package com.kirey.wscm.data.entity;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "wscm_user_accounts")
@@ -31,6 +26,7 @@ public class WscmUserAccounts implements UserDetails{
 	private String password;
 	private String email;
 	private String role;
+	private String socketSessionId;
 	
 //	@JsonBackReference(value = "wscmUserIpAddress")
 //	private List<UserIpAddress> userIpAddress = new ArrayList<>();
@@ -46,6 +42,9 @@ public class WscmUserAccounts implements UserDetails{
 	
 	@Transient
     private List<WscmRoles> wscmRoles;
+	
+	@Transient
+	private String sessionId;
 	
 	
 	@Id
@@ -92,7 +91,14 @@ public class WscmUserAccounts implements UserDetails{
 	}
 	
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
+	@Column(name = "socket_session_id", unique = false, nullable = true)
+	public String getSocketSessionId() {
+		return socketSessionId;
+	}
+	public void setSocketSessionId(String socketSessionId) {
+		this.socketSessionId = socketSessionId;
+	}
+	//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
 //	public List<UserIpAddress> getUserIpAddress() {
 //		return userIpAddress;
 //	}
@@ -164,6 +170,15 @@ public class WscmUserAccounts implements UserDetails{
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	@Transient
+	public String getSessionId() {
+		return sessionId;
+	}
+	@Transient
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 	
 	

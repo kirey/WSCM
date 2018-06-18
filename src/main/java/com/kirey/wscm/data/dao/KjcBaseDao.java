@@ -1,7 +1,5 @@
 package com.kirey.wscm.data.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;

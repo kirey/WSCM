@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kirey.wscm.data.entity.NotificationsSent;
 
+/**
+ * @author paunovicm
+ *
+ */
+
 @Repository(value = "notificationsSentDao")
 public class NotificationsSentDao extends KjcBaseDao{
 	

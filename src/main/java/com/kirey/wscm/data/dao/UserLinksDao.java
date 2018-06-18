@@ -9,6 +9,11 @@ import com.kirey.wscm.data.entity.Links;
 import com.kirey.wscm.data.entity.UserLinks;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 
+/**
+ * @author paunovicm
+ *
+ */
+
 @Repository(value = "userLinksDao")
 public class UserLinksDao extends KjcBaseDao {
 	
@@ -20,6 +25,12 @@ public class UserLinksDao extends KjcBaseDao {
 		entityClass = UserLinks.class;
 	}
 
+	/**
+	 * Method for getting {@link UserLinks} by {@link WscmUserAccounts} and {@link Links}
+	 * @param user
+	 * @param link
+	 * @return {@link UserLinks}
+	 */
 	public UserLinks findByUserLink(WscmUserAccounts user, Links link) {
 		String hql = "from UserLinks ul where ul.userAccount.id = :userId and ul.link.id = :linkId";
 		UserLinks userLinks = (UserLinks) sessionFactory.getCurrentSession().createQuery(hql).setParameter("userId", user.getId()).setParameter("linkId", link.getId()).uniqueResult();
