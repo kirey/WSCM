@@ -56,6 +56,9 @@ import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.compo
   providers: [
     PanelService, AuthGuard, AuthService, LoginService
   ],
+  entryComponents: [
+    DeleteDialog
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
