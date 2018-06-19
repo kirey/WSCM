@@ -34,10 +34,12 @@
               <!-- Text -->
               <div class="tabs-text">
                 <form class="form">
-                  <mat-form-field class="textarea">
-                    <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.html">
+                  <mat-form-field class="textarea" appearance="outline">
+                    <mat-label>Enter HTML code</mat-label>
+                    <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="position.html">
                     {{position.html}}
                   </textarea>
+                    <mat-icon class="input-icon" matSuffix>code</mat-icon>
                   </mat-form-field>
                 </form>
               </div>
@@ -58,10 +60,12 @@
               <!-- Text -->
               <div class="tabs-text">
                 <form class="form">
-                  <mat-form-field class="textarea">
-                    <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.css">
+                  <mat-form-field class="textarea" appearance="outline">
+                    <mat-label>Enter CSS code</mat-label>
+                    <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="position.css">
                       {{position.css}}
                     </textarea>
+                    <mat-icon class="input-icon" matSuffix>code</mat-icon>
                   </mat-form-field>
                 </form>
               </div>
@@ -82,10 +86,12 @@
               </span>
               <!-- Text -->
               <div class="tabs-text">
-                <mat-form-field class="textarea">
-                  <textarea matInput name="textarea" placeholder="Edit code" rows="10" cols="50" [(ngModel)]="position.script">
+                <mat-form-field class="textarea" appearance="outline">
+                  <mat-label>Enter JavaScript code</mat-label>
+                  <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="position.script">
                   {{position.script}}
                 </textarea>
+                  <mat-icon class="input-icon" matSuffix>code</mat-icon>
                 </mat-form-field>
               </div>
             </div>
