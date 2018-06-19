@@ -120,6 +120,18 @@ public class AdminContentManagementController {
 				new RestResponseDto("Successfully edited content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for deleting {@link Content}
+	 * @param id
+	 * @return ResponseEntity containing the request status message and HTTP status code
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<RestResponseDto> deleteContent(@PathVariable Integer id) {
+
+		Content content = contentDao.findById(id);
+		contentDao.delete(content);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted content", HttpStatus.OK.value()), HttpStatus.OK);
+	}
 	
 	/**
 	 * Method for getting list of Content by page and language
