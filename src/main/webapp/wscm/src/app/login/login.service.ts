@@ -10,7 +10,6 @@ export class LoginService {
   public url = 'authentication';
 
   public login(data) {
-    console.log(data);
     return this.http.post(this.url, data);
   }
 }

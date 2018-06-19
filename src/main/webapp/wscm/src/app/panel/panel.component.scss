@@ -45,6 +45,12 @@
   p {
     color: white;
   }
+  em::selection {
+    background: $primary;
+  }
+  strong::selection {
+    background: $primary;
+  }
   hr {
     background-color: white;
     width: 100%;
@@ -55,7 +61,7 @@
     overflow: hidden;
   }
   mat-nav-list:hover {
-    box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
+    box-shadow: inset 0px 11px 8px -10px #fff, inset 0px -11px 8px -10px #fff;
     transition: 1s;
   }
   a {
@@ -66,5 +72,19 @@
   .material-icons {
     color: white;
     margin-right: 10px;
+  }
+  .secondSide {
+    margin-top: 110%;
+  }
+  .logoutBut a {
+    color: #009688;
+  }
+  .logoutBut i {
+    color: #009688;
+  }
+  .logoutBut:hover {
+    box-shadow: none;
+    transition: 1s;
+    border: none;
   }
 }
