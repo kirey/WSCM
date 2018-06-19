@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,13 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.kirey.wscm.data.dao.NotificationsSentDao;
 import com.kirey.wscm.data.dao.WscmUserAccountsDao;
+import com.kirey.wscm.data.entity.Notifications;
+import com.kirey.wscm.data.entity.NotificationsSent;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.ContentService;
+import com.kirey.wscm.data.service.TemplateEngine;
 
 /**
  * @author paunovicm
@@ -31,6 +36,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	
 	@Autowired
 	private ContentService contentService;
+	
+	@Autowired
+	private TemplateEngine templateEngine;
+	
+	@Autowired
+	private NotificationsSentDao notificationsSentDao;
 
 	List<WebSocketSession> allSessions = new CopyOnWriteArrayList<>();
 	List<WebSocketSession> filteredSessions = new ArrayList<>();
@@ -62,6 +73,36 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			if (session != null && session.isOpen()) {
 				try {
 					session.sendMessage(new TextMessage(content));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("Don't have open session to send");
+			}
+		}
+	}
+	
+	/**
+	 * Method for sending a WebSocket message to specific users
+	 * @param content
+	 */
+	public void sendNotificationToFilteredUsers(Notifications notification, Map<String, Object> templateModel) {
+		String templateString = notification.getNotificationTemplate(); 
+		String notificationContent = templateEngine.processTemplateContent(templateModel, templateString);
+		for (WebSocketSession session : filteredSessions) {
+			if (session != null && session.isOpen()) {
+				try {
+					session.sendMessage(new TextMessage(notificationContent));
+					//Add new NotificationsSent
+					Principal principal =  session.getPrincipal();
+					if(principal != null) {
+						UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
+						WscmUserAccounts user = (WscmUserAccounts) token.getPrincipal();
+						NotificationsSent notificationSent = new NotificationsSent();
+						notificationSent.setUserAccount(user);
+						notificationSent.setNotification(notification);
+						notificationsSentDao.attachDirty(notificationSent);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

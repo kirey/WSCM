@@ -78,5 +78,24 @@ public class TemplateEngine {
 		}
 		return sb.toString();
 	}
+	
+	/**
+	 * Method for getting email content by processing {@link Template}
+	 * @param model - the holder of the variables visible from the template (name-value pairs); 
+	 * @param templateName - template source code which need to be processed
+	 * @return {@link String} emailContent
+	 */
+	public String processTemplateContent(Map<String, Object> model, String templateName) {
+		
+		StringBuilder sb = new StringBuilder();
+		try (Writer out = new StringWriter()){
+			Template template = new Template("templ", templateName, null);
+			template.process(model, out);
+			sb.append(out.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
 
 }

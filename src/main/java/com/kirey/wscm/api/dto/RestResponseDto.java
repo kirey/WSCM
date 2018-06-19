@@ -24,6 +24,11 @@ public class RestResponseDto implements Serializable {
 		this.statusCode = statusCode;
 	}
 	
+	public RestResponseDto(Object data, String msg){
+		this.data = data;
+		this.message = msg;
+	}
+	
     public RestResponseDto(Object data, int status, String msg){
     	this.data = data;
     	this.statusCode = status;
