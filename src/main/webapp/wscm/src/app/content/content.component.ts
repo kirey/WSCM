@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ContentService } from './content.service';
 import { SnackBarService } from './../shared/services/snackbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class ContentComponent implements OnInit {
     this.listCategoryWeight = [];
   }
 
+  // NEXT button
   next(obj, step) {
     switch (step) {
       case 1:
@@ -51,6 +53,8 @@ export class ContentComponent implements OnInit {
     }
     console.log(this.listCategoryWeight);
   }
+
+  // BACK button
   back(currentStep) {
     switch (currentStep) {
       case 2:
@@ -106,16 +110,16 @@ export class ContentComponent implements OnInit {
   }
 
   // Delete Dialog
-  deleteDialog() {
-    // let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-    //   width: '250px',
-    //   data: { name: this.name, animal: this.animal }
-    // });
+  deleteDialog(type, value) {
+    let dialogRef = this.dialog.open(DeleteDialog, {
+      width: '500px',
+      data: { type: type, value: value }
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   this.animal = result;
-    // });
+    dialogRef.afterClosed().subscribe(res => {
+      console.log('The dialog was closed');
+      console.log(res);
+    });
   }
 
   // Send Request
