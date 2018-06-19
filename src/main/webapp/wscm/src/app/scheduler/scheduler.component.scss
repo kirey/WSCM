@@ -5,6 +5,7 @@
 
   table {
     width: 100%;
+    text-align: center;
   }
   tr.mat-header-row {
     background: linear-gradient(to right, $primary, $accent)!important;
@@ -12,9 +13,11 @@
    th.mat-header-cell {
     color: white;
     font-size: 1em;
+    text-align: center;
   }
   td::selection {
     background: $primary;
+    color:white;
   }
   th::selection {
     background: $primary;

@@ -18,7 +18,7 @@ export class SchedulerComponent implements OnInit {
   constructor(public schedulerService: SchedulerService) {}
 
   jobs: any;
-  displayedColumns = ['id', 'jobName', 'status', 'cronExpression'];
+  displayedColumns = ['id', 'jobName', 'status', 'cronExpression', 'changeStatus', 'actions', 'history'];
 
   ngOnInit() {
     this.schedulerService.getJobs().subscribe(
