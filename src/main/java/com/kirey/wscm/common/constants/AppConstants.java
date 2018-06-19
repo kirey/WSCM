@@ -256,16 +256,38 @@ public class AppConstants {
 	public static final String STYLE_CLOSE_TAG = "</style>";
 	public static final String SCRIPT_OPEN_TAG = "<script>";
 	public static final String SCRIPT_CLOSE_TAG = "</script>";
-	
+
 	public static final String NOTIFICATION_TYPE_SOCKET = "socket";
 	public static final String NOTIFICATION_TYPE_EMAIL = "email";
 	public static final String NOTIFICATION_TYPE_MOBILE = "mobile";
 	public static final String APPLICATION_EMAIL = "cecanda.kir@gmail.com";
-	
+
 	public static final String FIREBASE_SERVERKEY = "alerts.firebase.serverkey";
 	public static final String FIREBASE_SEND_ALERT_URL = "alerts.firebase.sendAlertUrl";
 	public static final String FIREBASE_SUBSCRIBE_PART1_URL = "alerts.firebase.subscribeURLpart1";
 	public static final String FIREBASE_SUBSCRIBE_PART2_URL = "alerts.firebase.subscribeURLpart2";
+
+	// GROUPS
+	public static final String GROUP_NAME = "group1";
+
+	// SCHEDULER STATUS
+	public static final String SCHEDULER_STATUS_ACTIVE = "ACTIVE";
+	public static final String SCHEDULER_STATUS_INACTIVE = "INACTIVE";
+
+	// JOB LOG STATUS
+	public static final String JOB_STATUS_FINISHED_SUCCESSFULL = "SUCCESSFULL";
+	public static final String JOB_STATUS_FINISHED_FAILED = "FAILED";
+	public static final String JOB_STATUS_STARTED = "STARTED";
+	public static final String JOB_STATUS_INTERRUPT = "CANCELED";
+
+	// MESSAGES
+	public static final String MSG_SUCCESSFULL = "Successfull";
+	public static final String MSG_JOB_SUCCESSFULL_STARTED = "Job successfully started";
+	public static final String MSG_JOB_SUCCESSFULL_DELETED = "Job successfully deleted";
+	public static final String MSG_CRON_EXPRESSION_INVALID = "Cron expression not valid";
+	public static final String MSG_JOB_START_FAILED = "Job starting failed";
+	public static final String MSG_JOB_SUCCESSFULL_STOPPED = "Job stopped sucesffully";
+	public static final String MSG_JOB_STOP_FAILED = "Job stop failed";
 	
 	
 	/**

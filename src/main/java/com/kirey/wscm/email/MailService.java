@@ -21,6 +21,7 @@ import com.kirey.wscm.data.dao.WscmUserAccountsDao;
 import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.entity.NotificationsSent;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
+import com.kirey.wscm.data.service.TemplateEngine;
 
 import freemarker.template.Template;
 
@@ -41,6 +42,9 @@ public class MailService {
 	@Autowired
 	private NotificationsSentDao notificationsSentDao;
 	
+	@Autowired
+	private TemplateEngine templateEngine;
+	
 	private JavaMailSender mailSender;
 	
 	public void setMailSender(JavaMailSender mailSender) {
@@ -59,7 +63,7 @@ public class MailService {
 	
 		Notifications notification = notificationsDao.findNotificationByName(templateName);
 		String templateString = notification.getNotificationTemplate(); 
-		String emailContent = this.processTemplateContent(templateModel, templateString);
+		String emailContent = templateEngine.processTemplateContent(templateModel, templateString);
 		 MimeMessage message = mailSender.createMimeMessage();
 
 		try {
@@ -91,23 +95,5 @@ public class MailService {
 		}
 	}
 	
-	/**
-	 * Method for getting email content by processing {@link Template}
-	 * @param model - the holder of the variables visible from the template (name-value pairs); 
-	 * @param templateName - template source code which need to be processed
-	 * @return {@link String} emailContent
-	 */
-	public String processTemplateContent(Map<String, Object> model, String templateName) {
-		
-		StringBuilder sb = new StringBuilder();
-		try (Writer out = new StringWriter()){
-			Template template = new Template("templ", templateName, null);
-			template.process(model, out);
-			sb.append(out.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return sb.toString();
-	}
 
 }

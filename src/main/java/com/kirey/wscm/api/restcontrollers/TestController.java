@@ -67,7 +67,7 @@ public class TestController {
 	private MailService mailService;
 	
 	@Autowired
-    private WebSocketHandler counterHandler;
+    private WebSocketHandler webSocketHandler;
 	
 	@Autowired
 	private NotificationsDao notificationsDao;
@@ -286,7 +286,7 @@ public class TestController {
 		templateModel.put("ipAddress", listAddresses.get(0));
 		templateModel.put("user", user);
 		templateModel.put("slika", new String(encoded));
-		String notificationContent = mailService.processTemplateContent(templateModel, templateString);
+		String notificationContent = templateEngine.processTemplateContent(templateModel, templateString);
 		
 		
 		
@@ -294,18 +294,18 @@ public class TestController {
 		
 		List<WscmUserAccounts> usersByCategory = wscmUserAccountsDao.findUsersByCategory("insurance");
 		
-		for(WebSocketSession activeSession : counterHandler.getAllSessions()) {
+		for(WebSocketSession activeSession : webSocketHandler.getAllSessions()) {
 			for (WscmUserAccounts wscmUserAccounts : usersByCategory) {
 				if(activeSession.getId().equals(wscmUserAccounts.getSocketSessionId())) {
-					boolean exist = counterHandler.getFilteredSessions().stream().anyMatch(e -> e.getId().equals(activeSession.getId()));
+					boolean exist = webSocketHandler.getFilteredSessions().stream().anyMatch(e -> e.getId().equals(activeSession.getId()));
 					if(!exist) {
-						counterHandler.getFilteredSessions().add(activeSession);	
+						webSocketHandler.getFilteredSessions().add(activeSession);	
 					}
 				}
 			}
 		}
 		
-		counterHandler.sendNotificationToFilteredUsers(notificationContent);
+		webSocketHandler.sendNotificationToFilteredUsers(notificationContent);
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Mail sent!", HttpStatus.OK.value()), HttpStatus.OK);
 	}
