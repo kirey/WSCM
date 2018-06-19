@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ContentService } from './content.service';
 import { SnackBarService } from './../shared/services/snackbar.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 
 @Component({
   selector: 'app-content',
@@ -10,7 +12,7 @@ import { SnackBarService } from './../shared/services/snackbar.service';
 })
 export class ContentComponent implements OnInit {
 
-  constructor(public contentService: ContentService, public snackbar: SnackBarService) { }
+  constructor(public contentService: ContentService, public snackbar: SnackBarService, public dialog: MatDialog) { }
   positions: any;
   categories: any;
   step: number = 1;
@@ -90,6 +92,7 @@ export class ContentComponent implements OnInit {
     }
     console.log(this.listCategoryWeight);
   }
+
   // Remove from list 'Selected categories'
   unchecked(position) {
     if (this.listCategoryWeight.length > 0) {
@@ -102,6 +105,20 @@ export class ContentComponent implements OnInit {
     console.log(this.listCategoryWeight);
   }
 
+  // Delete Dialog
+  deleteDialog() {
+    // let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+    //   width: '250px',
+    //   data: { name: this.name, animal: this.animal }
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   this.animal = result;
+    // });
+  }
+
+  // Send Request
   save() {
     this.selectedPosition['contentCategorieses'] = this.listCategoryWeight;
 

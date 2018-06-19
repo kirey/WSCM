@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LanguagesComponent } from './languages/languages.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { SchedulerComponent } from './scheduler/scheduler.component';
     LoginComponent,
     LanguagesComponent,
     FilterPipe,
-    SchedulerComponent
+    SchedulerComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,

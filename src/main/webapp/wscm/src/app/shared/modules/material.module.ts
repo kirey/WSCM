@@ -18,49 +18,51 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatInputModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatSidenavModule,
-    MatListModule,
-    MatTabsModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSlideToggleModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatSnackBarModule,
-    MatCheckboxModule,
-    MatCardModule
-  ],
-  exports: [
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatInputModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatSidenavModule,
-    MatListModule,
-    MatTabsModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatSlideToggleModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatSnackBarModule,
-    MatCheckboxModule,
-    MatCardModule
-  ],
-  declarations: []
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatInputModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatSidenavModule,
+        MatListModule,
+        MatTabsModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSlideToggleModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatSliderModule,
+        MatSnackBarModule,
+        MatCheckboxModule,
+        MatCardModule,
+        MatDialogModule
+    ],
+    exports: [
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatInputModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatSidenavModule,
+        MatListModule,
+        MatTabsModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatSlideToggleModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatSliderModule,
+        MatSnackBarModule,
+        MatCheckboxModule,
+        MatCardModule,
+        MatDialogModule
+    ],
+    declarations: []
 })
 export class MaterialModule { }

@@ -29,14 +29,12 @@ export class ContentService {
 
     // Update position
     updateContent(obj: Object) {
-        // let params = new HttpParams()
-        //     .set('categoryId', category)
-        //     .set('weight', weight);
-
         let options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-
-
-
         return this._http.post(this.baseUrl + '/edit', obj, options).pipe(map(res => res));
+    }
+
+    // Delete Position
+    deletePosition(id) {
+        return this._http.delete(this.baseUrl, id);
     }
 }
