@@ -11,6 +11,7 @@ export class ContentService {
     constructor(private _http: HttpClient) { }
 
     baseUrl = 'rest/admin/content';
+    options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
     // Get array of positions
     getPositions(page: String) {
@@ -29,12 +30,11 @@ export class ContentService {
 
     // Update position
     updateContent(obj: Object) {
-        let options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        return this._http.post(this.baseUrl + '/edit', obj, options).pipe(map(res => res));
+        return this._http.post(this.baseUrl + '/edit', obj, this.options).pipe(map(res => res));
     }
 
     // Delete Position
     deletePosition(id) {
-        return this._http.delete(this.baseUrl, id);
+        return this._http.delete(this.baseUrl + '/' + id, this.options);
     }
 }

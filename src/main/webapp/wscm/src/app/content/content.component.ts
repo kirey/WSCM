@@ -110,15 +110,23 @@ export class ContentComponent implements OnInit {
   }
 
   // Delete Dialog
-  deleteDialog(type, value) {
+  deleteDialog(id, type, value) {
     let dialogRef = this.dialog.open(DeleteDialog, {
       width: '500px',
       data: { type: type, value: value }
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log('The dialog was closed');
-      console.log(res);
+      if (res) {
+        this.contentService.deletePosition(id)
+          .subscribe(
+            res => {
+              console.log(res);
+
+            },
+            err => console.log(err)
+          )
+      }
     });
   }
 
