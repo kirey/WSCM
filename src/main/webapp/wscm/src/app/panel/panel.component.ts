@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PanelService } from './panel.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../shared/services/auth.service';
 
@@ -14,7 +15,8 @@ export class PanelComponent implements OnInit {
   constructor(
     public panelService: PanelService,
     public sanitizer: DomSanitizer,
-    public auth: AuthService
+    public auth: AuthService,
+    public router: Router
   ) {}
 
   style: any;
@@ -28,6 +30,7 @@ export class PanelComponent implements OnInit {
             res => {
                 console.log(res);
                 localStorage.setItem('username', '');
+                this.router.navigate(['/login']);
             },
             err => console.log(err)
         );

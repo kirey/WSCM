@@ -129,6 +129,10 @@ public class AdminContentManagementController {
 	public ResponseEntity<RestResponseDto> deleteContent(@PathVariable Integer id) {
 
 		Content content = contentDao.findById(id);
+		List<ContentCategories> listCategories = contentCategoriesDao.findByContent(id);
+		for (ContentCategories contentCategories : listCategories) {
+			contentCategoriesDao.delete(contentCategories);
+		}
 		contentDao.delete(content);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
