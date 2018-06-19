@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PanelService } from './panel.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
-
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-panel',
@@ -11,15 +11,29 @@ import { DomSanitizer } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.None
 })
 export class PanelComponent implements OnInit {
-
-  constructor(public panelService: PanelService, public sanitizer: DomSanitizer) { }
+  constructor(
+    public panelService: PanelService,
+    public sanitizer: DomSanitizer,
+    public auth: AuthService
+  ) {}
 
   style: any;
   template: any;
   script: any;
+  login = true;
+
+  logout() {
+    this.auth.logout()
+        .subscribe(
+            res => {
+                console.log(res);
+                localStorage.setItem('username', '');
+            },
+            err => console.log(err)
+        );
+}
 
   ngOnInit() {
-
     // Get TEMPLATE
     // this.panelService.getContent('home', 'P2', 'EN')
     //   .subscribe(

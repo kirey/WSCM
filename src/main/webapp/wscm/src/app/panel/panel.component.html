@@ -1,6 +1,7 @@
 <div id="panel" class="flex">
   <!-- Sidenav content -->
-  <div id="sidebar-content">
+
+  <div *ngIf="auth.isLoggedIn()" id="sidebar-content">
     <mat-sidenav-container>
       <!-- User image - info -->
       <div id="userInfo">
@@ -47,6 +48,12 @@
           <i class="material-icons">
             flag
           </i>Link</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-list-item (click)="logout()">
+          <i class="material-icons">
+            flag
+          </i>logout</a>
       </mat-nav-list>
     </mat-sidenav-container>
   </div>

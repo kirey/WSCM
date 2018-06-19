@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { map } from 'rxjs/operators';
+// import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-
 export class LoginService {
-  constructor () {}
+  constructor(public http: Http) {}
+  public url = 'authentication';
+
+  public login(data) {
+    console.log(data);
+    return this.http.post(this.url, data);
+  }
 }

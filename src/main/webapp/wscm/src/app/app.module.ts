@@ -12,7 +12,10 @@ import { AppRoutes } from './app.routes';
 import { MaterialModule } from './shared/modules/material.module';
 
 // Services
+import { AuthGuard } from './shared/guards/auth.guard';
 import { PanelService } from './panel/panel.service';
+import { AuthService } from './shared/services/auth.service';
+import { LoginService } from './login/login.service';
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -49,7 +52,7 @@ import { SchedulerComponent } from './scheduler/scheduler.component';
     MaterialModule
   ],
   providers: [
-    PanelService
+    PanelService, AuthGuard, AuthService, LoginService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
