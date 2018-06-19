@@ -16,6 +16,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { PanelService } from './panel/panel.service';
 import { AuthService } from './shared/services/auth.service';
 import { LoginService } from './login/login.service';
+import { SchedulerService } from './scheduler/scheduler.service';
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -54,7 +55,7 @@ import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.compo
     MaterialModule
   ],
   providers: [
-    PanelService, AuthGuard, AuthService, LoginService
+    PanelService, AuthGuard, AuthService, LoginService, SchedulerService
   ],
   entryComponents: [
     DeleteDialog
