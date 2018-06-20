@@ -14,9 +14,9 @@ export class SchedulerService {
         return this._http.get(this.baseUrl + 'jobs');
     }
 
-    // startJob(id): Observable<any> {
-    //     return this._http.post(this.baseUrl + 'startJob/' + id, null);
-    // }
+    startJob(id): Observable<any> {
+        return this._http.post(this.baseUrl + 'startJob/' + id, null);
+    }
 
     // stopJob(id): Observable<any> {
     //     return this._http.post(this.baseUrl + 'stopJob/' + id, null);
@@ -28,9 +28,9 @@ export class SchedulerService {
     // editJob(obj): Observable<any> {
     //     return this._http.put(this.baseUrl + 'editJob', obj);
     // }
-    // deleteJob(id): Observable<any> {
-    //     return this._http.delete(this.baseUrl + 'deleteJob/' + id);
-    // }
+    deleteJob(id: number): Observable<any> {
+        return this._http.delete(this.baseUrl + 'deleteJob/' + id);
+    }
     // getHisory(id): Observable<any> {
     //     return this._http.get(this.baseUrl + 'jobHistory/' + id);
     // }

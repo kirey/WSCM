@@ -2,8 +2,7 @@ import {
   Component,
   OnInit,
   TemplateRef,
-  ViewEncapsulation,
-  ViewChild
+  ViewEncapsulation
 } from '@angular/core';
 
 import { SchedulerService } from './scheduler.service';
@@ -15,10 +14,35 @@ import { SchedulerService } from './scheduler.service';
   encapsulation: ViewEncapsulation.None
 })
 export class SchedulerComponent implements OnInit {
+  currentStatus: string;
+  job: any;
+  jobs: any;
+
   constructor(public schedulerService: SchedulerService) {}
 
-  jobs: any;
-  displayedColumns = ['id', 'jobName', 'status', 'cronExpression', 'changeStatus', 'actions', 'history'];
+  displayedColumns = [
+    'id',
+    'jobName',
+    'status',
+    'cronExpression',
+    'changeStatus',
+    'actions',
+    'history'
+  ];
+
+    // Delete Job
+    deleteJob(id) {
+      this.schedulerService.deleteJob(id)
+          .subscribe(
+          res => {
+              console.log(res);
+              // this.jobs = res.data;
+          },
+          err => {
+              console.log(err);
+          }
+          );
+  }
 
   ngOnInit() {
     this.schedulerService.getJobs().subscribe(
@@ -30,7 +54,3 @@ export class SchedulerComponent implements OnInit {
     );
   }
 }
-
-
-
-
