@@ -1,7 +1,9 @@
 <div id="scheduler">
-    <!-- <button type="button">
-        <i class="material-icons">plus</i>
-    </button> -->
+
+  <button>
+    <i class="material-icons">control_point</i>
+  </button>
+
   <table mat-table [dataSource]="jobs" class="mat-elevation-z8">
     <!-- Position Column -->
     <!--  Column -->
@@ -36,12 +38,12 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions</th>
       <td mat-cell *matCellDef="let element">
-          <i class="material-icons" (click)="deleteJob(element.id)" >
-              delete
-            </i>
-            <i class="material-icons" >
-                edit
-              </i>
+        <i class="material-icons" (click)="deleteJob(element.id)">
+          delete
+        </i>
+        <i class="material-icons">
+          edit
+        </i>
       </td>
     </ng-container>
     <ng-container matColumnDef="history">
@@ -52,4 +54,16 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
+  <!-- Add Job Template -->
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Job Name</mat-label>
+      <input matInput placeholder="Job Name">
+    </mat-form-field><br>
+    <mat-form-field appearance="outline">
+      <mat-label>Cron Expression</mat-label>
+      <input matInput placeholder="Cron Expression">
+    </mat-form-field>
+  </p>
+  <button mat-raised-button class="submitButton">Primary</button>
 </div>

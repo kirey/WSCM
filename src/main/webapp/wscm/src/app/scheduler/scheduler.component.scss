@@ -22,20 +22,27 @@
   th::selection {
     background: $primary;
   }
-  // slider toggle
-  .example-section {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 40px;
-  }
-  .example-margin {
-    margin: 5px;
-  }
-.result {
-  box-shadow: none;
-}
 .material-icons {
   color: $primary;
+}
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+  float: right;
+}
+button i {
+  font-size: 3vw;
+}
+.mat-form-field {
+  width: 100%;
+}
+.submitButton {
+  background-color: $primary;
+  color: white;
+}
+.submitButton:hover {
+  color: white;
+
 }
 }
