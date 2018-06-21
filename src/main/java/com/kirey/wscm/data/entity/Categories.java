@@ -1,14 +1,23 @@
 package com.kirey.wscm.data.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "categories")
@@ -19,6 +28,8 @@ public class Categories implements Serializable{
 	private Integer id;
 	private String categoryName;
 	private String description;
+	
+	private List<Jobs> listJobses = new ArrayList<>();
 	
 //	@JsonBackReference(value="categoriesUserCategories")
 //	private List<UserCategories> userCategorieses = new ArrayList<>();
@@ -61,6 +72,20 @@ public class Categories implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "categories_jobs", joinColumns = {
+			@JoinColumn(name = "category", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "job", nullable = false, updatable = false) })
+	@Fetch(FetchMode.SUBSELECT)
+	public List<Jobs> getListJobses() {
+		return listJobses;
+	}
+	public void setListJobses(List<Jobs> listJobses) {
+		this.listJobses = listJobses;
+	}
+	
+	
 	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
 //	public List<UserCategories> getUserCategorieses() {
