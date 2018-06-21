@@ -53,13 +53,15 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <!-- Add Job Template -->
-  <div class="addJob-container">
-    <mat-form-field>
-      <input matInput placeholder="Job Name">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Job Name">
-    </mat-form-field>
-    <button mat-raised-button align="end" class="formButton">Primary</button>
+  <div>
+    <form #UserLogin="ngForm" class="addJob-container">
+      <mat-form-field>
+        <input matInput name="jobName" [(ngModel)]="jobName" type="text" placeholder="Job Name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="cronExpression" [(ngModel)]="cronExpression" placeholder="Cron Expression">
+      </mat-form-field>
+      <button type="submit" mat-raised-button class="formButton" (click)="onSubmit()">Primary</button>
+    </form>
   </div>
 </div>

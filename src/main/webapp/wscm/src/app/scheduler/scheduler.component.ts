@@ -3,7 +3,7 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray} from '@angular/forms';
 import { SchedulerService } from './scheduler.service';
 
 @Component({
@@ -22,6 +22,7 @@ export class SchedulerComponent implements OnInit {
   jobName: any;
   cronExpression: any;
 
+
   constructor(public schedulerService: SchedulerService) {}
 
   displayedColumns = [
@@ -35,7 +36,28 @@ export class SchedulerComponent implements OnInit {
   ];
 
 // Add Job
-
+onSubmit() {
+  console.log('sdfdfg');
+  console.log(this.jobName, this.cronExpression);
+  const jobs = {
+    jobName: this.jobName,
+    cronExpression: this.cronExpression,
+    status: null
+}
+console.log('WTFF');
+this.schedulerService.addJob(jobs)
+    .subscribe(
+    res => {
+        console.log(res);
+        // this.jobs = res.data;
+        // this.successMessage(res.message);
+    },
+    err => {
+      console.log(err);
+        // this.errorMessage(err);
+    }
+    );
+}
 
 
 

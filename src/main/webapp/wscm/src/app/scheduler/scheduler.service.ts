@@ -22,8 +22,8 @@ export class SchedulerService {
     //     return this._http.post(this.baseUrl + 'stopJob/' + id, null);
     // }
 
-    addJob(obj): Observable<any> {
-        return this._http.post(this.baseUrl + 'addJob', obj);
+    addJob(jobs): Observable<any> {
+        return this._http.post(this.baseUrl + 'addJob', jobs);
     }
     // editJob(obj): Observable<any> {
     //     return this._http.put(this.baseUrl + 'editJob', obj);
