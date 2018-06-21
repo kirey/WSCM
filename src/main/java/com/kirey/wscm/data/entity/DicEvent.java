@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -21,6 +24,7 @@ public class DicEvent implements Serializable {
 	private String description;
 	private String eventType;
 	private String definition;
+	private Jobs jobs;
 	
 	@Id
 	@SequenceGenerator(name = "dic_event_gen", sequenceName = "seq_dic_event", allocationSize = 1, initialValue = 1)
@@ -63,6 +67,15 @@ public class DicEvent implements Serializable {
 	}
 	public void setDefinition(String definition) {
 		this.definition = definition;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "jobs", nullable = true)
+	public Jobs getJobs() {
+		return jobs;
+	}
+	public void setJobs(Jobs jobs) {
+		this.jobs = jobs;
 	}
 	
 	

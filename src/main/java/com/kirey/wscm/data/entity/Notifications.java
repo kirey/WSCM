@@ -1,6 +1,8 @@
 package com.kirey.wscm.data.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "notifications")
@@ -22,8 +29,10 @@ public class Notifications implements Serializable {
 	private Integer id;
 	private String name;
 	private String notificationTemplate;
-	private String notificationType;
-	private DicEvent dicEvent;
+	private DicNotificationType dicNotificationType;
+	
+	
+	private List<Jobs> listJobses = new ArrayList<>();
 	
 //	@JsonBackReference(value="notificationCategorieses")
 //	private List<NotificationCategories> notificationCategorieses = new ArrayList<>();
@@ -58,22 +67,28 @@ public class Notifications implements Serializable {
 		this.notificationTemplate = notificationTemplate;
 	}
 	
-	@Column(name = "notification_type", unique = false, nullable = false)
-	public String getNotificationType() {
-		return notificationType;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "notifications_jobs", joinColumns = {
+			@JoinColumn(name = "notification", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "job", nullable = false, updatable = false) })
+	@Fetch(FetchMode.SUBSELECT)
+	public List<Jobs> getListJobses() {
+		return listJobses;
 	}
-	public void setNotificationType(String notificationType) {
-		this.notificationType = notificationType;
+	public void setListJobses(List<Jobs> listJobses) {
+		this.listJobses = listJobses;
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "dic_event", nullable = true)
-	public DicEvent getDicEvent() {
-		return dicEvent;
+	@JoinColumn(name = "dic_notification_type", nullable = true)
+	public DicNotificationType getDicNotificationType() {
+		return dicNotificationType;
 	}
-	public void setDicEvent(DicEvent dicEvent) {
-		this.dicEvent = dicEvent;
+	public void setDicNotificationType(DicNotificationType dicNotificationType) {
+		this.dicNotificationType = dicNotificationType;
 	}
+	
+	
 	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "notification")
 //	public List<NotificationCategories> getNotificationCategorieses() {
