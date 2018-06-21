@@ -34,15 +34,14 @@ button {
 button i {
   font-size: 3vw;
 }
-.mat-form-field {
-  width: 100%;
+.addJob-container {
+  display: flex;
+  flex-direction: column;
 }
-.submitButton {
-  background-color: $primary;
+button.formButton {
+  width: 20%;
+  margin-left: 80%;
+  background: $primary;
   color: white;
-}
-.submitButton:hover {
-  color: white;
-
 }
 }

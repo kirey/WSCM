@@ -3,7 +3,6 @@
   <button>
     <i class="material-icons">control_point</i>
   </button>
-
   <table mat-table [dataSource]="jobs" class="mat-elevation-z8">
     <!-- Position Column -->
     <!--  Column -->
@@ -53,17 +52,14 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
   <!-- Add Job Template -->
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>Job Name</mat-label>
+  <div class="addJob-container">
+    <mat-form-field>
       <input matInput placeholder="Job Name">
-    </mat-form-field><br>
-    <mat-form-field appearance="outline">
-      <mat-label>Cron Expression</mat-label>
-      <input matInput placeholder="Cron Expression">
     </mat-form-field>
-  </p>
-  <button mat-raised-button class="submitButton">Primary</button>
+    <mat-form-field>
+      <input matInput placeholder="Job Name">
+    </mat-form-field>
+    <button mat-raised-button align="end" class="formButton">Primary</button>
+  </div>
 </div>

@@ -1,10 +1,9 @@
 import {
   Component,
   OnInit,
-  TemplateRef,
   ViewEncapsulation
 } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
 import { SchedulerService } from './scheduler.service';
 
 @Component({
@@ -22,6 +21,7 @@ export class SchedulerComponent implements OnInit {
   jobForm: FormGroup;
   jobName: any;
   cronExpression: any;
+
   constructor(public schedulerService: SchedulerService) {}
 
   displayedColumns = [
@@ -36,25 +36,8 @@ export class SchedulerComponent implements OnInit {
 
 // Add Job
 
-addJob() {
-  const obj = {
-      jobName: this.jobName.value,
-      cronExpression: this.cronExpression.value,
-      status: null
-  };
-  this.schedulerService.addJob(obj)
-      .subscribe(
-      res => {
-          console.log(res);
-          // this.jobs = res.data;
-          // this.successMessage(res.message);
-      },
-      err => {
-          console.log(err);
-          // this.addJobModal.hide();
-      }
-      );
-}
+
+
 
     // Delete Job
     deleteJob(id) {
