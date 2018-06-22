@@ -1,7 +1,7 @@
 <div id="scheduler">
 
-  <button (click)="changeTemplate()">
-    <i class="material-icons">control_point</i>
+  <button id="adButton" (click)="changeTemplate()" mat-mini-fab>
+    <i class="material-icons plus">add</i>
   </button>
   <div id="jobList">
   <table mat-table [dataSource]="jobs" class="mat-elevation-z8">
@@ -56,17 +56,17 @@
 </div>
   <!-- Add Job Template -->
   <div id="addTemplate" #addTemplate>
-    <h1>Add</h1>
+    <h5>Add</h5>
     <form #AddForm="ngForm" class="addJob-container">
       <mat-form-field>
-        <input matInput name="jobName" [(ngModel)]="jobName" type="text" placeholder="Job Name">
+        <input matInput name="jobName" [(ngModel)]="jobName" type="text" placeholder="Job Name" autocomplete="off">
         <!-- <mat-error >
             Job Name is required.
           </mat-error> -->
 
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="cronExpression" [(ngModel)]="cronExpression" placeholder="Cron Expression">
+        <input matInput name="cronExpression" [(ngModel)]="cronExpression" placeholder="Cron Expression" autocomplete="off">
         <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
             Cron Expression is required.
           </mat-error> -->

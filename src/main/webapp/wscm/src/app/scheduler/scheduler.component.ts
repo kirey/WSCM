@@ -163,14 +163,18 @@ onSubmitEditForm() {
 changeTemplate() {
  const addTemplate = document.getElementById('addTemplate');
  const jobList = document.getElementById('jobList');
+ const adButton = document.getElementById('adButton');
  addTemplate.style.display = 'block';
  jobList.style.display = 'none';
+ adButton.style.display = 'none';
 }
 closeAddTemplate() {
-  const addTemplate = document.getElementById('addTemplate');
+ const addTemplate = document.getElementById('addTemplate');
  const jobList = document.getElementById('jobList');
+ const adButton = document.getElementById('adButton');
  addTemplate.style.display = 'none';
  jobList.style.display = 'block';
+ adButton.style.display = 'block';
 }
   ngOnInit() {
    this.getList();
