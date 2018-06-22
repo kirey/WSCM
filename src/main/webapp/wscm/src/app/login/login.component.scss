@@ -1,5 +1,6 @@
 @import '../app.component.scss';
 @import '~@angular/material/theming';
+
 #login {
   height: 100vh;
   display: flex;
@@ -8,6 +9,7 @@
   overflow: hidden; // left content login page
   z-index: 10;
   width: 100%;
+
   #leftSide {
     background-image: linear-gradient(rgba(0, 150, 136, 0.9), rgba(0, 150, 136, 0.1)), url("../../assets/login4.jpg");
     background-repeat: no-repeat;
@@ -71,7 +73,7 @@
     padding: 0 1%;
     background-color: $warn;
     display: flex;
-    width: 45%;
+    width: 70%;
     align-items: center;
     justify-content: center;
   }

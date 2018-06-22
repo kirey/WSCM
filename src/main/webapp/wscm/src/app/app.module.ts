@@ -17,6 +17,8 @@ import { PanelService } from './panel/panel.service';
 import { AuthService } from './shared/services/auth.service';
 import { LoginService } from './login/login.service';
 import { SchedulerService } from './scheduler/scheduler.service';
+import { AddJobService } from './shared/components/add-job/addJob.service';
+import { EditJobService } from './shared/components/edit-job/edit-job.service';
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -30,6 +32,8 @@ import { LoginComponent } from './login/login.component';
 import { LanguagesComponent } from './languages/languages.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.component';
+import { AddJobComponent } from './shared/components/add-job/add-job.component';
+import { EditJobComponent } from './shared/components/edit-job/edit-job.component';
 
 
 @NgModule({
@@ -42,7 +46,9 @@ import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.compo
     LanguagesComponent,
     FilterPipe,
     SchedulerComponent,
-    DeleteDialog
+    DeleteDialog,
+    AddJobComponent,
+    EditJobComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,7 @@ import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.compo
     MaterialModule
   ],
   providers: [
-    PanelService, AuthGuard, AuthService, LoginService, SchedulerService
+    PanelService, AuthGuard, AuthService, LoginService, SchedulerService, AddJobService, EditJobService
   ],
   entryComponents: [
     DeleteDialog

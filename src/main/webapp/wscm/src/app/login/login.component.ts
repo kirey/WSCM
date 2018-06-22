@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
-  FormControl,
   FormGroup,
   Validators,
   FormBuilder
@@ -8,9 +7,8 @@ import {
 import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
-import { AuthGuard } from '../shared/guards/auth.guard';
 import { AuthService } from '../shared/services/auth.service';
-// import { SnackBarService } from '../shared/services/snackbar.service';
+import { SnackBarService } from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -18,21 +16,22 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   constructor(
     public formBuilder: FormBuilder,
     public loginService: LoginService,
     public router: Router,
-    public auth: AuthService
+    public auth: AuthService,
+    public snackBarService: SnackBarService
   ) {}
 
   loginUser() {
     if (!this.username.value) {
-      console.log(this.username);
-      // this.snackBarService.openSnackBar('Please, enter your username.');
+      this.snackBarService.openSnackBar('Please enter your username.', 'Missing username.');
     } else if (!this.password.value) {
-      // this.snackBarService.openSnackBar('Please, enter your password.');
+      this.snackBarService.openSnackBar('Please enter your password.', 'Missing password.');
     } else {
       const obj = {
         username: this.username.value,
@@ -45,7 +44,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         err => {
-          // this.snackBarService.openSnackBar(err._body);
+          this.snackBarService.openSnackBar(err.statusText, 'Error');
           console.log(err);
         }
       );

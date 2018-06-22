@@ -1,5 +1,8 @@
 <div id="login">
-  <div id="leftSide"><h1>Neque porro</h1><h4>"Neque porro quisquam est qui dolorem"</h4></div>
+  <!-- Left Side -->
+  <div id="leftSide"><h1>Content Management</h1><h4>"Neque porro quisquam est qui dolorem..."</h4></div>
+
+  <!-- Right Side -->
   <div id="rightSide">
     <!-- Login Card -->
     <mat-card class="card-login">
@@ -9,7 +12,7 @@
         <mat-card-subtitle>Enter your username and password to login.</mat-card-subtitle>
       </mat-card-header>
 
-      <!-- autocomplete="on"  -->
+      <!-- Login Form  -->
       <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
         <mat-card-content>
           <div class="form-container">
@@ -30,7 +33,6 @@
         <!-- Card Actions -->
         <mat-card-actions>
           <button type="submit"  [disabled]="username.errors ||  password.errors" align="end" mat-raised-button color="primary">Login</button>
-
         </mat-card-actions>
       </form>
     </mat-card>

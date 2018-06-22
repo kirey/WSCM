@@ -66,4 +66,7 @@
   #addTemplate {
     width: 50%;
   }
+  .mat-input-element::selection {
+    background: $primary;
+  }
 }
