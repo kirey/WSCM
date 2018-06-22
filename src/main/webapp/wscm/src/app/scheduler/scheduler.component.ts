@@ -23,6 +23,7 @@ export class SchedulerComponent implements OnInit {
   jobForm: FormGroup;
   jobName: any;
   cronExpression: any;
+  currentJob: any;
 
 
   constructor(public schedulerService: SchedulerService) {}
@@ -56,6 +57,7 @@ this.schedulerService.addJob(jobs)
         // this.errorMessage(err);
     }
     );
+    this.closeAddTemplate();
 }
 
 
@@ -106,7 +108,42 @@ this.schedulerService.addJob(jobs)
       );
 }
 
+// Edit job form
+onSubmitEditForm() {
+  const obj = {
+      jobName: this.jobName.value,
+      cronExpression: this.cronExpression.value,
+      status: this.currentStatus,
+      id: this.currentJob.id
+  };
+  this.schedulerService.editJob(obj)
+      .subscribe(
+      res => {
+          console.log(res);
+          // this.jobs = res.data;
+          // this.successMessage(res.message);
+          // this.editJobModal.hide();
+      },
+      err => {
+          console.log(err);
+          // this.errorMessage(err);
+          // this.editJobModal.hide();
+      }
+      );
+}
 
+changeTemplate() {
+ const addTemplate = document.getElementById('addTemplate');
+ const jobList = document.getElementById('jobList');
+ addTemplate.style.display = 'block';
+ jobList.style.display = 'none';
+}
+closeAddTemplate() {
+  const addTemplate = document.getElementById('addTemplate');
+ const jobList = document.getElementById('jobList');
+ addTemplate.style.display = 'none';
+ jobList.style.display = 'block';
+}
   ngOnInit() {
     this.schedulerService.getJobs().subscribe(
       res => {

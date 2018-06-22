@@ -1,8 +1,9 @@
 <div id="scheduler">
 
-  <button>
+  <button (click)="changeTemplate()">
     <i class="material-icons">control_point</i>
   </button>
+  <div id="jobList">
   <table mat-table [dataSource]="jobs" class="mat-elevation-z8">
     <!-- Position Column -->
     <!--  Column -->
@@ -52,10 +53,11 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+</div>
   <!-- Add Job Template -->
-  <div>
-    <h1>bla bla blay</h1>
-    <form #UserLogin="ngForm" class="addJob-container">
+  <div id="addTemplate" #addTemplate>
+    <h1>Add</h1>
+    <form #AddForm="ngForm" class="addJob-container">
       <mat-form-field>
         <input matInput name="jobName" [(ngModel)]="jobName" type="text" placeholder="Job Name">
         <!-- <mat-error >
@@ -69,7 +71,29 @@
             Cron Expression is required.
           </mat-error> -->
       </mat-form-field>
-      <button type="submit" mat-raised-button class="formButton" (click)="onSubmit()">Primary</button>
+      <button type="submit" mat-raised-button class="formButton" (click)="onSubmit()">Submit</button>
     </form>
   </div>
+
+ <!-- Edit Job Template -->
+ <div>
+    <h1>Edit</h1>
+    <form #EditForm="ngForm" class="addJob-container">
+      <mat-form-field>
+        <input matInput name="jobName" [(ngModel)]="jobName" type="text" placeholder="Job Name">
+        <!-- <mat-error >
+            Job Name is required.
+          </mat-error> -->
+
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput name="cronExpression" [(ngModel)]="cronExpression" placeholder="Cron Expression">
+        <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
+            Cron Expression is required.
+          </mat-error> -->
+      </mat-form-field>
+      <button type="submit" mat-raised-button class="editButton" (click)="onSubmitEditForm()">Save</button>
+    </form>
+  </div>
+
 </div>

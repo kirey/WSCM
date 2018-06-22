@@ -25,9 +25,9 @@ export class SchedulerService {
     addJob(jobs): Observable<any> {
         return this._http.post(this.baseUrl + 'addJob', jobs);
     }
-    // editJob(obj): Observable<any> {
-    //     return this._http.put(this.baseUrl + 'editJob', obj);
-    // }
+    editJob(obj): Observable<any> {
+        return this._http.put(this.baseUrl + 'editJob', obj);
+    }
     deleteJob(id: number): Observable<any> {
         return this._http.delete(this.baseUrl + 'deleteJob/' + id);
     }

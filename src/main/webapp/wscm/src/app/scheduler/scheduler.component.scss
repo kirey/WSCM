@@ -44,4 +44,14 @@ button.formButton {
   background: $primary;
   color: white;
 }
+button.editButton {
+  width: 20%;
+  // height: 50px;
+  margin-left: 80%;
+  background: $primary;
+  color: white;
+}
+#addTemplate {
+  display: none;
+}
 }
