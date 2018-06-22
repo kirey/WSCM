@@ -41,7 +41,7 @@
         <i class="material-icons" (click)="deleteJob(element.id)">
           delete
         </i>
-        <i class="material-icons">
+        <i class="material-icons" (click)="openEditJobForm(element.id)">
           edit
         </i>
       </td>
@@ -76,15 +76,15 @@
   </div>
 
  <!-- Edit Job Template -->
- <div>
+ <div id="editForm">
+
     <h1>Edit</h1>
-    <form #EditForm="ngForm" class="addJob-container">
+    <form class="addJob-container">
       <mat-form-field>
         <input matInput name="jobName" [(ngModel)]="jobName" type="text" placeholder="Job Name">
         <!-- <mat-error >
             Job Name is required.
           </mat-error> -->
-
       </mat-form-field>
       <mat-form-field>
         <input matInput name="cronExpression" [(ngModel)]="cronExpression" placeholder="Cron Expression">
