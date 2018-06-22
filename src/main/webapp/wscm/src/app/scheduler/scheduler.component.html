@@ -26,12 +26,12 @@
       <th mat-header-cell *matHeaderCellDef> Change Status</th>
       <td mat-cell *matCellDef="let element">
 
-        <!-- <i class="material-icons" (click)="stop(job)" >
-          play_arrow
-        </i>-->
-        <!-- <i class="material-icons" (click)="start(job)">
+        <i class="material-icons" (click)="stop(element)" >
           stop
-        </i>-->
+        </i>
+        <i class="material-icons" (click)="start(element)">
+            play_arrow
+        </i>
       </td>
     </ng-container>
     <ng-container matColumnDef="actions">
@@ -54,12 +54,20 @@
   </table>
   <!-- Add Job Template -->
   <div>
+    <h1>bla bla blay</h1>
     <form #UserLogin="ngForm" class="addJob-container">
       <mat-form-field>
         <input matInput name="jobName" [(ngModel)]="jobName" type="text" placeholder="Job Name">
+        <!-- <mat-error >
+            Job Name is required.
+          </mat-error> -->
+
       </mat-form-field>
       <mat-form-field>
         <input matInput name="cronExpression" [(ngModel)]="cronExpression" placeholder="Cron Expression">
+        <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
+            Cron Expression is required.
+          </mat-error> -->
       </mat-form-field>
       <button type="submit" mat-raised-button class="formButton" (click)="onSubmit()">Primary</button>
     </form>

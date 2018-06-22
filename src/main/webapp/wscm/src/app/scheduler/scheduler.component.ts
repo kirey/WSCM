@@ -3,8 +3,10 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormArray} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { SchedulerService } from './scheduler.service';
+
+
 
 @Component({
   selector: 'app-scheduler',
@@ -37,14 +39,11 @@ export class SchedulerComponent implements OnInit {
 
 // Add Job
 onSubmit() {
-  console.log('sdfdfg');
-  console.log(this.jobName, this.cronExpression);
   const jobs = {
     jobName: this.jobName,
     cronExpression: this.cronExpression,
     status: null
-}
-console.log('WTFF');
+};
 this.schedulerService.addJob(jobs)
     .subscribe(
     res => {
@@ -74,6 +73,39 @@ this.schedulerService.addJob(jobs)
           }
           );
   }
+
+  // Start Job
+  start(job) {
+    this.schedulerService.startJob(job.id)
+        .subscribe(
+        res => {
+            console.log(res);
+            // this.successMessage(res.message);
+            // return job.status = 'ACTIVE';
+        },
+        err => {
+            console.log(err);
+            // this.errorMessage(err);
+        }
+        );
+}
+
+ // Stop Job
+ stop(job) {
+  this.schedulerService.stopJob(job.id)
+      .subscribe(
+      res => {
+          console.log(res);
+          // this.successMessage(res.message);
+          return job.status = 'INACTIVE';
+      },
+      err => {
+          console.log(err);
+          // this.errorMessage(err);
+      }
+      );
+}
+
 
   ngOnInit() {
     this.schedulerService.getJobs().subscribe(
