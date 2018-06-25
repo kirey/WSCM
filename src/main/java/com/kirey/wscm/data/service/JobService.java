@@ -136,10 +136,14 @@ public class JobService {
 		jobDetail.getJobDataMap().put("jobId", schedulerEnt.getId());
 		
 		scheduler1.getListenerManager().addJobListener(schedJobListener);
-		if (!scheduler1.checkExists(jobDetail.getKey()))
+		if (!scheduler1.checkExists(jobDetail.getKey())) {
 			scheduler1.scheduleJob(jobDetail, trigger);
-
-		scheduler1.start();
+			scheduler1.start();
+		}else {
+			scheduler1.triggerJob(jobDetail.getKey());
+		}
+			
+//		scheduler1.start();
 
 		schedulerEnt.setStatus(AppConstants.SCHEDULER_STATUS_ACTIVE);
 		jobsDao.merge(schedulerEnt);

@@ -83,7 +83,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	}
 	
 	/**
-	 * Method for sending a WebSocket message to specific users
+	 * Method for sending a WebSocket message to filtered users
 	 * @param content
 	 */
 	public void sendNotificationToFilteredUsers(Notifications notification, Map<String, Object> templateModel) {
@@ -110,6 +110,42 @@ public class WebSocketHandler extends TextWebSocketHandler {
 				System.out.println("Don't have open session to send");
 			}
 		}
+	}
+	
+	/**
+	 * Method for sending WebSocket message to specific users
+	 * @param listUsers - the list of users to which the message is sent
+	 * @param notification
+	 * @param templateModel
+	 */
+	public void sendNotificationToSpecificUsers(List<WscmUserAccounts> listUsers, Notifications notification, Map<String, Object> templateModel) {
+		String templateString = notification.getNotificationTemplate(); 
+		String notificationContent = templateEngine.processTemplateContent(templateModel, templateString);
+		for (WscmUserAccounts user : listUsers) {
+			for (WebSocketSession session : allSessions) {
+				//for each user form list check does session exist
+				if(user.getSocketSessionId() != null && user.getSocketSessionId().equals(session.getId())) {
+					//check is session open
+					if (session != null && session.isOpen()) {
+						try {
+							session.sendMessage(new TextMessage(notificationContent));
+							//Add new NotificationsSent
+							NotificationsSent notificationSent = new NotificationsSent();
+							notificationSent.setUserAccount(user);
+							notificationSent.setNotification(notification);
+							notificationsSentDao.attachDirty(notificationSent);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				} else {
+					System.out.println("Don't have open session to send");
+				}
+			}
+		}
+	
+			
+			
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
@@ -42,6 +43,8 @@ public class Jobs implements Serializable {
 	private String cronExpression;
 
 	private String status;
+	
+	private DicJobType jobType;
 
 	@JsonBackReference
 	private List<JobExecutionLog> jobExecutionLogs = new ArrayList<>();
@@ -97,6 +100,17 @@ public class Jobs implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dic_job_type", nullable = true)
+	public DicJobType getJobType() {
+		return jobType;
+	}
+
+	public void setJobType(DicJobType jobType) {
+		this.jobType = jobType;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
