@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -73,8 +75,8 @@ public class TestController {
 	private NotificationsDao notificationsDao;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() {
-		
+	public String test(@RequestParam String name) {
+		System.out.println(name);
 		List<IpAddress> listIp = ipAddressDao.findByUser(1);
 		String ipAddress = "192.168.60.21";
 		List<Categories> listCategories = categoriesDao.findCategoriesByIp(ipAddress); 

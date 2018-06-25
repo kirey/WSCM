@@ -13,6 +13,19 @@
 	<mvc:default-servlet-handler />
     <mvc:annotation-driven />
 	
+	
+	<!-- InterceptorLogging bean -->
+	<bean id="webReqInterceptor" class="com.kirey.wscm.data.service.WebRequestInterceptor" />
+	
+	<!-- AOP config web request -->
+	<aop:config proxy-target-class="true">
+        <aop:aspect id="webReqAspect" ref="webReqInterceptor">
+            <aop:pointcut id="webRequestCommon"
+                expression="execution(* com.kirey.wscm.api.restcontrollers.TestController.*(..)) " /> <!-- com.kirey.wscm.*.*(..) &amp;&amp; !execution(* com.kirey.kjcore.common.util.PrintingToConsole.*(..)) -->
+            <aop:around method="aroundMethod" pointcut-ref="webRequestCommon" />
+        </aop:aspect>
+    </aop:config>
+    
 	<!-- Import KJCore servlet content
 	<import resource="kjcore-servlet.xml"/>  -->
 

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "dic_event")
-public class DicEvent implements Serializable {
+public class Event implements Serializable {
 
 	private static final long serialVersionUID = -7737237512641595663L;
 	

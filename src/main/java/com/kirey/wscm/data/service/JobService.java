@@ -15,6 +15,7 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.Trigger.TriggerState;
+import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -102,6 +103,47 @@ public class JobService {
 		schedulerEnt.setStatus(AppConstants.SCHEDULER_STATUS_ACTIVE);
 		jobsDao.merge(schedulerEnt);
 
+	}
+	
+	
+	/**
+	 * Method starts the job and updates {@link Jobs} status to "ACTIVE"
+	 * @param schedulerEnt - {@link Jobs} entity with cronExpresion set
+	 * @throws SchedulerException
+	 * @throws ClassNotFoundException
+	 */
+	public void startJobOnInit(Jobs schedulerEnt) throws SchedulerException, ClassNotFoundException {
+		CronTrigger cronTrigger = createTrigger(schedulerEnt.getCronExpression(), schedulerEnt.getJobName(), AppConstants.GROUP_NAME);
+		JobDetail jobDetail = createJob(schedulerEnt.getJobName(), AppConstants.GROUP_NAME);
+
+		jobDetail.getJobDataMap().put("jobId", schedulerEnt.getId());
+		
+		scheduler1.getListenerManager().addJobListener(schedJobListener);
+		if (!scheduler1.checkExists(jobDetail.getKey()))
+			scheduler1.scheduleJob(jobDetail, cronTrigger);
+
+		scheduler1.start();
+
+		schedulerEnt.setStatus(AppConstants.SCHEDULER_STATUS_ACTIVE);
+		jobsDao.merge(schedulerEnt);
+		
+	}
+	
+	public void startJobImmediately(Jobs schedulerEnt) throws SchedulerException, ClassNotFoundException {
+		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(schedulerEnt.getJobName(), AppConstants.GROUP_NAME).startNow().build();
+		JobDetail jobDetail = createJob(schedulerEnt.getJobName(), AppConstants.GROUP_NAME);
+
+		jobDetail.getJobDataMap().put("jobId", schedulerEnt.getId());
+		
+		scheduler1.getListenerManager().addJobListener(schedJobListener);
+		if (!scheduler1.checkExists(jobDetail.getKey()))
+			scheduler1.scheduleJob(jobDetail, trigger);
+
+		scheduler1.start();
+
+		schedulerEnt.setStatus(AppConstants.SCHEDULER_STATUS_ACTIVE);
+		jobsDao.merge(schedulerEnt);
+		
 	}
 
 	/**
@@ -235,5 +277,9 @@ public class JobService {
 		// :"+e.getMessage()
 		return false;
 	}
+
+	
+
+	
 
 }

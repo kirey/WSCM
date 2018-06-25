@@ -33,7 +33,7 @@
 		<property name="hibernateProperties">
 			<map>
 				<entry key="hibernate.default_schema" value="${database.default_schema}" />
-	 			<entry key="hibernate.hbm2ddl.auto" value="none" />
+	 			<entry key="hibernate.hbm2ddl.auto" value="update" />
 				<entry key="show_sql" value="true" />
 				<entry key="hibernate.dialect" value="${hibernate.dialect}" />
 				<entry key="transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory" />

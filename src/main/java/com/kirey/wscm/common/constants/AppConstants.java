@@ -289,6 +289,14 @@ public class AppConstants {
 	public static final String MSG_JOB_SUCCESSFULL_STOPPED = "Job stopped sucesffully";
 	public static final String MSG_JOB_STOP_FAILED = "Job stop failed";
 	
+	//EVENTS
+	public static final String EVENT_TYPE_CRON = "cron";
+	public static final String EVENT_TYPE_WEB_REQUEST = "webRequest";
+	
+	
+	
+	public static final String URL_LINK_CONTROLLER = "/wscm/rest/link";
+	
 	
 	/**
 	 * Constructor from superClass.
