@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kirey.wscm.data.entity.Categories;
+import com.kirey.wscm.data.entity.Content;
 import com.kirey.wscm.data.entity.ContentCategories;
 
 /**
@@ -46,6 +48,21 @@ public class ContentCategoriesDao extends KjcBaseDao {
 		String hql = "from ContentCategories cc where cc.content.id = :contentId";
 		 List<ContentCategories> contentCategories = sessionFactory.getCurrentSession().createQuery(hql).setParameter("contentId", contentId).list();
 		return contentCategories;
+	}
+
+	/**
+	 * Method for getting {@link Content} by {@link Categories} and max weight
+	 * @param category
+	 * @return {@link Content}
+	 */
+	public Content findContentByCategoryMaxWeightPagePositionLang(Categories category, String page, String position, String lang) {
+		String hql = "select cc.content from ContentCategories cc where cc.categories.id = :categoryId and cc.content.page = :page and cc.content.position = :position and cc.content.language = :lang and cc.weight in (select max(ccc.weight) from ContentCategories ccc)";
+		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql)
+				.setParameter("categoryId", category.getId())
+				.setParameter("page", page)
+				.setParameter("position", position)
+				.setParameter("lang", lang).uniqueResult();
+		return content;
 	}
 
 }

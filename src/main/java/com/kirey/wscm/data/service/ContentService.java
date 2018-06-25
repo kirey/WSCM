@@ -1,11 +1,18 @@
 package com.kirey.wscm.data.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kirey.wscm.data.dao.ContentCategoriesDao;
 import com.kirey.wscm.data.dao.IpAddressLinksDao;
+import com.kirey.wscm.data.dao.UserCategoriesDao;
 import com.kirey.wscm.data.dao.UserIpAddressDao;
 import com.kirey.wscm.data.dao.UserLinksDao;
+import com.kirey.wscm.data.entity.Categories;
+import com.kirey.wscm.data.entity.Content;
+import com.kirey.wscm.data.entity.ContentCategories;
 import com.kirey.wscm.data.entity.IpAddress;
 import com.kirey.wscm.data.entity.IpAddressLinks;
 import com.kirey.wscm.data.entity.Links;
@@ -29,6 +36,12 @@ public class ContentService {
 	
 	@Autowired
 	private IpAddressLinksDao ipAddressLinksDao;
+	
+	@Autowired
+	private UserCategoriesDao userCategoriesDao;
+	
+	@Autowired
+	private ContentCategoriesDao contentCategoriesDao;
 
 	/**
 	 * Method for creating or updating relations between:
@@ -78,6 +91,12 @@ public class ContentService {
 			ipAddressLinksDao.attachDirty(ipAddressLinks);
 		}
 		
+	}
+
+	public Content getContentByUserPagePositionLang(WscmUserAccounts user, String page, String position, String lang) {
+		Categories category = userCategoriesDao.findCategoryByUserMaxWeight(user);
+		Content content = contentCategoriesDao.findContentByCategoryMaxWeightPagePositionLang(category, page, position, lang);
+		return content;
 	}
 
 	

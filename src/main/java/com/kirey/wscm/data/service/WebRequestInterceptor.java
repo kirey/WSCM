@@ -50,7 +50,7 @@ public class WebRequestInterceptor implements ThrowsAdvice {
 		for (Event event : listEvent) {
 			Jobs job = event.getJobs();
 			if (job.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
-				 jobService.startJobImmediately(job);
+//				 jobService.startJobImmediately(job);
 				System.out.println("***************************JOB STARTED********************************");
 			}
 

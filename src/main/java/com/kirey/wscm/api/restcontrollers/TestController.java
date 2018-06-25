@@ -13,6 +13,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.ContentSecurityPolicyConfig;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ import com.kirey.wscm.data.entity.Content;
 import com.kirey.wscm.data.entity.IpAddress;
 import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
+import com.kirey.wscm.data.service.ContentService;
 import com.kirey.wscm.data.service.TemplateEngine;
 import com.kirey.wscm.email.MailService;
 import com.kirey.wscm.security.SecurityUtils;
@@ -73,6 +75,9 @@ public class TestController {
 	
 	@Autowired
 	private NotificationsDao notificationsDao;
+	
+	@Autowired
+	private ContentService contentService;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(@RequestParam String name) {
@@ -154,8 +159,11 @@ public class TestController {
 	
 	@RequestMapping(value = "/{page}/{position}/{lang}", method = RequestMethod.GET)
 	public String getByPagePositionLang(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
+		
+		WscmUserAccounts user = SecurityUtils.getUserFromContext();
+		Content content = contentService.getContentByUserPagePositionLang(user, page, position, lang);
 
-		Content content = contentDao.findByPagePositionLang(page, position, lang);
+//		Content content = contentDao.findByPagePositionLang(page, position, lang);
 		StringBuilder sb = new StringBuilder();
 		if(content.getCss() != null) {
 			sb.append(AppConstants.STYLE_OPEN_TAG);
