@@ -41,6 +41,8 @@ public class Jobs implements Serializable {
 	private String jobName;
 
 	private String cronExpression;
+	
+	private Boolean classLoading;
 
 	private String status;
 	
@@ -48,6 +50,10 @@ public class Jobs implements Serializable {
 
 	@JsonBackReference
 	private List<JobExecutionLog> jobExecutionLogs = new ArrayList<>();
+	
+	private List<JobParameters> jobParameterses = new ArrayList<>();
+	
+	private List<JobCategories> jobCategorieses = new ArrayList<>();
 	
 //	private List<Categories> listCategorieses = new ArrayList<>();
 	
@@ -104,7 +110,7 @@ public class Jobs implements Serializable {
 	}
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "dic_job_type", nullable = true)
 	public DicJobType getJobType() {
 		return jobType;
@@ -139,6 +145,39 @@ public class Jobs implements Serializable {
 	public void setListNotificationses(List<Notifications> listNotificationses) {
 		this.listNotificationses = listNotificationses;
 	}
+
+	@Column(name = "class_loading", precision = 1, scale = 0)
+	public Boolean getClassLoading() {
+		return classLoading;
+	}
+
+	public void setClassLoading(Boolean classLoading) {
+		this.classLoading = classLoading;
+	}
+
+	@OneToMany(mappedBy = "job", fetch = FetchType.LAZY)
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@Fetch(FetchMode.SUBSELECT)
+	public List<JobParameters> getJobParameterses() {
+		return jobParameterses;
+	}
+
+	public void setJobParameterses(List<JobParameters> jobParameterses) {
+		this.jobParameterses = jobParameterses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@LazyCollection(LazyCollectionOption.TRUE)
+	@Fetch(FetchMode.SUBSELECT)
+	public List<JobCategories> getJobCategorieses() {
+		return jobCategorieses;
+	}
+
+	public void setJobCategorieses(List<JobCategories> jobCategorieses) {
+		this.jobCategorieses = jobCategorieses;
+	}
+	
 	
 	
 

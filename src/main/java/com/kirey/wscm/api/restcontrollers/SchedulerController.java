@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
+import com.kirey.wscm.data.dao.EventDao;
 import com.kirey.wscm.data.dao.JobExecutionLogDao;
 import com.kirey.wscm.data.dao.JobsDao;
+import com.kirey.wscm.data.entity.JobCategories;
 import com.kirey.wscm.data.entity.JobExecutionLog;
 import com.kirey.wscm.data.entity.Jobs;
 import com.kirey.wscm.data.service.JobService;
@@ -34,7 +36,10 @@ public class SchedulerController {
 	private JobExecutionLogDao jobExecutionLogDao;
 
 	@Autowired
-	JobService jobService;
+	private JobService jobService;
+	
+	@Autowired
+	private EventDao eventDao;
 
 	/**
 	 * get all jobs
@@ -43,7 +48,12 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/jobs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getAllSchedulers() {
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+		List<Jobs> listJobs = jobsDao.findAll();
+		for (Jobs jobs : listJobs) {
+			List<JobCategories> listCategories = jobs.getJobCategorieses();
+			System.out.println("milos");
+		}
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listJobs, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 
 	/**
@@ -67,13 +77,13 @@ public class SchedulerController {
 	@RequestMapping(value = "/addJob", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> addScheduler(@RequestBody Jobs scheduler) {
 		
-		if( CronExpression.isValidExpression(scheduler.getCronExpression()) ) { 
-			scheduler.setStatus(AppConstants.SCHEDULER_STATUS_INACTIVE);
+//		if( CronExpression.isValidExpression(scheduler.getCronExpression()) ) { 
+//			scheduler.setStatus(AppConstants.SCHEDULER_STATUS_INACTIVE);
 			jobsDao.persist(scheduler);
 			return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
-		} else {
-			 return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_CRON_EXPRESSION_INVALID), HttpStatus.BAD_REQUEST);
-		}
+//		} else {
+//			 return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_CRON_EXPRESSION_INVALID), HttpStatus.BAD_REQUEST);
+//		}
 	}
 
 	/**
@@ -85,12 +95,12 @@ public class SchedulerController {
 	@RequestMapping(value = "/editJob", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> editScheduler(@RequestBody Jobs scheduler) {
 		
-		if( CronExpression.isValidExpression(scheduler.getCronExpression()) ) {
+//		if( CronExpression.isValidExpression(scheduler.getCronExpression()) ) {
 			jobsDao.attachDirty(scheduler);
 		   return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
-		} else {
-		   return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_CRON_EXPRESSION_INVALID), HttpStatus.BAD_REQUEST);
-		}
+//		} else {
+//		   return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_CRON_EXPRESSION_INVALID), HttpStatus.BAD_REQUEST);
+//		}
 	}
 
 	/**
@@ -164,5 +174,12 @@ public class SchedulerController {
 			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), AppConstants.MSG_JOB_STOP_FAILED), HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@RequestMapping(value = "/events", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> getEvents() {
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(eventDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
 
 }

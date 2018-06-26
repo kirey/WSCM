@@ -32,7 +32,7 @@ public class EventsService {
 		List<Event> listEvents = eventDao.findByType(AppConstants.EVENT_TYPE_CRON);
 		for (Event event : listEvents) {
 			Jobs job = event.getJobs();
-			if(job.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
+			if(event.getStatus() != null && event.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
 				job.setCronExpression(event.getDefinition());
 //				jobService.startJobOnInit(job);
 				System.out.println("***************************JOB STARTED********************************");

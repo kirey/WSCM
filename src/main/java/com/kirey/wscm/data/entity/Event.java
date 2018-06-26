@@ -20,10 +20,11 @@ public class Event implements Serializable {
 	private static final long serialVersionUID = -7737237512641595663L;
 	
 	private Integer id;
-	private String name;
+	private String eventName;
 	private String description;
 	private String eventType;
 	private String definition;
+	private String status;
 	private Jobs jobs;
 	
 	@Id
@@ -37,18 +38,19 @@ public class Event implements Serializable {
 		this.id = id;
 	}
 	
-	@Column(name = "name", unique = false, nullable = false)
-	public String getName() {
-		return name;
+	@Column(name = "event_name", unique = false, nullable = true)
+	public String getEventName() {
+		return eventName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
 	}
 	
 	@Column(name = "description", unique = false, nullable = false)
 	public String getDescription() {
 		return description;
 	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -77,6 +79,15 @@ public class Event implements Serializable {
 	public void setJobs(Jobs jobs) {
 		this.jobs = jobs;
 	}
+	
+	@Column(name = "status")
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	
 	
 

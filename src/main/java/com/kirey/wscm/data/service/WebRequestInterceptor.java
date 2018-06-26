@@ -49,7 +49,7 @@ public class WebRequestInterceptor implements ThrowsAdvice {
 		List<Event> listEvent = eventDao.findByTypeAndDefinition(AppConstants.EVENT_TYPE_WEB_REQUEST, url);
 		for (Event event : listEvent) {
 			Jobs job = event.getJobs();
-			if (job.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
+			if (event.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
 				 jobService.startJobImmediately(job);
 				System.out.println("***************************JOB STARTED********************************");
 			}

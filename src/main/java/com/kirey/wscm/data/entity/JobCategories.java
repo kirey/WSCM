@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "job_categories")
 public class JobCategories implements Serializable {
@@ -21,6 +23,7 @@ public class JobCategories implements Serializable {
 	
 	
 	private Integer id;
+	@JsonBackReference
 	private Jobs job;
 	private Categories category;
 	private Integer weight;

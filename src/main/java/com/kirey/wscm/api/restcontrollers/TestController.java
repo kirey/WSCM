@@ -134,6 +134,14 @@ public class TestController {
 	
 	/*-----------------------------------------------------------------*/
 	
+	@RequestMapping(value = "/pages", method = RequestMethod.GET)
+	public List<String> getAllPages() {
+
+		List<String> listPages = contentDao.getAllDistinctPages();
+		
+		return listPages;
+	}
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public List<Content> getAll() {
 
