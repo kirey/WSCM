@@ -139,4 +139,7 @@
     .sliders>h5 {
         margin-bottom: 50px;
     }
+    .mat-accent .mat-slider-thumb-label-text {
+      transform: none;
+    }
 }

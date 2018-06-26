@@ -31,7 +31,7 @@
     </ng-container>
     <!-- Change Status -->
     <ng-container matColumnDef="changeStatus">
-      <th mat-header-cell *matHeaderCellDef> Change Status</th>
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
       <td mat-cell *matCellDef="let element">
         <i class="material-icons" (click)="stop(element)" >
           stop
@@ -43,7 +43,7 @@
     </ng-container>
     <!-- Actions -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions</th>
+      <th mat-header-cell *matHeaderCellDef> Editing</th>
       <td mat-cell *matCellDef="let element">
         <i class="material-icons" (click)="deleteJob(element.id)">
           delete

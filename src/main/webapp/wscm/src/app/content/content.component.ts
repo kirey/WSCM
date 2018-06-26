@@ -20,6 +20,7 @@ export class ContentComponent implements OnInit {
   selectedPosition: any;
   listCategoryWeight: Array<Object> = [];
 
+
   // Get Positions
   getPositions() {
     this.contentService.getPositions('home')
