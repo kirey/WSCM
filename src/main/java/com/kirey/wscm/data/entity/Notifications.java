@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "notifications")
 public class Notifications implements Serializable {
@@ -31,7 +33,7 @@ public class Notifications implements Serializable {
 	private String notificationTemplate;
 	private DicNotificationType dicNotificationType;
 	
-	
+	@JsonBackReference(value = "jobsNotifications")
 	private List<Jobs> listJobses = new ArrayList<>();
 	
 //	@JsonBackReference(value="notificationCategorieses")

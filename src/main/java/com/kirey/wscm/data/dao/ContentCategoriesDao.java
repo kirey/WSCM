@@ -64,5 +64,19 @@ public class ContentCategoriesDao extends KjcBaseDao {
 				.setParameter("lang", lang).uniqueResult();
 		return content;
 	}
+	
+	/**
+	 * Method for getting {@link Content} by {@link Categories} and max weight
+	 * @param category
+	 * @return {@link Content}
+	 */
+	public Content findContentByUniversalMaxWeightPagePositionLang(String page, String position, String lang) {
+		String hql = "select cc.content from ContentCategories cc where cc.categories.categoryName = 'universal' and cc.content.page = :page and cc.content.position = :position and cc.content.language = :lang and cc.weight in (select max(ccc.weight) from ContentCategories ccc)";
+		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql)
+				.setParameter("page", page)
+				.setParameter("position", position)
+				.setParameter("lang", lang).uniqueResult();
+		return content;
+	}
 
 }

@@ -26,6 +26,7 @@ import org.springframework.web.socket.WebSocketSession;
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.CategoriesDao;
+import com.kirey.wscm.data.dao.ContentCategoriesDao;
 import com.kirey.wscm.data.dao.ContentDao;
 import com.kirey.wscm.data.dao.IpAddressDao;
 import com.kirey.wscm.data.dao.NotificationsDao;
@@ -78,6 +79,9 @@ public class TestController {
 	
 	@Autowired
 	private ContentService contentService;
+	
+	@Autowired
+	private ContentCategoriesDao contentCategoriesDao;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(@RequestParam String name) {
@@ -161,24 +165,35 @@ public class TestController {
 	public String getByPagePositionLang(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
 		
 		WscmUserAccounts user = SecurityUtils.getUserFromContext();
-		Content content = contentService.getContentByUserPagePositionLang(user, page, position, lang);
-
-//		Content content = contentDao.findByPagePositionLang(page, position, lang);
-		StringBuilder sb = new StringBuilder();
-		if(content.getCss() != null) {
-			sb.append(AppConstants.STYLE_OPEN_TAG);
-			sb.append(content.getCss());
-			sb.append(AppConstants.STYLE_CLOSE_TAG);
+		Content content = new Content();
+		if(user != null) {
+			content = contentService.getContentByUserPagePositionLang(user, page, position, lang);
+		}else {
+			content = contentCategoriesDao.findContentByUniversalMaxWeightPagePositionLang(page, position, lang);
 		}
-		sb.append(content.getHtml());
-		if(content.getScript() != null) {
-			sb.append(AppConstants.SCRIPT_OPEN_TAG);
-			sb.append(content.getScript());
-			sb.append(AppConstants.SCRIPT_CLOSE_TAG);
+		
+		if(content != null) {
+			StringBuilder sb = new StringBuilder();
+			if(content.getCss() != null) {
+				sb.append(AppConstants.STYLE_OPEN_TAG);
+				sb.append(content.getCss());
+				sb.append(AppConstants.STYLE_CLOSE_TAG);
+			}
+			sb.append(content.getHtml());
+			if(content.getScript() != null) {
+				sb.append(AppConstants.SCRIPT_OPEN_TAG);
+				sb.append(content.getScript());
+				sb.append(AppConstants.SCRIPT_CLOSE_TAG);
+			}
+			content.setConnected(sb.toString());
+			return content.getConnected();
+		} else {
+			return null;
 		}
-		content.setConnected(sb.toString());
-		return content.getConnected();
+		
 	}
+	
+	/*
 	@RequestMapping(value = "/html/{page}/{position}/{lang}", method = RequestMethod.GET)
 	public String getHtmlCssByPagePositionLang(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
 
@@ -193,8 +208,9 @@ public class TestController {
 		
 		content.setConnected(sb.toString());
 		return content.getConnected();
-	}
+	}*/
 	
+	/*
 	@RequestMapping(value = "/script/{page}/{position}/{lang}", method = RequestMethod.GET)
 	public String getScriptByPagePositionLang(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
 
@@ -206,7 +222,7 @@ public class TestController {
 		
 		content.setConnected(sb.toString());
 		return content.getConnected();
-	}
+	}*/
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<RestResponseDto> addNewContent(@RequestBody Content content) {
@@ -230,7 +246,7 @@ public class TestController {
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted content", HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
-	
+	/*
 	@RequestMapping(value = "/test/{page}/{position}/{lang}", method = RequestMethod.GET)
 	public String getByPagePositionLangDynamicContent(@PathVariable String page, @PathVariable String position, @PathVariable String lang) {
 
@@ -257,7 +273,7 @@ public class TestController {
 		
 		return htmlWithCssAndScript;
 	}
-
+*/
 	@RequestMapping(value = "/email", method = RequestMethod.GET)
 	public ResponseEntity<RestResponseDto> sendEmail() throws Exception {
 		List<IpAddress> listAddresses = ipAddressDao.findAll();
@@ -320,4 +336,10 @@ public class TestController {
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Mail sent!", HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/notifications", method = RequestMethod.GET)
+	public ResponseEntity<RestResponseDto> getAllNotifications() {
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(notificationsDao.findAll(), HttpStatus.OK.value()), HttpStatus.OK);
+		
+	}
 }

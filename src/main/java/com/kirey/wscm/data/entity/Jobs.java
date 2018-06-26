@@ -49,7 +49,8 @@ public class Jobs implements Serializable {
 	@JsonBackReference
 	private List<JobExecutionLog> jobExecutionLogs = new ArrayList<>();
 	
-	private List<Categories> listCategorieses = new ArrayList<>();
+//	private List<Categories> listCategorieses = new ArrayList<>();
+	
 	private List<Notifications> listNotificationses = new ArrayList<>();
 
 	@Id
@@ -113,18 +114,18 @@ public class Jobs implements Serializable {
 		this.jobType = jobType;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "categories_jobs", joinColumns = {
-			@JoinColumn(name = "job", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "category", nullable = false, updatable = false) })
-	@Fetch(FetchMode.SUBSELECT)
-	public List<Categories> getListCategorieses() {
-		return listCategorieses;
-	}
-
-	public void setListCategorieses(List<Categories> listCategorieses) {
-		this.listCategorieses = listCategorieses;
-	}
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinTable(name = "categories_jobs", joinColumns = {
+//			@JoinColumn(name = "job", nullable = false, updatable = false) }, inverseJoinColumns = {
+//					@JoinColumn(name = "category", nullable = false, updatable = false) })
+//	@Fetch(FetchMode.SUBSELECT)
+//	public List<Categories> getListCategorieses() {
+//		return listCategorieses;
+//	}
+//
+//	public void setListCategorieses(List<Categories> listCategorieses) {
+//		this.listCategorieses = listCategorieses;
+//	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "notifications_jobs", joinColumns = {

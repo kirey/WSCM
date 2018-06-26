@@ -96,16 +96,16 @@ public class ContentDao extends KjcBaseDao {
 	}
 
 	/**
-	 * Method for getting {@link Content} by page, position and language
+	 * Method for getting {@link List} of {@link Content} by page, position and language
 	 * @param page
 	 * @param position
 	 * @param lang
-	 * @return {@link Content}
+	 * @return {@link List}<{@link Content}>
 	 */
-	public Content findByPagePositionLang(String page, String position, String lang) {
+	public List<Content> findByPagePositionLang(String page, String position, String lang) {
 		String hql = "from Content cont where cont.page = :page and cont.position = :position and cont.language = :lang";
-		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).setParameter("lang", lang).uniqueResult();
-		return content;
+		List<Content> contents = sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).setParameter("lang", lang).list();
+		return contents;
 	}
 
 	/**
@@ -142,5 +142,11 @@ public class ContentDao extends KjcBaseDao {
 			Hibernate.initialize(content.getContentCategorieses());
 		}
 		return listContent;
+	}
+
+	public Content findByPagePositionLangUniversal(String page, String position, String lang) {
+		String hql = "from Content cont where cont.page = :page and cont.position = :position and cont.language = :lang and cont";
+		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql).setParameter("page", page).setParameter("position", position).setParameter("lang", lang).list();
+		return content;
 	}
 }

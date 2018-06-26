@@ -29,7 +29,7 @@ public class Categories implements Serializable{
 	private String categoryName;
 	private String description;
 	
-	private List<Jobs> listJobses = new ArrayList<>();
+//	private List<Jobs> listJobses = new ArrayList<>();
 	
 //	@JsonBackReference(value="categoriesUserCategories")
 //	private List<UserCategories> userCategorieses = new ArrayList<>();
@@ -73,17 +73,17 @@ public class Categories implements Serializable{
 		this.description = description;
 	}
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "categories_jobs", joinColumns = {
-			@JoinColumn(name = "category", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "job", nullable = false, updatable = false) })
-	@Fetch(FetchMode.SUBSELECT)
-	public List<Jobs> getListJobses() {
-		return listJobses;
-	}
-	public void setListJobses(List<Jobs> listJobses) {
-		this.listJobses = listJobses;
-	}
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinTable(name = "categories_jobs", joinColumns = {
+//			@JoinColumn(name = "category", nullable = false, updatable = false) }, inverseJoinColumns = {
+//					@JoinColumn(name = "job", nullable = false, updatable = false) })
+//	@Fetch(FetchMode.SUBSELECT)
+//	public List<Jobs> getListJobses() {
+//		return listJobses;
+//	}
+//	public void setListJobses(List<Jobs> listJobses) {
+//		this.listJobses = listJobses;
+//	}
 	
 	
 	

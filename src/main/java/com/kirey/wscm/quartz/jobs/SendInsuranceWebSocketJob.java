@@ -21,6 +21,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.IpAddressDao;
+import com.kirey.wscm.data.dao.JobCategoriesDao;
 import com.kirey.wscm.data.dao.JobExecutionLogDao;
 import com.kirey.wscm.data.dao.JobsDao;
 import com.kirey.wscm.data.dao.NotificationsDao;
@@ -66,6 +67,9 @@ public class SendInsuranceWebSocketJob implements InterruptableJob {
 	@Autowired
 	private WebSocketHandler webSocketHandler;
 	
+	@Autowired
+	private JobCategoriesDao jobCategoriesDao;
+	
 	private boolean loopControl = false;
 	
 	private JobExecutionLog jobLogLatest = null;
@@ -98,7 +102,7 @@ public class SendInsuranceWebSocketJob implements InterruptableJob {
 			System.out.println("execute()::***EXECUTING SEND NOTIFICATION JOB:" + context.getJobDetail().getKey().getName() + "WITH LOG ID: " + jobLogLatest.getId());
 			
 			//*************************************************************
-			
+			List<Categories> listCategories = jobCategoriesDao.findByJob(job);
 			List<Notifications> notifications = job.getListNotificationses();
 			for (Notifications notification : notifications) {
 				File file = new File("c:\\insurance.jpg");
@@ -107,7 +111,7 @@ public class SendInsuranceWebSocketJob implements InterruptableJob {
 				byte[] encoded = Base64.getEncoder().encode(b);
 				Map<String, Object> templateModel = new HashMap<>();
 				templateModel.put("slika", new String(encoded));
-				for(Categories category : job.getListCategorieses()) {
+				for(Categories category : listCategories) {
 					List<WscmUserAccounts> usersByCategory = wscmUserAccountsDao.findUsersByCategory(category.getCategoryName());
 					webSocketHandler.sendNotificationToSpecificUsers(usersByCategory, notification, templateModel);
 				}
