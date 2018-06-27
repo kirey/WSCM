@@ -1,162 +1,165 @@
-<div id="content">
+<div style="display:flex">
+    <app-panel></app-panel>
+    <div id="content">
 
-  <!-- Add New page - position -->
-  <button mat-mini-fab color="warn" class="addButton" (click)="addJob()"><i class="material-icons plus">add</i></button>
-  <!-- Accordion -->
-  <mat-accordion *ngIf="positions && panelShow" color="accent">
-    <!-- Expansion panel START -->
-    <mat-expansion-panel *ngFor="let position of positions" (closed)="resetData()">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{position.position}}
-        </mat-panel-title>
-        <mat-panel-description>
-          {{position.page | uppercase}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+        <!-- Add New page - position -->
+        <button mat-mini-fab color="warn" class="addButton" (click)="addJob()"><i class="material-icons plus">add</i></button>
+        <!-- Accordion -->
+        <mat-accordion *ngIf="positions && panelShow" color="accent">
+            <!-- Expansion panel START -->
+            <mat-expansion-panel *ngFor="let position of positions" (closed)="resetData()">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{position.position}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{position.page | uppercase}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
 
-      <!-- Code inside expansion panel -->
+                <!-- Code inside expansion panel -->
 
-      <!-- S T E P 1 -->
-      <!-- Tabs - Material -->
-      <div *ngIf="step == 1" class="tabs-container">
-        <mat-tab-group color="warn">
-          <mat-tab label="HTML">
-            <ng-template mat-tab-label>
-              HTML
-            </ng-template>
-            <!-- Tabs Content -->
-            <div class="tabs-content">
-              <!-- Icons -->
-              <span class="tabs-icons">
+                <!-- S T E P 1 -->
+                <!-- Tabs - Material -->
+                <div *ngIf="step == 1" class="tabs-container">
+                    <mat-tab-group color="warn">
+                        <mat-tab label="HTML">
+                            <ng-template mat-tab-label>
+                                HTML
+                            </ng-template>
+                            <!-- Tabs Content -->
+                            <div class="tabs-content">
+                                <!-- Icons -->
+                                <span class="tabs-icons">
                 <i (click)="deleteDialog(position.id, 'position', position.position)" matTooltip="Delete position" matTooltipPosition="above"
                   class="material-icons">
                   delete
                 </i>
               </span>
-              <!-- Text -->
-              <div class="tabs-text">
-                <form class="form">
-                  <mat-form-field class="textarea" appearance="outline">
-                    <mat-label>Enter HTML code</mat-label>
-                    <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="position.html">
+                                <!-- Text -->
+                                <div class="tabs-text">
+                                    <form class="form">
+                                        <mat-form-field class="textarea" appearance="outline">
+                                            <mat-label>Enter HTML code</mat-label>
+                                            <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="position.html">
                     {{position.html}}
                   </textarea>
-                    <mat-icon class="input-icon" matSuffix>code</mat-icon>
-                  </mat-form-field>
-                </form>
-              </div>
-            </div>
-          </mat-tab>
-          <mat-tab label="CSS">
-            <ng-template mat-tab-label>
-              CSS
-            </ng-template>
-            <!-- Tabs Content -->
-            <div class="tabs-content">
-              <!-- Icons -->
-              <span class="tabs-icons">
+                                            <mat-icon class="input-icon" matSuffix>code</mat-icon>
+                                        </mat-form-field>
+                                    </form>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="CSS">
+                            <ng-template mat-tab-label>
+                                CSS
+                            </ng-template>
+                            <!-- Tabs Content -->
+                            <div class="tabs-content">
+                                <!-- Icons -->
+                                <span class="tabs-icons">
                 <i (click)="deleteDialog()" matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
                   delete
                 </i>
               </span>
-              <!-- Text -->
-              <div class="tabs-text">
-                <form class="form">
-                  <mat-form-field class="textarea" appearance="outline">
-                    <mat-label>Enter CSS code</mat-label>
-                    <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="position.css">
+                                <!-- Text -->
+                                <div class="tabs-text">
+                                    <form class="form">
+                                        <mat-form-field class="textarea" appearance="outline">
+                                            <mat-label>Enter CSS code</mat-label>
+                                            <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="position.css">
                       {{position.css}}
                     </textarea>
-                    <mat-icon class="input-icon" matSuffix>code</mat-icon>
-                  </mat-form-field>
-                </form>
-              </div>
-            </div>
-          </mat-tab>
-          <mat-tab label="JavaScript">
-            <ng-template mat-tab-label>
-              JavaScript
-            </ng-template>
-            <!-- Tabs Content -->
-            <div class="tabs-content">
-              <!-- Icons -->
-              <span class="tabs-icons">
+                                            <mat-icon class="input-icon" matSuffix>code</mat-icon>
+                                        </mat-form-field>
+                                    </form>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="JavaScript">
+                            <ng-template mat-tab-label>
+                                JavaScript
+                            </ng-template>
+                            <!-- Tabs Content -->
+                            <div class="tabs-content">
+                                <!-- Icons -->
+                                <span class="tabs-icons">
                 <!-- Icon -->
                 <i (click)="deleteDialog()" matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
                   delete
                 </i>
               </span>
-              <!-- Text -->
-              <div class="tabs-text">
-                <mat-form-field class="textarea" appearance="outline">
-                  <mat-label>Enter JavaScript code</mat-label>
-                  <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="position.script">
+                                <!-- Text -->
+                                <div class="tabs-text">
+                                    <mat-form-field class="textarea" appearance="outline">
+                                        <mat-label>Enter JavaScript code</mat-label>
+                                        <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="position.script">
                   {{position.script}}
                 </textarea>
-                  <mat-icon class="input-icon" matSuffix>code</mat-icon>
-                </mat-form-field>
-              </div>
-            </div>
-          </mat-tab>
-        </mat-tab-group>
-        <button mat-raised-button color="warn" (click)="next(position, 1)">Next</button>
-      </div>
-      <!-- Tabs - END -->
+                                        <mat-icon class="input-icon" matSuffix>code</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <button mat-raised-button color="warn" (click)="next(position, 1)">Next</button>
+                </div>
+                <!-- Tabs - END -->
 
-      <!-- S T E P 2 -->
-      <!-- Form -->
-      <div class="categories" *ngIf="step == 2">
-        <h5 class="label">Select categories for this position</h5>
-        <div class="categories-box">
-          <div *ngFor="let category of categories | filter : selectedPosition.contentCategorieses: 'categories'">
-            <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after">
-              {{category.description}}
-            </mat-checkbox>
-          </div>
+                <!-- S T E P 2 -->
+                <!-- Form -->
+                <div class="categories" *ngIf="step == 2">
+                    <h5 class="label">Select categories for this position</h5>
+                    <div class="categories-box">
+                        <div *ngFor="let category of categories | filter : selectedPosition.contentCategorieses: 'categories'">
+                            <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after">
+                                {{category.description}}
+                            </mat-checkbox>
+                        </div>
 
-        </div>
-        <h5 class="label">Selected categories</h5>
-        <div *ngIf="selectedPosition.contentCategorieses.length > 0; else nodata">
-          <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box">
-            <span>{{selected.categories.description}}</span>
-            <mat-icon class="unselect-icon" (click)="unchecked(selected)">close</mat-icon>
-          </div>
-        </div>
-        <ng-template #nodata>
-          <h6>
-            <i>No selected categories.</i>
-          </h6>
-        </ng-template>
-        <div class="buttons">
-          <button mat-button (click)="back(2)">Back</button>
-          <button mat-raised-button color="warn" (click)="next(selectedPosition, 2)">Next</button>
-        </div>
-      </div>
-      <!-- Form - END -->
+                    </div>
+                    <h5 class="label">Selected categories</h5>
+                    <div *ngIf="selectedPosition.contentCategorieses.length > 0; else nodata">
+                        <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box">
+                            <span>{{selected.categories.description}}</span>
+                            <mat-icon class="unselect-icon" (click)="unchecked(selected)">close</mat-icon>
+                        </div>
+                    </div>
+                    <ng-template #nodata>
+                        <h6>
+                            <i>No selected categories.</i>
+                        </h6>
+                    </ng-template>
+                    <div class="buttons">
+                        <button mat-button (click)="back(2)">Back</button>
+                        <button mat-raised-button color="warn" (click)="next(selectedPosition, 2)">Next</button>
+                    </div>
+                </div>
+                <!-- Form - END -->
 
-      <!-- S T E P 3 -->
-      <div *ngIf="step == 3" class="sliders">
-        <h5 class="label">Select weight for each category</h5>
-        <div *ngIf="listCategoryWeight.length > 0; else nodata">
-          <div *ngFor="let item of listCategoryWeight">
-            <h6>{{item.categories.description}}</h6>
-            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [(ngModel)]="item.weight">
-            </mat-slider>
-          </div>
-        </div>
-        <ng-template #nodata>
-          <h6>
-            <i>No selected categories.</i>
-          </h6>
-        </ng-template>
-        <div class="buttons">
-          <button mat-button (click)="back(3)">Back</button>
-          <button mat-raised-button color="warn" (click)="save()">Save</button>
-        </div>
-      </div>
-    </mat-expansion-panel>
-    <!-- Expansion panel END -->
-  </mat-accordion>
-  <app-add-new-position *ngIf="addJobShow"></app-add-new-position>
+                <!-- S T E P 3 -->
+                <div *ngIf="step == 3" class="sliders">
+                    <h5 class="label">Select weight for each category</h5>
+                    <div *ngIf="listCategoryWeight.length > 0; else nodata">
+                        <div *ngFor="let item of listCategoryWeight">
+                            <h6>{{item.categories.description}}</h6>
+                            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [(ngModel)]="item.weight">
+                            </mat-slider>
+                        </div>
+                    </div>
+                    <ng-template #nodata>
+                        <h6>
+                            <i>No selected categories.</i>
+                        </h6>
+                    </ng-template>
+                    <div class="buttons">
+                        <button mat-button (click)="back(3)">Back</button>
+                        <button mat-raised-button color="warn" (click)="save()">Save</button>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <!-- Expansion panel END -->
+        </mat-accordion>
+        <app-add-new-position *ngIf="addJobShow"></app-add-new-position>
+    </div>
 </div>

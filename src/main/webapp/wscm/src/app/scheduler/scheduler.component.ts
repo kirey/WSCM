@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SchedulerService } from './scheduler.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-scheduler',
@@ -22,7 +23,7 @@ export class SchedulerComponent implements OnInit {
   tableShow = true;
   editJobShow = false;
 
-  constructor(public schedulerService: SchedulerService) {}
+  constructor(public schedulerService: SchedulerService,public router: Router) {}
 
   displayedColumns = [
     'id',
@@ -99,6 +100,9 @@ export class SchedulerComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(localStorage.getItem('role') == 'ROLE_USER'){
+        this.router.navigate(['/client']);
+    }
     this.getList();
   }
 }

@@ -3,6 +3,7 @@ import { ContentService } from './content.service';
 import { SnackBarService } from './../shared/services/snackbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.comp
 })
 export class ContentComponent implements OnInit {
 
-  constructor(public contentService: ContentService, public snackbar: SnackBarService, public dialog: MatDialog) { }
+  constructor(public contentService: ContentService, public snackbar: SnackBarService, public dialog: MatDialog,public router: Router) { }
   positions: any;
   categories: any;
   step: number = 1;
@@ -158,6 +159,10 @@ console.log(this.selectedPosition['contentCategorieses']);
   }
 
   ngOnInit() {
+    if(localStorage.getItem('role') == 'ROLE_USER'){
+        this.router.navigate(['/client']);
+    }
+
     this.getPositions();
 
     // Get Categories

@@ -61,7 +61,7 @@ public class AuthController {
 		
 		wscmUser.setSessionId(cookie);
 
-		return new ResponseEntity<Object>(null, HttpStatus.OK);
+		return new ResponseEntity<Object>(wscmUser, HttpStatus.OK);
 	}
 	
 	/**
