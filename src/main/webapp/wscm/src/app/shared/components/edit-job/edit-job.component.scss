@@ -1,0 +1,11 @@
+@import '../../../app.component.scss';
+// @import '~@angular/material/theming';
+
+#editJob {
+  p {
+    color: $primary;
+  }
+  .addJob-container {
+    width: 50%;
+  }
+}

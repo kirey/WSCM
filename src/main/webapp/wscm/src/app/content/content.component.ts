@@ -19,6 +19,15 @@ export class ContentComponent implements OnInit {
   step: number = 1;
   selectedPosition: any;
   listCategoryWeight: Array<Object> = [];
+  addJobShow = false;
+  panelShow = true;
+
+
+  // Add New Position panel open and close
+  addJob() {
+    this.panelShow = false;
+    this.addJobShow = true;
+  }
 
 
   // Get Positions
@@ -134,7 +143,7 @@ export class ContentComponent implements OnInit {
   // Send Request
   save() {
     this.selectedPosition['contentCategorieses'] = this.listCategoryWeight;
-
+console.log(this.selectedPosition['contentCategorieses']);
     this.contentService.updateContent(this.selectedPosition)
       .subscribe(
         res => {

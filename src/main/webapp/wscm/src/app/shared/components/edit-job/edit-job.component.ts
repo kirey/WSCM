@@ -16,7 +16,7 @@ export class EditJobComponent implements OnInit {
   cronExpression: string;
   status: string;
   id: number;
-
+  selected = 'option2';
    // Edit job form
    editJob() {
     const obj = {
@@ -26,19 +26,19 @@ export class EditJobComponent implements OnInit {
       id: this.currentJob.id
     };
     console.log(obj);
-    // this.editJobService.editJob(obj).subscribe(
-    //   res => {
-    //     console.log(res);
-    //     // this.jobs = res.data;
-    //     // this.successMessage(res.message);
-    //     // this.editJobModal.hide();
-    //   },
-    //   err => {
-    //     console.log(err);
-    //     // this.errorMessage(err);
-    //     // this.editJobModal.hide();
-    //   }
-    // );
+    this.editJobService.editJob(obj).subscribe(
+      res => {
+        console.log(res);
+        // this.jobs = res.data;
+        // this.successMessage(res.message);
+        // this.editJobModal.hide();
+      },
+      err => {
+        console.log(err);
+        // this.errorMessage(err);
+        // this.editJobModal.hide();
+      }
+    );
   }
 
   ngOnInit() {
