@@ -48,9 +48,10 @@ public class Jobs implements Serializable {
 	
 	private DicJobType jobType;
 
-	@JsonBackReference
+	@JsonBackReference(value = "jobLogs")
 	private List<JobExecutionLog> jobExecutionLogs = new ArrayList<>();
 	
+	@JsonBackReference(value = "jobParams")
 	private List<JobParameters> jobParameterses = new ArrayList<>();
 	
 	private List<JobCategories> jobCategorieses = new ArrayList<>();

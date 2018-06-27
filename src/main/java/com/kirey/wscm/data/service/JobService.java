@@ -22,7 +22,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.kirey.wscm.common.constants.AppConstants;
+import com.kirey.wscm.data.dao.EventDao;
 import com.kirey.wscm.data.dao.JobsDao;
+import com.kirey.wscm.data.entity.Event;
 import com.kirey.wscm.data.entity.Jobs;
 import com.kirey.wscm.quartz.jobs.SchedJobListener;
 
@@ -45,6 +47,9 @@ public class JobService {
 
 	@Autowired
 	private ApplicationContext applicationContext;
+	
+	@Autowired
+	private EventDao eventDao;
 
 	/**
 	 * Method creates {@link CronTrigger}
@@ -87,21 +92,23 @@ public class JobService {
 	 */
 	public void startJob(Integer id) throws SchedulerException, ClassNotFoundException {
 
-		Jobs schedulerEnt = jobsDao.findById(id);
+		// Jobs schedulerEnt = jobsDao.findById(id);
+		Event event = eventDao.findById(id);
 
-		CronTrigger cronTrigger = createTrigger(schedulerEnt.getCronExpression(), schedulerEnt.getJobName(), AppConstants.GROUP_NAME);
-		JobDetail jobDetail = createJob(schedulerEnt.getJobName(), AppConstants.GROUP_NAME);
+		Jobs job = event.getJobs();
+		CronTrigger cronTrigger = createTrigger(event.getDefinition(), job.getJobName(), AppConstants.GROUP_NAME);
+		JobDetail jobDetail = createJob(job.getJobName(), AppConstants.GROUP_NAME);
 
 		jobDetail.getJobDataMap().put("jobId", id);
-		
+
 		scheduler1.getListenerManager().addJobListener(schedJobListener);
 		if (!scheduler1.checkExists(jobDetail.getKey()))
 			scheduler1.scheduleJob(jobDetail, cronTrigger);
 
 		scheduler1.start();
 
-		schedulerEnt.setStatus(AppConstants.SCHEDULER_STATUS_ACTIVE);
-		jobsDao.merge(schedulerEnt);
+		job.setStatus(AppConstants.SCHEDULER_STATUS_ACTIVE);
+		jobsDao.merge(job);
 
 	}
 	
