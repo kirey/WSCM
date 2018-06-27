@@ -19,6 +19,7 @@ import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.EventDao;
 import com.kirey.wscm.data.dao.JobExecutionLogDao;
 import com.kirey.wscm.data.dao.JobsDao;
+import com.kirey.wscm.data.entity.Event;
 import com.kirey.wscm.data.entity.JobCategories;
 import com.kirey.wscm.data.entity.JobExecutionLog;
 import com.kirey.wscm.data.entity.Jobs;
@@ -49,10 +50,7 @@ public class SchedulerController {
 	@RequestMapping(value = "/jobs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getAllSchedulers() {
 		List<Jobs> listJobs = jobsDao.findAll();
-		for (Jobs jobs : listJobs) {
-			List<JobCategories> listCategories = jobs.getJobCategorieses();
-			System.out.println("milos");
-		}
+		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listJobs, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 
@@ -177,9 +175,34 @@ public class SchedulerController {
 	
 	@RequestMapping(value = "/events", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getEvents() {
-		
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto(eventDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+		List<Event> listEvents = eventDao.findAll();
+		for (Event event : listEvents) {
+			event.getJobs().setJobCategorieses(null);
+			event.getJobs().setListNotificationses(null);
+			event.getJobs().setJobParameterses(null);
+		}
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listEvents, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/events", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> addNewEvent(@RequestBody Event event) {
+		
+		eventDao.attachDirty(event);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully added new event", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/events", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> editEvent(@RequestBody Event event) {
+		
+		eventDao.merge(event);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited event", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/events/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> deleteEvent(@PathVariable Integer id) {
+		Event event = eventDao.findById(id);
+		eventDao.delete(event);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted event", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
 
 }
