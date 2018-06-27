@@ -56,7 +56,7 @@ public class ContentCategoriesDao extends KjcBaseDao {
 	 * @return {@link Content}
 	 */
 	public Content findContentByCategoryMaxWeightPagePositionLang(Categories category, String page, String position, String lang) {
-		String hql = "select cc.content from ContentCategories cc where cc.categories.id = :categoryId and cc.content.page = :page and cc.content.position = :position and cc.content.language = :lang and cc.weight in (select max(ccc.weight) from ContentCategories ccc)";
+		String hql = "select cc.content from ContentCategories cc where cc.categories.id = :categoryId and cc.content.page = :page and cc.content.position = :position and cc.content.language = :lang and cc.weight in (select max(ccc.weight) from ContentCategories ccc where ccc.categories.id = cc.categories.id)";
 		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql)
 				.setParameter("categoryId", category.getId())
 				.setParameter("page", page)
@@ -71,7 +71,7 @@ public class ContentCategoriesDao extends KjcBaseDao {
 	 * @return {@link Content}
 	 */
 	public Content findContentByUniversalMaxWeightPagePositionLang(String page, String position, String lang) {
-		String hql = "select cc.content from ContentCategories cc where cc.categories.categoryName = 'universal' and cc.content.page = :page and cc.content.position = :position and cc.content.language = :lang and cc.weight in (select max(ccc.weight) from ContentCategories ccc)";
+		String hql = "select cc.content from ContentCategories cc where cc.categories.categoryName = 'universal' and cc.content.page = :page and cc.content.position = :position and cc.content.language = :lang and cc.weight in (select max(ccc.weight) from ContentCategories ccc where ccc.categories.id = cc.categories.id)";
 		Content content = (Content) sessionFactory.getCurrentSession().createQuery(hql)
 				.setParameter("page", page)
 				.setParameter("position", position)

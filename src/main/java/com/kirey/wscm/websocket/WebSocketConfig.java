@@ -29,7 +29,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	
 	@Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(counterHandler, "/counter").setAllowedOrigins("*");
+        registry.addHandler(counterHandler, "/socket").setAllowedOrigins("*");
     }
 	
 	@Bean

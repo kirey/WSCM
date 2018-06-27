@@ -155,7 +155,7 @@ public class Jobs implements Serializable {
 		this.classLoading = classLoading;
 	}
 
-	@OneToMany(mappedBy = "job", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "job", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
 //	@LazyCollection(LazyCollectionOption.FALSE)
 	@Fetch(FetchMode.SUBSELECT)
 	public List<JobParameters> getJobParameterses() {
@@ -166,7 +166,7 @@ public class Jobs implements Serializable {
 		this.jobParameterses = jobParameterses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "job")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "job")
 //	@LazyCollection(LazyCollectionOption.FALSE)
 	@LazyCollection(LazyCollectionOption.TRUE)
 	@Fetch(FetchMode.SUBSELECT)
