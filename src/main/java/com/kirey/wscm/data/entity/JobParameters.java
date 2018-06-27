@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "job_parameters")
 public class JobParameters implements Serializable {
@@ -23,6 +25,7 @@ public class JobParameters implements Serializable {
 	private String name;
 	private String value;
 	private String description;
+	@JsonBackReference
 	private Jobs job;
 	
 	@Id
@@ -61,7 +64,7 @@ public class JobParameters implements Serializable {
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "dic_notification_type", nullable = true)
+	@JoinColumn(name = "job", nullable = true)
 	public Jobs getJob() {
 		return job;
 	}

@@ -17,12 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.EventDao;
+import com.kirey.wscm.data.dao.JobCategoriesDao;
 import com.kirey.wscm.data.dao.JobExecutionLogDao;
 import com.kirey.wscm.data.dao.JobsDao;
+import com.kirey.wscm.data.entity.Content;
+import com.kirey.wscm.data.entity.ContentCategories;
 import com.kirey.wscm.data.entity.Event;
 import com.kirey.wscm.data.entity.JobCategories;
 import com.kirey.wscm.data.entity.JobExecutionLog;
 import com.kirey.wscm.data.entity.Jobs;
+import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.service.JobService;
 
 
@@ -41,6 +45,9 @@ public class SchedulerController {
 	
 	@Autowired
 	private EventDao eventDao;
+	
+	@Autowired
+	private JobCategoriesDao jobCategoriesDao;
 
 	/**
 	 * get all jobs
@@ -74,14 +81,15 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/addJob", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> addScheduler(@RequestBody Jobs scheduler) {
-		
-//		if( CronExpression.isValidExpression(scheduler.getCronExpression()) ) { 
-//			scheduler.setStatus(AppConstants.SCHEDULER_STATUS_INACTIVE);
-			jobsDao.persist(scheduler);
-			return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
-//		} else {
-//			 return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_CRON_EXPRESSION_INVALID), HttpStatus.BAD_REQUEST);
-//		}
+
+		Jobs savedJob = (Jobs) jobsDao.merge(scheduler);
+		List<JobCategories> listJobCategories = scheduler.getJobCategorieses();
+		for (JobCategories jobCategories : listJobCategories) {
+			jobCategories.setJob(savedJob);
+			jobCategoriesDao.attachDirty(jobCategories);
+		}
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+
 	}
 
 	/**
@@ -93,12 +101,42 @@ public class SchedulerController {
 	@RequestMapping(value = "/editJob", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> editScheduler(@RequestBody Jobs scheduler) {
 		
-//		if( CronExpression.isValidExpression(scheduler.getCronExpression()) ) {
-			jobsDao.attachDirty(scheduler);
-		   return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
-//		} else {
-//		   return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_CRON_EXPRESSION_INVALID), HttpStatus.BAD_REQUEST);
-//		}
+		Jobs savedScheduler = (Jobs) jobsDao.merge(scheduler);
+		
+		List<JobCategories> jobCategoriesFromDb = jobCategoriesDao.findByJobId(savedScheduler.getId());
+		
+		List<JobCategories> jobCategorieses = scheduler.getJobCategorieses();
+		
+		for (JobCategories jobCategoryFromDb : jobCategoriesFromDb) {
+			boolean exist = false;
+			for (JobCategories jobCategories : jobCategorieses) {
+				if(jobCategoryFromDb.getCategory().getId().equals(jobCategories.getCategory().getId())) {
+					exist = true;
+				}
+			}
+			if(exist) {
+				jobCategoriesDao.delete(jobCategoryFromDb);	
+			}
+		}
+		
+		for (JobCategories jobCategory : jobCategorieses) {
+			JobCategories jobCategories = jobCategoriesDao.findByJobAndCategory(savedScheduler.getId(), jobCategory.getCategory().getId());
+			if(jobCategories == null) {
+				jobCategories = new JobCategories();
+				jobCategories.setCategory(jobCategory.getCategory());
+				jobCategories.setJob(savedScheduler);
+				jobCategories.setWeight(jobCategory.getWeight());
+				jobCategoriesDao.attachDirty(jobCategories);
+			} else {
+				jobCategories.setCategory(jobCategory.getCategory());
+				jobCategories.setJob(savedScheduler);
+				jobCategories.setWeight(jobCategory.getWeight());
+				jobCategoriesDao.merge(jobCategories);
+			}
+		}
+	
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+
 	}
 
 	/**
@@ -109,7 +147,11 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/deleteJob/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> deleteScheduler(@PathVariable int id) {
-		jobsDao.delete(jobsDao.findById(id));
+		Jobs job = jobsDao.findById(id);
+		job.getListNotificationses().clear();
+		jobsDao.merge(job);
+		
+		jobsDao.delete(job);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 

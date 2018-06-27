@@ -37,5 +37,23 @@ public class JobCategoriesDao extends KjcBaseDao {
 		List<Categories> listCategories = sessionFactory.getCurrentSession().createQuery(hql).setParameter("jobId", job.getId()).list();
 		return listCategories;
 	}
+	
+	/**
+	 * Method for getting {@link List} of {@link Categories} by {@link Jobs}
+	 * @param job
+	 * @return {@link List}<{@link Categories}>
+	 */
+	public List<JobCategories> findByJobId(Integer jobId) {
+		String hql = "from JobCategories jc where jc.job.id = :jobId";
+		List<JobCategories> jobCategories = sessionFactory.getCurrentSession().createQuery(hql).setParameter("jobId", jobId).list();
+		return jobCategories;
+	}
+
+	
+	public JobCategories findByJobAndCategory(Integer jobId, Integer categoryId) {
+		String hql = "from JobCategories jc where jc.job.id = :jobId and jc.category.id = :categoryId";
+		JobCategories jobCategory = (JobCategories) sessionFactory.getCurrentSession().createQuery(hql).setParameter("jobId", jobId).setParameter("categoryId", categoryId).uniqueResult();
+		return jobCategory;
+	}
 
 }
