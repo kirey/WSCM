@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
@@ -19,12 +20,14 @@ import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.EventDao;
 import com.kirey.wscm.data.dao.JobCategoriesDao;
 import com.kirey.wscm.data.dao.JobExecutionLogDao;
+import com.kirey.wscm.data.dao.JobParametersDao;
 import com.kirey.wscm.data.dao.JobsDao;
 import com.kirey.wscm.data.entity.Content;
 import com.kirey.wscm.data.entity.ContentCategories;
 import com.kirey.wscm.data.entity.Event;
 import com.kirey.wscm.data.entity.JobCategories;
 import com.kirey.wscm.data.entity.JobExecutionLog;
+import com.kirey.wscm.data.entity.JobParameters;
 import com.kirey.wscm.data.entity.Jobs;
 import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.service.JobService;
@@ -48,6 +51,9 @@ public class SchedulerController {
 	
 	@Autowired
 	private JobCategoriesDao jobCategoriesDao;
+	
+	@Autowired
+	private JobParametersDao jobParametersDao;
 
 	/**
 	 * get all jobs
@@ -191,7 +197,13 @@ public class SchedulerController {
 	public ResponseEntity<RestResponseDto> startJob(@PathVariable int id) throws ClassNotFoundException {
 
 		try {
-			jobService.startJob(id);
+			Event event = eventDao.findById(id);
+			if(event.getEventType().equals(AppConstants.EVENT_TYPE_CRON)) {
+				jobService.startJob(id);
+			} else {
+				jobService.startJobImmediately(event.getJobs());
+			}
+			
 			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.OK.value(), AppConstants.MSG_JOB_SUCCESSFULL_STARTED), HttpStatus.OK);
 		} catch (SchedulerException e) {
 			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), AppConstants.MSG_JOB_START_FAILED), HttpStatus.BAD_REQUEST);
@@ -208,7 +220,8 @@ public class SchedulerController {
 	public ResponseEntity<RestResponseDto> stopJob(@PathVariable Integer id) {
 
 		try {
-			jobService.stopJob(id);
+			Event event = eventDao.findById(id);
+			jobService.stopJob(event.getJobs().getId());
 			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.OK.value(), AppConstants.MSG_JOB_SUCCESSFULL_STOPPED), HttpStatus.OK);
 		} catch (SchedulerException e) {
 			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), AppConstants.MSG_JOB_STOP_FAILED), HttpStatus.BAD_REQUEST);
@@ -246,5 +259,37 @@ public class SchedulerController {
 		eventDao.delete(event);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted event", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/params", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> getAllParams() {
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobParametersDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{id}/params", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> getParamsByJob(@PathVariable Integer id) {
+		List<JobParameters> listJobParameters = jobParametersDao.findByJob(id);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listJobParameters, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/params", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> addNewParams(@RequestBody JobParameters jobParameter) {
+		jobParametersDao.attachDirty(jobParameter);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobParametersDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/params", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> edit(@RequestBody JobParameters jobParameter) {
+		jobParametersDao.merge(jobParameter);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobParametersDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/params/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> edit(@PathVariable Integer id) {
+		JobParameters jobParameter = jobParametersDao.findById(id);
+		jobParametersDao.delete(jobParameter);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted parameter", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
 
 }

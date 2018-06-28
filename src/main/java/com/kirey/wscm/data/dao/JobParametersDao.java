@@ -1,5 +1,7 @@
 package com.kirey.wscm.data.dao;
 
+import java.util.List;
+
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +23,11 @@ public class JobParametersDao extends KjcBaseDao {
 	public JobParametersDao() {
 		log = LogFactory.getLog(JobParametersDao.class);
 		entityClass = JobParameters.class;
+	}
+
+	public List<JobParameters> findByJob(Integer jobId) {
+		String hql = "from JobParameters jp where jp.job.id = :jobId";
+		List<JobParameters> listJobParameters = sessionFactory.getCurrentSession().createQuery(hql).setParameter("jobId", jobId).list();
+		return listJobParameters;
 	}
 }
