@@ -21,6 +21,7 @@ import { AddJobService } from './shared/components/add-job/addJob.service';
 import { EditJobService } from './shared/components/edit-job/edit-job.service';
 import { AddNewPositionService } from './shared/components/add-new-position/add-new-position.service';
 import { ClientService } from './client/client.service';
+import {SocketService} from './shared/services/socket.service'
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -67,7 +68,7 @@ import { ClientComponent } from './client/client.component';
     MaterialModule
   ],
   providers: [
-    PanelService, AuthGuard, AuthService, LoginService, SchedulerService, AddJobService, EditJobService, AddNewPositionService,ClientService
+    PanelService, AuthGuard, AuthService, LoginService, SchedulerService, AddJobService, EditJobService, AddNewPositionService,ClientService,SocketService
   ],
   entryComponents: [
     DeleteDialog

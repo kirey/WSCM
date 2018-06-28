@@ -129,6 +129,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 					if (session != null && session.isOpen()) {
 						try {
 							session.sendMessage(new TextMessage(notificationContent));
+							System.out.println("poslato");
 							//Add new NotificationsSent
 							NotificationsSent notificationSent = new NotificationsSent();
 							notificationSent.setUserAccount(user);
