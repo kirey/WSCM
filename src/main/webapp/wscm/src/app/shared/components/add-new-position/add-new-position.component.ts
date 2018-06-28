@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DeleteDialog } from '../../dialogs/delete-dialog/delete-dialog.component';
+import { SnackBarService } from './../../services/snackbar.service';
 
 import { AddNewPositionService } from './add-new-position.service';
 
@@ -12,94 +13,199 @@ import { AddNewPositionService } from './add-new-position.service';
 })
 export class AddNewPositionComponent implements OnInit {
   panelOpenState: boolean = false;
-  selectedPage = 'option2';
   selectedPosition: any;
   step: number = 1;
   listCategoryWeight: Array<Object> = [];
   position: any;
   contentCategorieses: any;
+  pages: string;
+  selectPage: any;
+  language: string;
+  id: number;
+  categoryName: string;
+  description: string;
+  weight: number;
+  html: null;
+  css: null;
+  script: null;
+  categories: any;
+  positions: any;
+  check: boolean = false;
 
+  constructor(
+    public dialog: MatDialog,
+    public contentService: AddNewPositionService,
+    public snackbar: SnackBarService
+  ) {}
 
-  constructor(public dialog: MatDialog, public contentService: AddNewPositionService) { }
-
-
-// NEXT button
-next(obj, step) {
-  console.log(obj);
-  switch (step) {
-    case 1:
-      this.step = 2;
-      this.selectedPosition = obj;
-      for (const item of this.selectedPosition) {
-        this.listCategoryWeight.push(item);
-      }
-      break;
-    case 2:
-      this.step = 3;
-      break;
-  }
-  console.log(this.listCategoryWeight);
-}
-
- // BACK button
- back(currentStep) {
-  switch (currentStep) {
-    case 2:
-      this.step = 1;
-      this.listCategoryWeight = [];
-      break;
-    case 3:
-      this.step = 2;
-      break;
-  }
-}
-
-// Reset Data
-resetData() {
-  this.step = 1;
-  this.listCategoryWeight = [];
-}
-
-// Delete Dialog
-deleteDialog(id, type, value) {
-  const dialogRef = this.dialog.open(DeleteDialog, {
-    width: '500px',
-    data: { type: type, value: value }
-  });
-
-  // dialogRef.afterClosed().subscribe(res => {
-  //   if (res) {
-  //     this.contentService.deletePosition(id)
-  //       .subscribe(
-  //         res => {
-  //           console.log(res);
-
-  //         },
-  //         err => console.log(err)
-  //       )
-  //   }
-  // });
-}
-
-
- // Send Request
- save() {
-  // this.selectedPosition['contentCategorieses'] = this.listCategoryWeight;
-
-  this.contentService.addContent(this.selectedPosition)
-    .subscribe(
+  // Get All Pages - select box for pages select ********************************
+  getAllPages() {
+    this.contentService.getPages(this.pages).subscribe(
       res => {
-        console.log(res);
-        // this.snackbar.openSnackBar('Success', res['data']);
-        // this.getPositions();
-        // this.resetData();
-
+        this.selectPage = res;
       },
       err => console.log(err)
     );
-}
-
-  ngOnInit() {
   }
 
+  // GET All Categories **************************************
+  getCategory() {
+    this.contentService.getCategories().subscribe(
+      res => {
+        this.categories = res['data'];
+      },
+      err => console.log(err)
+    );
+  }
+
+  getPositions() {
+    this.contentService.getPositions('home').subscribe(
+      res => {
+        this.positions = res;
+      },
+      err => console.log(err)
+    );
+  }
+
+  // CHECKED CATEGORIES
+  // ************************
+  checked(ev, categories) {
+    if (ev.checked) {
+      if (this.listCategoryWeight.length > 0) {
+        this.listCategoryWeight.push({ categories, weight: 1 });
+        this.selectedPosition.contentCategorieses.push({
+          categories,
+          weight: 1
+        });
+        console.log(this.listCategoryWeight);
+        console.log(ev, categories);
+        console.log(this.selectedPosition);
+      } else {
+        const index = this.listCategoryWeight.findIndex(
+          item => item['categories'] === categories
+        );
+        this.listCategoryWeight.splice(index, 1);
+
+        const index2 = this.selectedPosition['contentCategorieses'].findIndex(
+          item => item['categories'] === categories
+        );
+        this.selectedPosition['contentCategorieses'].splice(index2, 1);
+      }
+      console.log(this.listCategoryWeight);
+    }
+  }
+
+  // REMOVE  from list 'Selected categories'
+  unchecked(position) {
+    if (this.listCategoryWeight.length !== 0) {
+      const index = this.listCategoryWeight.findIndex(
+        item => item['categories'] === position.categories
+      );
+      this.listCategoryWeight.splice(index, 1);
+
+      const index2 = this.selectedPosition['contentCategorieses'].findIndex(
+        item => item['categories'] === position.categories
+      );
+      this.selectedPosition['contentCategorieses'].splice(index2, 1);
+    }
+    console.log(this.listCategoryWeight);
+  }
+
+  // NEXT button ***************************************
+  next(obj, step) {
+    obj = {
+      page: this.pages,
+      position: this.position,
+      language: this.language,
+      html: this.html,
+      css: this.css,
+      script: this.script,
+      contentCategorieses: [
+        {
+          categories: {
+            id: this.categories.id,
+            categoryName: this.categories.categoryName,
+            description: this.categories.description
+          },
+          weight: this.weight
+        }
+      ]
+    };
+    console.log(obj);
+    switch (step) {
+      case 1:
+        this.step = 2;
+        this.selectedPosition = obj;
+        for (const item of this.selectedPosition.contentCategorieses) {
+          this.listCategoryWeight.push(item);
+        }
+        break;
+      case 2:
+        this.step = 3;
+        break;
+      case 3:
+        this.step = 4;
+        break;
+    }
+    console.log(this.listCategoryWeight);
+  }
+
+  // BACK button ******************************************
+  back(currentStep) {
+    switch (currentStep) {
+      case 2:
+        this.step = 1;
+        // this.listCategoryWeight = [];
+        break;
+      case 3:
+        this.step = 2;
+        break;
+      case 4:
+        this.step = 3;
+        break;
+    }
+  }
+
+  // Reset Data ************************************
+  resetData() {
+    this.step = 1;
+    this.listCategoryWeight = [];
+  }
+
+  // Delete Dialog ***********************************
+  deleteDialog(id, type, value) {
+    const dialogRef = this.dialog.open(DeleteDialog, {
+      width: '500px',
+      data: { type: type, value: value }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.contentService.deletePosition(id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => console.log(err)
+        );
+      }
+    });
+  }
+
+  // Send Request
+  save() {
+    this.selectedPosition['contentCategorieses'] = this.listCategoryWeight;
+    this.contentService.addContent(this.selectedPosition).subscribe(
+      res => {
+        console.log(res);
+        this.snackbar.openSnackBar('Success', res['data']);
+        this.getPositions();
+        this.resetData();
+      },
+      err => console.log(err)
+    );
+  }
+
+  ngOnInit() {
+    this.getAllPages();
+    this.getCategory();
+  }
 }

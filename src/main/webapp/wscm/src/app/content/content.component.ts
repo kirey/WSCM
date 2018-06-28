@@ -50,6 +50,7 @@ export class ContentComponent implements OnInit {
 
   // NEXT button
   next(obj, step) {
+    console.log(obj, step);
     switch (step) {
       case 1:
         this.step = 2;

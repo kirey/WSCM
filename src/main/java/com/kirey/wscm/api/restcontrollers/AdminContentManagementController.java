@@ -41,6 +41,13 @@ public class AdminContentManagementController {
 	@Autowired
 	private ContentCategoriesDao contentCategoriesDao;
 	
+	@RequestMapping(value = "/pages", method = RequestMethod.GET)
+	public List<String> getAllPages() {
+
+		List<String> listPages = contentDao.getAllDistinctPages();
+		
+		return listPages;
+	}
 	
 	/**
 	 * Method used for getting list of all Categories

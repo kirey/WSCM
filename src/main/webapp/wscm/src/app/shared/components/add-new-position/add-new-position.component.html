@@ -9,7 +9,6 @@
           P1
         </mat-panel-description>
       </mat-expansion-panel-header>
-
       <!-- S T E P 1,
       Material tabs -->
       <div *ngIf="step == 1" class="tabs-container">
@@ -18,26 +17,22 @@
             delete
           </i>
         </span>
+        <!-- select pages -->
         <mat-form-field>
-          <mat-select [(value)]="selectedPage">
-            <mat-option>None</mat-option>
-            <mat-option value="page1">Page 1</mat-option>
-            <mat-option value="page2">Page 2</mat-option>
-            <mat-option value="page3">Page 3</mat-option>
+          <mat-select name="pages" placeholder="Pages" [(ngModel)]="pages">
+            <mat-option *ngFor="let pages of selectPage" [value]="pages">{{pages}}</mat-option>
           </mat-select>
         </mat-form-field>
-
-        <p>You selected: {{selectedPage}}</p>
-
-
+        <!-- Position -->
         <mat-form-field>
-          <input matInput placeholder="Position">
+          <input matInput placeholder="Position" name="position" id="position" [(ngModel)]="position" required minlength="2" maxlength="2">
         </mat-form-field>
+        <!-- language -->
         <mat-form-field>
-          <input matInput placeholder="Language">
+          <input matInput placeholder="Language" [(ngModel)]="language" required>
         </mat-form-field>
-        <button mat-raised-button color="warn" (click)="next(selectedPosition, 1)">Next</button>
-        </div>
+        <button mat-raised-button color="warn" (click)="next(position, 1)">Next</button>
+      </div>
       <!-- S T E P 1     END -->
       <!-- S T E P 2,
       Material tabs -->
@@ -60,7 +55,7 @@
                 <form class="form">
                   <mat-form-field class="textarea" appearance="outline">
                     <mat-label>Enter HTML code</mat-label>
-                    <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50">
+                    <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="html">
 
                     </textarea>
                     <mat-icon class="input-icon" matSuffix>code</mat-icon>
@@ -86,7 +81,7 @@
                 <form class="form">
                   <mat-form-field class="textarea" appearance="outline">
                     <mat-label>Enter CSS code</mat-label>
-                    <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50">
+                    <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="css">
 
                     </textarea>
                     <mat-icon class="input-icon" matSuffix>code</mat-icon>
@@ -111,7 +106,7 @@
               <div class="tabs-text">
                 <mat-form-field class="textarea" appearance="outline">
                   <mat-label>Enter JavaScript code</mat-label>
-                  <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50">
+                  <textarea matInput name="textarea" placeholder="Edit code" rows="15" cols="50" [(ngModel)]="script">
 
                   </textarea>
                   <mat-icon class="input-icon" matSuffix>code</mat-icon>
@@ -127,18 +122,22 @@
       </div>
       <!-- S T E P 2       E N D -->
       <!-- S T E P 3 -->
-      <div *ngIf="step == 3">
-        <span class="tabs-icons">
-          <i (click)="deleteDialog()" matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
-            delete
-          </i>
-        </span>
-        <mat-form-field>
-          <input matInput placeholder="Category">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Weight">
-        </mat-form-field>
+      <div class="categories" *ngIf="step == 3">
+        <h5 class="label">Select categories for this position</h5>
+        <div class="categories-box">
+          <div *ngFor="let category of categories | filter : selectedPosition.contentCategorieses: 'categories'">
+            <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after">
+              {{category.description}}
+            </mat-checkbox>
+          </div>
+        </div>
+        <div *ngIf="selectedPosition.contentCategorieses.length > 0; else nodata">
+          <h5 class="label">Selected categories</h5>
+          <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box">
+            <span>{{selected.categories.description}}</span>
+            <mat-icon  class="unselect-icon" (click)="unchecked(selected)">close</mat-icon>
+          </div>
+        </div>
         <ng-template #nodata>
           <h6>
             <i>No selected categories.</i>
@@ -146,6 +145,25 @@
         </ng-template>
         <div class="buttons">
           <button mat-button (click)="back(3)">Back</button>
+          <button mat-raised-button color="warn" (click)="next(selectedPosition, 3)">Next</button>
+        </div>
+      </div>
+      <!-- ****************************** -->
+      <div class="categories" *ngIf="step == 4">
+        <div *ngIf="listCategoryWeight.length > 0; else nodata">
+          <div *ngFor="let item of listCategoryWeight">
+            <h6>{{item.categories.description}}</h6>
+            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [(ngModel)]="item.weight">
+            </mat-slider>
+          </div>
+        </div>
+        <ng-template #nodata>
+          <h6>
+            <i>No selected categories.</i>
+          </h6>
+        </ng-template>
+        <div class="buttons">
+          <button mat-button (click)="back(4)">Back</button>
           <button mat-raised-button color="warn" (click)="save()">Save</button>
         </div>
       </div>
