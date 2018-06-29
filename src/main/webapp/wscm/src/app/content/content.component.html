@@ -1,9 +1,12 @@
 <div style="display:flex">
   <app-panel></app-panel>
   <div id="content">
-
+    <!-- back to content page button -->
+      <button *ngIf="!panelShow" mat-mini-fab color="warn" class="addButton" (click)="backToContentPanel()">
+          <i class="material-icons plus">flip_to_back</i>
+        </button>
     <!-- Add New page - position -->
-    <button mat-mini-fab color="warn" class="addButton" (click)="addJob()">
+    <button *ngIf="panelShow" mat-mini-fab color="warn" class="addButton" (click)="addJob()">
       <i class="material-icons plus">add</i>
     </button>
     <!-- Accordion -->

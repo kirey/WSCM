@@ -31,12 +31,12 @@ export class AddNewPositionComponent implements OnInit {
   categories: any;
   positions: any;
   check: boolean = false;
+
   constructor(
     public dialog: MatDialog,
     public contentService: AddNewPositionService,
     public snackbar: SnackBarService
   ) {}
-
   // Get All Pages - select box for pages select ********************************
   getAllPages() {
     this.contentService.getPages(this.pages).subscribe(
@@ -65,6 +65,12 @@ export class AddNewPositionComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  // Reset Data ************************************
+  resetData() {
+    this.step = 1;
+    this.listCategoryWeight = [];
   }
 
   // NEXT button ***************************************
@@ -99,7 +105,6 @@ export class AddNewPositionComponent implements OnInit {
         break;
       case 2:
         this.step = 3;
-
         break;
       case 3:
         this.step = 4;
@@ -121,16 +126,11 @@ export class AddNewPositionComponent implements OnInit {
           categories,
           weight: 1
         });
-
-        console.log(this.listCategoryWeight);
-        console.log(ev, categories);
-        console.log(this.selectedPosition);
       } else {
         const index = this.listCategoryWeight.findIndex(
           item => item['categories'] === categories
         );
         this.listCategoryWeight.splice(index, 1);
-
         const index2 = this.selectedPosition['contentCategorieses'].findIndex(
           item => item['categories'] === categories
         );
@@ -147,7 +147,6 @@ export class AddNewPositionComponent implements OnInit {
         item => item['categories'] === position.categories
       );
       this.listCategoryWeight.splice(index, 1);
-
       const index2 = this.selectedPosition['contentCategorieses'].findIndex(
         item => item['categories'] === position.categories
       );
@@ -170,12 +169,6 @@ export class AddNewPositionComponent implements OnInit {
         this.step = 3;
         break;
     }
-  }
-
-  // Reset Data ************************************
-  resetData() {
-    this.step = 1;
-    this.listCategoryWeight = [];
   }
 
   // Send Request

@@ -29,7 +29,10 @@ export class ContentComponent implements OnInit {
     this.panelShow = false;
     this.addJobShow = true;
   }
-
+backToContentPanel() {
+  this.panelShow = true;
+  this.addJobShow = false;
+}
 
   // Get Positions
   getPositions() {

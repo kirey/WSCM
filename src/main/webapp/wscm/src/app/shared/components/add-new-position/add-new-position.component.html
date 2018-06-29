@@ -14,17 +14,17 @@
       <div *ngIf="step == 1" class="tabs-container">
         <!-- select pages -->
         <mat-form-field>
-          <mat-select name="pages" placeholder="Pages" [(ngModel)]="pages">
+          <mat-select name="pages" placeholder="Pages" [(ngModel)]="pages"  required>
             <mat-option *ngFor="let pages of selectPage" [value]="pages">{{pages}}</mat-option>
           </mat-select>
         </mat-form-field>
         <!-- Position -->
         <mat-form-field>
-          <input matInput placeholder="Position" name="position" id="position" [(ngModel)]="position" required minlength="2" maxlength="2">
+          <input matInput placeholder="Position" name="position" id="position"  [(ngModel)]="position" required minlength="2" maxlength="2" [disabled]="disabled">
         </mat-form-field>
         <!-- language -->
         <mat-form-field>
-          <input matInput placeholder="Language" [(ngModel)]="language" required>
+          <input matInput placeholder="Language" name="language" id="language" [(ngModel)]="language" required minlength="2" maxlength="2">
         </mat-form-field>
         <button mat-raised-button color="warn" (click)="next(position, 1)">Next</button>
       </div>
