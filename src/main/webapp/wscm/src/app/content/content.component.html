@@ -3,11 +3,11 @@
   <div id="content">
     <!-- back to content page button -->
       <button *ngIf="!panelShow" mat-mini-fab color="warn" class="addButton" (click)="backToContentPanel()">
-          <i class="material-icons plus">flip_to_back</i>
+          <i class="material-icons plus" matTooltip="Back to Events" matTooltipPosition="above">flip_to_back</i>
         </button>
     <!-- Add New page - position -->
     <button *ngIf="panelShow" mat-mini-fab color="warn" class="addButton" (click)="addJob()">
-      <i class="material-icons plus">add</i>
+      <i class="material-icons plus" matTooltip="Add New Events" matTooltipPosition="above">add</i>
     </button>
     <!-- Accordion -->
     <mat-accordion *ngIf="positions && panelShow" color="accent">
