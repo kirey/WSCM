@@ -172,6 +172,7 @@ console.log(this.selectedPosition['contentCategorieses']);
         res => {
           console.log(res);
           this.categories = res['data'];
+          console.log(this.categories);
         },
         err => console.log(err)
       );

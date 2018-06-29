@@ -5,16 +5,16 @@ import * as Rx from 'rxjs';
   providedIn: 'root'
 })
 export class SocketService {
-
-  constructor() { }
+  constructor() {}
 
   private subject: Rx.Subject<MessageEvent>;
   private ws: WebSocket;
 
   public connect(url): Rx.Subject<MessageEvent> {
     if (!this.subject) {
+      console.log('ponovo ulazi');
       this.subject = this.create(url);
-      console.log("Successfully connected: " + url);
+      console.log('Successfully connected: ' + url);
       console.log(this.ws);
     }
     return this.subject;
@@ -23,26 +23,25 @@ export class SocketService {
   private create(url): Rx.Subject<MessageEvent> {
     this.ws = new WebSocket(url);
 
-    let observable = Rx.Observable.create(
-      (obs: Rx.Observer<MessageEvent>) => {
-        this.ws.onmessage = obs.next.bind(obs);
-        this.ws.onerror = obs.error.bind(obs);
-        this.ws.onclose = obs.complete.bind(obs);
-        return this.ws.close.bind(this.ws);
-      })
+    let observable = Rx.Observable.create((obs: Rx.Observer<MessageEvent>) => {
+      this.ws.onmessage = obs.next.bind(obs);
+      this.ws.onerror = obs.error.bind(obs);
+      this.ws.onclose = obs.complete.bind(obs);
+      return this.ws.close.bind(this.ws);
+    });
     let observer = {
       next: (data: Object) => {
         if (this.ws.readyState === WebSocket.OPEN) {
           this.ws.send(JSON.stringify(data));
         }
       }
-    }
+    };
     return Rx.Subject.create(observer, observable);
   }
   public disconnect() {
     this.subject = null;
+    console.log(this.ws);
     this.ws.send('CLOSE');
     this.ws.close();
   }
-
 }

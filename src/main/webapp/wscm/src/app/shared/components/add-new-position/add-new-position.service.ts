@@ -32,9 +32,4 @@ export class AddNewPositionService {
   getPositions(page: String) {
     return this._http.get(this.baseUrl + '/' + page).pipe(map(res => res));
   }
-
-   // Delete Position
-   deletePosition(id) {
-    return this._http.delete(this.baseUrl + '/' + id, this.options);
-}
 }

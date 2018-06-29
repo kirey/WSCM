@@ -1,6 +1,7 @@
 @import '../app.component.scss';
 #panel {
   min-width: 100%;
+  min-height: 100%;
   .router-outlet {
     width: 100%;
   }
@@ -9,7 +10,7 @@
     margin-left: 0;
     text-align: left;
     background-color: $primary;
-    min-height: 100vh;
+    min-height: 105vmax;
     width: 320px;
     padding-right: 15px;
     box-shadow: 0 5px 2px -1px rgba(0, 0, 0, .2), 0 3px 3px 0 rgba(0, 0, 0, .14), 0 5px 10px 3px rgba(0, 0, 0, .12);

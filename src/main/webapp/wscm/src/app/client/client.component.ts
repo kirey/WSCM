@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
 import { ClientService } from './client.service';
 import { Observable, Subject } from 'rxjs';
-import {SocketService} from '../shared/services/socket.service'
+import {SocketService} from '../shared/services/socket.service';
 import { map } from 'rxjs/operators';
 import { Http } from '@angular/http';
 
@@ -18,7 +18,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   htmlString: string = "";
   public messages: Subject<any>;
 
-  constructor(public router: Router, public auth: AuthService, public clientService: ClientService, public wsService: SocketService, private _http: Http) {
+constructor(public router: Router, public auth: AuthService, public clientService: ClientService, public wsService: SocketService, private _http: Http) {
   }
 
   ngOnInit() {
@@ -55,12 +55,12 @@ export class ClientComponent implements OnInit, OnDestroy {
       .pipe(
       map((response: MessageEvent): any => {
         console.log(response.data);
-        ////work with response from socket
+        //// work with response from socket
         var x = document.getElementById("toast");
         x.innerHTML = response.data;
         x.className = "show";
         setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
-        ////work with response from socket
+        //// work with response from socket
         return response.data;
       }
       ));

@@ -12,11 +12,6 @@
       <!-- S T E P 1,
       Material tabs -->
       <div *ngIf="step == 1" class="tabs-container">
-        <span class="tabs-icons">
-          <i (click)="deleteDialog()" matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
-            delete
-          </i>
-        </span>
         <!-- select pages -->
         <mat-form-field>
           <mat-select name="pages" placeholder="Pages" [(ngModel)]="pages">
@@ -44,12 +39,6 @@
             </ng-template>
             <!-- Tabs Content -->
             <div class="tabs-content">
-              <!-- Icons -->
-              <span class="tabs-icons">
-                <i (click)="deleteDialog()" matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
-                  delete
-                </i>
-              </span>
               <!-- Text -->
               <div class="tabs-text">
                 <form class="form">
@@ -70,12 +59,6 @@
             </ng-template>
             <!-- Tabs Content -->
             <div class="tabs-content">
-              <!-- Icons -->
-              <span class="tabs-icons">
-                <i (click)="deleteDialog()" matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
-                  delete
-                </i>
-              </span>
               <!-- Text -->
               <div class="tabs-text">
                 <form class="form">
@@ -96,12 +79,6 @@
             </ng-template>
             <!-- Tabs Content -->
             <div class="tabs-content">
-              <!-- Icons -->
-              <span class="tabs-icons">
-                <i (click)="deleteDialog()" matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
-                  delete
-                </i>
-              </span>
               <!-- Text -->
               <div class="tabs-text">
                 <mat-form-field class="textarea" appearance="outline">
@@ -126,7 +103,7 @@
         <h5 class="label">Select categories for this position</h5>
         <div class="categories-box">
           <div *ngFor="let category of categories | filter : selectedPosition.contentCategorieses: 'categories'">
-            <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after">
+            <mat-checkbox  color="warn" (change)="checked($event, category)" labelPosition="after">
               {{category.description}}
             </mat-checkbox>
           </div>
@@ -135,7 +112,7 @@
           <h5 class="label">Selected categories</h5>
           <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box">
             <span>{{selected.categories.description}}</span>
-            <mat-icon  class="unselect-icon" (click)="unchecked(selected)">close</mat-icon>
+            <mat-icon  *ngIf="selected.categories.description" class="unselect-icon" (click)="unchecked(selected)">close</mat-icon>
           </div>
         </div>
         <ng-template #nodata>

@@ -31,7 +31,6 @@ export class AddNewPositionComponent implements OnInit {
   categories: any;
   positions: any;
   check: boolean = false;
-
   constructor(
     public dialog: MatDialog,
     public contentService: AddNewPositionService,
@@ -53,6 +52,7 @@ export class AddNewPositionComponent implements OnInit {
     this.contentService.getCategories().subscribe(
       res => {
         this.categories = res['data'];
+        console.log(this.categories);
       },
       err => console.log(err)
     );
@@ -67,6 +67,50 @@ export class AddNewPositionComponent implements OnInit {
     );
   }
 
+  // NEXT button ***************************************
+  next(obj, step) {
+    console.log(this.listCategoryWeight);
+    obj = {
+      page: this.pages,
+      position: this.position,
+      language: this.language,
+      html: this.html,
+      css: this.css,
+      script: this.script,
+      contentCategorieses: [
+        {
+          categories: {
+            id: this.categories.id,
+            categoryName: this.categories.categoryName,
+            description: this.categories.description
+          },
+          weight: this.weight
+        }
+      ]
+    };
+    console.log(obj);
+    switch (step) {
+      case 1:
+        this.step = 2;
+        this.selectedPosition = obj;
+        for (const item of this.selectedPosition.contentCategorieses) {
+          this.listCategoryWeight.push(item);
+        }
+        break;
+      case 2:
+        this.step = 3;
+
+        break;
+      case 3:
+        this.step = 4;
+        // delete first default category from this.listCategoryWeight
+        this.listCategoryWeight.shift();
+        break;
+    }
+
+    console.log(this.listCategoryWeight);
+  }
+
   // CHECKED CATEGORIES
   // ************************
   checked(ev, categories) {
@@ -77,6 +121,7 @@ export class AddNewPositionComponent implements OnInit {
           categories,
           weight: 1
         });
+
         console.log(this.listCategoryWeight);
         console.log(ev, categories);
         console.log(this.selectedPosition);
@@ -111,45 +156,6 @@ export class AddNewPositionComponent implements OnInit {
     console.log(this.listCategoryWeight);
   }
 
-  // NEXT button ***************************************
-  next(obj, step) {
-    obj = {
-      page: this.pages,
-      position: this.position,
-      language: this.language,
-      html: this.html,
-      css: this.css,
-      script: this.script,
-      contentCategorieses: [
-        {
-          categories: {
-            id: this.categories.id,
-            categoryName: this.categories.categoryName,
-            description: this.categories.description
-          },
-          weight: this.weight
-        }
-      ]
-    };
-    console.log(obj);
-    switch (step) {
-      case 1:
-        this.step = 2;
-        this.selectedPosition = obj;
-        for (const item of this.selectedPosition.contentCategorieses) {
-          this.listCategoryWeight.push(item);
-        }
-        break;
-      case 2:
-        this.step = 3;
-        break;
-      case 3:
-        this.step = 4;
-        break;
-    }
-    console.log(this.listCategoryWeight);
-  }
-
   // BACK button ******************************************
   back(currentStep) {
     switch (currentStep) {
@@ -170,24 +176,6 @@ export class AddNewPositionComponent implements OnInit {
   resetData() {
     this.step = 1;
     this.listCategoryWeight = [];
-  }
-
-  // Delete Dialog ***********************************
-  deleteDialog(id, type, value) {
-    const dialogRef = this.dialog.open(DeleteDialog, {
-      width: '500px',
-      data: { type: type, value: value }
-    });
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        this.contentService.deletePosition(id).subscribe(
-          res => {
-            console.log(res);
-          },
-          err => console.log(err)
-        );
-      }
-    });
   }
 
   // Send Request

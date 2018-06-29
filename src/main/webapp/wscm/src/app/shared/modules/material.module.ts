@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -46,7 +47,8 @@ import { MatTableModule } from '@angular/material/table';
         MatCheckboxModule,
         MatCardModule,
         MatDialogModule,
-        MatTableModule
+        MatTableModule,
+        MatPaginatorModule
     ],
     exports: [
         MatButtonModule,
@@ -67,7 +69,8 @@ import { MatTableModule } from '@angular/material/table';
         MatCheckboxModule,
         MatCardModule,
         MatDialogModule,
-        MatTableModule
+        MatTableModule,
+        MatPaginatorModule
     ],
     declarations: []
 })
