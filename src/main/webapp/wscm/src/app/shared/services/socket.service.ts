@@ -13,7 +13,6 @@ export class SocketService {
 
   public connect(url): Rx.Subject<MessageEvent> {
     if (!this.subject) {
-      console.log('ponovo ulazi')
       this.subject = this.create(url);
       console.log("Successfully connected: " + url);
       console.log(this.ws);
@@ -42,11 +41,8 @@ export class SocketService {
   }
   public disconnect() {
     this.subject = null;
-    console.log(this.ws)
     this.ws.send('CLOSE');
     this.ws.close();
-    console.log(this.subject);
-    console.log(this.ws.CLOSED);
   }
 
 }

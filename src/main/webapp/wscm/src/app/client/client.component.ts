@@ -47,7 +47,6 @@ export class ClientComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.messages.unsubscribe();
     this.wsService.disconnect();
-    console.log('poziva se metoda');
   }
 
   socketLogic() {
