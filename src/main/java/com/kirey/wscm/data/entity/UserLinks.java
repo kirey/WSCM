@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "user_links")
 public class UserLinks implements Serializable {
@@ -24,6 +26,7 @@ public class UserLinks implements Serializable {
 //	@JsonManagedReference(value = "wscmUserLinkses")
 	private WscmUserAccounts userAccount;
 //	@JsonManagedReference(value="linksUserLinks")
+	@JsonBackReference
 	private Links link;
 	private Integer noRequests;
 	private Date tsInsert;

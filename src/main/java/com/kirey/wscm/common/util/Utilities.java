@@ -2,8 +2,11 @@ package com.kirey.wscm.common.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,6 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.kirey.wscm.common.constants.AppConstants;
+import com.kirey.wscm.data.entity.LinksCategories;
 
 /**
  * Class containing utility methods used in multiple classes.
@@ -168,5 +172,75 @@ public class Utilities {
 	    Map<Object, Boolean> map = new ConcurrentHashMap<>();
 	    return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
 	}
+	
+	public static void main(String[] args) {
+		String pattern = "/rest/wscm/test/P1";
+		String url = "/rest/wscm/test";
+		String result = searchUrl(pattern, url);
+		System.out.println(result);
+	}
+	
+
+	
+	public static String searchUrl(String pattern, String url) {
+		int pattLength = pattern.length();
+		int urlLength = url.length();
+		char wildcard = '*';
+		int i = 0; //for url
+		int j = 0; //for pattern
+		if(urlLength > pattLength) {
+			while (i < pattLength) {
+				if(pattern.charAt(j) == url.charAt(i)) {
+					i++;
+					j++;
+				} else if(pattern.charAt(j) != url.charAt(i) && pattern.charAt(j) == wildcard) {
+					return url;
+				} else {
+					break;
+				}
+			}
+			if(urlLength-pattLength == 2 && url.charAt(j)== '/' && url.charAt(j+1) == '*') {
+				return pattern;
+			}
+			if(urlLength-pattLength == 1 && url.charAt(j)== '*') {
+				return pattern;
+			}
+		}else if (urlLength < pattLength) {
+			while (i < urlLength) {
+				if(pattern.charAt(j) == url.charAt(i)) {
+					i++;
+					j++;
+				} else if(pattern.charAt(j) != url.charAt(i) && url.charAt(j) == wildcard) {
+					return pattern;
+				} else {
+					break;
+				}
+			}
+			if(pattLength-urlLength == 2 && pattern.charAt(j)== '/' && pattern.charAt(j+1) == '*') {
+				return url;
+			}
+			if(pattLength-urlLength == 1 && pattern.charAt(j)== '*') {
+				return url;
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	public static List<LinksCategories> getDistinctCategoryMaxWeight(List<LinksCategories> linksCategories) {
+		List<LinksCategories> distinctList = new ArrayList<>();
+		
+		for (LinksCategories linksCategory : linksCategories) {
+			LinksCategories maxValue = linksCategories.stream().filter(e -> e.getCategories().getId().equals(linksCategory.getCategories().getId()))
+															   .max(Comparator.comparingInt(e -> e.getWeight())).get();
+			boolean exist = distinctList.stream().anyMatch(e -> e.getId().equals(maxValue.getId()));
+			if(!exist) {
+				distinctList.add(maxValue);
+			}
+		}
+		return distinctList;
+	}
+	
 
 }

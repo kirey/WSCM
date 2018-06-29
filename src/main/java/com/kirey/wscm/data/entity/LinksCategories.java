@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "links_categories")
 public class LinksCategories implements Serializable {
@@ -21,6 +23,7 @@ public class LinksCategories implements Serializable {
 	
 	private Integer id;
 //	@JsonManagedReference(value="linksCategories")
+	@JsonBackReference
 	private Links link;
 //	@JsonManagedReference(value="categoriesLinksCategories")
 	private Categories categories;

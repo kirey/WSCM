@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "ip_address_links")
 public class IpAddressLinks implements Serializable {
@@ -24,6 +26,7 @@ public class IpAddressLinks implements Serializable {
 //	@JsonManagedReference(value="ipAddressLinks")
 	private IpAddress ipAddress;
 //	@JsonManagedReference(value="linksIpAddressLinkses")
+	@JsonBackReference
 	private Links link;
 	private Integer noRequests;
 	private Date tsInsert;

@@ -1,5 +1,7 @@
 package com.kirey.wscm.api.restcontrollers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
+import com.kirey.wscm.common.util.Utilities;
 import com.kirey.wscm.data.dao.IpAddressDao;
 import com.kirey.wscm.data.dao.LinksDao;
 import com.kirey.wscm.data.entity.IpAddress;
@@ -45,16 +48,32 @@ public class ContentManagementController {
 	 * @param request
 	 * @return ResponseEntity containing the request status message and HTTP status code
 	 */
-	@RequestMapping(value = "/link", method = RequestMethod.POST)
+	@RequestMapping(value = "/link/intercept", method = RequestMethod.POST)
 	public ResponseEntity<RestResponseDto> saveLink(@RequestParam String url, HttpServletRequest request) {
-
-		Links link = linksDao.findByUrl(url);
-		if(link == null) {
-			link = new Links();
-			link.setUrl(url);
-			linksDao.attachDirty(link);
+		Links linkByUrl = linksDao.findByUrl(url);
+		if(linkByUrl != null) {
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "URL already exists"), HttpStatus.BAD_REQUEST);
+		}
+		List<Links> linksFromDb = linksDao.findAll();
+		boolean flag = false;
+		for (Links linkFromDb : linksFromDb) {
+			String foundUrl = Utilities.searchUrl(url, linkFromDb.getUrl());
+			if(foundUrl != null) {
+				if(foundUrl.equals(url)) {
+					return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "URL already exists"), HttpStatus.BAD_REQUEST);
+				}
+			}else {
+				flag = true;
+			}
 		}
 		
+		if (flag) {
+			linkByUrl = new Links();
+			linkByUrl.setUrl(url);
+			linksDao.attachDirty(linkByUrl);
+			
+		}
+
 		String address = request.getRemoteAddr();
 		IpAddress ipAddress = ipAddressDao.findByAddress(address);
 		if(ipAddress == null) {
@@ -65,7 +84,7 @@ public class ContentManagementController {
 
 		WscmUserAccounts user = SecurityUtils.getUserFromContext();
 		
-		contentService.createOrUpdateRelations(link, ipAddress, user);
+		contentService.createOrUpdateRelations(linkByUrl, ipAddress, user);
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.OK.value(), "successfully saved link and updated relations"), HttpStatus.OK);
 	}

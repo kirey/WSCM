@@ -1,14 +1,22 @@
 package com.kirey.wscm.data.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.engine.FetchStyle;
 
 @Entity
 @Table(name = "links")
@@ -20,11 +28,11 @@ public class Links implements Serializable {
 	private String url;
 	
 //	@JsonBackReference(value="linksUserLinks")
-//	private List<UserLinks> userLinkses = new ArrayList<>();
+	private List<UserLinks> userLinkses = new ArrayList<>();
 //	@JsonBackReference(value="linksIpAddressLinkses")
-//	private List<IpAddressLinks> ipAddressLinkses = new ArrayList<>();
+	private List<IpAddressLinks> ipAddressLinkses = new ArrayList<>();
 //	@JsonBackReference(value="linksCategories")
-//	private List<LinksCategories> linksCategorieses = new ArrayList<>();
+	private List<LinksCategories> linksCategorieses = new ArrayList<>();
 	
 	@Id
 	@SequenceGenerator(name = "links_gen", sequenceName = "seq_links", allocationSize = 1, initialValue = 1)
@@ -45,29 +53,29 @@ public class Links implements Serializable {
 		this.url = url;
 	}
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
-//	public List<UserLinks> getUserLinkses() {
-//		return userLinkses;
-//	}
-//	public void setUserLinkses(List<UserLinks> userLinkses) {
-//		this.userLinkses = userLinkses;
-//	}
-//	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
-//	public List<IpAddressLinks> getIpAddressLinkses() {
-//		return ipAddressLinkses;
-//	}
-//	public void setIpAddressLinkses(List<IpAddressLinks> ipAddressLinkses) {
-//		this.ipAddressLinkses = ipAddressLinkses;
-//	}
-//	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
-//	public List<LinksCategories> getLinksCategorieses() {
-//		return linksCategorieses;
-//	}
-//	public void setLinksCategorieses(List<LinksCategories> linksCategorieses) {
-//		this.linksCategorieses = linksCategorieses;
-//	}
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "link")
+	public List<UserLinks> getUserLinkses() {
+		return userLinkses;
+	}
+	public void setUserLinkses(List<UserLinks> userLinkses) {
+		this.userLinkses = userLinkses;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "link")
+	public List<IpAddressLinks> getIpAddressLinkses() {
+		return ipAddressLinkses;
+	}
+	public void setIpAddressLinkses(List<IpAddressLinks> ipAddressLinkses) {
+		this.ipAddressLinkses = ipAddressLinkses;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "link")
+	public List<LinksCategories> getLinksCategorieses() {
+		return linksCategorieses;
+	}
+	public void setLinksCategorieses(List<LinksCategories> linksCategorieses) {
+		this.linksCategorieses = linksCategorieses;
+	}
 
 	
 	
