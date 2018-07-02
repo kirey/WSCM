@@ -21,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -49,7 +50,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatCardModule,
         MatDialogModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatMenuModule
     ],
     exports: [
         MatButtonModule,
@@ -71,7 +73,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatCardModule,
         MatDialogModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatMenuModule
     ],
     declarations: []
 })

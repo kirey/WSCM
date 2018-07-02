@@ -110,7 +110,7 @@
         </div>
         <div *ngIf="selectedPosition.contentCategorieses.length > 0; else nodata">
           <h5 class="label">Selected categories</h5>
-          <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box">
+          <div *ngFor="let selected of selectedPosition.contentCategorieses" class="selected-categories-box" >
             <span>{{selected.categories.description}}</span>
             <mat-icon  *ngIf="selected.categories.description" class="unselect-icon" (click)="unchecked(selected)">close</mat-icon>
           </div>

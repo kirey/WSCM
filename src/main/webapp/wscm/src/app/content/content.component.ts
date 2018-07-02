@@ -5,7 +5,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -13,8 +12,12 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class ContentComponent implements OnInit {
-
-  constructor(public contentService: ContentService, public snackbar: SnackBarService, public dialog: MatDialog,public router: Router) { }
+  constructor(
+    public contentService: ContentService,
+    public snackbar: SnackBarService,
+    public dialog: MatDialog,
+    public router: Router
+  ) {}
   positions: any;
   categories: any;
   step: number = 1;
@@ -22,28 +25,26 @@ export class ContentComponent implements OnInit {
   listCategoryWeight: Array<Object> = [];
   addJobShow = false;
   panelShow = true;
-
-
   // Add New Position panel open and close
   addJob() {
     this.panelShow = false;
     this.addJobShow = true;
   }
-backToContentPanel() {
-  this.panelShow = true;
-  this.addJobShow = false;
-}
+  // Back button, back to centent page
+  backToContentPanel() {
+    this.panelShow = true;
+    this.addJobShow = false;
+  }
 
   // Get Positions
   getPositions() {
-    this.contentService.getPositions('home')
-      .subscribe(
-        res => {
-          console.log(res);
-          this.positions = res;
-        },
-        err => console.log(err)
-      );
+    this.contentService.getPositions('home').subscribe(
+      res => {
+        console.log(res);
+        this.positions = res;
+      },
+      err => console.log(err)
+    );
   }
   // Reset Data
   resetData() {
@@ -86,10 +87,12 @@ backToContentPanel() {
   checked(ev, categories) {
     if (ev.checked) {
       if (this.listCategoryWeight.length == 0) {
-        this.listCategoryWeight.push({ categories, 'weight': 1 });
-        this.selectedPosition.contentCategorieses.push({ categories, 'weight': 1 });
-      }
-      else {
+        this.listCategoryWeight.push({ categories, weight: 1 });
+        this.selectedPosition.contentCategorieses.push({
+          categories,
+          weight: 1
+        });
+      } else {
         let push: boolean = false;
         for (let i = 0; i < this.listCategoryWeight.length; i++) {
           if (this.listCategoryWeight[i]['categoryId'] != categories.id) {
@@ -97,28 +100,40 @@ backToContentPanel() {
           }
         }
         if (push) {
-          this.listCategoryWeight.push({ categories, 'weight': 1 });
-          this.selectedPosition.contentCategorieses.push({ categories, 'weight': 1 });
+          this.listCategoryWeight.push({ categories, weight: 1 });
+          this.selectedPosition.contentCategorieses.push({
+            categories,
+            weight: 1
+          });
         }
       }
-    }
-    else {
-      let index = this.listCategoryWeight.findIndex(item => item['categories'] == categories);
+    } else {
+      let index = this.listCategoryWeight.findIndex(
+        item => item['categories'] == categories
+      );
       this.listCategoryWeight.splice(index, 1);
 
-      let index2 = this.selectedPosition['contentCategorieses'].findIndex(item => item['categories'] == categories);
+      let index2 = this.selectedPosition['contentCategorieses'].findIndex(
+        item => item['categories'] == categories
+      );
       this.selectedPosition['contentCategorieses'].splice(index2, 1);
     }
+    // this.selected = categories.description;
+    // console.log(this.selected);
     console.log(this.listCategoryWeight);
   }
 
   // Remove from list 'Selected categories'
   unchecked(position) {
     if (this.listCategoryWeight.length > 0) {
-      let index = this.listCategoryWeight.findIndex(item => item['categories'] == position.categories);
+      let index = this.listCategoryWeight.findIndex(
+        item => item['categories'] == position.categories
+      );
       this.listCategoryWeight.splice(index, 1);
 
-      let index2 = this.selectedPosition['contentCategorieses'].findIndex(item => item['categories'] == position.categories);
+      let index2 = this.selectedPosition['contentCategorieses'].findIndex(
+        item => item['categories'] == position.categories
+      );
       this.selectedPosition['contentCategorieses'].splice(index2, 1);
     }
     console.log(this.listCategoryWeight);
@@ -133,14 +148,12 @@ backToContentPanel() {
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.contentService.deletePosition(id)
-          .subscribe(
-            res => {
-              console.log(res);
-
-            },
-            err => console.log(err)
-          )
+        this.contentService.deletePosition(id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => console.log(err)
+        );
       }
     });
   }
@@ -148,38 +161,33 @@ backToContentPanel() {
   // Send Request
   save() {
     this.selectedPosition['contentCategorieses'] = this.listCategoryWeight;
-console.log(this.selectedPosition['contentCategorieses']);
-    this.contentService.updateContent(this.selectedPosition)
-      .subscribe(
-        res => {
-          console.log(res)
-          this.snackbar.openSnackBar('Success', res['data']);
-          this.getPositions();
-          this.resetData();
-
-        },
-        err => console.log(err)
-      )
+    console.log(this.selectedPosition['contentCategorieses']);
+    this.contentService.updateContent(this.selectedPosition).subscribe(
+      res => {
+        console.log(res);
+        this.snackbar.openSnackBar('Success', res['data']);
+        this.getPositions();
+        this.resetData();
+      },
+      err => console.log(err)
+    );
   }
 
   ngOnInit() {
-    if(localStorage.getItem('role') == 'ROLE_USER'){
-        this.router.navigate(['/client']);
+    if (localStorage.getItem('role') == 'ROLE_USER') {
+      this.router.navigate(['/client']);
     }
 
     this.getPositions();
 
     // Get Categories
-    this.contentService.getCategories()
-      .subscribe(
-        res => {
-          console.log(res);
-          this.categories = res['data'];
-          console.log(this.categories);
-        },
-        err => console.log(err)
-      );
-
+    this.contentService.getCategories().subscribe(
+      res => {
+        console.log(res);
+        this.categories = res['data'];
+        console.log(this.categories);
+      },
+      err => console.log(err)
+    );
   }
-
 }

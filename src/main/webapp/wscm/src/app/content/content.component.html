@@ -2,12 +2,12 @@
   <app-panel></app-panel>
   <div id="content">
     <!-- back to content page button -->
-      <button *ngIf="!panelShow" mat-mini-fab color="warn" class="addButton" (click)="backToContentPanel()">
-          <i class="material-icons plus" matTooltip="Back to Events" matTooltipPosition="above">flip_to_back</i>
-        </button>
+    <button *ngIf="!panelShow" mat-mini-fab color="warn" class="addButton" (click)="backToContentPanel()">
+      <i class="material-icons plus" matTooltip="Back to Content Page" matTooltipPosition="above">flip_to_back</i>
+    </button>
     <!-- Add New page - position -->
     <button *ngIf="panelShow" mat-mini-fab color="warn" class="addButton" (click)="addJob()">
-      <i class="material-icons plus" matTooltip="Add New Events" matTooltipPosition="above">add</i>
+      <i class="material-icons plus" matTooltip="Add New Content" matTooltipPosition="above">add</i>
     </button>
     <!-- Accordion -->
     <mat-accordion *ngIf="positions && panelShow" color="accent">
@@ -15,10 +15,12 @@
       <mat-expansion-panel *ngFor="let position of positions" (closed)="resetData()">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{position.position}}
+            {{position.page | uppercase}}, {{position.position}}
           </mat-panel-title>
           <mat-panel-description>
-            {{position.page | uppercase}}
+            <div  *ngFor="let item of position.contentCategorieses">
+              <a mat-list-item>{{item.categories.description}}</a><br>
+            </div>
           </mat-panel-description>
         </mat-expansion-panel-header>
 
