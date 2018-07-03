@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kirey.wscm.common.constants.AppConstants;
+import com.kirey.wscm.common.util.Utilities;
 import com.kirey.wscm.data.dao.EventDao;
 import com.kirey.wscm.data.entity.Event;
 import com.kirey.wscm.data.entity.Jobs;
@@ -46,15 +47,22 @@ public class WebRequestInterceptor implements ThrowsAdvice {
 			Object[] ob = pjp.getArgs();
 			url = (String) ob[0];
 		}
-		List<Event> listEvent = eventDao.findByTypeAndDefinition(AppConstants.EVENT_TYPE_WEB_REQUEST, url);
-		for (Event event : listEvent) {
-			Jobs job = event.getJobs();
-			if (event.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
-				 jobService.startJobImmediately(job);
-				System.out.println("***************************JOB STARTED********************************");
-			}
+		
+		List<Event> listEventByType = eventDao.findByType(AppConstants.EVENT_TYPE_WEB_REQUEST);
+		for (Event eventByType : listEventByType) {
+			String urlForSearch = Utilities.searchUrl(url, eventByType.getDefinition());
+			List<Event> listEvent = eventDao.findByTypeAndDefinition(AppConstants.EVENT_TYPE_WEB_REQUEST, urlForSearch);
+			for (Event event : listEvent) {
+				Jobs job = event.getJobs();
+				if (event.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
+					 jobService.startJobImmediately(job);
+					System.out.println("***************************JOB STARTED********************************");
+				}
 
+			}
 		}
+		
+		
 
 		Object value;
 		value = pjp.proceed();

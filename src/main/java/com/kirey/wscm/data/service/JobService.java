@@ -99,7 +99,7 @@ public class JobService {
 		CronTrigger cronTrigger = createTrigger(event.getDefinition(), job.getJobName(), AppConstants.GROUP_NAME);
 		JobDetail jobDetail = createJob(job.getJobName(), AppConstants.GROUP_NAME);
 
-		jobDetail.getJobDataMap().put("jobId", id);
+		jobDetail.getJobDataMap().put("jobId", job.getId());
 
 		scheduler1.getListenerManager().addJobListener(schedJobListener);
 		if (!scheduler1.checkExists(jobDetail.getKey()))
