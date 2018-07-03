@@ -25,6 +25,7 @@ export class ContentComponent implements OnInit {
   listCategoryWeight: Array<Object> = [];
   addJobShow = false;
   panelShow = true;
+
   // Add New Position panel open and close
   addJob() {
     this.panelShow = false;
@@ -172,7 +173,6 @@ export class ContentComponent implements OnInit {
       err => console.log(err)
     );
   }
-
   ngOnInit() {
     if (localStorage.getItem('role') == 'ROLE_USER') {
       this.router.navigate(['/client']);

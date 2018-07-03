@@ -15,12 +15,19 @@
       <mat-expansion-panel *ngFor="let position of positions" (closed)="resetData()">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{position.page | uppercase}}, {{position.position}}
+            {{position.page | uppercase}}&nbsp;&nbsp;&nbsp; {{position.position}}
           </mat-panel-title>
           <mat-panel-description>
-            <div  *ngFor="let item of position.contentCategorieses">
-              <a mat-list-item>{{item.categories.description}}</a><br>
-            </div>
+            <h6 *ngFor="let item of position.contentCategorieses">{{item.categories.description}}</h6>
+            <!-- <form>
+                <mat-form-field>
+                  <mat-select placeholder="Categories Description">
+                    <mat-option *ngFor="let item of position.contentCategorieses"> -->
+                        <!-- {{item.categories.description}} -->
+                    <!-- </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </form> -->
           </mat-panel-description>
         </mat-expansion-panel-header>
 

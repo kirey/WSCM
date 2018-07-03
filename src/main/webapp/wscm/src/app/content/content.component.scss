@@ -1,156 +1,152 @@
 @import '../app.component.scss';
-
-
 #content {
+  width: 80%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 15%;
+  button {
+    width: 80px;
+    align-self: flex-end;
+    margin-left: 5px;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 50px;
+  }
+  .input-icon {
+    color: $primary;
+    margin: 15px;
+  } // Expansion Panel
+  .mat-expansion-panel-body {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+  }
+  mat-expansion-panel-header {
+    background-color: $primary;
+  }
+  .mat-expansion-panel-header-title,
+  .mat-expansion-panel-header-description {
+    color: #fff;
+  }
+  .mat-expansion-indicator::after {
+    color: $primary;
+  }
+  mat-expansion-panel-header {
+    background: linear-gradient(to right, $primary, $accent) !important;
+  }
+  h6 {
+    font-weight: 100;
+    font-size: 12px;
+    padding-right: 5px;
+  }
+  // Tabs
+  .tabs-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .mat-tab-labels {
+    justify-content: center;
+  }
+  .tabs-content {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+  }
+  .tabs-icons {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+  }
+  .tabs-icons>i {
+    color: $primary;
+    font-size: 28px;
+    padding: 0 !important;
+    margin: 0;
+    margin-top: 10px;
+  }
+  .tabs-icons>i:hover {
+    color: $accent;
+    cursor: pointer;
+  }
+  .tabs-text {
     width: 80%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 15%;
-    button {
-        width: 80px;
-        align-self: flex-end;
-        margin-left: 5px;
-    }
-    .buttons {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        justify-content: flex-end;
-        margin-top: 50px;
-    }
-    .input-icon {
-        color: $primary;
-        margin: 15px;
-    }
-
-    // Expansion Panel
-    .mat-expansion-panel-body {
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 50px;
-    }
-    mat-expansion-panel-header {
-        background-color: $primary;
-    }
-    .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
-        color: #fff;
-    }
-    .mat-expansion-indicator::after {
-        color: $primary;
-    }
-    mat-expansion-panel-header {
-        background: linear-gradient(to right, $primary, $accent)!important;
-    }
-
-    // Tabs
-    .tabs-container {
-        display: flex;
-        flex-direction: column;
-    }
-    .mat-tab-labels {
-        justify-content: center;
-    }
-    .tabs-content {
-        min-width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px 0;
-    }
-    .tabs-icons {
-        align-self: flex-end;
-        display: flex;
-        align-items: center;
-    }
-    .tabs-icons>i {
-        color: $primary;
-        font-size: 28px;
-        padding: 0!important;
-        margin: 0;
-        margin-top: 10px;
-    }
-    .tabs-icons>i:hover {
-        color: $accent;
-        cursor: pointer;
-    }
-    .tabs-text {
-        width: 80%;
-        padding: 50px 0;
-    }
-    .textarea {
-        width: 100%;
-    }
-
-    //Categories
-    .categories {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-top: 50px;
-    }
-    .categories-box {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: 20px;
-    }
-    .selected-categories-box {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-    .selected-categories-box>span {
-        margin: 5px 0;
-        font-size: 16px;
-    }
-    .label {
-        margin-top: 20px;
-        text-align: left;
-        color: #bdbdbd;
-    }
-    .unselect-icon {
-        color: $primary;
-        font-size: 20px;
-        font-weight: bold;
-        line-height: 26px;
-        margin-left: 10px;
-        height: auto;
-        width: auto;
-    }
-    .unselect-icon:hover {
-        color: #bdbdbd;
-        cursor: pointer;
-    }
-    // Sliders - Step 3
-    .sliders {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-top: 50px;
-    }
-    mat-slider {
-        width: 200px;
-        margin-bottom: 15px;
-    }
-    .sliders>div>h6 {
-        font-size: 17px;
-        color: #bdbdbd;
-    }
-    .sliders>h5 {
-        margin-bottom: 50px;
-    }
-    .mat-accent .mat-slider-thumb-label-text {
-      transform: none;
-    }
-    // Add Button
-    .addButton {
-      float: right;
-      border-radius: 50%;
-      outline: none;
-      margin-top: -50px;
-      width: 40px;
-    }
-
+    padding: 50px 0;
+  }
+  .textarea {
+    width: 100%;
+  } //Categories
+  .categories {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+  }
+  .categories-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  .selected-categories-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .selected-categories-box>span {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  .label {
+    margin-top: 20px;
+    text-align: left;
+    color: #bdbdbd;
+  }
+  .unselect-icon {
+    color: $primary;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 26px;
+    margin-left: 10px;
+    height: auto;
+    width: auto;
+  }
+  .unselect-icon:hover {
+    color: #bdbdbd;
+    cursor: pointer;
+  } // Sliders - Step 3
+  .sliders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+  }
+  mat-slider {
+    width: 200px;
+    margin-bottom: 15px;
+  }
+  .sliders>div>h6 {
+    font-size: 17px;
+    color: #bdbdbd;
+  }
+  .sliders>h5 {
+    margin-bottom: 50px;
+  }
+  .mat-accent .mat-slider-thumb-label-text {
+    transform: none;
+  } // Add Button
+  .addButton {
+    float: right;
+    border-radius: 50%;
+    outline: none;
+    margin-top: -50px;
+    width: 40px;
+  }
 }
