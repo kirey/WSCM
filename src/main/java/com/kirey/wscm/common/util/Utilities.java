@@ -174,16 +174,16 @@ public class Utilities {
 	}
 	
     public static void main(String[] args) {
-        String pattern = "/nfdsa/rest/tesegfgdgdfgdfgdft/aast/fgsfgsdfgsdf/";
+        String pattern = "/nfdsa/ryst/tesegfgdgdfgdfgdft/aast/fgsfgsdfgsdf/";
         String url = "/*/?e??/*/??st/*/";
-        String result = searchUrl(pattern, url);
+        boolean result = searchUrl(pattern, url);
        
         System.out.println(result);
     }
     
     
     
-	public static String searchUrl(String pattern, String url) {
+	public static boolean searchUrl(String pattern, String url) {
 		int pattLength = pattern.length();
 		int urlLength = url.length();
 		char wildcard = '*';
@@ -238,12 +238,12 @@ public class Utilities {
 			}
 
 		}
-		if (match) {
-			return url;
-		} else {
-			return pattern;
-		}
-
+//		if (match) {
+//			return url;
+//		} else {
+//			return pattern;
+//		}
+		return match;
 	}
     
 	/*

@@ -1,6 +1,10 @@
 package com.kirey.wscm.data.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -27,6 +31,12 @@ public class EventsService {
 	@Autowired
 	private JobService jobService;
 	
+	private List<Event> allEvents;
+	
+	public EventsService() {
+		allEvents = Collections.synchronizedList(new ArrayList<>());
+	}
+	
 	@PostConstruct
 	private void loadAllCronsAndExecute() throws ClassNotFoundException, SchedulerException {
 		List<Event> listEvents = eventDao.findByType(AppConstants.EVENT_TYPE_CRON);
@@ -38,6 +48,34 @@ public class EventsService {
 				System.out.println("***************************JOB STARTED********************************");
 			}
 		}
+	}
+	
+	@PostConstruct
+	private void loadAllEvents() {
+		allEvents = eventDao.findAll();
+	}
+
+	public List<Event> getAllEvents() {
+		return allEvents;
+	}
+
+	public void setAllEvents(List<Event> allEvents) {
+		this.allEvents = allEvents;
+	}
+	
+	/**
+	 * Method for getting {@link List} of {@link Event} by type from cache
+	 * @param type
+	 * @return {@link List}<{@link Event}>
+	 */
+	public List<Event> getEventByType(String type){
+		List<Event> eventsByType = new ArrayList<>();
+		for (Event event : allEvents) {
+			if(event.getEventType().equals(type)) {
+				eventsByType.add(event);
+			}
+		}
+		return eventsByType;
 	}
 
 }

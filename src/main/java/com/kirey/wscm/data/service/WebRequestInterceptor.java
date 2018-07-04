@@ -28,6 +28,9 @@ public class WebRequestInterceptor implements ThrowsAdvice {
 
 	@Autowired
 	private JobService jobService;
+	
+	@Autowired
+	private EventsService eventsService;
 
 	/**
 	 * This method is used to intercept method before execution(print message Begin
@@ -48,22 +51,18 @@ public class WebRequestInterceptor implements ThrowsAdvice {
 			url = (String) ob[0];
 		}
 		
-		List<Event> listEventByType = eventDao.findByType(AppConstants.EVENT_TYPE_WEB_REQUEST);
-		for (Event eventByType : listEventByType) {
-			String urlForSearch = Utilities.searchUrl(url, eventByType.getDefinition());
-			List<Event> listEvent = eventDao.findByTypeAndDefinition(AppConstants.EVENT_TYPE_WEB_REQUEST, urlForSearch);
-			for (Event event : listEvent) {
+		List<Event> listEventByType = eventsService.getEventByType(AppConstants.EVENT_TYPE_WEB_REQUEST); //eventDao.findByType(AppConstants.EVENT_TYPE_WEB_REQUEST);
+		for (Event event : listEventByType) {
+			boolean match = Utilities.searchUrl(url, event.getDefinition());
+			if(match) {
 				Jobs job = event.getJobs();
 				if (event.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
-					 jobService.startJobImmediately(job);
+					jobService.startJobImmediately(job);
 					System.out.println("***************************JOB STARTED********************************");
 				}
-
 			}
 		}
 		
-		
-
 		Object value;
 		value = pjp.proceed();
 

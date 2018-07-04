@@ -1,5 +1,8 @@
 package com.kirey.wscm.security;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -30,6 +33,13 @@ public class SecurityUtils {
 		}
 
 		return user;
+	}
+	
+	public static HttpServletRequest getAsHttpRequest(ServletRequest request) {
+		if (!(request instanceof HttpServletRequest)) {
+			throw new RuntimeException("HTTP request was expected!");
+		}
+		return (HttpServletRequest) request;
 	}
 	
 

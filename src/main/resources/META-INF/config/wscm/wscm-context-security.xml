@@ -35,7 +35,7 @@
 					entry-point-ref="unauthorizedEntryPoint"
 					authentication-manager-ref="authenticationManager">
 					
-				
+		<security:custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER" />
 
 		<!-- Access Rights -->
 		<!-- ===================================================================================================================================== -->
@@ -61,6 +61,7 @@
 		</security:http>
 	
   	 <!-- Security Beans -->
+  	 <bean id="authenticationTokenProcessingFilter" class="com.kirey.wscm.security.AuthenticationTokenProcessingFilter" />
 	<bean id="unauthorizedEntryPoint" class="com.kirey.wscm.security.UnauthorizedEntryPoint" />
 	<bean id="accessDeniedHandler"  class="com.kirey.wscm.security.AccessDeniedExceptionHandler"/>
 	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
