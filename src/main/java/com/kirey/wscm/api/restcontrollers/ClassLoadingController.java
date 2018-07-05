@@ -223,20 +223,6 @@ public class ClassLoadingController {
 		return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.OK.value(),"Successfully deleted"), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public ResponseEntity<RestResponseDto> test() throws Exception {
-		Jobs job = jobsDao.findByJobName("testLoading"); 
-		jobService.testClassLoadingJob(job);
-		
-		
-		
-//		KjcClasses kjcClass = kjcClassesDao.findById(2);
-//		String qName = classLoadingUtil.getQualifiedName(kjcClass);
-//		Model model = (Model) baseObjectFactory.create(qName);
-//		model.stampaj();
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto("test", HttpStatus.OK.value()), HttpStatus.OK);
-	}
-	
 	@RequestMapping(value = "/testUpload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<RestResponseDto> testUpload(@RequestParam(required = false, value = "file") MultipartFile file) throws Exception {
 		
