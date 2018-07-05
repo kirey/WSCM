@@ -1,72 +1,74 @@
 @import '../app.component.scss';
 #scheduler {
-  width: 80%;
-  margin: 200px auto;
-  table {
-    width: 100%;
-    text-align: center;
-  }
-  tr.mat-header-row {
-    background: linear-gradient(to right, $primary, $accent) !important;
-  }
-  th.mat-header-cell {
-    color: white;
-    font-size: 1em;
-    text-align: center;
-  }
-  td::selection {
-    background: $primary;
-    color: white;
-  }
-  th::selection {
-    background: $primary;
-  }
-  .material-icons {
-    color: $primary;
-  }
-  button {
-    background: $warn;
-    border: none;
-    outline: none;
-    float: right;
-    margin-bottom: 10px;
-  }
-  .plus {
-    font-size: 30px;
-    margin-top: -3px;
-    margin-left: 5px;
-  }
-  .addJob-container {
-    display: flex;
-    flex-direction: column;
-  }
-  button.formButton {
-    width: 20%;
-    margin-left: 80%;
-    background: $warn;
-  }
-  button.editButton {
-    width: 20%; // height: 50px;
-    margin-left: 80%;
-    background: $primary;
-    color: white;
-  }
-  #addTemplate {
-    display: none;
-  }
-  #editForm {
-    display: none;
-  }
-  h5 {
-    color: #bdbdbd;
-  }
-  h5::selection {
-    background: $primary;
-  }
-  #addTemplate {
-    width: 50%;
-  }
-  .mat-input-element::selection {
-    background: $primary;
-  }
+    width: 80%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 10%;
+    table {
+        width: 100%;
+        text-align: center;
+    }
+    tr.mat-header-row {
+        background: linear-gradient(to right, $primary, $accent) !important;
+    }
+    th.mat-header-cell {
+        color: white;
+        font-size: 1em;
+        text-align: center;
+    }
+    td::selection {
+        background: $primary;
+        color: white;
+    }
+    th::selection {
+        background: $primary;
+    }
+    .material-icons {
+        color: $primary;
+    }
+    button {
+        background: $warn;
+        border: none;
+        outline: none;
+        float: right;
+        margin-bottom: 10px;
+    }
+    .plus {
+        font-size: 30px;
+        margin-top: -3px;
+        margin-left: 5px;
+    }
+    .addJob-container {
+        display: flex;
+        flex-direction: column;
+    }
+    button.formButton {
+        width: 20%;
+        margin-left: 80%;
+        background: $warn;
+    }
+    button.editButton {
+        width: 20%; // height: 50px;
+        margin-left: 80%;
+        background: $primary;
+        color: white;
+    }
+    #addTemplate {
+        display: none;
+    }
+    #editForm {
+        display: none;
+    }
+    h5 {
+        color: #bdbdbd;
+    }
+    h5::selection {
+        background: $primary;
+    }
+    #addTemplate {
+        width: 50%;
+    }
+    .mat-input-element::selection {
+        background: $primary;
+    }
 }

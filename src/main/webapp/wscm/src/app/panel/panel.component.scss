@@ -1,6 +1,7 @@
 @import '../app.component.scss';
 #panel {
   min-width: 100%;
+  min-height: 100%;
   .router-outlet {
     width: 100%;
   }
