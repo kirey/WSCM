@@ -174,8 +174,8 @@ public class Utilities {
 	}
 	
     public static void main(String[] args) {
-        String pattern = "/nfdsa/ryst/tesegfgdgdfgdfgdft/aast/fgsfgsdfgsdf/";
-        String url = "/*/?e??/*/??st/*/";
+        String pattern = "/wscm/rest/content/test?name=bank";
+        String url = "/wscm/rest/content/test?name=bank?";
         boolean result = searchUrl(pattern, url);
        
         System.out.println(result);
@@ -195,7 +195,8 @@ public class Utilities {
 		while (i < urlLength && j < pattLength) {
 			if (pattern.charAt(j) == url.charAt(i) && 
 					((j == pattLength - 1 && i != urlLength - 1 && i != urlLength - 2	&& url.charAt(i + 2) != wildcard) || 
-							(i == urlLength - 1 && j != pattLength - 1 && url.charAt(i) != wildcard))) {
+							(i == urlLength - 1 && j != pattLength - 1 && url.charAt(i) != wildcard) ||
+							j == pattLength -1 && i == urlLength -2 && url.charAt(i+1) != wildcard)) {
 				match = false;
 				break;
 			}

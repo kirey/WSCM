@@ -4,12 +4,17 @@ import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.quartz.CronTrigger;
+import org.quartz.InterruptableJob;
 import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -17,10 +22,15 @@ import org.quartz.Trigger;
 import org.quartz.Trigger.TriggerState;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
+import org.quartz.impl.JobExecutionContextImpl;
+import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.kirey.wscm.classloading.BaseObjectFactory;
+import com.kirey.wscm.classloading.ClassLoadingUtil;
+import com.kirey.wscm.classloading.classes.interfaces.WebRequestJob;
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.EventDao;
 import com.kirey.wscm.data.dao.JobsDao;
@@ -50,6 +60,13 @@ public class JobService {
 	
 	@Autowired
 	private EventDao eventDao;
+	
+	@Autowired
+	private BaseObjectFactory baseObjectFactory;
+	
+	@Autowired
+	private ClassLoadingUtil classLoadingUtil;
+
 
 	/**
 	 * Method creates {@link CronTrigger}
@@ -107,9 +124,6 @@ public class JobService {
 
 		scheduler1.start();
 
-		job.setStatus(AppConstants.SCHEDULER_STATUS_ACTIVE);
-		jobsDao.merge(job);
-
 	}
 	
 	
@@ -130,9 +144,6 @@ public class JobService {
 			scheduler1.scheduleJob(jobDetail, cronTrigger);
 
 		scheduler1.start();
-
-		schedulerEnt.setStatus(AppConstants.SCHEDULER_STATUS_ACTIVE);
-		jobsDao.merge(schedulerEnt);
 		
 	}
 	
@@ -149,11 +160,6 @@ public class JobService {
 		}else {
 			scheduler1.triggerJob(jobDetail.getKey());
 		}
-			
-//		scheduler1.start();
-
-		schedulerEnt.setStatus(AppConstants.SCHEDULER_STATUS_ACTIVE);
-		jobsDao.merge(schedulerEnt);
 		
 	}
 
@@ -168,9 +174,6 @@ public class JobService {
 
 		scheduler1.interrupt(JobKey.jobKey(schedulerEnt.getJobName(), AppConstants.GROUP_NAME));
 		scheduler1.deleteJob(JobKey.jobKey(schedulerEnt.getJobName(), AppConstants.GROUP_NAME));
-
-		schedulerEnt.setStatus(AppConstants.SCHEDULER_STATUS_INACTIVE);
-		jobsDao.attachDirty(schedulerEnt);
 
 	}
 
@@ -287,6 +290,17 @@ public class JobService {
 		// checking job with key :"+jobKey+ " is running. error message
 		// :"+e.getMessage()
 		return false;
+	}
+
+	public void startJobClassLoading(Jobs job) {
+		String qName = classLoadingUtil.getQualifiedName(job.getKjcClasses());
+		
+		WebRequestJob webReqJob = (WebRequestJob) baseObjectFactory.create(qName);
+		HashMap<String, Object> inputMap = new HashMap<>();
+		inputMap.put("applicationContext", applicationContext);
+		inputMap.put("job", job);
+		
+		webReqJob.execute(inputMap);
 	}
 
 	

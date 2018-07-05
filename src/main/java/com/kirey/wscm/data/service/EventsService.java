@@ -27,9 +27,7 @@ public class EventsService {
 	
 	@Autowired
 	private EventDao eventDao;
-	
-	@Autowired
-	private JobService jobService;
+
 	
 	private List<Event> allEvents;
 	

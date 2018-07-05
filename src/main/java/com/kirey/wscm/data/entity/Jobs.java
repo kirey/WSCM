@@ -17,10 +17,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
@@ -28,6 +30,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "jobs")
@@ -44,9 +47,9 @@ public class Jobs implements Serializable {
 	
 	private Boolean classLoading;
 
-	private String status;
-	
 	private DicJobType jobType;
+	
+	private KjcClasses kjcClasses;
 
 	@JsonBackReference(value = "jobLogs")
 	private List<JobExecutionLog> jobExecutionLogs = new ArrayList<>();
@@ -100,16 +103,7 @@ public class Jobs implements Serializable {
 	public void setJobExecutionLogs(List<JobExecutionLog> jobExecutionLogs) {
 		this.jobExecutionLogs = jobExecutionLogs;
 	}
-	
-	@Column(name = "status")
-	public String getStatus() {
-		return status;
-	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "dic_job_type", nullable = true)
@@ -177,6 +171,16 @@ public class Jobs implements Serializable {
 
 	public void setJobCategorieses(List<JobCategories> jobCategorieses) {
 		this.jobCategorieses = jobCategorieses;
+	}
+
+	@JsonManagedReference(value = "Classes_Jobs")
+	@OneToOne//(mappedBy = "job")
+	public KjcClasses getKjcClasses() {
+		return kjcClasses;
+	}
+
+	public void setKjcClasses(KjcClasses kjcClasses) {
+		this.kjcClasses = kjcClasses;
 	}
 	
 	

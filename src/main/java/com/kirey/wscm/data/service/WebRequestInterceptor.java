@@ -56,9 +56,13 @@ public class WebRequestInterceptor implements ThrowsAdvice {
 			boolean match = Utilities.searchUrl(url, event.getDefinition());
 			if(match) {
 				Jobs job = event.getJobs();
-				if (event.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
-					jobService.startJobImmediately(job);
-					System.out.println("***************************JOB STARTED********************************");
+				if(job.getClassLoading()) {
+					jobService.startJobClassLoading(job);
+				}else {
+					if (event.getStatus().equals(AppConstants.SCHEDULER_STATUS_ACTIVE)) {
+						jobService.startJobImmediately(job);
+						System.out.println("***************************JOB STARTED********************************");
+					}
 				}
 			}
 		}
