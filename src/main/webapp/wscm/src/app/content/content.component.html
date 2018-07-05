@@ -18,16 +18,9 @@
             {{position.page | uppercase}}&nbsp;&nbsp;&nbsp; {{position.position}}
           </mat-panel-title>
           <mat-panel-description>
-            <h6 *ngFor="let item of position.contentCategorieses | slice:0:3"><span>{{item.categories.description}},</span></h6>
-            <!-- <form>
-                <mat-form-field>
-                  <mat-select placeholder="Categories Description">
-                    <mat-option *ngFor="let item of position.contentCategorieses"> -->
-                        <!-- {{item.categories.description}} -->
-                    <!-- </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </form> -->
+            <h6 *ngFor="let item of position.contentCategorieses">
+              <span>{{item.categories.description}},</span>
+            </h6>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <!-- Code inside expansion panel -->

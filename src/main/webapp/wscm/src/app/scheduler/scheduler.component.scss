@@ -36,7 +36,6 @@
     .plus {
         font-size: 30px;
         margin-top: -3px;
-        margin-left: 5px;
     }
     .addJob-container {
         display: flex;
@@ -48,7 +47,7 @@
         background: $warn;
     }
     button.editButton {
-        width: 20%; // height: 50px;
+        width: 20%;
         margin-left: 80%;
         background: $primary;
         color: white;

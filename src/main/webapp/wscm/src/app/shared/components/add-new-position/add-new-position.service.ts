@@ -18,12 +18,10 @@ export class AddNewPositionService {
       .post(this.baseUrl, obj, this.options)
       .pipe(map(res => res));
   }
-
   // get All Pages
   getPages(pages: string) {
     return this._http.get(this.baseUrl + '/pages').pipe(map(res => res));
   }
-
   // get All Categories
   getCategories() {
     return this._http.get(this.baseUrl + '/categories').pipe(map(res => res));

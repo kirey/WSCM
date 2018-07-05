@@ -21,7 +21,7 @@ import { AddJobService } from './shared/components/add-job/addJob.service';
 import { EditJobService } from './shared/components/edit-job/edit-job.service';
 import { AddNewPositionService } from './shared/components/add-new-position/add-new-position.service';
 import { ClientService } from './client/client.service';
-import {SocketService} from './shared/services/socket.service'
+import { SocketService } from './shared/services/socket.service';
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -39,7 +39,7 @@ import { AddJobComponent } from './shared/components/add-job/add-job.component';
 import { EditJobComponent } from './shared/components/edit-job/edit-job.component';
 import { AddNewPositionComponent } from './shared/components/add-new-position/add-new-position.component';
 import { ClientComponent } from './client/client.component';
-
+import { JobsComponent } from './jobs/jobs.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import { ClientComponent } from './client/client.component';
     EditJobComponent,
     AddNewPositionComponent,
     ClientComponent,
+    JobsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,12 +69,19 @@ import { ClientComponent } from './client/client.component';
     MaterialModule
   ],
   providers: [
-    PanelService, AuthGuard, AuthService, LoginService, SchedulerService, AddJobService, EditJobService, AddNewPositionService,ClientService,SocketService
+    PanelService,
+    AuthGuard,
+    AuthService,
+    LoginService,
+    SchedulerService,
+    AddJobService,
+    EditJobService,
+    AddNewPositionService,
+    ClientService,
+    SocketService
   ],
-  entryComponents: [
-    DeleteDialog
-  ],
+  entryComponents: [DeleteDialog],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {}

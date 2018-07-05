@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DeleteDialog } from '../../dialogs/delete-dialog/delete-dialog.component';
 import { SnackBarService } from './../../services/snackbar.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { AddNewPositionService } from './add-new-position.service';
 
@@ -25,18 +25,23 @@ export class AddNewPositionComponent implements OnInit {
   categoryName: string;
   description: string;
   weight: number;
-  html: null;
-  css: null;
-  script: null;
+  css: any;
+  html: string;
+  script: any;
   categories: any;
   positions: any;
   check: boolean = false;
+  selectedObject: any;
+  obj: any;
 
   constructor(
     public dialog: MatDialog,
     public contentService: AddNewPositionService,
-    public snackbar: SnackBarService
-  ) {}
+    public snackbar: SnackBarService,
+    public sanitizer: DomSanitizer
+  ) {
+    const html: SafeHtml = this.sanitizer.bypassSecurityTrustHtml(this.html);
+  }
   // Get All Pages - select box for pages select ********************************
   getAllPages() {
     this.contentService.getPages(this.pages).subscribe(
@@ -75,7 +80,6 @@ export class AddNewPositionComponent implements OnInit {
 
   // NEXT button ***************************************
   next(obj, step) {
-    console.log(this.listCategoryWeight);
     obj = {
       page: this.pages,
       position: this.position,
@@ -99,20 +103,21 @@ export class AddNewPositionComponent implements OnInit {
       case 1:
         this.step = 2;
         this.selectedPosition = obj;
+        console.log(this.selectedPosition);
         for (const item of this.selectedPosition.contentCategorieses) {
           this.listCategoryWeight.push(item);
         }
         break;
       case 2:
         this.step = 3;
+        this.listCategoryWeight.shift();
         break;
       case 3:
         this.step = 4;
         // delete first default category from this.listCategoryWeight
-        this.listCategoryWeight.shift();
-        break;
+        // this.listCategoryWeight.shift();
+        // break;
     }
-
     console.log(this.listCategoryWeight);
   }
 
@@ -174,18 +179,20 @@ export class AddNewPositionComponent implements OnInit {
   // Send Request
   save() {
     this.selectedPosition['contentCategorieses'] = this.listCategoryWeight;
+    console.log(this.selectedPosition);
     this.contentService.addContent(this.selectedPosition).subscribe(
       res => {
         console.log(res);
         this.snackbar.openSnackBar('Success', res['data']);
         this.getPositions();
-        this.resetData();
+        // this.resetData();
       },
       err => console.log(err)
     );
   }
 
   ngOnInit() {
+    this.getPositions();
     this.getAllPages();
     this.getCategory();
   }

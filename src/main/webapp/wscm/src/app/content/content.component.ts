@@ -36,7 +36,6 @@ export class ContentComponent implements OnInit {
     this.panelShow = true;
     this.addJobShow = false;
   }
-
   // Get Positions
   getPositions() {
     this.contentService.getPositions('home').subscribe(
@@ -119,8 +118,6 @@ export class ContentComponent implements OnInit {
       );
       this.selectedPosition['contentCategorieses'].splice(index2, 1);
     }
-    // this.selected = categories.description;
-    // console.log(this.selected);
     console.log(this.listCategoryWeight);
   }
 
@@ -146,7 +143,6 @@ export class ContentComponent implements OnInit {
       width: '500px',
       data: { type: type, value: value }
     });
-
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.contentService.deletePosition(id).subscribe(
