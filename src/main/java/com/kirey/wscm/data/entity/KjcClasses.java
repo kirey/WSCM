@@ -26,6 +26,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -47,6 +48,7 @@ public class KjcClasses implements java.io.Serializable {
 	private boolean flEnabled;
 	private List<KjcClasses> kjcClasseses = new ArrayList<KjcClasses>();
 	private KjcClassCompiled kjcClassCompiled;
+	
 	private Jobs job;
 	
 	public KjcClasses() {
@@ -149,7 +151,7 @@ public class KjcClasses implements java.io.Serializable {
 		this.kjcClassCompiled = kjcClassCompiled;
 	}
 
-	@JsonManagedReference(value = "Classes_Jobs")
+	@JsonBackReference(value = "Classes_Jobs")
 	@OneToOne(mappedBy = "kjcClasses")
 	public Jobs getJob() {
 		return job;
