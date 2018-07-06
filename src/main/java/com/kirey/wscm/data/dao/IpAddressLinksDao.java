@@ -1,5 +1,7 @@
 package com.kirey.wscm.data.dao;
 
+import java.util.List;
+
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,18 @@ public class IpAddressLinksDao extends KjcBaseDao {
 		String hql = "from IpAddressLinks ipl where ipl.ipAddress.id = :ipAddrId and ipl.link.id = :linkId";
 		IpAddressLinks ipAddressLinks = (IpAddressLinks) sessionFactory.getCurrentSession().createQuery(hql).setParameter("ipAddrId", ipAddress.getId()).setParameter("linkId", link.getId()).uniqueResult();
 		return ipAddressLinks;
+	}
+
+	public List<IpAddressLinks> findByIpAddress(IpAddress ipAddress) {
+		String hql = "from IpAddressLinks ipl where ipl.ipAddress.id = :ipAddrId";
+		List<IpAddressLinks> list = sessionFactory.getCurrentSession().createQuery(hql).setParameter("ipAddrId", ipAddress.getId()).list();
+		return list;
+	}
+
+	public List<IpAddressLinks> findByLink(Links link) {
+		String hql = "from IpAddressLinks ipl where ipl.link.id = :linkId";
+		List<IpAddressLinks> list = sessionFactory.getCurrentSession().createQuery(hql).setParameter("linkId", link.getId()).list();
+		return list;
 	}
 
 }
