@@ -18,7 +18,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   htmlString: string = "";
   public messages: Subject<any>;
 
-constructor(public router: Router, public auth: AuthService, public clientService: ClientService, public wsService: SocketService, private _http: Http) {
+  constructor(public router: Router, public auth: AuthService, public clientService: ClientService, public wsService: SocketService, private _http: Http) {
   }
 
   ngOnInit() {
@@ -28,8 +28,25 @@ constructor(public router: Router, public auth: AuthService, public clientServic
       document.getElementById("position").innerHTML = this.htmlString;
     }, err => {
       console.log(err);
-    }
-    );
+    }, () => {
+      //getting anchor tag id and putting to url and writting to database
+      let element = document.getElementById("test");
+      element.addEventListener("click", function () {
+        console.log("ID is:" + this.id);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", 'rest/link', true);
+
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {//Call a function when the state changes.
+          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            console.log('Succesful');
+          }
+        }
+        var url = 'client/' + this.id;
+        xhr.send("url=" + url);
+      });
+    });
   }
 
   logout() {
@@ -51,7 +68,7 @@ constructor(public router: Router, public auth: AuthService, public clientServic
 
   socketLogic() {
     this.messages = <Subject<any>>this.wsService
-      .connect('ws://localhost:8083/wscm/socket')
+      .connect('ws://192.168.60.12:8083/wscm/socket')
       .pipe(
       map((response: MessageEvent): any => {
         console.log(response.data);
@@ -68,11 +85,11 @@ constructor(public router: Router, public auth: AuthService, public clientServic
     this.messages.subscribe(res => { }, err => { }, () => { });
     setTimeout(() => {
       if (localStorage.getItem('username') == "insurance") {
-        this._http.get('http://localhost:8083/wscm/rest/content/test?name=insurance').subscribe(res => {
+        this._http.get('rest/content/test?name=insurance').subscribe(res => {
           console.log(res);
         });
       } else {
-        this._http.get('http://localhost:8083/wscm/rest/content/test?name=bank').subscribe(res => {
+        this._http.get('rest/content/test?name=bank').subscribe(res => {
           console.log(res);
         });
       }
