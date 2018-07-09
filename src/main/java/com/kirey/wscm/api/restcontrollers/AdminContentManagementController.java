@@ -67,6 +67,14 @@ public class AdminContentManagementController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<RestResponseDto> addNewContent(@RequestBody Content content) {
 
+		if(content.getContentCategorieses() == null || content.getContentCategorieses().isEmpty()) {
+			Categories defaultCategory = categoriesDao.findDefaultCategory();
+			ContentCategories contentCateogory = new ContentCategories();
+			contentCateogory.setCategories(defaultCategory);
+			contentCateogory.setContent(content);
+			contentCateogory.setWeight(10);
+		}
+		
 		
 		Content savedContent = (Content) contentDao.merge(content);
 		
@@ -88,6 +96,13 @@ public class AdminContentManagementController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public ResponseEntity<RestResponseDto> editContent(@RequestBody Content content) {
 
+		if(content.getContentCategorieses() == null || content.getContentCategorieses().isEmpty()) {
+			Categories defaultCategory = categoriesDao.findDefaultCategory();
+			ContentCategories contentCateogory = new ContentCategories();
+			contentCateogory.setCategories(defaultCategory);
+			contentCateogory.setContent(content);
+			contentCateogory.setWeight(10);
+		}
 		
 		Content savedContent = (Content) contentDao.merge(content);
 		
