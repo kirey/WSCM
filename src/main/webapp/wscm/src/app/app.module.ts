@@ -40,6 +40,7 @@ import { EditJobComponent } from './shared/components/edit-job/edit-job.componen
 import { AddNewPositionComponent } from './shared/components/add-new-position/add-new-position.component';
 import { ClientComponent } from './client/client.component';
 import { JobsComponent } from './jobs/jobs.component';
+import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { JobsComponent } from './jobs/jobs.component';
     EditJobComponent,
     AddNewPositionComponent,
     ClientComponent,
-    JobsComponent
+    JobsComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,7 @@ import { JobsComponent } from './jobs/jobs.component';
     ClientService,
     SocketService
   ],
-  entryComponents: [DeleteDialog],
+  entryComponents: [DeleteDialog, EditDialogComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

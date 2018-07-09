@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ContentService } from './content.service';
 import { SnackBarService } from './../shared/services/snackbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
+import { EditDialogComponent } from '../shared/dialogs/edit-dialog/edit-dialog.component';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-content',
@@ -25,6 +28,15 @@ export class ContentComponent implements OnInit {
   listCategoryWeight: Array<Object> = [];
   addJobShow = false;
   panelShow = true;
+  category: any;
+  animal: string;
+  name: string;
+  @ViewChild('editUserModal') editUserModal: ModalDirective;
+  editUserForm: boolean = false;
+  user: any;
+
+
+  displayedColumns: string[] = ['pages', 'positions', 'language', 'categories', 'edit', 'delete'];
 
   // Add New Position panel open and close
   addJob() {
@@ -136,6 +148,24 @@ export class ContentComponent implements OnInit {
     }
     console.log(this.listCategoryWeight);
   }
+
+  editDialog(id) {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      width: '1000px',
+      data: {id}
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.contentService.updateContent(id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => console.log(err)
+        );
+      }
+    });
+  }
+
 
   // Delete Dialog
   deleteDialog(id, type, value) {

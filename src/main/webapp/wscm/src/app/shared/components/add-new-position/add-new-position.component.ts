@@ -1,8 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  Sanitizer,
+  SecurityContext
+} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SnackBarService } from './../../services/snackbar.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import { AddNewPositionService } from './add-new-position.service';
 
 @Component({
@@ -26,22 +31,18 @@ export class AddNewPositionComponent implements OnInit {
   description: string;
   weight: number;
   css: any;
-  html: string;
+  html: any;
   script: any;
   categories: any;
   positions: any;
   check: boolean = false;
-  selectedObject: any;
-  obj: any;
 
   constructor(
     public dialog: MatDialog,
     public contentService: AddNewPositionService,
     public snackbar: SnackBarService,
     public sanitizer: DomSanitizer
-  ) {
-    const html: SafeHtml = this.sanitizer.bypassSecurityTrustHtml(this.html);
-  }
+  ) {}
   // Get All Pages - select box for pages select ********************************
   getAllPages() {
     this.contentService.getPages(this.pages).subscribe(
@@ -84,7 +85,7 @@ export class AddNewPositionComponent implements OnInit {
       page: this.pages,
       position: this.position,
       language: this.language,
-      html: this.html,
+      html: this.sanitizer.bypassSecurityTrustHtml(this.html),
       css: this.css,
       script: this.script,
       contentCategorieses: [
@@ -98,6 +99,7 @@ export class AddNewPositionComponent implements OnInit {
         }
       ]
     };
+    console.log(this.html);
     console.log(obj);
     switch (step) {
       case 1:
@@ -114,9 +116,9 @@ export class AddNewPositionComponent implements OnInit {
         break;
       case 3:
         this.step = 4;
-        // delete first default category from this.listCategoryWeight
-        // this.listCategoryWeight.shift();
-        // break;
+      // delete first default category from this.listCategoryWeight
+      // this.listCategoryWeight.shift();
+      // break;
     }
     console.log(this.listCategoryWeight);
   }
@@ -178,8 +180,8 @@ export class AddNewPositionComponent implements OnInit {
 
   // Send Request
   save() {
+    console.log(this.html);
     this.selectedPosition['contentCategorieses'] = this.listCategoryWeight;
-    console.log(this.selectedPosition);
     this.contentService.addContent(this.selectedPosition).subscribe(
       res => {
         console.log(res);

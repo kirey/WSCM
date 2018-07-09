@@ -1,37 +1,84 @@
 <div style="display:flex">
   <app-panel></app-panel>
-  <div id="content">
-    <!-- back to content page button -->
-    <button *ngIf="!panelShow" mat-mini-fab color="warn" class="addButton" (click)="backToContentPanel()">
-      <i class="material-icons plus" matTooltip="Back to Content Page" matTooltipPosition="above">flip_to_back</i>
-    </button>
+   <!-- back to content page button -->
+            <button *ngIf="!panelShow" mat-mini-fab color="warn" class="addButton" (click)="backToContentPanel()">
+              <i class="material-icons plus" matTooltip="Back to Content Page" matTooltipPosition="above">flip_to_back</i>
+            </button>
     <!-- Add New page - position -->
-    <button *ngIf="panelShow" mat-mini-fab color="warn" class="addButton" (click)="addJob()">
-      <i class="material-icons plus" matTooltip="Add New Content" matTooltipPosition="above">add</i>
-    </button>
+              <button *ngIf="panelShow" mat-mini-fab color="warn" class="addButton" (click)="addJob()">
+                <i class="material-icons plus" matTooltip="Add New Content" matTooltipPosition="above">add</i>
+              </button>
+  <div id="content" *ngIf="positions">
+
+    <!-- MATERIAL TABLE************************************** -->
+    <!-- <table mat-table class="mat-elevation-z8" [dataSource]="positions">
+        <ng-container matColumnDef="pages">
+            <th mat-header-cell *matHeaderCellDef> Page </th>
+            <td mat-cell *matCellDef="let element"> {{element.page | uppercase}} </td>
+          </ng-container> -->
+
+          <!-- Name Column -->
+          <!-- <ng-container matColumnDef="positions">
+            <th mat-header-cell *matHeaderCellDef> Position </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container> -->
+          <!-- language -->
+          <!-- <ng-container matColumnDef="language">
+              <th mat-header-cell *matHeaderCellDef> Language </th>
+              <td mat-cell *matCellDef="let element"> {{element.language}} </td>
+            </ng-container> -->
+
+          <!-- Weight Column -->
+            <!-- <ng-container matColumnDef="categories">
+            <th mat-header-cell *matHeaderCellDef> Categories </th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngFor="let cat of element.contentCategorieses">{{cat.categories.description}}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef> Edit </th>
+              <td mat-cell *matCellDef="let element"><i (click)="editDialog()" class="material-icons"  matTooltip="Edit position" matTooltipPosition="above"
+                class="material-icons">
+                  edit
+                  </i>
+                </td>
+            </ng-container> -->
+          <!-- Symbol Column -->
+          <!-- <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let element"><i class="material-icons" (click)="deleteDialog(element.id, 'position', element.position)" matTooltip="Delete position" matTooltipPosition="above"
+              class="material-icons">
+                delete
+                </i></td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table> -->
     <!-- Accordion -->
-    <mat-accordion *ngIf="positions && panelShow" color="accent">
+           <mat-accordion *ngIf="positions && panelShow" color="accent">
       <!-- Expansion panel START -->
-      <mat-expansion-panel *ngFor="let position of positions" (closed)="resetData()">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{position.page | uppercase}}&nbsp;&nbsp;&nbsp; {{position.position}}
-          </mat-panel-title>
-          <mat-panel-description>
-            <h6 *ngFor="let item of position.contentCategorieses">
-              <span>{{item.categories.description}},</span>
-            </h6>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+                  <mat-expansion-panel *ngFor="let position of positions" (closed)="resetData()">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{position.page | uppercase}}&nbsp;&nbsp;&nbsp; {{position.position}}
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        <h6 *ngFor="let item of position.contentCategorieses">
+                          <span>{{item.categories.description}},</span>
+                        </h6>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
         <!-- Code inside expansion panel -->
         <!-- S T E P 1 -->
         <!-- Tabs - Material -->
-        <div *ngIf="step == 1" class="tabs-container">
-          <mat-tab-group color="warn">
-            <mat-tab label="HTML">
-              <ng-template mat-tab-label>
-                HTML
-              </ng-template>
+        <!-- *******************************EDIT CONTENT******************************************************* -->
+                    <div *ngIf="step == 1" class="tabs-container">
+                      <mat-tab-group color="warn">
+                        <mat-tab label="HTML">
+                          <ng-template mat-tab-label>
+                            HTML
+                          </ng-template>
               <!-- Tabs Content -->
               <div class="tabs-content">
                 <!-- Icons -->
@@ -60,7 +107,7 @@
                 CSS
               </ng-template>
               <!-- Tabs Content -->
-              <div class="tabs-content">
+               <div class="tabs-content">
                 <!-- Icons -->
                 <span class="tabs-icons">
                   <i (click)="deleteDialog()" matTooltip="Delete position" matTooltipPosition="above" class="material-icons">
@@ -166,6 +213,5 @@
       <!-- Expansion panel END -->
     </mat-accordion>
     <app-add-new-position *ngIf="addJobShow"></app-add-new-position>
-  </div>
 
 </div>
