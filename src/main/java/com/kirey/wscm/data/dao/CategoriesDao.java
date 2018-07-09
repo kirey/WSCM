@@ -36,4 +36,14 @@ public class CategoriesDao extends KjcBaseDao {
 		return listCat;
 	}
 
+	/**
+	 * Method for gettiing default category
+	 * @return {@link Categories}
+	 */
+	public Categories findDefaultCategory() {
+		String hql = "from Categories cat where cat.categoryName = 'universal'";
+		Categories category = (Categories) sessionFactory.getCurrentSession().createQuery(hql).uniqueResult();
+		return category;
+	}
+
 }
