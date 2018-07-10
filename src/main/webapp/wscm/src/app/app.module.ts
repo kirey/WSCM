@@ -22,6 +22,7 @@ import { EditJobService } from './shared/components/edit-job/edit-job.service';
 import { AddNewPositionService } from './shared/components/add-new-position/add-new-position.service';
 import { ClientService } from './client/client.service';
 import { SocketService } from './shared/services/socket.service';
+import { EditEventService } from './shared/dialogs/edit-event-dialog/edit-event-dialog.service';
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -41,6 +42,7 @@ import { AddNewPositionComponent } from './shared/components/add-new-position/ad
 import { ClientComponent } from './client/client.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.component';
+import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edit-event-dialog.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.co
     AddNewPositionComponent,
     ClientComponent,
     JobsComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    EditEventDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -80,9 +83,10 @@ import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.co
     EditJobService,
     AddNewPositionService,
     ClientService,
-    SocketService
+    SocketService,
+    EditEventService
   ],
-  entryComponents: [DeleteDialog, EditDialogComponent],
+  entryComponents: [DeleteDialog, EditDialogComponent, EditEventDialogComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

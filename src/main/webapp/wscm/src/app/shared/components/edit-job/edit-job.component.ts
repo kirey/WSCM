@@ -15,13 +15,27 @@ export class EditJobComponent implements OnInit {
   jobName: string;
   cronExpression: string;
   status: string;
+  eventType: string;
   id: number;
-  selected = 'option2';
+  events: any;
+
+  getList() {
+    this.editJobService.getJobs().subscribe(
+      res => {
+        this.events = res.data;
+        console.log(this.events);
+      },
+      err => console.log(err)
+    );
+  }
    // Edit job form
    editJob() {
     const obj = {
-      jobName: this.jobName,
-      cronExpression: this.cronExpression,
+      eventName: this.currentJob.eventName,
+      jobName: this.currentJob.jobName,
+      eventType: this.currentJob.eventType,
+      cronExpression: this.currentJob.jobs.cronExpression,
+      description: this.currentJob.description,
       status: this.currentJob.currentStatus,
       id: this.currentJob.id
     };
@@ -42,6 +56,7 @@ export class EditJobComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getList();
   }
 
 }

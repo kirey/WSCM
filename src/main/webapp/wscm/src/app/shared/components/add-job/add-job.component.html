@@ -1,19 +1,36 @@
 <div id="addJob">
-    <h5>Add Job</h5>
+    <h5>Add Event</h5>
     <form #addForm="ngForm" class="addJob-container">
+        <mat-form-field>
+            <input matInput name="eventName" [(ngModel)]="eventName" type="text" placeholder="Event Name" autocomplete="off">
+            <!-- <mat-error >
+                Job Name is required.
+              </mat-error> -->
+          </mat-form-field>
       <mat-form-field>
         <input matInput name="jobName" [(ngModel)]="jobName" type="text" placeholder="Job Name" autocomplete="off">
         <!-- <mat-error >
             Job Name is required.
           </mat-error> -->
-
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="cronExpression" [(ngModel)]="cronExpression" placeholder="Cron Expression" autocomplete="off">
+          <input matInput name="eventType" [(ngModel)]="eventType" placeholder="Event Type" autocomplete="off">
+          <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
+              Cron Expression is required.
+            </mat-error> -->
+        </mat-form-field>
+      <mat-form-field>
+        <input matInput name="cronExpression" [(ngModel)]="cronExpression" placeholder="Definition" autocomplete="off">
         <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
             Cron Expression is required.
           </mat-error> -->
       </mat-form-field>
+      <mat-form-field>
+          <textarea matInput name="description"  [(ngModel)]="description" placeholder="Description"></textarea>
+          <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
+              Cron Expression is required.
+            </mat-error> -->
+        </mat-form-field>
       <button type="submit" mat-raised-button class="formButton" (click)="addJob()">Submit</button>
     </form>
   </div>

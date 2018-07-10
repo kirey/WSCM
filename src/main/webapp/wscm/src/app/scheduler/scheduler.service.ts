@@ -11,7 +11,7 @@ export class SchedulerService {
     baseUrl = '/wscm/rest/scheduler/';
 
     getJobs(): Observable<any> {
-        return this._http.get(this.baseUrl + 'jobs');
+        return this._http.get(this.baseUrl + 'events');
     }
 
     startJob(id): Observable<any> {

@@ -12,12 +12,18 @@ export class AddJobComponent implements OnInit {
 
   jobName: string;
   cronExpression: string;
+  eventName: string;
+  eventType: string;
+  description: string;
 
     // Add Job
     addJob() {
       const jobs = {
+        eventName: this.eventName,
         jobName: this.jobName,
+        eventType: this.eventType,
         cronExpression: this.cronExpression,
+        description: this.description,
         status: null
       };
       this.addJobSerivice.addJob(jobs).subscribe(

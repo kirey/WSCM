@@ -2,6 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SchedulerService } from './scheduler.service';
 import { Router } from '@angular/router';
+import { SnackBarService } from './../shared/services/snackbar.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { EditEventDialogComponent } from '../shared/dialogs/edit-event-dialog/edit-event-dialog.component';
 
 @Component({
   selector: 'app-scheduler',
@@ -12,7 +15,7 @@ import { Router } from '@angular/router';
 export class SchedulerComponent implements OnInit {
   currentStatus: string;
   job: any;
-  jobs: any;
+  events: any;
   animal: string;
   name: string;
   jobForm: FormGroup;
@@ -23,24 +26,32 @@ export class SchedulerComponent implements OnInit {
   tableShow = true;
   editJobShow = false;
 
-  constructor(public schedulerService: SchedulerService,public router: Router) {}
+  constructor(
+    public schedulerService: SchedulerService,
+    public router: Router,
+    public snackbar: SnackBarService,
+    public dialog: MatDialog
+  ) {}
 
   displayedColumns = [
     'id',
+    'eventName',
     'jobName',
+    'eventType',
+    'definition',
+    'description',
     'status',
-    'cronExpression',
-    'changeStatus',
     'actions',
-    'history'
+    'history',
+    'editing'
   ];
 
   // Get List
   getList() {
     this.schedulerService.getJobs().subscribe(
       res => {
-        this.jobs = res.data;
-        console.log(this.jobs);
+        this.events = res.data;
+        console.log(this.events);
       },
       err => console.log(err)
     );
@@ -56,7 +67,28 @@ export class SchedulerComponent implements OnInit {
     this.tableShow = false;
     this.editJobShow = true;
   }
+  editDialog(obj) {
+    // this.currentJob = job;
+    const dialogRef = this.dialog.open(EditEventDialogComponent, {
+      width: '800px',
+      data: obj
+    });
+    console.log(obj);
 
+        dialogRef.afterClosed().subscribe(result => {
+            this.getList();
+        });
+    // dialogRef.afterClosed().subscribe(res => {
+    //   if (res) {
+    //     this.contentService.updateContent(id).subscribe(
+    //       res => {
+    //         console.log(res);
+    //       },
+    //       err => console.log(err)
+    //     );
+    //   }
+    // });
+  }
   // Delete Job
   deleteJob(id) {
     this.schedulerService.deleteJob(id).subscribe(
@@ -74,8 +106,9 @@ export class SchedulerComponent implements OnInit {
     this.schedulerService.startJob(job.id).subscribe(
       res => {
         console.log(res);
+        this.snackbar.openSnackBar('Success', res);
         // this.successMessage(res.message);
-        // return job.status = 'ACTIVE';
+        return (job.status = 'ACTIVE');
       },
       err => {
         console.log(err);
@@ -100,8 +133,8 @@ export class SchedulerComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('role') == 'ROLE_USER'){
-        this.router.navigate(['/client']);
+    if (localStorage.getItem('role') == 'ROLE_USER') {
+      this.router.navigate(['/client']);
     }
     this.getList();
   }

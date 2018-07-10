@@ -3,45 +3,37 @@
     <form class="addJob-container">
       <mat-form-field>
         <!-- JOB Name? -->
-        <input matInput name="jobName" [(ngModel)]="currentJob.jobName" type="text" placeholder="Event Name" autocomplete="off">
+        <input matInput name="eventName" [(ngModel)]="currentJob.eventName" type="text" placeholder="Event Name" autocomplete="off">
         <!-- <mat-error >
             Job Name is required.
           </mat-error> -->
       </mat-form-field>
       <mat-form-field>
-        <input matInput name="jobName2" placeholder="Job Name" autocomplete="off">
-        <mat-select [(value)]="selected">
-            <mat-option>None</mat-option>
-            <mat-option value="option1">Option 1</mat-option>
-            <mat-option value="option2">Option 2</mat-option>
-            <mat-option value="option3">Option 3</mat-option>
+        <input matInput name="jobName" placeholder="Job Name" autocomplete="off">
+        <mat-select name="jobName" placeholder="Job Name"  [(ngModel)]="currentJob.jobName"required>
+            <mat-option *ngFor="let job of events" [value]="job.jobs.jobName" >{{job.jobName}}</mat-option>
           </mat-select>
         <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
             Cron Expression is required.
           </mat-error> -->
       </mat-form-field>
-      <p>You selected: {{selected}}</p>
       <mat-form-field>
-          <input matInput name="type"  placeholder="Type">
-          <mat-select [(value)]="selected">
-              <mat-option>None</mat-option>
-              <mat-option value="option1">Option 1</mat-option>
-              <mat-option value="option2">Option 2</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
-            </mat-select>
+          <input matInput name="eventType" placeholder="Event Type" autocomplete="off">
+        <mat-select name="eventType" placeholder="Event Type"  [(ngModel)]="currentJob.eventType" required>
+            <mat-option *ngFor="let job of events" [value]="job.eventType" >{{job.eventType}}</mat-option>
+          </mat-select>
           <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
               Cron Expression is required.
             </mat-error> -->
         </mat-form-field>
-        <p>You selected: {{selected}}</p>
         <mat-form-field>
-            <input matInput name="cronExpression" [(ngModel)]="currentJob.cronExpression" placeholder="Definition" autocomplete="off">
+            <input matInput name="cronExpression" [(ngModel)]="currentJob.jobs.cronExpression" placeholder="Definition" autocomplete="off">
             <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
                 Cron Expression is required.
               </mat-error> -->
           </mat-form-field>
           <mat-form-field>
-              <textarea matInput name="description"  placeholder="Description"></textarea>
+              <textarea matInput name="description"  [(ngModel)]="currentJob.description" placeholder="Description"></textarea>
               <!-- <mat-error *ngIf="cronExpression.touched && cronExpression.errors">
                   Cron Expression is required.
                 </mat-error> -->
