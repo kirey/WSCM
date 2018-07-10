@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ContentService } from './content.service';
 import { SnackBarService } from './../shared/services/snackbar.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatPaginator } from '@angular/material';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from '../shared/dialogs/edit-dialog/edit-dialog.component';
-import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { visitAstChildren } from '@angular/compiler';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class ContentComponent implements OnInit {
     public snackbar: SnackBarService,
     public dialog: MatDialog,
     public router: Router
-  ) {}
+  ) { }
   positions: any;
   categories: any;
   step: number = 1;
@@ -31,10 +31,11 @@ export class ContentComponent implements OnInit {
   category: any;
   animal: string;
   name: string;
-  @ViewChild('editUserModal') editUserModal: ModalDirective;
   editUserForm: boolean = false;
   user: any;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  obs: any;
 
   displayedColumns: string[] = ['pages', 'positions', 'language', 'categories', 'edit', 'delete'];
 
@@ -54,6 +55,7 @@ export class ContentComponent implements OnInit {
       res => {
         console.log(res);
         this.positions = res;
+        this.positions.paginator = this.paginator;
       },
       err => console.log(err)
     );
@@ -152,7 +154,7 @@ export class ContentComponent implements OnInit {
   editDialog(id) {
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: '1000px',
-      data: {id}
+      data: { id }
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
