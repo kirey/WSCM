@@ -29,23 +29,23 @@ export class ClientComponent implements OnInit, OnDestroy {
     }, err => {
       console.log(err);
     }, () => {
-      //getting anchor tag id and putting to url and writting to database
-      let element = document.getElementById("test");
-      element.addEventListener("click", function () {
-        console.log("ID is:" + this.id);
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", 'rest/link', true);
+      // //getting anchor tag id and putting to url and writting to database
+      // let element = document.getElementById("test");
+      // element.addEventListener("click", function () {
+      //   console.log("ID is:" + this.id);
+      //   var xhr = new XMLHttpRequest();
+      //   xhr.open("POST", 'rest/link', true);
 
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      //   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-        xhr.onreadystatechange = function () {//Call a function when the state changes.
-          if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            console.log('Succesful');
-          }
-        }
-        var url = 'client/' + this.id;
-        xhr.send("url=" + url);
-      });
+      //   xhr.onreadystatechange = function () {//Call a function when the state changes.
+      //     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+      //       console.log('Succesful');
+      //     }
+      //   }
+      //   var url = 'client/' + this.id;
+      //   xhr.send("url=" + url);
+      // });
     });
   }
 
@@ -76,7 +76,7 @@ export class ClientComponent implements OnInit, OnDestroy {
         var x = document.getElementById("toast");
         x.innerHTML = response.data;
         x.className = "show";
-        setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 10000);
         //// work with response from socket
         return response.data;
       }

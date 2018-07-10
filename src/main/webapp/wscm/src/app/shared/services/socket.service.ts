@@ -12,7 +12,6 @@ export class SocketService {
 
   public connect(url): Rx.Subject<MessageEvent> {
     if (!this.subject) {
-      console.log('ponovo ulazi');
       this.subject = this.create(url);
       console.log('Successfully connected: ' + url);
       console.log(this.ws);
