@@ -17,3 +17,35 @@ $warn: #FFEE58;
     align-items: center;
     justify-content: center;
 }
+
+// Table
+table {
+    width: 100%;
+    text-align: center;
+}
+tr.mat-header-row {
+    background: linear-gradient(to right, $primary, $accent) !important;
+}
+th.mat-header-cell {
+    color: white;
+    font-size: 1em;
+    text-align: center;
+}
+td::selection {
+    background: $primary;
+    color: white;
+}
+th::selection {
+    background: $primary;
+}
+th.mat-header-cell {
+    text-align: center!important;
+    padding: 0 20px!important;
+}
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    text-align: center;
+    padding: 10px 0;
+}
+td.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {
+    padding: 20px!important;
+}

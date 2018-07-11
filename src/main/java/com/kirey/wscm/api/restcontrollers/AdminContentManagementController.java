@@ -166,14 +166,14 @@ public class AdminContentManagementController {
 	 * @return ResponseEntity containing the list of Content
 	 */
 	@RequestMapping(value = "/{page}/{lang}", method = RequestMethod.GET)
-	public List<Content> getByPageLang(@PathVariable String page, @PathVariable String lang) {
+	public ResponseEntity<RestResponseDto> getByPageLang(@PathVariable String page, @PathVariable String lang) {
 
 		List<Content> listContent = contentDao.findByPageLang(page, lang);
 		for (Content content : listContent) {
 			String connected = content.getCss() + "\n" + content.getHtml();
 			content.setConnected(connected);
 		}
-		return listContent;
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listContent, HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
 	
@@ -183,11 +183,11 @@ public class AdminContentManagementController {
 	 * @return ResponseEntity containing the list of Content
 	 */
 	@RequestMapping(value = "/{page}", method = RequestMethod.GET)
-	public List<Content> getByPageLang(@PathVariable String page) {
+	public ResponseEntity<RestResponseDto> getByPageLang(@PathVariable String page) {
 
 		List<Content> listContent = contentDao.findByPageAndInitCategories(page);
 		
-		return listContent;
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listContent, HttpStatus.OK.value()), HttpStatus.OK);
 	}
 
 }

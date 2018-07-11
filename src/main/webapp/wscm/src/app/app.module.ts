@@ -8,6 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutes } from './app.routes';
 
+import 'hammerjs';
+
+
 // Modules
 import { MaterialModule } from './shared/modules/material.module';
 
@@ -90,4 +93,4 @@ import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edi
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {}
+export class AppModule { }

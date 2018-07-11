@@ -1,7 +1,7 @@
 <div class="flex">
   <app-panel></app-panel>
 
-  <div id="content" *ngIf="positions">
+  <div id="content" *ngIf="dataSource">
     <!-- back to content page button -->
     <button *ngIf="!panelShow" mat-mini-fab color="warn" class="addButton" (click)="backToContentPanel()">
       <i class="material-icons plus" matTooltip="Back to Content Page" matTooltipPosition="above">flip_to_back</i>
@@ -12,14 +12,14 @@
     </button>
 
     <!-- MATERIAL TABLE -->
-    <table mat-table class="mat-elevation-z8" [dataSource]="positions">
+    <table mat-table class="mat-elevation-z8" [dataSource]="dataSource">
       <ng-container matColumnDef="pages">
         <th mat-header-cell *matHeaderCellDef> Page </th>
         <td mat-cell *matCellDef="let element"> {{element.page | uppercase}} </td>
       </ng-container>
 
       <!-- Name -->
-      <ng-container matColumnDef="positions">
+      <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Position </th>
         <td mat-cell *matCellDef="let element"> {{element.position}} </td>
       </ng-container>
@@ -59,12 +59,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-
-    <!-- PAGINATOR -->
-    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">>
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
     </mat-paginator>
-
-    <app-add-new-position *ngIf="addJobShow"></app-add-new-position>
-
   </div>
 </div>

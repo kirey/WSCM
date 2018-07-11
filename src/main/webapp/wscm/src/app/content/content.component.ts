@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ContentService } from './content.service';
 import { SnackBarService } from './../shared/services/snackbar.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatPaginator } from '@angular/material';
+import { MatDialog, MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from '../shared/dialogs/edit-dialog/edit-dialog.component';
 import { Router } from '@angular/router';
-import { visitAstChildren } from '@angular/compiler';
 
 
 @Component({
@@ -14,6 +13,7 @@ import { visitAstChildren } from '@angular/compiler';
   styleUrls: ['./content.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class ContentComponent implements OnInit {
   constructor(
     public contentService: ContentService,
@@ -21,7 +21,11 @@ export class ContentComponent implements OnInit {
     public dialog: MatDialog,
     public router: Router
   ) { }
-  positions: any;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+
+  dataSource: any;
   categories: any;
   step: number = 1;
   selectedPosition: any;
@@ -33,10 +37,7 @@ export class ContentComponent implements OnInit {
   name: string;
   user: any;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  obs: any;
-
-  displayedColumns: string[] = ['pages', 'positions', 'language', 'categories', 'edit', 'delete'];
+  displayedColumns: string[] = ['pages', 'name', 'language', 'categories', 'edit', 'delete'];
 
   // Add New Position panel open and close
   addJob() {
@@ -53,8 +54,9 @@ export class ContentComponent implements OnInit {
     this.contentService.getPositions('home').subscribe(
       res => {
         console.log(res);
-        this.positions = res;
-        this.positions.paginator = this.paginator;
+        this.dataSource = new MatTableDataSource<any>(res['data']);
+        this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
       },
       err => console.log(err)
     );
