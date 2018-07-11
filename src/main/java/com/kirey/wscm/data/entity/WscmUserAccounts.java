@@ -27,6 +27,8 @@ public class WscmUserAccounts implements UserDetails{
 	private String email;
 	private String role;
 	private String socketSessionId;
+	private String firstName;
+	private String lastName;
 	
 //	@JsonBackReference(value = "wscmUserIpAddress")
 //	private List<UserIpAddress> userIpAddress = new ArrayList<>();
@@ -97,6 +99,23 @@ public class WscmUserAccounts implements UserDetails{
 	}
 	public void setSocketSessionId(String socketSessionId) {
 		this.socketSessionId = socketSessionId;
+	}
+	
+	@Column(name = "first_name", unique = false, nullable = true)
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	@Column(name = "last_name", unique = false, nullable = true)
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userAccount")
 //	public List<UserIpAddress> getUserIpAddress() {
