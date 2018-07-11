@@ -39,15 +39,16 @@ export class EditEventDialogComponent implements OnInit {
     );
   }
 
+  jobObjectChanged(obj) {
+    console.log(obj);
+  }
+
   // Edit job form
   editJob() {
-    const obj = this.data;
-    obj['jobs']['jobName'] = this.selectedJobName;
-    console.log(obj);
-    this.editEventService.editJobs(obj).subscribe(
+    console.log(this.data);
+    this.editEventService.editJobs(this.data).subscribe(
       res => {
         console.log(res);
-        console.log('uspesno');
         // this.successMessage(res.message);
         this.dialogRef.close();
       },

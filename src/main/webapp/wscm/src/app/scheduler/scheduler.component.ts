@@ -75,8 +75,10 @@ export class SchedulerComponent implements OnInit {
     });
     console.log(obj);
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(res => {
             this.getList();
+            console.log(res);
+            console.log('uspesno');
         });
     // dialogRef.afterClosed().subscribe(res => {
     //   if (res) {

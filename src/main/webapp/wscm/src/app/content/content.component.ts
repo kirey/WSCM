@@ -31,10 +31,6 @@ export class ContentComponent implements OnInit {
   category: any;
   animal: string;
   name: string;
-<<<<<<< Updated upstream
-  editUserForm: boolean = false;
-=======
->>>>>>> Stashed changes
   user: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
