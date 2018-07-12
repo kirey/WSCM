@@ -53,12 +53,12 @@ export class ClientComponent implements OnInit, OnDestroy {
   logout() {
     this.auth.logout()
       .subscribe(
-        res => {
-          localStorage.removeItem('username');
-          localStorage.removeItem('role');
-          this.router.navigate(['/login']);
-        },
-        err => console.log(err)
+      res => {
+        localStorage.removeItem('username');
+        localStorage.removeItem('role');
+        this.router.navigate(['/login']);
+      },
+      err => console.log(err)
       );
   }
 
@@ -67,21 +67,33 @@ export class ClientComponent implements OnInit, OnDestroy {
     this.wsService.disconnect();
   }
 
+  mail() {
+    if (localStorage.getItem('username') == "insurance") {
+      this.clientService.sendMail('insurance').subscribe(res => {
+        console.log('insurance');
+      });
+    } else if (localStorage.getItem('username') == "bank") {
+      this.clientService.sendMail('bank').subscribe(res => {
+        console.log('bank');
+      });
+    }
+  }
+
   socketLogic() {
     this.messages = <Subject<any>>this.wsService
       .connect('ws://192.168.60.12:8083/wscm/socket')
       .pipe(
-        map((response: MessageEvent): any => {
-          console.log(response.data);
-          //// work with response from socket
-          var x = document.getElementById("toast");
-          x.innerHTML = response.data;
-          x.className = "show";
-          setTimeout(function () { x.className = x.className.replace("show", ""); }, 10000);
-          //// work with response from socket
-          return response.data;
-        }
-        ));
+      map((response: MessageEvent): any => {
+        console.log(response.data);
+        //// work with response from socket
+        var x = document.getElementById("toast");
+        x.innerHTML = response.data;
+        x.className = "show";
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 10000);
+        //// work with response from socket
+        return response.data;
+      }
+      ));
 
     this.messages.subscribe(res => { }, err => { }, () => { });
     setTimeout(() => {
@@ -89,7 +101,7 @@ export class ClientComponent implements OnInit, OnDestroy {
         this._http.get('rest/content/test?name=insurance').subscribe(res => {
           console.log(res);
         });
-      } else if(localStorage.getItem('username') == "bank"){
+      } else if (localStorage.getItem('username') == "bank") {
         this._http.get('rest/content/test?name=bank').subscribe(res => {
           console.log(res);
         });

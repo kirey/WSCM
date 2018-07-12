@@ -14,4 +14,8 @@ export class ClientService {
     getPosition() {
         return this._http.get(this.baseUrl + 'home/P1/EN');
     }
+
+    sendMail(user) {
+        return this._http.get(this.baseUrl + 'testEmail?type=' + user);
+    }
 }

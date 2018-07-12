@@ -45,6 +45,7 @@ import { JobsComponent } from './jobs/jobs.component';
 import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.component';
 import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edit-event-dialog.component';
 import { AddEventDialogComponent } from './shared/dialogs/add-event-dialog/add-event-dialog.component';
+import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { AddEventDialogComponent } from './shared/dialogs/add-event-dialog/add-e
     JobsComponent,
     EditDialogComponent,
     EditEventDialogComponent,
-    AddEventDialogComponent
+    AddEventDialogComponent,
+    MailRedirectComponent
   ],
   imports: [
     BrowserModule,
