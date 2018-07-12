@@ -20,12 +20,12 @@ import { PanelService } from './panel/panel.service';
 import { AuthService } from './shared/services/auth.service';
 import { LoginService } from './login/login.service';
 import { SchedulerService } from './scheduler/scheduler.service';
-import { AddJobService } from './shared/components/add-job/addJob.service';
-import { EditJobService } from './shared/components/edit-job/edit-job.service';
 import { AddNewPositionService } from './shared/components/add-new-position/add-new-position.service';
 import { ClientService } from './client/client.service';
 import { SocketService } from './shared/services/socket.service';
 import { EditEventService } from './shared/dialogs/edit-event-dialog/edit-event-dialog.service';
+import { AddEventService } from './shared/dialogs/add-event-dialog/add-event-dialog.service';
+import { JobsService } from './jobs/jobs.service';
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -39,8 +39,6 @@ import { LoginComponent } from './login/login.component';
 import { LanguagesComponent } from './languages/languages.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.component';
-import { AddJobComponent } from './shared/components/add-job/add-job.component';
-import { EditJobComponent } from './shared/components/edit-job/edit-job.component';
 import { AddNewPositionComponent } from './shared/components/add-new-position/add-new-position.component';
 import { ClientComponent } from './client/client.component';
 import { JobsComponent } from './jobs/jobs.component';
@@ -48,6 +46,8 @@ import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.co
 import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edit-event-dialog.component';
 import { AddContentDialogComponent } from './shared/dialogs/add-content-dialog/add-content-dialog.component';
 import { EditContentDialogComponent } from './shared/dialogs/edit-content-dialog/edit-content-dialog.component';
+import { AddEventDialogComponent } from './shared/dialogs/add-event-dialog/add-event-dialog.component';
+import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
 
 @NgModule({
   declarations: [
@@ -60,8 +60,6 @@ import { EditContentDialogComponent } from './shared/dialogs/edit-content-dialog
     FilterPipe,
     SchedulerComponent,
     DeleteDialog,
-    AddJobComponent,
-    EditJobComponent,
     AddNewPositionComponent,
     ClientComponent,
     JobsComponent,
@@ -69,6 +67,8 @@ import { EditContentDialogComponent } from './shared/dialogs/edit-content-dialog
     EditEventDialogComponent,
     AddContentDialogComponent,
     EditContentDialogComponent
+    AddEventDialogComponent,
+    MailRedirectComponent
   ],
   imports: [
     BrowserModule,
@@ -86,19 +86,20 @@ import { EditContentDialogComponent } from './shared/dialogs/edit-content-dialog
     AuthService,
     LoginService,
     SchedulerService,
-    AddJobService,
-    EditJobService,
     AddNewPositionService,
     ClientService,
     SocketService,
-    EditEventService
+    EditEventService,
+    AddEventService,
+    JobsService
   ],
   entryComponents: [
     DeleteDialog,
     EditDialogComponent,
     EditEventDialogComponent,
     AddContentDialogComponent,
-    EditContentDialogComponent
+    EditContentDialogComponent,
+    AddEventDialogComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

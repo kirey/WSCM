@@ -1,5 +1,5 @@
 <nav class="navbar bg-dark">
-    <a class="navbar-brand" href="#" style="color:white">WSCM</a>
+    <a class="navbar-brand" href="#" style="color:white">ICAP - Intelligent Content and Ad Provider</a>
 </nav>
 <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,9 @@
                 <a class="nav-link" href="#">Contact Us</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" routerLink="/client-mail" (click)="mail()">See Our offer</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" (click)="logout()">
                     <span class="material-icons" id="forHover">
                         exit_to_app
@@ -49,37 +52,37 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="first-slide" src="wscm/src/assets/one.jpg" alt="First slide">
+                <img class="first-slide img-fluid" src="wscm/src/assets/one.jpg" alt="First slide">
                 <div class="container">
                     <div class="carousel-caption text-left">
                         <h1>Experience.Expertise</h1>
                         <p>Comperhensive financial advice and financial services that are tailored to meet your individual needs.</p>
                         <p style="display:flex">
                             <a class="btn btn-lg btn-primary" href="#" role="button">Our services</a>
-                            <a class="btn btn-lg btn-default" id="whiteButton" href="#" role="button">Request Consultation</a>
+                            <a class="btn btn-lg btn-default" id="whiteButton" href="#" role="button">Contact Us</a>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="second-slide" src="wscm/src/assets/two.jpg" alt="Second slide">
+                <img class="second-slide img-fluid" src="wscm/src/assets/two.jpg" alt="Second slide">
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>CONSULTING SERVICES</h1>
                         <p>We help financial institutions,from banking and insurance to wealth management and securities distribution,manage risks and serve customers.</p>
-                        <p><a class="btn btn-lg btn-default" id="whiteButton" href="#" role="button">Request Consultation</a></p>
+                        <p><a class="btn btn-lg btn-default" id="whiteButton" href="#" role="button">Contact Us</a></p>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="third-slide" src="wscm/src/assets/three.jpg" alt="Third slide">
+                <img class="third-slide img-fluid" src="wscm/src/assets/three.jpg" alt="Third slide">
                 <div class="container">
                     <div class="carousel-caption text-left">
                         <h1>FINANCIAL STRATEGY</h1>
                         <p>Comperhensive financial advice and financial services that are tailored to meet your individual needs.</p>
                         <p style="display:flex">
                             <a class="btn btn-lg btn-primary" href="#" role="button">Our services</a>
-                            <a class="btn btn-lg btn-default" id="whiteButton" href="#" role="button">Request Consultation</a>
+                            <a class="btn btn-lg btn-default" id="whiteButton" href="#" role="button">Contact Us</a>
                         </p>
                     </div>
                 </div>
@@ -133,6 +136,7 @@
 </div>
 <div class="container-fluid">
     <div id="position" style="margin-top:2%;">
+
     </div>
 </div>
 <div id="toast">

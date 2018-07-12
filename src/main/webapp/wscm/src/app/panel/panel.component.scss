@@ -89,4 +89,7 @@
     transition: 1s;
     border: none;
   }
+  .mat-nav-list a.active {
+    background: #00998a;
+}
 }

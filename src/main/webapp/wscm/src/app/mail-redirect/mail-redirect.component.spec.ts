@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddJobComponent } from './add-job.component';
+import { MailRedirectComponent } from './mail-redirect.component';
 
-describe('AddJobComponent', () => {
-  let component: AddJobComponent;
-  let fixture: ComponentFixture<AddJobComponent>;
+describe('MailRedirectComponent', () => {
+  let component: MailRedirectComponent;
+  let fixture: ComponentFixture<MailRedirectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddJobComponent ]
+      declarations: [ MailRedirectComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddJobComponent);
+    fixture = TestBed.createComponent(MailRedirectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

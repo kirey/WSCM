@@ -106,12 +106,12 @@ public class TestController {
 		return "testSercurituy";
 	}
 	
-	@RequestMapping(value = "/testRole", method = RequestMethod.GET)
-	public String testRole() {
+	@RequestMapping(value = "/testEmail", method = RequestMethod.GET)
+	public String testRole(@RequestParam String type) {
 
-		System.out.println("testRole");
+		System.out.println(type);
 		
-		return "testRole";
+		return type;
 	}
 	
 	

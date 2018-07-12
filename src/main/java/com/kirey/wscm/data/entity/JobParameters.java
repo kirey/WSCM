@@ -25,7 +25,7 @@ public class JobParameters implements Serializable {
 	private String name;
 	private String value;
 	private String description;
-	
+	@JsonBackReference(value = "jobParams")
 	private Jobs job;
 	
 	@Id

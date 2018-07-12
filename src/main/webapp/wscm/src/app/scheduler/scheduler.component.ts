@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { SnackBarService } from '../shared/services/snackbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EditEventDialogComponent } from '../shared/dialogs/edit-event-dialog/edit-event-dialog.component';
+import { AddEventDialogComponent } from '../shared/dialogs/add-event-dialog/add-event-dialog.component';
+import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-scheduler',
@@ -22,9 +24,8 @@ export class SchedulerComponent implements OnInit {
   jobName: any;
   cronExpression: any;
   currentJob: any;
-  addJobShow = false;
-  tableShow = true;
-  editJobShow = false;
+  tableShow: true;
+
 
   constructor(
     public schedulerService: SchedulerService,
@@ -56,17 +57,21 @@ export class SchedulerComponent implements OnInit {
       err => console.log(err)
     );
   }
+  // open add dialog
+  openAddDialog() {
+    const dialogRef = this.dialog.open(AddEventDialogComponent, {
+      width: '800px',
+      // data: this.data
+    });
+    // console.log(obj);
 
-  addJob() {
-    this.tableShow = false;
-    this.addJobShow = true;
+        dialogRef.afterClosed().subscribe(res => {
+            this.getList();
+            console.log(res);
+            console.log('uspesno');
+        });
   }
-
-  editJob(job) {
-    this.currentJob = job;
-    this.tableShow = false;
-    this.editJobShow = true;
-  }
+  // open edit dialog
   editDialog(obj) {
     // this.currentJob = job;
     const dialogRef = this.dialog.open(EditEventDialogComponent, {
@@ -93,16 +98,21 @@ export class SchedulerComponent implements OnInit {
   }
   // Delete Job
   deleteJob(id) {
-    this.schedulerService.deleteJob(id).subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log(err);
+    const dialogRef = this.dialog.open(DeleteDialog, {
+      width: '500px',
+      data: { id: id }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.schedulerService.deleteJob(id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => console.log(err)
+        );
       }
-    );
+    });
   }
-
   // Start Job
   start(job) {
     this.schedulerService.startJob(job.id).subscribe(
