@@ -46,6 +46,8 @@ import { ClientComponent } from './client/client.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.component';
 import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edit-event-dialog.component';
+import { AddContentDialogComponent } from './shared/dialogs/add-content-dialog/add-content-dialog.component';
+import { EditContentDialogComponent } from './shared/dialogs/edit-content-dialog/edit-content-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edi
     ClientComponent,
     JobsComponent,
     EditDialogComponent,
-    EditEventDialogComponent
+    EditEventDialogComponent,
+    AddContentDialogComponent,
+    EditContentDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,13 @@ import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edi
     SocketService,
     EditEventService
   ],
-  entryComponents: [DeleteDialog, EditDialogComponent, EditEventDialogComponent],
+  entryComponents: [
+    DeleteDialog,
+    EditDialogComponent,
+    EditEventDialogComponent,
+    AddContentDialogComponent,
+    EditContentDialogComponent
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

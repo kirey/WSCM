@@ -6,7 +6,7 @@ import {
   SecurityContext
 } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { SnackBarService } from './../../services/snackbar.service';
+import { SnackBarService } from '../../services/snackbar.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AddNewPositionService } from './add-new-position.service';
 
@@ -42,7 +42,7 @@ export class AddNewPositionComponent implements OnInit {
     public contentService: AddNewPositionService,
     public snackbar: SnackBarService,
     public sanitizer: DomSanitizer
-  ) {}
+  ) { }
   // Get All Pages - select box for pages select ********************************
   getAllPages() {
     this.contentService.getPages(this.pages).subscribe(

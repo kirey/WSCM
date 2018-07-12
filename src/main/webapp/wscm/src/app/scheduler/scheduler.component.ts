@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SchedulerService } from './scheduler.service';
 import { Router } from '@angular/router';
-import { SnackBarService } from './../shared/services/snackbar.service';
+import { SnackBarService } from '../shared/services/snackbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EditEventDialogComponent } from '../shared/dialogs/edit-event-dialog/edit-event-dialog.component';
 
@@ -31,7 +31,7 @@ export class SchedulerComponent implements OnInit {
     public router: Router,
     public snackbar: SnackBarService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   displayedColumns = [
     'id',
@@ -75,11 +75,11 @@ export class SchedulerComponent implements OnInit {
     });
     console.log(obj);
 
-        dialogRef.afterClosed().subscribe(res => {
-            this.getList();
-            console.log(res);
-            console.log('uspesno');
-        });
+    dialogRef.afterClosed().subscribe(res => {
+      this.getList();
+      console.log(res);
+      console.log('uspesno');
+    });
     // dialogRef.afterClosed().subscribe(res => {
     //   if (res) {
     //     this.contentService.updateContent(id).subscribe(

@@ -49,3 +49,19 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 td.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {
     padding: 20px!important;
 }
+
+// Dialogs
+
+.dialog-title {
+    color: #424242;
+    padding: 20px;
+}
+.dialog-subtitle {
+    display: flex;
+    align-items: center;
+    color: $primary;
+    padding-left: 20px;
+}
+.dialog-subtitle>i {
+    margin-right: 5px;
+}

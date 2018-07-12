@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ContentService } from './content.service';
-import { SnackBarService } from './../shared/services/snackbar.service';
+import { SnackBarService } from '../shared/services/snackbar.service';
 import { MatDialog, MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
-import { EditDialogComponent } from '../shared/dialogs/edit-dialog/edit-dialog.component';
+import { AddContentDialogComponent } from '../shared/dialogs/add-content-dialog/add-content-dialog.component';
 import { Router } from '@angular/router';
+import { EditContentDialogComponent } from '../shared/dialogs/edit-content-dialog/edit-content-dialog.component';
 
 
 @Component({
@@ -30,25 +31,10 @@ export class ContentComponent implements OnInit {
   step: number = 1;
   selectedPosition: any;
   listCategoryWeight: Array<Object> = [];
-  addJobShow = false;
-  panelShow = true;
   category: any;
-  animal: string;
-  name: string;
-  user: any;
 
   displayedColumns: string[] = ['pages', 'name', 'language', 'categories', 'edit', 'delete'];
 
-  // Add New Position panel open and close
-  addJob() {
-    this.panelShow = false;
-    this.addJobShow = true;
-  }
-  // Back button, back to centent page
-  backToContentPanel() {
-    this.panelShow = true;
-    this.addJobShow = false;
-  }
   // Get Positions
   getPositions() {
     this.contentService.getPositions('home').subscribe(
@@ -61,6 +47,32 @@ export class ContentComponent implements OnInit {
       err => console.log(err)
     );
   }
+
+  // Add Content Dialog
+  addContentDialog() {
+    const dialogRef = this.dialog.open(AddContentDialogComponent, {
+      width: '1000px'
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.getPositions();
+      }
+    });
+  }
+
+  // Edit Content Dialog
+  editContentDialog(position) {
+    const dialogRef = this.dialog.open(EditContentDialogComponent, {
+      width: '1000px',
+      data: position
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.getPositions();
+      }
+    });
+  }
+
   // Reset Data
   resetData() {
     this.step = 1;
@@ -137,38 +149,20 @@ export class ContentComponent implements OnInit {
   }
 
   // Remove from list 'Selected categories'
-  unchecked(position) {
-    if (this.listCategoryWeight.length > 0) {
-      let index = this.listCategoryWeight.findIndex(
-        item => item['categories'] == position.categories
-      );
-      this.listCategoryWeight.splice(index, 1);
+  // unchecked(position) {
+  //   if (this.listCategoryWeight.length > 0) {
+  //     let index = this.listCategoryWeight.findIndex(
+  //       item => item['categories'] == position.categories
+  //     );
+  //     this.listCategoryWeight.splice(index, 1);
 
-      let index2 = this.selectedPosition['contentCategorieses'].findIndex(
-        item => item['categories'] == position.categories
-      );
-      this.selectedPosition['contentCategorieses'].splice(index2, 1);
-    }
-    console.log(this.listCategoryWeight);
-  }
-
-  editDialog(id) {
-    const dialogRef = this.dialog.open(EditDialogComponent, {
-      width: '1000px',
-      data: { id }
-    });
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        this.contentService.updateContent(id).subscribe(
-          res => {
-            console.log(res);
-          },
-          err => console.log(err)
-        );
-      }
-    });
-  }
-
+  //     let index2 = this.selectedPosition['contentCategorieses'].findIndex(
+  //       item => item['categories'] == position.categories
+  //     );
+  //     this.selectedPosition['contentCategorieses'].splice(index2, 1);
+  //   }
+  //   console.log(this.listCategoryWeight);
+  // }
 
   // Delete Dialog
   deleteDialog(id, type, value) {
@@ -180,7 +174,8 @@ export class ContentComponent implements OnInit {
       if (res) {
         this.contentService.deletePosition(id).subscribe(
           res => {
-            console.log(res);
+            // console.log(res);
+            this.getPositions()
           },
           err => console.log(err)
         );
@@ -202,12 +197,13 @@ export class ContentComponent implements OnInit {
       err => console.log(err)
     );
   }
+
   ngOnInit() {
+    this.getPositions();
+
     if (localStorage.getItem('role') == 'ROLE_USER') {
       this.router.navigate(['/client']);
     }
-
-    this.getPositions();
 
     // Get Categories
     this.contentService.getCategories().subscribe(
