@@ -50,11 +50,13 @@ public class Jobs implements Serializable {
 	private DicJobType jobType;
 	
 	private KjcClasses kjcClasses;
+	
+	private String status;
 
 	@JsonBackReference(value = "jobLogs")
 	private List<JobExecutionLog> jobExecutionLogs = new ArrayList<>();
 	
-	@JsonBackReference(value = "jobParams")
+//	@JsonBackReference(value = "jobParams")
 	private List<JobParameters> jobParameterses = new ArrayList<>();
 	
 	private List<JobCategories> jobCategorieses = new ArrayList<>();
@@ -148,6 +150,16 @@ public class Jobs implements Serializable {
 
 	public void setClassLoading(Boolean classLoading) {
 		this.classLoading = classLoading;
+	}
+	
+	
+	@Column(name = "status", nullable = true)
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@OneToMany(mappedBy = "job", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
