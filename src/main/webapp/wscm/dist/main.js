@@ -412,7 +412,7 @@ var ClientComponent = /** @class */ (function () {
     ClientComponent.prototype.socketLogic = function () {
         var _this = this;
         this.messages = this.wsService
-            .connect('ws://192.168.60.12:8083/wscm/socket')
+            .connect('ws://192.168.60.13:8083/wscm/socket')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) {
             console.log(response.data);
             //// work with response from socket

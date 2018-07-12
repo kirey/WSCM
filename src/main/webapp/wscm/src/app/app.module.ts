@@ -66,7 +66,7 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     EditDialogComponent,
     EditEventDialogComponent,
     AddContentDialogComponent,
-    EditContentDialogComponent
+    EditContentDialogComponent,
     AddEventDialogComponent,
     MailRedirectComponent
   ],
