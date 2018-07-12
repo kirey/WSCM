@@ -2,10 +2,13 @@
 
 #content {
   width: 80%;
-  margin-left: 3%;
-  margin-right: 3%;
-  margin-top: 150px;
-
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 200px;
+h1 {
+  color: $primary;
+  text-transform: uppercase;
+}
   button {
     width: 80px;
     align-self: flex-end;
@@ -23,8 +26,8 @@
   .input-icon {
     color: $primary;
     margin: 15px;
-  } 
-  
+  }
+
   // Expansion Panel
   .mat-expansion-panel-body {
     display: flex;
@@ -88,7 +91,7 @@
   .textarea {
     width: 100%;
   }
-  
+
   //Categories
   .categories {
     display: flex;
@@ -150,8 +153,8 @@
   }
   .mat-accent .mat-slider-thumb-label-text {
     transform: none;
-  } 
-  
+  }
+
   // Add Button
   .addButton {
     float: right;

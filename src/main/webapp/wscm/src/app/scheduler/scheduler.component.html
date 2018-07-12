@@ -1,13 +1,13 @@
 <div style="display:flex">
   <app-panel></app-panel>
   <div id="scheduler">
-
+<h1>Events page</h1>
     <!-- Add Job Button -->
-    <button matTooltip="Add Job" matTooltipPosition="above" (click)="addJob()" mat-mini-fab>
+    <button matTooltip="Add Job" matTooltipPosition="above" (click)="openAddDialog()" mat-mini-fab>
       <i class="material-icons plus">add</i>
     </button>
     <!-- Table template -->
-    <div *ngIf="tableShow">
+    <div >
       <!-- Table -->
       <table mat-table [dataSource]="events" class="mat-elevation-z8">
         <!-- ID -->
@@ -70,7 +70,7 @@
         <ng-container matColumnDef="editing">
           <th mat-header-cell *matHeaderCellDef> Editing</th>
           <td mat-cell *matCellDef="let element">
-              <i (click)="editDialog(element)" matTooltip="Edit Job" matTooltipPosition="above" class="material-icons">
+              <i matTooltip="Edit Job" matTooltipPosition="above" class="material-icons" (click)="editDialog(element)">
                   edit
                 </i>
             <i matTooltip="Delete Job" matTooltipPosition="above" class="material-icons" (click)="deleteJob(element.id)">
@@ -85,10 +85,10 @@
       </table>
     </div>
     <!-- Add Job -->
-    <app-add-job *ngIf="addJobShow"></app-add-job>
+    <!-- <app-add-job *ngIf="addJobShow"></app-add-job> -->
 
     <!-- Edit Job Template -->
-    <app-edit-job *ngIf="editJobShow" [currentJob]="currentJob"></app-edit-job>
+    <!-- <app-edit-job *ngIf="editJobShow" [currentJob]="currentJob"></app-edit-job> -->
 
 
   </div>

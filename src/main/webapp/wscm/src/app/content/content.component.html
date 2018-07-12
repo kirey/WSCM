@@ -1,7 +1,7 @@
 <div class="flex">
   <app-panel></app-panel>
-
-  <div id="content" *ngIf="dataSource">
+<h1>Content page</h1>
+  <div id="content" *ngIf="positions">
     <!-- back to content page button -->
     <button *ngIf="!panelShow" mat-mini-fab color="warn" class="addButton" (click)="backToContentPanel()">
       <i class="material-icons plus" matTooltip="Back to Content Page" matTooltipPosition="above">flip_to_back</i>

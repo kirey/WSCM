@@ -11,7 +11,7 @@
               <input matInput name="eventType" id="eventType" type="text" [(ngModel)]="data.eventType" placeholder="Event Type" autocomplete="off">
             </mat-form-field><br>
           <mat-form-field>
-        <mat-select  [(ngModel)]="data.jobs.jobName" (ngModelChange)="jobObjectChanged($event)" name="jobName" id="jobName" placeholder="Job Name" required>
+        <mat-select  [(ngModel)]="data.jobs.jobName"  name="jobName" id="jobName" placeholder="Job Name" required>
             <!-- <mat-option [(value)]="data.jobs.jobName" ><span *ngFor="let job of data">{{data.jobs.jobName}}</span></mat-option> -->
             <mat-option *ngFor="let job of events" [value]="job.jobs.jobName">{{job.jobs.jobName}}</mat-option>
           </mat-select>

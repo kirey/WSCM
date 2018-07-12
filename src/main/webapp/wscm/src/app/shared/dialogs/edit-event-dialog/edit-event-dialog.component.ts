@@ -19,7 +19,7 @@ export class EditEventDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public editEventService: EditEventService
   ) {}
-  jobName: any;
+
   cronExpression: string;
   status: string;
   eventType: string;
@@ -27,7 +27,6 @@ export class EditEventDialogComponent implements OnInit {
   events: any;
   eventName: string;
   selectValue: any;
-  selectedJobName: any;
 
   getList() {
     this.editEventService.getJobs().subscribe(
@@ -39,8 +38,8 @@ export class EditEventDialogComponent implements OnInit {
     );
   }
 
-  jobObjectChanged(obj) {
-    console.log(obj);
+  jobObjectChanged(ev) {
+    console.log(ev);
   }
 
   // Edit job form
