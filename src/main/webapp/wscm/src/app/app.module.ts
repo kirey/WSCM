@@ -72,8 +72,8 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutes,
+    BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
     FormsModule,

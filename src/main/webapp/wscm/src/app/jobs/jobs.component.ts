@@ -3,7 +3,7 @@ import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
-  MatPaginator
+  MatPaginator, MatTableDataSource
 } from '@angular/material';
 import { JobsService } from './jobs.service';
 
@@ -13,6 +13,8 @@ import { JobsService } from './jobs.service';
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
+
+  dataSource: any;
   jobs: any;
   displayedColumns = [
     'jobName',
@@ -34,6 +36,8 @@ export class JobsComponent implements OnInit {
       res => {
         this.jobs = res.data;
         console.log(this.jobs);
+        // this.dataSource = new MatTableDataSource<any>(res['data']);
+        // this.dataSource.paginator = this.paginator;
       },
       err => console.log(err)
     );
