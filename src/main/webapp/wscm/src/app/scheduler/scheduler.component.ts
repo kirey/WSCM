@@ -107,6 +107,7 @@ export class SchedulerComponent implements OnInit {
         this.schedulerService.deleteJob(id).subscribe(
           res => {
             console.log(res);
+            this.getList();
           },
           err => console.log(err)
         );
@@ -118,7 +119,7 @@ export class SchedulerComponent implements OnInit {
     this.schedulerService.startJob(job.id).subscribe(
       res => {
         console.log(res);
-        this.snackbar.openSnackBar('Success', res);
+        this.snackbar.openSnackBar('Success', res.message);
         // this.successMessage(res.message);
         return (job.status = 'ACTIVE');
       },

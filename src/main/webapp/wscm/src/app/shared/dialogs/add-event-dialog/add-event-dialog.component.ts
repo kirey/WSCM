@@ -11,6 +11,7 @@ import { AddEventService } from './add-event-dialog.service';
 })
 export class AddEventDialogComponent implements OnInit {
   jobName: string;
+  jobSelected: any;
   cronExpression: string;
   eventName: string;
   eventType: string;
@@ -22,6 +23,8 @@ export class AddEventDialogComponent implements OnInit {
   typeName: null;
   kjcClasses: null;
   listNotificationses: null;
+  definition: string;
+  jobId: number;
 
   constructor(
     public dialogRef: MatDialogRef<AddEventDialogComponent>,
@@ -39,27 +42,17 @@ export class AddEventDialogComponent implements OnInit {
     );
   }
   // Add Event function
-  addJob(id) {
+  addJob(jobId) {
+    console.log('Job selected:');
+    console.log(this.jobSelected);
     const jobs = {
+      id: jobId,
       eventName: this.eventName,
       eventType: this.eventType,
-      jobs: {
-        // id: this.id,
-        jobName: this.jobName,
-        // id: this.id,
-        // jobName: this.jobName,
-        // classLoading: this.classLoading,
-        // cronExpression: this.cronExpression,
-        // jobCategorieses: this.jobCategorieses,
-        // jobType: {
-        //   id: this.id,
-        //   typeName: this.typeName
-        // },
-        // kjcClasses: this.kjcClasses,
-        // listNotificationses: this.listNotificationses
-      },
+      jobs: this.jobSelected,
+      definition: 'test',
       description: this.description,
-      status: null
+      status: 'test'
     };
     console.log(jobs);
     this.addEventService.addJobs(jobs).subscribe(
