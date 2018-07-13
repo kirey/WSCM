@@ -104,6 +104,7 @@ public class SendBankWebSocketJob implements InterruptableJob {
 			List<Categories> listCategories = jobCategoriesDao.findByJob(job);
 			List<Notifications> notifications = job.getListNotificationses();
 			for (Notifications notification : notifications) {
+				System.out.println("notification: " + notification.getName());
 				File file = new File("c:\\bank.jpg");
 				InputStream is = new FileInputStream(file);
 				byte[] b = IOUtils.toByteArray(is);
@@ -112,6 +113,7 @@ public class SendBankWebSocketJob implements InterruptableJob {
 				templateModel.put("slika", new String(encoded));
 				
 				for(Categories category : listCategories) {
+					System.out.println("category: " + category.getCategoryName());
 					List<WscmUserAccounts> usersByCategory = wscmUserAccountsDao.findUsersByCategory(category.getCategoryName());
 					webSocketHandler.sendNotificationToSpecificUsers(usersByCategory, notification, templateModel);
 				}

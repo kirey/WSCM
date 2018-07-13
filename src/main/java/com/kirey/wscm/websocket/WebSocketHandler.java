@@ -122,6 +122,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		String templateString = notification.getNotificationTemplate(); 
 		String notificationContent = templateEngine.processTemplateContent(templateModel, templateString);
 		for (WscmUserAccounts user : listUsers) {
+			System.out.println("user: " + user.getName());
 			for (WebSocketSession session : allSessions) {
 				//for each user form list check does session exist
 				if(user.getSocketSessionId() != null && user.getSocketSessionId().equals(session.getId())) {
