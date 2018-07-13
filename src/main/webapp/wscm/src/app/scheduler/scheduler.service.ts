@@ -23,7 +23,7 @@ export class SchedulerService {
     }
 
     deleteJob(id: number): Observable<any> {
-        return this._http.delete(this.baseUrl + 'deleteJob/' + id);
+        return this._http.delete(this.baseUrl + 'events/' + id);
     }
     // getHisory(id): Observable<any> {
     //     return this._http.get(this.baseUrl + 'jobHistory/' + id);

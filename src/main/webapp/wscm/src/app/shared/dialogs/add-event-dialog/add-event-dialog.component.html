@@ -1,0 +1,30 @@
+<div id="addJob">
+  <h1>Add Event </h1>
+  <!-- <div *ngIf="data"> -->
+  <mat-dialog-content>
+    <form #addForm="ngForm" class="addJob-container">
+      <mat-form-field>
+        <input matInput name="eventName" [(ngModel)]="eventName" type="text" placeholder="Event Name" autocomplete="off">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="eventType" [(ngModel)]="eventType" placeholder="Event Type" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select  id="jobSelected" placeholder="Job Name" required [(ngModel)]="jobSelected"  name="jobSelected">
+          <!-- <mat-option [(value)]="data.jobs.jobName" ><span *ngFor="let job of data">{{data.jobs.jobName}}</span></mat-option> -->
+          <mat-option *ngFor="let job of events; let i = index" [value]="job.jobs">{{job.jobs.jobName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput name="description" [(ngModel)]="description" placeholder="Description"></textarea>
+      </mat-form-field>
+
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="submit" mat-raised-button class="formButton" (click)="addJob()">Submit</button>
+    <button mat-button mat-dialog-close class="cancelButton">Cancel</button>
+  </mat-dialog-actions>
+  <!-- </div> -->
+</div>

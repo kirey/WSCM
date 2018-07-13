@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatPaginator, MatTableDataSource
+} from '@angular/material';
+import { JobsService } from './jobs.service';
 
 @Component({
   selector: 'app-jobs',
@@ -7,9 +14,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobsComponent implements OnInit {
 
-  constructor() { }
+  dataSource: any;
+  jobs: any;
+  displayedColumns = [
+    'jobName',
+    'jobType',
+    'status',
+    'classLoading',
+    'cronExpression',
+    'actions',
+    'editing'
+  ];
 
-  ngOnInit() {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  // dataSource = new MatTableDataSource<Element>(this.jobs);
+
+  constructor(public jobService: JobsService) {}
+
+  getList() {
+    this.jobService.getJobs().subscribe(
+      res => {
+        this.jobs = res.data;
+        console.log(this.jobs);
+        // this.dataSource = new MatTableDataSource<any>(res['data']);
+        // this.dataSource.paginator = this.paginator;
+      },
+      err => console.log(err)
+    );
   }
-
+  ngOnInit() {
+    this.getList();
+  }
 }

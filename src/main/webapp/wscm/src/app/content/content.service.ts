@@ -28,6 +28,11 @@ export class ContentService {
         return this._http.get(this.baseUrl + '/' + 'categories').pipe(map(res => res));
     }
 
+    // Add position
+    addContent(obj: Object) {
+        return this._http.post(this.baseUrl, obj, this.options).pipe(map(res => res));
+    }
+
     // Update position
     updateContent(obj: Object) {
         return this._http.post(this.baseUrl + '/edit', obj, this.options).pipe(map(res => res));

@@ -67,9 +67,21 @@ export class ClientComponent implements OnInit, OnDestroy {
     this.wsService.disconnect();
   }
 
+  mail() {
+    if (localStorage.getItem('username') == "insurance") {
+      this.clientService.sendMail('insurance').subscribe(res => {
+        console.log('insurance');
+      });
+    } else if (localStorage.getItem('username') == "bank") {
+      this.clientService.sendMail('bank').subscribe(res => {
+        console.log('bank');
+      });
+    }
+  }
+
   socketLogic() {
     this.messages = <Subject<any>>this.wsService
-      .connect('ws://192.168.60.12:8083/wscm/socket')
+      .connect('ws://192.168.60.13:8097/wscm/socket')
       .pipe(
         map((response: MessageEvent): any => {
           console.log(response.data);
@@ -89,7 +101,7 @@ export class ClientComponent implements OnInit, OnDestroy {
         this._http.get('rest/content/test?name=insurance').subscribe(res => {
           console.log(res);
         });
-      } else if(localStorage.getItem('username') == "bank"){
+      } else if (localStorage.getItem('username') == "bank") {
         this._http.get('rest/content/test?name=bank').subscribe(res => {
           console.log(res);
         });

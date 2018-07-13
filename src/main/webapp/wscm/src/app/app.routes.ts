@@ -5,6 +5,7 @@ import { LanguagesComponent } from './languages/languages.component';
 import { LoginComponent } from './login/login.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { ClientComponent } from './client/client.component';
+import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
 import { JobsComponent } from './jobs/jobs.component';
 
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'jobs', component: JobsComponent, canActivate: [AuthGuard] },
   { path: 'languages', component: LanguagesComponent },
   { path: 'client', component: ClientComponent , canActivate: [AuthGuard]},
+  { path: 'client-mail', component: MailRedirectComponent , canActivate: [AuthGuard]},
 
   { path: '**', component: HomeComponent }
 ];

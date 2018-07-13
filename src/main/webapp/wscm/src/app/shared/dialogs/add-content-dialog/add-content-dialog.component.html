@@ -1,0 +1,104 @@
+<div id="addContent">
+  <h2 class="dialog-title">Add Content
+    <!-- <h5>{{data.eventName}}</h5> -->
+  </h2>
+  <form [formGroup]="addContentForm" (ngSubmit)="addContent()">
+    <mat-dialog-content>
+      <!-- BASIC INPUT FIELDS -->
+      <!-- Page -->
+      <h3 class="dialog-subtitle">
+        <!-- <i class="material-icons">
+        info
+      </i> -->
+        Basic information</h3>
+      <div class="basic-inputs">
+        <mat-form-field class="basic-fileds">
+          <input formControlName="page" matInput placeholder="Page Name">
+        </mat-form-field>
+        <!-- Position -->
+        <mat-form-field class="basic-fileds">
+          <input formControlName="position" matInput placeholder="Position">
+        </mat-form-field>
+        <!-- Language -->
+        <mat-form-field class="basic-fileds">
+          <input formControlName="language" matInput placeholder="Language">
+        </mat-form-field>
+      </div>
+      <hr>
+
+      <!-- TABS - HTML, CSS, JS -->
+      <h3 class="dialog-subtitle">
+        <!-- <i class="material-icons">
+        code
+      </i> -->
+        Add code</h3>
+      <div class="tabs">
+        <mat-tab-group color="warn">
+          <!-- HTML -->
+          <mat-tab label="HTML">
+            <div class="tabs-body">
+              <mat-form-field class="textarea-fields" appearance="outline">
+                <mat-label>HTML</mat-label>
+                <textarea formControlName="html" rows="10" matInput></textarea>
+                <mat-hint>Enter your HTML code</mat-hint>
+              </mat-form-field>
+            </div>
+          </mat-tab>
+          <!-- CSS -->
+          <mat-tab label="CSS">
+            <div class="tabs-body">
+              <mat-form-field class="textarea-fields" appearance="outline">
+                <mat-label>CSS</mat-label>
+                <textarea formControlName="css" rows="10" matInput></textarea>
+                <mat-hint>Enter your CSS code</mat-hint>
+              </mat-form-field>
+            </div>
+          </mat-tab>
+          <!-- JAVASCRIPT -->
+          <mat-tab label="JavaScript">
+            <div class="tabs-body">
+              <mat-form-field class="textarea-fields" appearance="outline">
+                <mat-label>JavaScript</mat-label>
+                <textarea formControlName="script" rows="10" matInput></textarea>
+                <mat-hint>Enter your JavaScript code</mat-hint>
+              </mat-form-field>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <hr>
+
+      <!-- CATEGORIES AND WEIGHT -->
+      <h3 class="dialog-subtitle">
+        <!-- <i class="material-icons">
+        format_list_bulleted
+      </i> -->
+        Select categories & weight for each category</h3>
+      <div class="categories">
+        <div class="categories-box">
+          <div *ngFor="let category of categories; let i = index">
+            <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after">
+              {{category.description}}
+            </mat-checkbox>
+            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id, i)">
+            </mat-slider>
+          </div>
+        </div>
+        <!-- Selected Categories -->
+        <div class="selected-categories">
+          <h5 class="label">Selected categories</h5>
+          <div>
+            <div *ngFor="let selected of listCategoryWeight" class="selected-categories-box">
+              <span>{{selected.categories.description}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="buttons">
+      <button mat-button mat-dialog-close class="cancelButton">Cancel</button>
+      <button type="submit" mat-raised-button color="warn" [disabled]="html.errors || page.errors || position.errors || language.errors">Save</button>
+    </mat-dialog-actions>
+  </form>
+</div>

@@ -104,12 +104,12 @@ public class SendBankWebSocketJob implements InterruptableJob {
 			List<Categories> listCategories = jobCategoriesDao.findByJob(job);
 			List<Notifications> notifications = job.getListNotificationses();
 			for (Notifications notification : notifications) {
-				File file = new File("c:\\bank.jpg");
-				InputStream is = new FileInputStream(file);
-				byte[] b = IOUtils.toByteArray(is);
-				byte[] encoded = Base64.getEncoder().encode(b);
+//				File file = new File("c:\\bank.jpg");
+//				InputStream is = new FileInputStream(file);
+//				byte[] b = IOUtils.toByteArray(is);
+//				byte[] encoded = Base64.getEncoder().encode(b);
 				Map<String, Object> templateModel = new HashMap<>();
-				templateModel.put("slika", new String(encoded));
+//				templateModel.put("slika", new String(encoded));
 				
 				for(Categories category : listCategories) {
 					List<WscmUserAccounts> usersByCategory = wscmUserAccountsDao.findUsersByCategory(category.getCategoryName());
