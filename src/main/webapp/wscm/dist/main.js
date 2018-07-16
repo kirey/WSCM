@@ -2404,7 +2404,7 @@ var DeleteDialog = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"editContent\">\r\n  <h2 class=\"dialog-title\">Edit Content\r\n    <!-- <h5>{{data.eventName}}</h5> -->\r\n  </h2>\r\n  <form [formGroup]=\"addContentForm\" (ngSubmit)=\"addContent()\">\r\n    <mat-dialog-content>\r\n      <!-- BASIC INPUT FIELDS -->\r\n      <!-- Page -->\r\n      <h3 class=\"dialog-subtitle\">\r\n        <!-- <i class=\"material-icons\">\r\n        info\r\n      </i> -->\r\n        Basic information</h3>\r\n      <div class=\"basic-inputs\">\r\n        <mat-form-field class=\"basic-fileds\">\r\n          <input formControlName=\"page\" matInput placeholder=\"Page Name\" [value]=\"positionData.page\">\r\n        </mat-form-field>\r\n        <!-- Position -->\r\n        <mat-form-field class=\"basic-fileds\">\r\n          <input formControlName=\"position\" matInput placeholder=\"Position\" [value]=\"positionData.position\">\r\n        </mat-form-field>\r\n        <!-- Language -->\r\n        <mat-form-field class=\"basic-fileds\">\r\n          <input formControlName=\"language\" matInput placeholder=\"Language\" [value]=\"positionData.language\">\r\n        </mat-form-field>\r\n      </div>\r\n      <hr>\r\n\r\n      <!-- TABS - HTML, CSS, JS -->\r\n      <h3 class=\"dialog-subtitle\">\r\n        <!-- <i class=\"material-icons\">\r\n        code\r\n      </i> -->\r\n        Add code</h3>\r\n      <div class=\"tabs\">\r\n        <mat-tab-group color=\"warn\">\r\n          <!-- HTML -->\r\n          <mat-tab label=\"HTML\">\r\n            <div class=\"tabs-body\">\r\n              <mat-form-field class=\"textarea-fields\" appearance=\"outline\">\r\n                <mat-label>HTML</mat-label>\r\n                <textarea formControlName=\"html\" rows=\"10\" matInput [value]=\"positionData.html\"></textarea>\r\n                <mat-hint>Enter your HTML code</mat-hint>\r\n              </mat-form-field>\r\n            </div>\r\n          </mat-tab>\r\n          <!-- CSS -->\r\n          <mat-tab label=\"CSS\">\r\n            <div class=\"tabs-body\">\r\n              <mat-form-field class=\"textarea-fields\" appearance=\"outline\">\r\n                <mat-label>CSS</mat-label>\r\n                <textarea formControlName=\"css\" rows=\"10\" matInput [value]=\"positionData.css\"></textarea>\r\n                <mat-hint>Enter your CSS code</mat-hint>\r\n              </mat-form-field>\r\n            </div>\r\n          </mat-tab>\r\n          <!-- JAVASCRIPT -->\r\n          <mat-tab label=\"JavaScript\">\r\n            <div class=\"tabs-body\">\r\n              <mat-form-field class=\"textarea-fields\" appearance=\"outline\">\r\n                <mat-label>JavaScript</mat-label>\r\n                <textarea formControlName=\"script\" rows=\"10\" matInput [value]=\"positionData.script\"></textarea>\r\n                <mat-hint>Enter your JavaScript code</mat-hint>\r\n              </mat-form-field>\r\n            </div>\r\n          </mat-tab>\r\n        </mat-tab-group>\r\n      </div>\r\n      <hr>\r\n\r\n      <!-- CATEGORIES AND WEIGHT -->\r\n      <h3 class=\"dialog-subtitle\">\r\n        <!-- <i class=\"material-icons\">\r\n        format_list_bulleted\r\n      </i> -->\r\n        Select categories & weight for each category</h3>\r\n      <div class=\"categories\">\r\n        <div class=\"categories-box\">\r\n          <div *ngFor=\"let category of categories; let i = index\">\r\n            <mat-checkbox [checked]=\"checkCheckboxVar\" color=\"warn\" (change)=\"checked($event, category)\" labelPosition=\"after\">\r\n              {{category.description}}\r\n            </mat-checkbox>\r\n            <mat-slider color=\"warn\" max=\"5\" min=\"1\" step=\"1\" thumbLabel=\"true\" tickInterval=\"5\" (change)=\"sliderChange($event, category.id, i)\">\r\n            </mat-slider>\r\n          </div>\r\n        </div>\r\n        <!-- Selected Categories -->\r\n        <div class=\"selected-categories\">\r\n          <h5 class=\"label\">Selected categories</h5>\r\n          <div>\r\n            <div *ngFor=\"let selected of positionData.contentCategorieses\" class=\"selected-categories-box\">\r\n              <span>{{selected.categories.description}}</span>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n    </mat-dialog-content>\r\n    <mat-dialog-actions class=\"buttons\">\r\n      <button mat-button mat-dialog-close class=\"cancelButton\">Cancel</button>\r\n      <button type=\"submit\" mat-raised-button color=\"warn\" [disabled]=\"html.errors || page.errors || position.errors || language.errors\">Save</button>\r\n    </mat-dialog-actions>\r\n  </form>\r\n</div>"
+module.exports = "<div id=\"editContent\">\r\n  <h2 class=\"dialog-title\">Edit Content\r\n    <!-- <h5>{{data.eventName}}</h5> -->\r\n  </h2>\r\n  <form #editContentForm=\"ngForm\" (ngSubmit)=\"editContent(editContentForm.value)\">\r\n    <mat-dialog-content>\r\n      <!-- BASIC INPUT FIELDS -->\r\n      <!-- Page -->\r\n      <h3 class=\"dialog-subtitle\">\r\n        <!-- <i class=\"material-icons\">\r\n        info\r\n      </i> -->\r\n        Basic information</h3>\r\n      <div class=\"basic-inputs\">\r\n        <mat-form-field class=\"basic-fileds\">\r\n          <input matInput placeholder=\"Page Name\" name=\"page\" [(ngModel)]=\"positionData.page\">\r\n        </mat-form-field>\r\n        <!-- Position -->\r\n        <mat-form-field class=\"basic-fileds\">\r\n          <input matInput placeholder=\"Position\" name=\"position\" [(ngModel)]=\"positionData.position\">\r\n        </mat-form-field>\r\n        <!-- Language -->\r\n        <mat-form-field class=\"basic-fileds\">\r\n          <input matInput placeholder=\"Language\" name=\"language\" [(ngModel)]=\"positionData.language\">\r\n        </mat-form-field>\r\n      </div>\r\n      <hr>\r\n\r\n      <!-- TABS - HTML, CSS, JS -->\r\n      <h3 class=\"dialog-subtitle\">\r\n        <!-- <i class=\"material-icons\">\r\n        code\r\n      </i> -->\r\n        Add code</h3>\r\n      <div class=\"tabs\">\r\n        <mat-tab-group color=\"warn\">\r\n          <!-- HTML -->\r\n          <mat-tab label=\"HTML\">\r\n            <div class=\"tabs-body\">\r\n              <mat-form-field class=\"textarea-fields\" appearance=\"outline\">\r\n                <mat-label>HTML</mat-label>\r\n                <textarea rows=\"10\" matInput name=\"html\" [(ngModel)]=\"positionData.html\"></textarea>\r\n                <mat-hint>Enter your HTML code</mat-hint>\r\n              </mat-form-field>\r\n            </div>\r\n          </mat-tab>\r\n          <!-- CSS -->\r\n          <mat-tab label=\"CSS\">\r\n            <div class=\"tabs-body\">\r\n              <mat-form-field class=\"textarea-fields\" appearance=\"outline\">\r\n                <mat-label>CSS</mat-label>\r\n                <textarea rows=\"10\" matInput name=\"css\" [(ngModel)]=\"positionData.css\"></textarea>\r\n                <mat-hint>Enter your CSS code</mat-hint>\r\n              </mat-form-field>\r\n            </div>\r\n          </mat-tab>\r\n          <!-- JAVASCRIPT -->\r\n          <mat-tab label=\"JavaScript\">\r\n            <div class=\"tabs-body\">\r\n              <mat-form-field class=\"textarea-fields\" appearance=\"outline\">\r\n                <mat-label>JavaScript</mat-label>\r\n                <textarea rows=\"10\" matInput name=\"script\" [(ngModel)]=\"positionData.script\"></textarea>\r\n                <mat-hint>Enter your JavaScript code</mat-hint>\r\n              </mat-form-field>\r\n            </div>\r\n          </mat-tab>\r\n        </mat-tab-group>\r\n      </div>\r\n      <hr>\r\n\r\n      <!-- CATEGORIES AND WEIGHT -->\r\n      <h3 class=\"dialog-subtitle\">\r\n        <!-- <i class=\"material-icons\">\r\n        format_list_bulleted\r\n      </i> -->\r\n        Select categories & weight for each category</h3>\r\n      <div class=\"categories\">\r\n        <div class=\"categories-box\">\r\n          <div *ngIf=\"categories\">\r\n            <h5 class=\"label\">Choose categories</h5>\r\n            <div *ngFor=\"let category of categories | filter: positionData.contentCategorieses : 'categories'\">\r\n              <mat-checkbox color=\"warn\" (change)=\"checked($event, category)\" labelPosition=\"after\">\r\n                {{category.description}}\r\n              </mat-checkbox>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!-- Selected Categories -->\r\n        <div class=\"selected-categories\">\r\n          <h5 class=\"label\">Choose weight for selected categories</h5>\r\n          <div>\r\n            <div *ngFor=\"let selected of positionData.contentCategorieses\" class=\"selected-categories-box\">\r\n              <mat-icon class=\"unselect-icon\" (click)=\"unchecked(selected)\">close</mat-icon>\r\n              <span>{{selected.categories.description}}</span>\r\n              <mat-slider color=\"warn\" max=\"5\" min=\"1\" step=\"1\" thumbLabel=\"true\" tickInterval=\"5\" [value]=\"selected.weight\" (change)=\"sliderChange($event, selected)\">\r\n              </mat-slider>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n    </mat-dialog-content>\r\n    <mat-dialog-actions class=\"buttons\">\r\n      <button mat-button mat-dialog-close class=\"cancelButton\">Cancel</button>\r\n      <button type=\"submit\" mat-raised-button color=\"warn\">Save</button>\r\n    </mat-dialog-actions>\r\n  </form>\r\n</div>"
 
 /***/ }),
 
@@ -2415,7 +2415,7 @@ module.exports = "<div id=\"editContent\">\r\n  <h2 class=\"dialog-title\">Edit 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#editContent .basic-fileds {\n  width: 50% !important; }\n\n#editContent .textarea-fields {\n  width: 100% !important; }\n\n#editContent .mat-tab-group {\n  width: 100%;\n  padding: 0 20px; }\n\n#editContent .mat-tab-labels {\n  justify-content: center;\n  align-items: center; }\n\n#editContent .tabs-body {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 50px; }\n\n#editContent .basic-inputs {\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center; }\n\n#editContent .code-body {\n  width: 100px;\n  height: 100px; }\n\n#editContent .tabs {\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n#editContent .categories {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start; }\n\n#editContent .categories-box {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin-top: 20px;\n  margin-left: 20px; }\n\n#editContent .selected-categories {\n  margin-left: 85px; }\n\n#editContent .selected-categories-box {\n  display: flex;\n  align-items: center; }\n\n#editContent .selected-categories-box > span {\n  font-size: 15px; }\n\n#editContent .mat-checkbox-layout .mat-checkbox-label {\n  font-size: 15px; }\n\n#editContent .label {\n  margin-top: 20px;\n  text-align: left;\n  color: #bdbdbd; }\n\n#editContent mat-slider {\n  width: 150px;\n  margin-bottom: 5px;\n  margin-left: 50px; }\n\n#editContent .buttons {\n  float: right; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#editContent .basic-fileds {\n  width: 50% !important; }\n\n#editContent .textarea-fields {\n  width: 100% !important; }\n\n#editContent .mat-tab-group {\n  width: 100%;\n  padding: 0 20px; }\n\n#editContent .mat-tab-labels {\n  justify-content: center;\n  align-items: center; }\n\n#editContent .tabs-body {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 50px; }\n\n#editContent .basic-inputs {\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center; }\n\n#editContent .code-body {\n  width: 100px;\n  height: 100px; }\n\n#editContent .tabs {\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n#editContent .categories {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start; }\n\n#editContent .categories-box {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin-left: 20px; }\n\n#editContent .selected-categories {\n  margin-left: 140px; }\n\n#editContent .selected-categories-box {\n  display: flex;\n  align-items: center; }\n\n#editContent .selected-categories-box > span {\n  font-size: 15px; }\n\n#editContent .mat-checkbox-layout .mat-checkbox-label {\n  font-size: 15px; }\n\n#editContent .label {\n  margin-top: 20px;\n  text-align: left;\n  color: #bdbdbd; }\n\n#editContent .label:first-child {\n  margin-bottom: 20px; }\n\n#editContent .unselect-icon {\n  color: #009688;\n  height: 18px;\n  font-size: 20px;\n  margin-right: 3px;\n  font-weight: 600; }\n\n#editContent .unselect-icon:hover {\n  cursor: pointer;\n  color: #424242; }\n\n#editContent mat-slider {\n  width: 150px;\n  margin-bottom: 0px;\n  margin-left: 20px; }\n\n#editContent .buttons {\n  float: right; }\n"
 
 /***/ }),
 
@@ -2458,27 +2458,14 @@ var EditContentDialogComponent = /** @class */ (function () {
         this.contentService = contentService;
         this.formBuilder = formBuilder;
         this.snackBarService = snackBarService;
-        this.listCategoryWeight = [];
+        this.listCategoryWeight = this.positionData.contentCategorieses;
         this.contentCategorieses = [];
     }
-    // Check Checkbox
-    EditContentDialogComponent.prototype.checkCheckbox = function () {
-        for (var i = 0; i < this.positionData.contentCategorieses.length; i++) {
-            for (var y = 0; y < this.categories.length; y++) {
-                if (this.positionData.contentCategorieses[i].categories.id == this.categories[y].id) {
-                    this.checkCheckboxVar = true;
-                }
-                else
-                    this.checkCheckboxVar = false;
-            }
-        }
-    };
     // Select category - checkbox
     EditContentDialogComponent.prototype.checked = function (ev, categories) {
         if (ev.checked) {
             if (this.listCategoryWeight.length == 0) {
-                this.listCategoryWeight.push({ categories: categories, weight: 1 });
-                this.contentCategorieses.push({
+                this.positionData.contentCategorieses.push({
                     categories: categories,
                     weight: 1
                 });
@@ -2491,8 +2478,7 @@ var EditContentDialogComponent = /** @class */ (function () {
                     }
                 }
                 if (push) {
-                    this.listCategoryWeight.push({ categories: categories, weight: 1 });
-                    this.contentCategorieses.push({
+                    this.positionData.contentCategorieses.push({
                         categories: categories,
                         weight: 1
                     });
@@ -2500,18 +2486,24 @@ var EditContentDialogComponent = /** @class */ (function () {
             }
         }
         else {
-            var index = this.listCategoryWeight.findIndex(function (item) { return item['categories'] == categories; });
-            this.listCategoryWeight.splice(index, 1);
-            var index2 = this.contentCategorieses.findIndex(function (item) { return item['categories'] == categories; });
-            this.contentCategorieses.splice(index2, 1);
+            // let index = this.positionData.contentCategorieses.findIndex(
+            //   item => item['categories'] == categories
+            // );
+            // this.positionData.contentCategorieses.splice(index3, 1);
         }
         console.log(this.listCategoryWeight);
     };
+    EditContentDialogComponent.prototype.unchecked = function (position) {
+        var index = this.positionData.contentCategorieses.findIndex(function (item) { return item['categories'] == position.categories; });
+        this.positionData.contentCategorieses.splice(index, 1);
+        console.log(this.listCategoryWeight);
+    };
     // Slider change fo each category
-    EditContentDialogComponent.prototype.sliderChange = function (ev, id, index) {
+    EditContentDialogComponent.prototype.sliderChange = function (ev, selected) {
+        console.log(selected);
         if (this.listCategoryWeight.length !== 0) {
             for (var i = 0; i < this.listCategoryWeight.length; i++) {
-                if (this.listCategoryWeight[i]['categories']['id'] === id) {
+                if (this.listCategoryWeight[i]['categories']['id'] === selected.categories.id) {
                     this.listCategoryWeight[i]['weight'] = ev.value;
                 }
             }
@@ -2528,17 +2520,16 @@ var EditContentDialogComponent = /** @class */ (function () {
             console.log(res);
             _this.categories = res['data'];
             console.log(_this.categories);
-            _this.checkCheckbox();
         }, function (err) { return console.log(err); });
     };
     // Send request
-    EditContentDialogComponent.prototype.addContent = function () {
+    EditContentDialogComponent.prototype.editContent = function (value) {
         var _this = this;
-        var obj = this.addContentForm.value;
-        obj['contentCategorieses'] = this.listCategoryWeight;
-        this.contentService.addContent(obj)
+        value['contentCategorieses'] = this.positionData.contentCategorieses;
+        console.log(value);
+        this.contentService.updateContent(value)
             .subscribe(function (res) {
-            // console.log(res)
+            console.log(res);
             _this.snackBarService.openSnackBar(res['data'], 'Success');
             _this.dialogRef.close();
         }, function (err) { return _this.snackBarService.openSnackBar('Something went wrong.', 'Error'); });
@@ -2547,44 +2538,29 @@ var EditContentDialogComponent = /** @class */ (function () {
         console.log(this.positionData);
         this.getCategories();
         // Build Form
-        this.addContentForm = this.formBuilder.group({
-            html: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            css: [''],
-            script: [''],
-            page: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            position: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            language: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]
-        });
-    };
-    Object.defineProperty(EditContentDialogComponent.prototype, "html", {
+        //   this.editContentForm = this.formBuilder.group({
+        //     html: ['', Validators.required],
+        //     css: [''],
+        //     script: [''],
+        //     page: ['', Validators.required],
+        //     position: ['', Validators.required],
+        //     language: ['', Validators.required]
+        //   });
+        // }
         // Form Getters
-        get: function () {
-            return this.addContentForm.get('html');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(EditContentDialogComponent.prototype, "page", {
-        get: function () {
-            return this.addContentForm.get('page');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(EditContentDialogComponent.prototype, "position", {
-        get: function () {
-            return this.addContentForm.get('position');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(EditContentDialogComponent.prototype, "language", {
-        get: function () {
-            return this.addContentForm.get('language');
-        },
-        enumerable: true,
-        configurable: true
-    });
+        // get html() {
+        //   return this.editContentForm.get('html');
+        // }
+        // get page() {
+        //   return this.editContentForm.get('page');
+        // }
+        // get position() {
+        //   return this.editContentForm.get('position');
+        // }
+        // get language() {
+        //   return this.editContentForm.get('language');
+        // }
+    };
     EditContentDialogComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-edit-content-dialog',
