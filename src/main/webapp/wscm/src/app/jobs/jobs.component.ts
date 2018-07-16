@@ -43,6 +43,39 @@ export class JobsComponent implements OnInit {
       err => console.log(err)
     );
   }
+
+
+   // Start Job
+   start(job) {
+    this.jobService.startJob(job.id).subscribe(
+      res => {
+        console.log(res);
+        // this.snackbar.openSnackBar('Success', res.message);
+        // this.successMessage(res.message);
+        return (job.status = 'ACTIVE');
+      },
+      err => {
+        console.log(err);
+        // this.errorMessage(err);
+      }
+    );
+  }
+
+  // Stop Job
+  stop(job) {
+    this.jobService.stopJob(job.id).subscribe(
+      res => {
+        console.log(res);
+        // this.successMessage(res.message);
+        return (job.status = 'INACTIVE');
+      },
+      err => {
+        console.log(err);
+        // this.errorMessage(err);
+      }
+    );
+  }
+
   ngOnInit(): void {
     this.getList();
     this.dataSource = new MatTableDataSource<Element>(this.jobs);

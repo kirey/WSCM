@@ -10,11 +10,11 @@
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput name="eventName" type="text" [(ngModel)]="data.eventName" placeholder="Event Name" autocomplete="off">
+          <input matInput name="eventName" type="text" [(ngModel)]="data.eventName" placeholder="Event Name" autocomplete="off" required>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput name="eventType" type="text" [(ngModel)]="data.eventType" placeholder="Event Type" autocomplete="off">
+          <input matInput name="eventType" type="text" [(ngModel)]="data.eventType" placeholder="Event Type" autocomplete="off" required>
         </mat-form-field>
         <br>
         <mat-form-field>
@@ -42,7 +42,7 @@
       </mat-dialog-content>
 
       <mat-dialog-actions class="buttons">
-        <button mat-raised-button class="editButton" (click)="editJob(editEventForm.value)">Save</button>
+        <button mat-raised-button class="editButton" [disabled]="editEventForm.invalid" (click)="editJob(editEventForm.value)">Save</button>
         <button mat-button mat-dialog-close class="cancelButton">Cancel</button>
       </mat-dialog-actions>
     </form>
