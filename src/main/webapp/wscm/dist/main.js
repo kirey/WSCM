@@ -107,30 +107,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./shared/services/auth.service */ "./src/app/shared/services/auth.service.ts");
 /* harmony import */ var _login_login_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./login/login.service */ "./src/app/login/login.service.ts");
 /* harmony import */ var _scheduler_scheduler_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./scheduler/scheduler.service */ "./src/app/scheduler/scheduler.service.ts");
-/* harmony import */ var _shared_components_add_new_position_add_new_position_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./shared/components/add-new-position/add-new-position.service */ "./src/app/shared/components/add-new-position/add-new-position.service.ts");
-/* harmony import */ var _client_client_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./client/client.service */ "./src/app/client/client.service.ts");
-/* harmony import */ var _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shared/services/socket.service */ "./src/app/shared/services/socket.service.ts");
-/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./shared/dialogs/edit-event-dialog/edit-event-dialog.service */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.service.ts");
-/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./shared/dialogs/add-event-dialog/add-event-dialog.service */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.service.ts");
-/* harmony import */ var _jobs_jobs_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./jobs/jobs.service */ "./src/app/jobs/jobs.service.ts");
-/* harmony import */ var _shared_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./shared/pipes/filter.pipe */ "./src/app/shared/pipes/filter.pipe.ts");
-/* harmony import */ var _panel_panel_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./panel/panel.component */ "./src/app/panel/panel.component.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _content_content_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./content/content.component */ "./src/app/content/content.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
-/* harmony import */ var _languages_languages_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./languages/languages.component */ "./src/app/languages/languages.component.ts");
-/* harmony import */ var _scheduler_scheduler_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./scheduler/scheduler.component */ "./src/app/scheduler/scheduler.component.ts");
-/* harmony import */ var _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./shared/dialogs/delete-dialog/delete-dialog.component */ "./src/app/shared/dialogs/delete-dialog/delete-dialog.component.ts");
-/* harmony import */ var _shared_components_add_new_position_add_new_position_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./shared/components/add-new-position/add-new-position.component */ "./src/app/shared/components/add-new-position/add-new-position.component.ts");
-/* harmony import */ var _client_client_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./client/client.component */ "./src/app/client/client.component.ts");
-/* harmony import */ var _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./jobs/jobs.component */ "./src/app/jobs/jobs.component.ts");
-/* harmony import */ var _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./shared/dialogs/edit-dialog/edit-dialog.component */ "./src/app/shared/dialogs/edit-dialog/edit-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./shared/dialogs/edit-event-dialog/edit-event-dialog.component */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./shared/dialogs/add-content-dialog/add-content-dialog.component */ "./src/app/shared/dialogs/add-content-dialog/add-content-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./shared/dialogs/edit-content-dialog/edit-content-dialog.component */ "./src/app/shared/dialogs/edit-content-dialog/edit-content-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./shared/dialogs/add-event-dialog/add-event-dialog.component */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.component.ts");
-/* harmony import */ var _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./mail-redirect/mail-redirect.component */ "./src/app/mail-redirect/mail-redirect.component.ts");
+/* harmony import */ var _client_client_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./client/client.service */ "./src/app/client/client.service.ts");
+/* harmony import */ var _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./shared/services/socket.service */ "./src/app/shared/services/socket.service.ts");
+/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shared/dialogs/edit-event-dialog/edit-event-dialog.service */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.service.ts");
+/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./shared/dialogs/add-event-dialog/add-event-dialog.service */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.service.ts");
+/* harmony import */ var _jobs_jobs_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./jobs/jobs.service */ "./src/app/jobs/jobs.service.ts");
+/* harmony import */ var _shared_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./shared/pipes/filter.pipe */ "./src/app/shared/pipes/filter.pipe.ts");
+/* harmony import */ var _panel_panel_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./panel/panel.component */ "./src/app/panel/panel.component.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _content_content_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./content/content.component */ "./src/app/content/content.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
+/* harmony import */ var _languages_languages_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./languages/languages.component */ "./src/app/languages/languages.component.ts");
+/* harmony import */ var _scheduler_scheduler_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./scheduler/scheduler.component */ "./src/app/scheduler/scheduler.component.ts");
+/* harmony import */ var _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./shared/dialogs/delete-dialog/delete-dialog.component */ "./src/app/shared/dialogs/delete-dialog/delete-dialog.component.ts");
+/* harmony import */ var _client_client_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./client/client.component */ "./src/app/client/client.component.ts");
+/* harmony import */ var _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./jobs/jobs.component */ "./src/app/jobs/jobs.component.ts");
+/* harmony import */ var _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./shared/dialogs/edit-dialog/edit-dialog.component */ "./src/app/shared/dialogs/edit-dialog/edit-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./shared/dialogs/edit-event-dialog/edit-event-dialog.component */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./shared/dialogs/add-content-dialog/add-content-dialog.component */ "./src/app/shared/dialogs/add-content-dialog/add-content-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./shared/dialogs/edit-content-dialog/edit-content-dialog.component */ "./src/app/shared/dialogs/edit-content-dialog/edit-content-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./shared/dialogs/add-event-dialog/add-event-dialog.component */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.component.ts");
+/* harmony import */ var _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./mail-redirect/mail-redirect.component */ "./src/app/mail-redirect/mail-redirect.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -148,7 +146,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 // Modules
 
 // Services
-
 
 
 
@@ -178,36 +175,34 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_22__["AppComponent"],
-                _panel_panel_component__WEBPACK_IMPORTED_MODULE_21__["PanelComponent"],
-                _content_content_component__WEBPACK_IMPORTED_MODULE_23__["ContentComponent"],
-                _home_home_component__WEBPACK_IMPORTED_MODULE_24__["HomeComponent"],
-                _login_login_component__WEBPACK_IMPORTED_MODULE_25__["LoginComponent"],
-                _languages_languages_component__WEBPACK_IMPORTED_MODULE_26__["LanguagesComponent"],
-                _shared_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_20__["FilterPipe"],
-                _scheduler_scheduler_component__WEBPACK_IMPORTED_MODULE_27__["SchedulerComponent"],
-                _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_28__["DeleteDialog"],
-                _shared_components_add_new_position_add_new_position_component__WEBPACK_IMPORTED_MODULE_29__["AddNewPositionComponent"],
-                _client_client_component__WEBPACK_IMPORTED_MODULE_30__["ClientComponent"],
-                _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_31__["JobsComponent"],
-                _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_32__["EditDialogComponent"],
-                _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_33__["EditEventDialogComponent"],
-                _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_34__["AddContentDialogComponent"],
-                _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_35__["EditContentDialogComponent"],
-                _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_36__["AddEventDialogComponent"],
-                _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_37__["MailRedirectComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_21__["AppComponent"],
+                _panel_panel_component__WEBPACK_IMPORTED_MODULE_20__["PanelComponent"],
+                _content_content_component__WEBPACK_IMPORTED_MODULE_22__["ContentComponent"],
+                _home_home_component__WEBPACK_IMPORTED_MODULE_23__["HomeComponent"],
+                _login_login_component__WEBPACK_IMPORTED_MODULE_24__["LoginComponent"],
+                _languages_languages_component__WEBPACK_IMPORTED_MODULE_25__["LanguagesComponent"],
+                _shared_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_19__["FilterPipe"],
+                _scheduler_scheduler_component__WEBPACK_IMPORTED_MODULE_26__["SchedulerComponent"],
+                _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_27__["DeleteDialog"],
+                _client_client_component__WEBPACK_IMPORTED_MODULE_28__["ClientComponent"],
+                _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_29__["JobsComponent"],
+                _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_30__["EditDialogComponent"],
+                _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_31__["EditEventDialogComponent"],
+                _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_32__["AddContentDialogComponent"],
+                _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_33__["EditContentDialogComponent"],
+                _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_34__["AddEventDialogComponent"],
+                _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_35__["MailRedirectComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_2__["BrowserAnimationsModule"],
                 _app_routes__WEBPACK_IMPORTED_MODULE_6__["AppRoutes"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_2__["BrowserAnimationsModule"],
                 _angular_http__WEBPACK_IMPORTED_MODULE_4__["HttpModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
@@ -220,22 +215,21 @@ var AppModule = /** @class */ (function () {
                 _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"],
                 _login_login_service__WEBPACK_IMPORTED_MODULE_12__["LoginService"],
                 _scheduler_scheduler_service__WEBPACK_IMPORTED_MODULE_13__["SchedulerService"],
-                _shared_components_add_new_position_add_new_position_service__WEBPACK_IMPORTED_MODULE_14__["AddNewPositionService"],
-                _client_client_service__WEBPACK_IMPORTED_MODULE_15__["ClientService"],
-                _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_16__["SocketService"],
-                _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_17__["EditEventService"],
-                _shared_dialogs_add_event_dialog_add_event_dialog_service__WEBPACK_IMPORTED_MODULE_18__["AddEventService"],
-                _jobs_jobs_service__WEBPACK_IMPORTED_MODULE_19__["JobsService"]
+                _client_client_service__WEBPACK_IMPORTED_MODULE_14__["ClientService"],
+                _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_15__["SocketService"],
+                _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_16__["EditEventService"],
+                _shared_dialogs_add_event_dialog_add_event_dialog_service__WEBPACK_IMPORTED_MODULE_17__["AddEventService"],
+                _jobs_jobs_service__WEBPACK_IMPORTED_MODULE_18__["JobsService"]
             ],
             entryComponents: [
-                _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_28__["DeleteDialog"],
-                _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_32__["EditDialogComponent"],
-                _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_33__["EditEventDialogComponent"],
-                _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_34__["AddContentDialogComponent"],
-                _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_35__["EditContentDialogComponent"],
-                _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_36__["AddEventDialogComponent"]
+                _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_27__["DeleteDialog"],
+                _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_30__["EditDialogComponent"],
+                _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_31__["EditEventDialogComponent"],
+                _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_32__["AddContentDialogComponent"],
+                _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_33__["EditContentDialogComponent"],
+                _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_34__["AddEventDialogComponent"]
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_22__["AppComponent"]],
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_21__["AppComponent"]],
             schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["CUSTOM_ELEMENTS_SCHEMA"]]
         })
     ], AppModule);
@@ -952,6 +946,8 @@ var JobsComponent = /** @class */ (function () {
         this.jobService.getJobs().subscribe(function (res) {
             _this.jobs = res.data;
             console.log(_this.jobs);
+            // this.dataSource = new MatTableDataSource<any>(res['data']);
+            // this.dataSource.paginator = this.paginator;
         }, function (err) { return console.log(err); });
     };
     JobsComponent.prototype.ngOnInit = function () {
@@ -1273,7 +1269,7 @@ var LoginService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar\" style=\"background-color:rgb(52, 82, 255);\">\n    <a class=\"navbar-brand\" href=\"#\" style=\"color:white\">ICAP - Intelligent Content and Ad Provider</a>\n</nav>\n<nav class=\"navbar navbar-expand-lg navbar-light bg-light rounded\">\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExample10\" aria-controls=\"navbarsExample10\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n    </button>\n\n    <div class=\"collapse navbar-collapse justify-content-md-center\" id=\"navbarsExample10\">\n        <ul class=\"navbar-nav\">\n            <li class=\"nav-item active\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" href=\"#\">HOME<span class=\"sr-only\">(current)</span></a>\n            </li>\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" href=\"#\">ABOUT US</a>\n            </li>\n            <li class=\"nav-item dropdown\" style=\"margin-left:20px;\">\n                <a class=\"nav-link dropdown-toggle\" href=\"https://example.com\" id=\"dropdown10\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Services</a>\n                <div class=\"dropdown-menu\" aria-labelledby=\"dropdown10\">\n                    <a class=\"dropdown-item\" href=\"#\">Banking</a>\n                    <a class=\"dropdown-item\" href=\"#\">Insurance</a>\n                </div>\n            </li>\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" href=\"#\">WORKS</a>\n            </li>\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" href=\"#\">CONTACT</a>\n            </li>\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" (click)=\"logout()\">\n                    <span class=\"material-icons\" id=\"forHover\">\n                        exit_to_app\n                    </span>\n                </a>\n            </li>\n        </ul>\n    </div>\n</nav>\n<div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\n    <ol class=\"carousel-indicators\">\n        <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\n        <li data-target=\"#myCarousel\" data-slide-to=\"1\"></li>\n    </ol>\n    <div class=\"carousel-inner\">\n        <div class=\"carousel-item active\">\n            <img class=\"first-slide img-fluid\" src=\"wscm/src/assets/mail2.jpg\" alt=\"First slide\">\n            <div class=\"container\">\n                <div class=\"carousel-caption text-left\">\n                    <h1>Prepare for the future with our advisors</h1>\n                    <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively foster cutting-edge manufactured products and distinctive.</p>\n                    <a class=\"btn btn-lg\" href=\"#\" role=\"button\" style=\"background-color:rgb(52, 82, 255);color:white;\">Meet Experts</a>\n                </div>\n            </div>\n        </div>\n        <div class=\"carousel-item\">\n            <img class=\"second-slide img-fluid\" src=\"wscm/src/assets/mail3.jpg\" alt=\"Second slide\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>Prepare for the future with our advisors</h1>\n                    <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively foster cutting-edge manufactured products and distinctive.</p>\n                    <a class=\"btn btn-lg\" href=\"#\" role=\"button\" style=\"background-color:rgb(52, 82, 255);color:white;\">Meet Experts</a>\n                </div>\n            </div>\n        </div>\n    </div>\n    <a class=\"carousel-control-prev\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\n        <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\" style=\"background-color:rgb(52, 82, 255);\"></span>\n        <span class=\"sr-only\">Previous</span>\n    </a>\n    <a class=\"carousel-control-next\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\n        <span class=\"carousel-control-next-icon\" aria-hidden=\"true\" style=\"background-color:rgb(52, 82, 255);\"></span>\n        <span class=\"sr-only\">Next</span>\n    </a>\n</div>\n<div class=\"container\">\n    <div class=\"row\">\n        <div id=\"welcome\" class=\"col-sm-12\">\n            <h2>Welcom to ICAP</h2>\n            <br>\n            <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively</p>\n            <p style=\"margin-top:10px;\">foster cutting-edge manufactured products and distinctive.</p>\n        </div>\n    </div>\n    <div class=\"row cards\">\n        <div class=\"col-sm-4\">\n            <div class=\"card \">\n                <img class=\"card-img-top\" src=\"wscm/src/assets/card.jpg\">\n                <div class=\"card-body\">\n                    <h5 class=\"card-title\">About Business</h5>\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-sm-4\">\n            <div class=\"card \">\n                <img class=\"card-img-top\" src=\"wscm/src/assets/growth.jpg\">\n                <div class=\"card-body\">\n                    <h5 class=\"card-title\">Business Growth</h5>\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-sm-4\">\n            <div class=\"card\" >\n                <img class=\"card-img-top\" src=\"wscm/src/assets/strategy.jpg\">\n                <div class=\"card-body\">\n                    <h5 class=\"card-title\">Sustainability</h5>\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"row\" id=\"like\" style=\"margin-top:6%;margin-bottom:5%;\">\n        <div class=\"col-md-6\">\n            <h2>A Finance Agency Crafting Beautiful & Engaging Online Experiences</h2>\n            <br>\n            <p>Seamlessly communicate distinctive alignments and business models. Efficiently whiteboard robust meta-services whereas stand-alone synergy. Enthusiastically engage premier supply chains after intuitive testing procedures. Conveniently parallel\n                task robust imperatives through corporate customer service.\n            </p>\n            <br>\n            <p>\n                Dynamically productivate tactical mindshare via business collaboration and idea-sharing. Credibly conceptualize extensive schemas for functionalized metrics.\n            </p>\n        </div>\n        <div class=\"col-md-6\">\n            <img class=\"img-fluid\" src=\"wscm/src/assets/like.jpg\" alt=\"\">\n        </div>\n    </div>\n</div>\n<footer class=\"page-footer font-small blue pt-4\" style=\"background-color:rgb(52, 82, 255);\">\n    <div class=\"container-fluid text-center text-md-left\">\n        <div class=\"row\">\n            <div class=\"col-md-9 mt-md-0 mt-3\">\n                <h5 class=\"text-uppercase\">ICAP</h5>\n                <p>Intelligent Content and Ad Provider</p>\n            </div>\n            <hr class=\"clearfix w-100 d-md-none pb-3\">\n            <div class=\"col-md-3 mb-md-0 mb-3\">\n                <h5 class=\"text-uppercase\">Useful Links</h5>\n                <ul class=\"list-unstyled\">\n                    <li>\n                        <a href=\"#!\">HOME</a>\n                    </li>\n                    <li>\n                        <a href=\"#!\">ABOUT US</a>\n                    </li>\n                    <li>\n                        <a href=\"#!\">SERVICES</a>\n                    </li>\n                    <li>\n                        <a href=\"#!\">CONTACT</a>\n                    </li>\n                </ul>\n            </div>\n        </div>\n    </div>\n    <div class=\"footer-copyright text-center py-3\">\n        <a href=\"http://kireygroup.com/\" style=\"\">© 2018 Copyright:Kirey Group</a>\n    </div>\n</footer>"
+module.exports = "<nav class=\"navbar\" style=\"background-color:rgb(52, 82, 255);\">\r\n    <a class=\"navbar-brand\" href=\"#\" style=\"color:white\">ICAP - Intelligent Content and Ad Provider</a>\r\n</nav>\r\n<nav class=\"navbar navbar-expand-lg navbar-light bg-light rounded\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExample10\" aria-controls=\"navbarsExample10\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n          <span class=\"navbar-toggler-icon\"></span>\r\n    </button>\r\n\r\n    <div class=\"collapse navbar-collapse justify-content-md-center\" id=\"navbarsExample10\">\r\n        <ul class=\"navbar-nav\">\r\n            <li class=\"nav-item active\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" href=\"#\">HOME<span class=\"sr-only\">(current)</span></a>\r\n            </li>\r\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" href=\"#\">ABOUT US</a>\r\n            </li>\r\n            <li class=\"nav-item dropdown\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link dropdown-toggle\" href=\"https://example.com\" id=\"dropdown10\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Services</a>\r\n                <div class=\"dropdown-menu\" aria-labelledby=\"dropdown10\">\r\n                    <a class=\"dropdown-item\" href=\"#\">Banking</a>\r\n                    <a class=\"dropdown-item\" href=\"#\">Insurance</a>\r\n                </div>\r\n            </li>\r\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" href=\"#\">WORKS</a>\r\n            </li>\r\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" href=\"#\">CONTACT</a>\r\n            </li>\r\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" (click)=\"logout()\">\r\n                    <span class=\"material-icons\" id=\"forHover\">\r\n                        exit_to_app\r\n                    </span>\r\n                </a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</nav>\r\n<div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\r\n    <ol class=\"carousel-indicators\">\r\n        <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\r\n        <li data-target=\"#myCarousel\" data-slide-to=\"1\"></li>\r\n    </ol>\r\n    <div class=\"carousel-inner\">\r\n        <div class=\"carousel-item active\">\r\n            <img class=\"first-slide img-fluid\" src=\"wscm/src/assets/mail2.jpg\" alt=\"First slide\">\r\n            <div class=\"container\">\r\n                <div class=\"carousel-caption text-left\">\r\n                    <h1>Prepare for the future with our advisors</h1>\r\n                    <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively foster cutting-edge manufactured products and distinctive.</p>\r\n                    <a class=\"btn btn-lg\" href=\"#\" role=\"button\" style=\"background-color:rgb(52, 82, 255);color:white;\">Meet Experts</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"carousel-item\">\r\n            <img class=\"second-slide img-fluid\" src=\"wscm/src/assets/mail3.jpg\" alt=\"Second slide\">\r\n            <div class=\"container\">\r\n                <div class=\"carousel-caption\">\r\n                    <h1>Prepare for the future with our advisors</h1>\r\n                    <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively foster cutting-edge manufactured products and distinctive.</p>\r\n                    <a class=\"btn btn-lg\" href=\"#\" role=\"button\" style=\"background-color:rgb(52, 82, 255);color:white;\">Meet Experts</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <a class=\"carousel-control-prev\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\r\n        <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\" style=\"background-color:rgb(52, 82, 255);\"></span>\r\n        <span class=\"sr-only\">Previous</span>\r\n    </a>\r\n    <a class=\"carousel-control-next\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\r\n        <span class=\"carousel-control-next-icon\" aria-hidden=\"true\" style=\"background-color:rgb(52, 82, 255);\"></span>\r\n        <span class=\"sr-only\">Next</span>\r\n    </a>\r\n</div>\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div id=\"welcome\" class=\"col-sm-12\">\r\n            <h2>Welcom to ICAP</h2>\r\n            <br>\r\n            <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively</p>\r\n            <p style=\"margin-top:10px;\">foster cutting-edge manufactured products and distinctive.</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"row cards\">\r\n        <div class=\"col-sm-4\">\r\n            <div class=\"card \">\r\n                <img class=\"card-img-top\" src=\"wscm/src/assets/card.jpg\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title\">About Business</h5>\r\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n            <div class=\"card \">\r\n                <img class=\"card-img-top\" src=\"wscm/src/assets/growth.jpg\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title\">Business Growth</h5>\r\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n            <div class=\"card\" >\r\n                <img class=\"card-img-top\" src=\"wscm/src/assets/strategy.jpg\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title\">Sustainability</h5>\r\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\" id=\"like\" style=\"margin-top:6%;margin-bottom:5%;\">\r\n        <div class=\"col-md-6\">\r\n            <h2>A Finance Agency Crafting Beautiful & Engaging Online Experiences</h2>\r\n            <br>\r\n            <p>Seamlessly communicate distinctive alignments and business models. Efficiently whiteboard robust meta-services whereas stand-alone synergy. Enthusiastically engage premier supply chains after intuitive testing procedures. Conveniently parallel\r\n                task robust imperatives through corporate customer service.\r\n            </p>\r\n            <br>\r\n            <p>\r\n                Dynamically productivate tactical mindshare via business collaboration and idea-sharing. Credibly conceptualize extensive schemas for functionalized metrics.\r\n            </p>\r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <img class=\"img-fluid\" src=\"wscm/src/assets/like.jpg\" alt=\"\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<footer class=\"page-footer font-small blue pt-4\" style=\"background-color:rgb(52, 82, 255);\">\r\n    <div class=\"container-fluid text-center text-md-left\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-9 mt-md-0 mt-3\">\r\n                <h5 class=\"text-uppercase\">ICAP</h5>\r\n                <p>Intelligent Content and Ad Provider</p>\r\n            </div>\r\n            <hr class=\"clearfix w-100 d-md-none pb-3\">\r\n            <div class=\"col-md-3 mb-md-0 mb-3\">\r\n                <h5 class=\"text-uppercase\">Useful Links</h5>\r\n                <ul class=\"list-unstyled\">\r\n                    <li>\r\n                        <a href=\"#!\">HOME</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#!\">ABOUT US</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#!\">SERVICES</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#!\">CONTACT</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"footer-copyright text-center py-3\">\r\n        <a href=\"http://kireygroup.com/\" style=\"\">© 2018 Copyright:Kirey Group</a>\r\n    </div>\r\n</footer>"
 
 /***/ }),
 
@@ -1609,6 +1605,7 @@ var SchedulerComponent = /** @class */ (function () {
             if (res) {
                 _this.schedulerService.deleteJob(id).subscribe(function (res) {
                     console.log(res);
+                    _this.getList();
                 }, function (err) { return console.log(err); });
             }
         });
@@ -1618,7 +1615,7 @@ var SchedulerComponent = /** @class */ (function () {
         var _this = this;
         this.schedulerService.startJob(job.id).subscribe(function (res) {
             console.log(res);
-            _this.snackbar.openSnackBar('Success', res);
+            _this.snackbar.openSnackBar('Success', res.message);
             // this.successMessage(res.message);
             return (job.status = 'ACTIVE');
         }, function (err) {
@@ -1700,285 +1697,13 @@ var SchedulerService = /** @class */ (function () {
         return this._http.post(this.baseUrl + 'stopJob/' + id, null);
     };
     SchedulerService.prototype.deleteJob = function (id) {
-        return this._http.delete(this.baseUrl + 'deleteEvents/' + id);
+        return this._http.delete(this.baseUrl + 'events/' + id);
     };
     SchedulerService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], SchedulerService);
     return SchedulerService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/components/add-new-position/add-new-position.component.html":
-/*!************************************************************************************!*\
-  !*** ./src/app/shared/components/add-new-position/add-new-position.component.html ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div id=\"addNewPage\">\r\n  <mat-accordion>\r\n    <mat-expansion-panel (closed)=\"resetData()\">\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>\r\n          Add New Page Content\r\n        </mat-panel-title>\r\n        <mat-panel-description>\r\n        </mat-panel-description>\r\n      </mat-expansion-panel-header>\r\n      <!-- S T E P 1,\r\n      Material tabs -->\r\n      <div *ngIf=\"step == 1\" class=\"tabs-container\">\r\n        <!-- select pages -->\r\n        <mat-form-field>\r\n          <mat-select name=\"pages\" placeholder=\"Pages\" [(ngModel)]=\"pages\"  required>\r\n            <mat-option *ngFor=\"let pages of selectPage\" [value]=\"pages\">{{pages}}</mat-option>\r\n          </mat-select>\r\n        </mat-form-field>\r\n        <!-- Position -->\r\n        <mat-form-field>\r\n          <input matInput placeholder=\"Position\" name=\"position\" id=\"position\"  [(ngModel)]=\"position\"  required minlength=\"2\" maxlength=\"2\">\r\n        </mat-form-field>\r\n        <!-- language -->\r\n        <mat-form-field>\r\n          <input matInput placeholder=\"Language\" name=\"language\" id=\"language\" [(ngModel)]=\"language\" required minlength=\"2\" maxlength=\"2\">\r\n        </mat-form-field>\r\n        <button mat-raised-button color=\"warn\" (click)=\"next(position, 1)\">Next</button>\r\n      </div>\r\n      <!-- S T E P 1     END -->\r\n      <!-- S T E P 2,\r\n      Material tabs -->\r\n      <div *ngIf=\"step == 2\" class=\"tabs-container\">\r\n        <mat-tab-group color=\"warn\">\r\n          <mat-tab label=\"Categories\">\r\n              <div class=\"categories\" >\r\n                  <h5 class=\"label\">Select categories for this position</h5>\r\n                  <div class=\"categories-box\">\r\n                    <div *ngFor=\"let category of categories | filter : selectedPosition.contentCategorieses: 'categories'\">\r\n                      <mat-checkbox  color=\"warn\" (change)=\"checked($event, category)\" labelPosition=\"after\">\r\n                        {{category.description}}\r\n                      </mat-checkbox>\r\n                    </div>\r\n                  </div>\r\n                  <div *ngIf=\"selectedPosition.contentCategorieses.length > 0; else nodata\">\r\n                    <h5 class=\"label\">Selected categories</h5>\r\n                    <div *ngFor=\"let selected of selectedPosition.contentCategorieses\" class=\"selected-categories-box\" >\r\n                      <span>{{selected.categories.description}}</span>\r\n                      <mat-icon  *ngIf=\"selected.categories.description\" class=\"unselect-icon\" (click)=\"unchecked(selected)\">close</mat-icon>\r\n                    </div>\r\n                  </div>\r\n                  <ng-template #nodata>\r\n                    <h6>\r\n                      <i>No selected categories.</i>\r\n                    </h6>\r\n                  </ng-template>\r\n                  <!-- <div class=\"buttons\">\r\n                    <button mat-button (click)=\"back(3)\">Back</button>\r\n                    <button mat-raised-button color=\"warn\" (click)=\"next(selectedPosition, 3)\">Next</button>\r\n                  </div> -->\r\n                </div>\r\n          </mat-tab>\r\n          <mat-tab label=\"HTML\">\r\n            <ng-template mat-tab-label>\r\n              HTML\r\n            </ng-template>\r\n            <!-- Tabs Content -->\r\n            <div class=\"tabs-content\">\r\n              <!-- Text -->\r\n              <div class=\"tabs-text\">\r\n                <form class=\"form\">\r\n                  <mat-form-field class=\"textarea\" appearance=\"outline\">\r\n                    <mat-label>Enter HTML code</mat-label>\r\n                    <textarea matInput name=\"textarea\" placeholder=\"Edit code\" rows=\"15\" cols=\"50\" [(ngModel)]=\"html\">\r\n                       HTML\r\n                    </textarea>\r\n                    <mat-icon class=\"input-icon\" matSuffix>code</mat-icon>\r\n                  </mat-form-field>\r\n                </form>\r\n              </div>\r\n            </div>\r\n          </mat-tab>\r\n          <mat-tab label=\"CSS\">\r\n            <ng-template mat-tab-label>\r\n              CSS\r\n            </ng-template>\r\n            <!-- Tabs Content -->\r\n            <div class=\"tabs-content\">\r\n              <!-- Text -->\r\n              <div class=\"tabs-text\">\r\n                <form class=\"form\">\r\n                  <mat-form-field class=\"textarea\" appearance=\"outline\">\r\n                    <mat-label>Enter CSS code</mat-label>\r\n                    <textarea matInput name=\"textarea\" placeholder=\"Edit code\" rows=\"15\" cols=\"50\" [(ngModel)]=\"css\">\r\n\r\n                    </textarea>\r\n                    <mat-icon class=\"input-icon\" matSuffix>code</mat-icon>\r\n                  </mat-form-field>\r\n                </form>\r\n              </div>\r\n            </div>\r\n          </mat-tab>\r\n          <mat-tab label=\"JavaScript\">\r\n            <ng-template mat-tab-label>\r\n              JavaScript\r\n            </ng-template>\r\n            <!-- Tabs Content -->\r\n            <div class=\"tabs-content\">\r\n              <!-- Text -->\r\n              <div class=\"tabs-text\">\r\n                <mat-form-field class=\"textarea\" appearance=\"outline\">\r\n                  <mat-label>Enter JavaScript code</mat-label>\r\n                  <textarea matInput name=\"textarea\" placeholder=\"Edit code\" rows=\"15\" cols=\"50\" [(ngModel)]=\"script\">\r\n\r\n                  </textarea>\r\n                  <mat-icon class=\"input-icon\" matSuffix>code</mat-icon>\r\n                </mat-form-field>\r\n              </div>\r\n            </div>\r\n          </mat-tab>\r\n        </mat-tab-group>\r\n        <div class=\"buttons\">\r\n          <button mat-button (click)=\"back(2)\">Back</button>\r\n          <button mat-raised-button color=\"warn\" (click)=\"next(selectedPosition, 2)\">Next</button>\r\n        </div>\r\n      </div>\r\n      <!-- S T E P 2       E N D -->\r\n      <!-- S T E P 3 -->\r\n      <!-- <div class=\"categories\" *ngIf=\"step == 3\">\r\n        <h5 class=\"label\">Select categories for this position</h5>\r\n        <div class=\"categories-box\">\r\n          <div *ngFor=\"let category of categories | filter : selectedPosition.contentCategorieses: 'categories'\">\r\n            <mat-checkbox  color=\"warn\" (change)=\"checked($event, category)\" labelPosition=\"after\">\r\n              {{category.description}}\r\n            </mat-checkbox>\r\n          </div>\r\n        </div>\r\n        <div *ngIf=\"selectedPosition.contentCategorieses.length > 0; else nodata\">\r\n          <h5 class=\"label\">Selected categories</h5>\r\n          <div *ngFor=\"let selected of selectedPosition.contentCategorieses\" class=\"selected-categories-box\" >\r\n            <span>{{selected.categories.description}}</span>\r\n            <mat-icon  *ngIf=\"selected.categories.description\" class=\"unselect-icon\" (click)=\"unchecked(selected)\">close</mat-icon>\r\n          </div>\r\n        </div>\r\n        <ng-template #nodata>\r\n          <h6>\r\n            <i>No selected categories.</i>\r\n          </h6>\r\n        </ng-template>\r\n        <div class=\"buttons\">\r\n          <button mat-button (click)=\"back(3)\">Back</button>\r\n          <button mat-raised-button color=\"warn\" (click)=\"next(selectedPosition, 3)\">Next</button>\r\n        </div>\r\n      </div> -->\r\n      <!-- ****************************** -->\r\n      <div class=\"categories\" *ngIf=\"step == 3\">\r\n        <div *ngIf=\"listCategoryWeight.length > 0; else nodata\">\r\n          <div *ngFor=\"let item of listCategoryWeight\">\r\n            <h6>{{item.categories.description}}</h6>\r\n            <mat-slider color=\"warn\" max=\"5\" min=\"1\" step=\"1\" thumbLabel=\"true\" tickInterval=\"5\" [(ngModel)]=\"item.weight\">\r\n            </mat-slider>\r\n          </div>\r\n        </div>\r\n        <ng-template #nodata>\r\n          <h6>\r\n            <i>No selected categories.</i>\r\n          </h6>\r\n        </ng-template>\r\n        <div class=\"buttons\">\r\n          <button mat-button (click)=\"back(3)\">Back</button>\r\n          <button mat-raised-button color=\"warn\" (click)=\"save()\">Save</button>\r\n        </div>\r\n      </div>\r\n      <!-- S T E P 3    End -->\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n</div>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/shared/components/add-new-position/add-new-position.component.scss":
-/*!************************************************************************************!*\
-  !*** ./src/app/shared/components/add-new-position/add-new-position.component.scss ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#addNewPage p {\n  color: #009688; }\n\n#addNewPage .material-icons {\n  margin-left: 10px; }\n"
-
-/***/ }),
-
-/***/ "./src/app/shared/components/add-new-position/add-new-position.component.ts":
-/*!**********************************************************************************!*\
-  !*** ./src/app/shared/components/add-new-position/add-new-position.component.ts ***!
-  \**********************************************************************************/
-/*! exports provided: AddNewPositionComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddNewPositionComponent", function() { return AddNewPositionComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _services_snackbar_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/snackbar.service */ "./src/app/shared/services/snackbar.service.ts");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-/* harmony import */ var _add_new_position_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-new-position.service */ "./src/app/shared/components/add-new-position/add-new-position.service.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var AddNewPositionComponent = /** @class */ (function () {
-    function AddNewPositionComponent(dialog, contentService, snackbar, sanitizer) {
-        this.dialog = dialog;
-        this.contentService = contentService;
-        this.snackbar = snackbar;
-        this.sanitizer = sanitizer;
-        this.panelOpenState = false;
-        this.step = 1;
-        this.listCategoryWeight = [];
-        this.check = false;
-    }
-    // Get All Pages - select box for pages select ********************************
-    AddNewPositionComponent.prototype.getAllPages = function () {
-        var _this = this;
-        this.contentService.getPages(this.pages).subscribe(function (res) {
-            _this.selectPage = res;
-        }, function (err) { return console.log(err); });
-    };
-    // GET All Categories **************************************
-    AddNewPositionComponent.prototype.getCategory = function () {
-        var _this = this;
-        this.contentService.getCategories().subscribe(function (res) {
-            _this.categories = res['data'];
-            console.log(_this.categories);
-        }, function (err) { return console.log(err); });
-    };
-    AddNewPositionComponent.prototype.getPositions = function () {
-        var _this = this;
-        this.contentService.getPositions('home').subscribe(function (res) {
-            _this.positions = res;
-        }, function (err) { return console.log(err); });
-    };
-    // Reset Data ************************************
-    AddNewPositionComponent.prototype.resetData = function () {
-        this.step = 1;
-        this.listCategoryWeight = [];
-    };
-    // NEXT button ***************************************
-    AddNewPositionComponent.prototype.next = function (obj, step) {
-        obj = {
-            page: this.pages,
-            position: this.position,
-            language: this.language,
-            html: this.sanitizer.bypassSecurityTrustHtml(this.html),
-            css: this.css,
-            script: this.script,
-            contentCategorieses: [
-                {
-                    categories: {
-                        id: this.categories.id,
-                        categoryName: this.categories.categoryName,
-                        description: this.categories.description
-                    },
-                    weight: this.weight
-                }
-            ]
-        };
-        console.log(this.html);
-        console.log(obj);
-        switch (step) {
-            case 1:
-                this.step = 2;
-                this.selectedPosition = obj;
-                console.log(this.selectedPosition);
-                for (var _i = 0, _a = this.selectedPosition.contentCategorieses; _i < _a.length; _i++) {
-                    var item = _a[_i];
-                    this.listCategoryWeight.push(item);
-                }
-                break;
-            case 2:
-                this.step = 3;
-                this.listCategoryWeight.shift();
-                break;
-            case 3:
-                this.step = 4;
-        }
-        console.log(this.listCategoryWeight);
-    };
-    // CHECKED CATEGORIES
-    // ************************
-    AddNewPositionComponent.prototype.checked = function (ev, categories) {
-        if (ev.checked) {
-            if (this.listCategoryWeight.length > 0) {
-                this.listCategoryWeight.push({ categories: categories, weight: 1 });
-                this.selectedPosition.contentCategorieses.push({
-                    categories: categories,
-                    weight: 1
-                });
-            }
-            else {
-                var index = this.listCategoryWeight.findIndex(function (item) { return item['categories'] === categories; });
-                this.listCategoryWeight.splice(index, 1);
-                var index2 = this.selectedPosition['contentCategorieses'].findIndex(function (item) { return item['categories'] === categories; });
-                this.selectedPosition['contentCategorieses'].splice(index2, 1);
-            }
-            console.log(this.listCategoryWeight);
-        }
-    };
-    // REMOVE  from list 'Selected categories'
-    AddNewPositionComponent.prototype.unchecked = function (position) {
-        if (this.listCategoryWeight.length !== 0) {
-            var index = this.listCategoryWeight.findIndex(function (item) { return item['categories'] === position.categories; });
-            this.listCategoryWeight.splice(index, 1);
-            var index2 = this.selectedPosition['contentCategorieses'].findIndex(function (item) { return item['categories'] === position.categories; });
-            this.selectedPosition['contentCategorieses'].splice(index2, 1);
-        }
-        console.log(this.listCategoryWeight);
-    };
-    // BACK button ******************************************
-    AddNewPositionComponent.prototype.back = function (currentStep) {
-        switch (currentStep) {
-            case 2:
-                this.step = 1;
-                // this.listCategoryWeight = [];
-                break;
-            case 3:
-                this.step = 2;
-                break;
-            case 4:
-                this.step = 3;
-                break;
-        }
-    };
-    // Send Request
-    AddNewPositionComponent.prototype.save = function () {
-        var _this = this;
-        console.log(this.html);
-        this.selectedPosition['contentCategorieses'] = this.listCategoryWeight;
-        this.contentService.addContent(this.selectedPosition).subscribe(function (res) {
-            console.log(res);
-            _this.snackbar.openSnackBar('Success', res['data']);
-            _this.getPositions();
-            // this.resetData();
-        }, function (err) { return console.log(err); });
-    };
-    AddNewPositionComponent.prototype.ngOnInit = function () {
-        this.getPositions();
-        this.getAllPages();
-        this.getCategory();
-    };
-    AddNewPositionComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-add-new-position',
-            template: __webpack_require__(/*! ./add-new-position.component.html */ "./src/app/shared/components/add-new-position/add-new-position.component.html"),
-            styles: [__webpack_require__(/*! ./add-new-position.component.scss */ "./src/app/shared/components/add-new-position/add-new-position.component.scss")],
-            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewEncapsulation"].None
-        }),
-        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"],
-            _add_new_position_service__WEBPACK_IMPORTED_MODULE_4__["AddNewPositionService"],
-            _services_snackbar_service__WEBPACK_IMPORTED_MODULE_2__["SnackBarService"],
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"]])
-    ], AddNewPositionComponent);
-    return AddNewPositionComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/components/add-new-position/add-new-position.service.ts":
-/*!********************************************************************************!*\
-  !*** ./src/app/shared/components/add-new-position/add-new-position.service.ts ***!
-  \********************************************************************************/
-/*! exports provided: AddNewPositionService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddNewPositionService", function() { return AddNewPositionService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var AddNewPositionService = /** @class */ (function () {
-    function AddNewPositionService(_http) {
-        this._http = _http;
-        this.baseUrl = 'rest/admin/content';
-        this.options = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' })
-        };
-    }
-    // Add  position
-    AddNewPositionService.prototype.addContent = function (obj) {
-        return this._http
-            .post(this.baseUrl, obj, this.options)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
-    };
-    // get All Pages
-    AddNewPositionService.prototype.getPages = function (pages) {
-        return this._http.get(this.baseUrl + '/pages').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
-    };
-    // get All Categories
-    AddNewPositionService.prototype.getCategories = function () {
-        return this._http.get(this.baseUrl + '/categories').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
-    };
-    // Get array of positions
-    AddNewPositionService.prototype.getPositions = function (page) {
-        return this._http.get(this.baseUrl + '/' + page).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
-    };
-    AddNewPositionService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
-    ], AddNewPositionService);
-    return AddNewPositionService;
 }());
 
 
@@ -2178,7 +1903,7 @@ var AddContentDialogComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"addJob\">\r\n  <h1>Add Event </h1>\r\n  <!-- <div *ngIf=\"data\"> -->\r\n  <mat-dialog-content>\r\n    <form #addForm=\"ngForm\" class=\"addJob-container\">\r\n      <mat-form-field>\r\n        <input matInput name=\"eventName\" [(ngModel)]=\"eventName\" type=\"text\" placeholder=\"Event Name\" autocomplete=\"off\">\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput name=\"eventType\" [(ngModel)]=\"eventType\" placeholder=\"Event Type\" autocomplete=\"off\">\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <mat-select  id=\"jobName\" placeholder=\"Job Name\" required [(ngModel)]=\"jobName\"  name=\"jobName\">\r\n          <!-- <mat-option [(value)]=\"data.jobs.jobName\" ><span *ngFor=\"let job of data\">{{data.jobs.jobName}}</span></mat-option> -->\r\n          <mat-option *ngFor=\"let job of events; let i = index\" [value]=\"job.jobs.jobName\">{{job.jobs.jobName}}</mat-option>\r\n        </mat-select>\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <textarea matInput name=\"description\" [(ngModel)]=\"description\" placeholder=\"Description\"></textarea>\r\n      </mat-form-field>\r\n\r\n    </form>\r\n  </mat-dialog-content>\r\n  <mat-dialog-actions>\r\n    <button type=\"submit\" mat-raised-button class=\"formButton\" (click)=\"addJob()\">Submit</button>\r\n    <button mat-button mat-dialog-close class=\"cancelButton\">Cancel</button>\r\n  </mat-dialog-actions>\r\n  <!-- </div> -->\r\n</div>\r\n"
+module.exports = "<div id=\"addJob\">\r\n  <h1>Add Event </h1>\r\n  <!-- <div *ngIf=\"data\"> -->\r\n  <mat-dialog-content>\r\n    <form #addForm=\"ngForm\" class=\"addJob-container\">\r\n      <mat-form-field>\r\n        <input matInput name=\"eventName\" [(ngModel)]=\"eventName\" type=\"text\" placeholder=\"Event Name\" autocomplete=\"off\">\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput name=\"eventType\" [(ngModel)]=\"eventType\" placeholder=\"Event Type\" autocomplete=\"off\">\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <mat-select  id=\"jobSelected\" placeholder=\"Job Name\" required [(ngModel)]=\"jobSelected\"  name=\"jobSelected\">\r\n          <!-- <mat-option [(value)]=\"data.jobs.jobName\" ><span *ngFor=\"let job of data\">{{data.jobs.jobName}}</span></mat-option> -->\r\n          <mat-option *ngFor=\"let job of events; let i = index\" [value]=\"job.jobs\">{{job.jobs.jobName}}</mat-option>\r\n        </mat-select>\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <textarea matInput name=\"description\" [(ngModel)]=\"description\" placeholder=\"Description\"></textarea>\r\n      </mat-form-field>\r\n\r\n    </form>\r\n  </mat-dialog-content>\r\n  <mat-dialog-actions>\r\n    <button type=\"submit\" mat-raised-button class=\"formButton\" (click)=\"addJob()\">Submit</button>\r\n    <button mat-button mat-dialog-close class=\"cancelButton\">Cancel</button>\r\n  </mat-dialog-actions>\r\n  <!-- </div> -->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2236,17 +1961,18 @@ var AddEventDialogComponent = /** @class */ (function () {
         }, function (err) { return console.log(err); });
     };
     // Add Event function
-    AddEventDialogComponent.prototype.addJob = function (id) {
+    AddEventDialogComponent.prototype.addJob = function (jobId) {
         var _this = this;
+        console.log('Job selected:');
+        console.log(this.jobSelected);
         var jobs = {
+            id: jobId,
             eventName: this.eventName,
             eventType: this.eventType,
-            jobs: {
-                // id: this.id,
-                jobName: this.jobName,
-            },
+            jobs: this.jobSelected,
+            definition: 'test',
             description: this.description,
-            status: null
+            status: 'test'
         };
         console.log(jobs);
         this.addEventService.addJobs(jobs).subscribe(function (res) {
@@ -2527,12 +2253,23 @@ var EditContentDialogComponent = /** @class */ (function () {
         var _this = this;
         value['contentCategorieses'] = this.positionData.contentCategorieses;
         console.log(value);
-        this.contentService.updateContent(value)
-            .subscribe(function (res) {
-            console.log(res);
-            _this.snackBarService.openSnackBar(res['data'], 'Success');
-            _this.dialogRef.close();
-        }, function (err) { return _this.snackBarService.openSnackBar('Something went wrong.', 'Error'); });
+        // Validation for required fields
+        if (!value.page)
+            this.snackBarService.openSnackBar('Please, enter page name.', '');
+        else if (!value.position)
+            this.snackBarService.openSnackBar('Please, enter position name.', '');
+        else if (!value.language)
+            this.snackBarService.openSnackBar('Please, enter language.', '');
+        else if (!value.html)
+            this.snackBarService.openSnackBar('Please, enter HTML code.', '');
+        else {
+            this.contentService.updateContent(value)
+                .subscribe(function (res) {
+                console.log(res);
+                _this.snackBarService.openSnackBar(res['data'], 'Success');
+                _this.dialogRef.close();
+            }, function (err) { return _this.snackBarService.openSnackBar('Something went wrong.', 'Error'); });
+        }
     };
     EditContentDialogComponent.prototype.ngOnInit = function () {
         console.log(this.positionData);
@@ -3252,7 +2989,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! c:\Users\jovanovicn\Documents\WSCM\src\main\webapp\wscm\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Projects\WSCM\src\main\webapp\wscm\src\main.ts */"./src/main.ts");
 
 
 /***/ })

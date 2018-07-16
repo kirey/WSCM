@@ -621,9 +621,9 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\Users\jovanovicn\Documents\WSCM\src\main\webapp\wscm\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
-__webpack_require__(/*! c:\Users\jovanovicn\Documents\WSCM\src\main\webapp\wscm\src\styles.css */"./src/styles.css");
-module.exports = __webpack_require__(/*! c:\Users\jovanovicn\Documents\WSCM\src\main\webapp\wscm\src\custom-theme.scss */"./src/custom-theme.scss");
+__webpack_require__(/*! D:\Projects\WSCM\src\main\webapp\wscm\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
+__webpack_require__(/*! D:\Projects\WSCM\src\main\webapp\wscm\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! D:\Projects\WSCM\src\main\webapp\wscm\src\custom-theme.scss */"./src/custom-theme.scss");
 
 
 /***/ })

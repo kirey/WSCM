@@ -92,15 +92,22 @@ export class EditContentDialogComponent implements OnInit {
     value['contentCategorieses'] = this.positionData.contentCategorieses;
     console.log(value);
 
-    this.contentService.updateContent(value)
-      .subscribe(
-        res => {
-          console.log(res)
-          this.snackBarService.openSnackBar(res['data'], 'Success');
-          this.dialogRef.close();
-        },
-        err => this.snackBarService.openSnackBar('Something went wrong.', 'Error')
-      );
+    // Validation for required fields
+    if (!value.page) this.snackBarService.openSnackBar('Please, enter page name.', '');
+    else if (!value.position) this.snackBarService.openSnackBar('Please, enter position name.', '');
+    else if (!value.language) this.snackBarService.openSnackBar('Please, enter language.', '');
+    else if (!value.html) this.snackBarService.openSnackBar('Please, enter HTML code.', '');
+    else {
+      this.contentService.updateContent(value)
+        .subscribe(
+          res => {
+            console.log(res)
+            this.snackBarService.openSnackBar(res['data'], 'Success');
+            this.dialogRef.close();
+          },
+          err => this.snackBarService.openSnackBar('Something went wrong.', 'Error')
+        );
+    }
   }
 
   ngOnInit() {

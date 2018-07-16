@@ -20,7 +20,6 @@ import { PanelService } from './panel/panel.service';
 import { AuthService } from './shared/services/auth.service';
 import { LoginService } from './login/login.service';
 import { SchedulerService } from './scheduler/scheduler.service';
-import { AddNewPositionService } from './shared/components/add-new-position/add-new-position.service';
 import { ClientService } from './client/client.service';
 import { SocketService } from './shared/services/socket.service';
 import { EditEventService } from './shared/dialogs/edit-event-dialog/edit-event-dialog.service';
@@ -39,7 +38,6 @@ import { LoginComponent } from './login/login.component';
 import { LanguagesComponent } from './languages/languages.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.component';
-import { AddNewPositionComponent } from './shared/components/add-new-position/add-new-position.component';
 import { ClientComponent } from './client/client.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.component';
@@ -60,7 +58,6 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     FilterPipe,
     SchedulerComponent,
     DeleteDialog,
-    AddNewPositionComponent,
     ClientComponent,
     JobsComponent,
     EditDialogComponent,
@@ -86,7 +83,6 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     AuthService,
     LoginService,
     SchedulerService,
-    AddNewPositionService,
     ClientService,
     SocketService,
     EditEventService,
