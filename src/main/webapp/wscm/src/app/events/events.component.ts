@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { SchedulerService } from './scheduler.service';
+import { EventsService } from './events.service';
 import { Router } from '@angular/router';
 import { SnackBarService } from '../shared/services/snackbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -9,12 +9,12 @@ import { AddEventDialogComponent } from '../shared/dialogs/add-event-dialog/add-
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 
 @Component({
-  selector: 'app-scheduler',
-  templateUrl: './scheduler.component.html',
-  styleUrls: ['./scheduler.component.scss'],
+  selector: 'app-events',
+  templateUrl: './events.component.html',
+  styleUrls: ['./events.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SchedulerComponent implements OnInit {
+export class EventsComponent implements OnInit {
   currentStatus: string;
   job: any;
   events: any;
@@ -28,7 +28,7 @@ export class SchedulerComponent implements OnInit {
 
 
   constructor(
-    public schedulerService: SchedulerService,
+    public eventsService: EventsService,
     public router: Router,
     public snackbar: SnackBarService,
     public dialog: MatDialog
@@ -49,7 +49,7 @@ export class SchedulerComponent implements OnInit {
 
   // Get List
   getList() {
-    this.schedulerService.getJobs().subscribe(
+    this.eventsService.getJobs().subscribe(
       res => {
         this.events = res.data;
         console.log(this.events);
@@ -65,11 +65,11 @@ export class SchedulerComponent implements OnInit {
     });
     // console.log(obj);
 
-        dialogRef.afterClosed().subscribe(res => {
-            this.getList();
-            console.log(res);
-            console.log('uspesno');
-        });
+    dialogRef.afterClosed().subscribe(res => {
+      this.getList();
+      console.log(res);
+      console.log('uspesno');
+    });
   }
   // open edit dialog
   editDialog(obj) {
@@ -104,7 +104,7 @@ export class SchedulerComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.schedulerService.deleteJob(id).subscribe(
+        this.eventsService.deleteJob(id).subscribe(
           res => {
             console.log(res);
             this.getList();
@@ -116,7 +116,7 @@ export class SchedulerComponent implements OnInit {
   }
   // Start Job
   start(job) {
-    this.schedulerService.startJob(job.id).subscribe(
+    this.eventsService.startJob(job.id).subscribe(
       res => {
         console.log(res);
         this.snackbar.openSnackBar('Success', res.message);
@@ -132,7 +132,7 @@ export class SchedulerComponent implements OnInit {
 
   // Stop Job
   stop(job) {
-    this.schedulerService.stopJob(job.id).subscribe(
+    this.eventsService.stopJob(job.id).subscribe(
       res => {
         console.log(res);
         // this.successMessage(res.message);

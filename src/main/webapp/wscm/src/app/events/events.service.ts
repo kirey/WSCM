@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class SchedulerService {
+export class EventsService {
 
     constructor(private _http: HttpClient) { }
 

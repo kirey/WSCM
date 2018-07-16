@@ -8,45 +8,7 @@
     color: $primary;
     text-transform: uppercase;
   }
-  table {
-    width: 100%;
-    text-align: center;
-  }
-  tr.mat-header-row {
-    background: linear-gradient(to right, $primary, $accent) !important;
-  }
-  th.mat-header-cell {
-    color: white;
-    font-size: 1em;
-    text-align: center;
-  }
-  td::selection {
-    background: $primary;
-    color: white;
-  }
-  th::selection {
-    background: $primary;
-  }
-  span::selection {
-    background: $primary;
-    color: white;
-  }
-  td {
-    padding: 0 10px;
-    font-size: 12px;
-  }
-  .material-icons {
-    color: $primary;
-    font-size: 20px;
-    padding-right: 5px;
-  }
-  .material-icons:hover {
-    cursor: pointer;
-  }
-  .material-icons::selection {
-    background: $primary;
-    color: white;
-  }
+  
   button {
     background: $warn;
     border: none;

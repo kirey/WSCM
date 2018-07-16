@@ -24,7 +24,7 @@ table {
     text-align: center;
 }
 tr.mat-header-row {
-    background: linear-gradient(to right, $primary, $accent) !important;
+    background: $primary!important;
 }
 th.mat-header-cell {
     color: white;
@@ -49,6 +49,19 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 td.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {
     padding: 20px!important;
 }
+
+  .material-icons {
+    color: $primary;
+    font-size: 20px;
+    padding-right: 5px;
+  }
+  .material-icons:hover {
+    cursor: pointer;
+  }
+  .material-icons::selection {
+    background: $primary;
+    color: white;
+  }
 
 // Dialogs
 

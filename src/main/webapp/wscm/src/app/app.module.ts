@@ -19,7 +19,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { PanelService } from './panel/panel.service';
 import { AuthService } from './shared/services/auth.service';
 import { LoginService } from './login/login.service';
-import { SchedulerService } from './scheduler/scheduler.service';
+import { EventsService } from './events/events.service';
 import { ClientService } from './client/client.service';
 import { SocketService } from './shared/services/socket.service';
 import { EditEventService } from './shared/dialogs/edit-event-dialog/edit-event-dialog.service';
@@ -36,7 +36,7 @@ import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LanguagesComponent } from './languages/languages.component';
-import { SchedulerComponent } from './scheduler/scheduler.component';
+import { EventsComponent } from './events/events.component';
 import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.component';
 import { ClientComponent } from './client/client.component';
 import { JobsComponent } from './jobs/jobs.component';
@@ -56,7 +56,7 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     LoginComponent,
     LanguagesComponent,
     FilterPipe,
-    SchedulerComponent,
+    EventsComponent,
     DeleteDialog,
     ClientComponent,
     JobsComponent,
@@ -82,7 +82,7 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     AuthGuard,
     AuthService,
     LoginService,
-    SchedulerService,
+    EventsService,
     ClientService,
     SocketService,
     EditEventService,

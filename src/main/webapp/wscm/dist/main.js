@@ -41,7 +41,7 @@ module.exports = "<router-outlet></router-outlet>\r\n\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n"
 
 /***/ }),
 
@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _panel_panel_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./panel/panel.service */ "./src/app/panel/panel.service.ts");
 /* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./shared/services/auth.service */ "./src/app/shared/services/auth.service.ts");
 /* harmony import */ var _login_login_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./login/login.service */ "./src/app/login/login.service.ts");
-/* harmony import */ var _scheduler_scheduler_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./scheduler/scheduler.service */ "./src/app/scheduler/scheduler.service.ts");
+/* harmony import */ var _events_events_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./events/events.service */ "./src/app/events/events.service.ts");
 /* harmony import */ var _client_client_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./client/client.service */ "./src/app/client/client.service.ts");
 /* harmony import */ var _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./shared/services/socket.service */ "./src/app/shared/services/socket.service.ts");
 /* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shared/dialogs/edit-event-dialog/edit-event-dialog.service */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.service.ts");
@@ -119,7 +119,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
 /* harmony import */ var _languages_languages_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./languages/languages.component */ "./src/app/languages/languages.component.ts");
-/* harmony import */ var _scheduler_scheduler_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./scheduler/scheduler.component */ "./src/app/scheduler/scheduler.component.ts");
+/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
 /* harmony import */ var _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./shared/dialogs/delete-dialog/delete-dialog.component */ "./src/app/shared/dialogs/delete-dialog/delete-dialog.component.ts");
 /* harmony import */ var _client_client_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./client/client.component */ "./src/app/client/client.component.ts");
 /* harmony import */ var _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./jobs/jobs.component */ "./src/app/jobs/jobs.component.ts");
@@ -188,7 +188,7 @@ var AppModule = /** @class */ (function () {
                 _login_login_component__WEBPACK_IMPORTED_MODULE_24__["LoginComponent"],
                 _languages_languages_component__WEBPACK_IMPORTED_MODULE_25__["LanguagesComponent"],
                 _shared_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_19__["FilterPipe"],
-                _scheduler_scheduler_component__WEBPACK_IMPORTED_MODULE_26__["SchedulerComponent"],
+                _events_events_component__WEBPACK_IMPORTED_MODULE_26__["EventsComponent"],
                 _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_27__["DeleteDialog"],
                 _client_client_component__WEBPACK_IMPORTED_MODULE_28__["ClientComponent"],
                 _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_29__["JobsComponent"],
@@ -214,7 +214,7 @@ var AppModule = /** @class */ (function () {
                 _shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"],
                 _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"],
                 _login_login_service__WEBPACK_IMPORTED_MODULE_12__["LoginService"],
-                _scheduler_scheduler_service__WEBPACK_IMPORTED_MODULE_13__["SchedulerService"],
+                _events_events_service__WEBPACK_IMPORTED_MODULE_13__["EventsService"],
                 _client_client_service__WEBPACK_IMPORTED_MODULE_14__["ClientService"],
                 _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_15__["SocketService"],
                 _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_16__["EditEventService"],
@@ -255,7 +255,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
 /* harmony import */ var _languages_languages_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./languages/languages.component */ "./src/app/languages/languages.component.ts");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
-/* harmony import */ var _scheduler_scheduler_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scheduler/scheduler.component */ "./src/app/scheduler/scheduler.component.ts");
+/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
 /* harmony import */ var _client_client_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./client/client.component */ "./src/app/client/client.component.ts");
 /* harmony import */ var _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mail-redirect/mail-redirect.component */ "./src/app/mail-redirect/mail-redirect.component.ts");
 /* harmony import */ var _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./jobs/jobs.component */ "./src/app/jobs/jobs.component.ts");
@@ -275,7 +275,7 @@ var routes = [
     { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"] },
     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
     { path: 'content', component: _content_content_component__WEBPACK_IMPORTED_MODULE_1__["ContentComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
-    { path: 'scheduler', component: _scheduler_scheduler_component__WEBPACK_IMPORTED_MODULE_5__["SchedulerComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
+    { path: 'scheduler', component: _events_events_component__WEBPACK_IMPORTED_MODULE_5__["EventsComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
     { path: 'jobs', component: _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_8__["JobsComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
     { path: 'languages', component: _languages_languages_component__WEBPACK_IMPORTED_MODULE_3__["LanguagesComponent"] },
     { path: 'client', component: _client_client_component__WEBPACK_IMPORTED_MODULE_6__["ClientComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
@@ -511,7 +511,7 @@ module.exports = "<div class=\"flex\">\r\n  <app-panel></app-panel>\r\n\r\n  <di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#content {\n  width: 80%;\n  margin-left: 5%;\n  margin-right: 5%;\n  margin-top: 200px; }\n\n#content h1 {\n    color: #009688;\n    text-transform: uppercase; }\n\n#content button {\n    width: 80px;\n    align-self: flex-end;\n    margin-left: 5px; }\n\n#content .buttons {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    justify-content: flex-end;\n    margin-top: 50px; }\n\n#content .input-icon {\n    color: #009688;\n    margin: 15px; }\n\n#content .mat-expansion-panel-body {\n    display: flex;\n    flex-direction: column;\n    padding-bottom: 50px; }\n\n#content mat-expansion-panel-header {\n    background-color: #009688; }\n\n#content .mat-expansion-panel-header-title,\n  #content .mat-expansion-panel-header-description {\n    color: #fff; }\n\n#content .mat-expansion-indicator::after {\n    color: #009688; }\n\n#content mat-expansion-panel-header {\n    background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\n#content h6 {\n    font-weight: 100;\n    font-size: 14px;\n    padding-right: 5px; }\n\n#content .tabs-container {\n    display: flex;\n    flex-direction: column; }\n\n#content .mat-tab-labels {\n    justify-content: center; }\n\n#content .tabs-content {\n    min-width: 100%;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    padding: 10px 0; }\n\n#content .tabs-icons {\n    align-self: flex-end;\n    display: flex;\n    align-items: center; }\n\n#content .tabs-icons > i {\n    color: #009688;\n    font-size: 28px;\n    padding: 0 !important;\n    margin: 0;\n    margin-top: 10px; }\n\n#content .tabs-icons > i:hover {\n    color: #64FFDA;\n    cursor: pointer; }\n\n#content .tabs-text {\n    width: 80%;\n    padding: 50px 0; }\n\n#content .textarea {\n    width: 100%; }\n\n#content .addButton {\n    float: right;\n    border-radius: 50%;\n    outline: none;\n    margin-top: -50px;\n    width: 40px; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#content {\n  width: 80%;\n  margin-left: 5%;\n  margin-right: 5%;\n  margin-top: 200px; }\n\n#content h1 {\n    color: #009688;\n    text-transform: uppercase; }\n\n#content button {\n    width: 80px;\n    align-self: flex-end;\n    margin-left: 5px; }\n\n#content .buttons {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    justify-content: flex-end;\n    margin-top: 50px; }\n\n#content .input-icon {\n    color: #009688;\n    margin: 15px; }\n\n#content .mat-expansion-panel-body {\n    display: flex;\n    flex-direction: column;\n    padding-bottom: 50px; }\n\n#content mat-expansion-panel-header {\n    background-color: #009688; }\n\n#content .mat-expansion-panel-header-title,\n  #content .mat-expansion-panel-header-description {\n    color: #fff; }\n\n#content .mat-expansion-indicator::after {\n    color: #009688; }\n\n#content mat-expansion-panel-header {\n    background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\n#content h6 {\n    font-weight: 100;\n    font-size: 14px;\n    padding-right: 5px; }\n\n#content .tabs-container {\n    display: flex;\n    flex-direction: column; }\n\n#content .mat-tab-labels {\n    justify-content: center; }\n\n#content .tabs-content {\n    min-width: 100%;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    padding: 10px 0; }\n\n#content .tabs-icons {\n    align-self: flex-end;\n    display: flex;\n    align-items: center; }\n\n#content .tabs-icons > i {\n    color: #009688;\n    font-size: 28px;\n    padding: 0 !important;\n    margin: 0;\n    margin-top: 10px; }\n\n#content .tabs-icons > i:hover {\n    color: #64FFDA;\n    cursor: pointer; }\n\n#content .tabs-text {\n    width: 80%;\n    padding: 50px 0; }\n\n#content .textarea {\n    width: 100%; }\n\n#content .addButton {\n    float: right;\n    border-radius: 50%;\n    outline: none;\n    margin-top: -50px;\n    width: 40px; }\n"
 
 /***/ }),
 
@@ -810,6 +810,244 @@ var ContentService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/events/events.component.html":
+/*!**********************************************!*\
+  !*** ./src/app/events/events.component.html ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div style=\"display:flex\">\r\n  <app-panel></app-panel>\r\n  <div id=\"scheduler\">\r\n<h1>Events page</h1>\r\n    <!-- Add Job Button -->\r\n    <button matTooltip=\"Add Job\" matTooltipPosition=\"above\" (click)=\"openAddDialog()\" mat-mini-fab>\r\n      <i class=\"material-icons plus\">add</i>\r\n    </button>\r\n    <!-- Table template -->\r\n    <div >\r\n      <!-- Table -->\r\n      <table mat-table [dataSource]=\"events\" class=\"mat-elevation-z8\">\r\n        <!-- ID -->\r\n        <ng-container matColumnDef=\"id\">\r\n          <th mat-header-cell *matHeaderCellDef> Id </th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.id}} </td>\r\n        </ng-container>\r\n        <!-- Event Name -->\r\n        <ng-container matColumnDef=\"eventName\">\r\n          <th mat-header-cell *matHeaderCellDef> Event Name </th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.eventName}} </td>\r\n        </ng-container>\r\n        <!-- Job Name -->\r\n        <ng-container matColumnDef=\"jobName\">\r\n          <th mat-header-cell *matHeaderCellDef> Job Name </th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.jobs.jobName}} </td>\r\n        </ng-container>\r\n        <!-- Event Type -->\r\n        <ng-container matColumnDef=\"eventType\">\r\n          <th mat-header-cell *matHeaderCellDef> Event Type </th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.eventType}} </td>\r\n        </ng-container>\r\n        <!-- Cron Ex -->\r\n        <ng-container matColumnDef=\"definition\">\r\n          <th mat-header-cell *matHeaderCellDef> Definition</th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.jobs.cronExpression}} </td>\r\n        </ng-container>\r\n        <!-- Description -->\r\n        <ng-container matColumnDef=\"description\">\r\n          <th mat-header-cell *matHeaderCellDef> Description</th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.description}} </td>\r\n        </ng-container>\r\n        <!-- Status -->\r\n        <ng-container matColumnDef=\"status\">\r\n          <th mat-header-cell *matHeaderCellDef> Status</th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.status}} </td>\r\n        </ng-container>\r\n        <!-- Change Status -->\r\n        <ng-container matColumnDef=\"actions\">\r\n          <th mat-header-cell *matHeaderCellDef> Actions</th>\r\n          <td mat-cell *matCellDef=\"let element\">\r\n              <i matTooltip=\"Start Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"start(element)\">\r\n                  play_arrow\r\n                </i>\r\n            <i matTooltip=\"Stop Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"stop(element)\">\r\n              stop\r\n            </i>\r\n          </td>\r\n        </ng-container>\r\n        <!-- History -->\r\n        <ng-container matColumnDef=\"history\">\r\n          <th mat-header-cell *matHeaderCellDef> History</th>\r\n          <td mat-cell *matCellDef=\"let element\">\r\n            <i matTooltip=\"History\" matTooltipPosition=\"above\" class=\"material-icons\">\r\n              history\r\n            </i>\r\n          </td>\r\n        </ng-container>\r\n        <!-- Actions -->\r\n        <ng-container matColumnDef=\"editing\">\r\n          <th mat-header-cell *matHeaderCellDef> Editing</th>\r\n          <td mat-cell *matCellDef=\"let element\">\r\n              <i matTooltip=\"Edit Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"editDialog(element)\">\r\n                  edit\r\n                </i>\r\n            <i matTooltip=\"Delete Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"deleteJob(element.id)\">\r\n              delete\r\n            </i>\r\n          </td>\r\n        </ng-container>\r\n\r\n\r\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n      </table>\r\n    </div>\r\n    <!-- Add Job -->\r\n    <!-- <app-add-job *ngIf=\"addJobShow\"></app-add-job> -->\r\n\r\n    <!-- Edit Job Template -->\r\n    <!-- <app-edit-job *ngIf=\"editJobShow\" [currentJob]=\"currentJob\"></app-edit-job> -->\r\n\r\n\r\n  </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/events/events.component.scss":
+/*!**********************************************!*\
+  !*** ./src/app/events/events.component.scss ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#scheduler {\n  width: 80%;\n  margin-left: 5%;\n  margin-right: 5%;\n  margin-top: 10%; }\n\n#scheduler h1 {\n    color: #009688;\n    text-transform: uppercase; }\n\n#scheduler button {\n    background: #FFEE58;\n    border: none;\n    outline: none;\n    float: right;\n    margin-bottom: 10px; }\n\n#scheduler .plus {\n    font-size: 30px;\n    margin-top: -3px; }\n\n#scheduler .addJob-container {\n    display: flex;\n    flex-direction: column; }\n\n#scheduler button.formButton {\n    width: 20%;\n    margin-left: 80%;\n    background: #FFEE58; }\n\n#scheduler button.editButton {\n    width: 20%;\n    margin-left: 80%;\n    background: #009688;\n    color: white; }\n\n#scheduler #addTemplate {\n    display: none; }\n\n#scheduler #editForm {\n    display: none; }\n\n#scheduler h5 {\n    color: #bdbdbd; }\n\n#scheduler h5::-moz-selection {\n    background: #009688; }\n\n#scheduler h5::selection {\n    background: #009688; }\n\n#scheduler #addTemplate {\n    width: 50%; }\n\n#scheduler .mat-input-element::-moz-selection {\n    background: #009688; }\n\n#scheduler .mat-input-element::selection {\n    background: #009688; }\n"
+
+/***/ }),
+
+/***/ "./src/app/events/events.component.ts":
+/*!********************************************!*\
+  !*** ./src/app/events/events.component.ts ***!
+  \********************************************/
+/*! exports provided: EventsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventsComponent", function() { return EventsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _events_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./events.service */ "./src/app/events/events.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _shared_services_snackbar_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/services/snackbar.service */ "./src/app/shared/services/snackbar.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/dialogs/edit-event-dialog/edit-event-dialog.component */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/dialogs/add-event-dialog/add-event-dialog.component */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/dialogs/delete-dialog/delete-dialog.component */ "./src/app/shared/dialogs/delete-dialog/delete-dialog.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var EventsComponent = /** @class */ (function () {
+    function EventsComponent(eventsService, router, snackbar, dialog) {
+        this.eventsService = eventsService;
+        this.router = router;
+        this.snackbar = snackbar;
+        this.dialog = dialog;
+        this.displayedColumns = [
+            'id',
+            'eventName',
+            'jobName',
+            'eventType',
+            'definition',
+            'description',
+            'status',
+            'actions',
+            'history',
+            'editing'
+        ];
+    }
+    // Get List
+    EventsComponent.prototype.getList = function () {
+        var _this = this;
+        this.eventsService.getJobs().subscribe(function (res) {
+            _this.events = res.data;
+            console.log(_this.events);
+        }, function (err) { return console.log(err); });
+    };
+    // open add dialog
+    EventsComponent.prototype.openAddDialog = function () {
+        var _this = this;
+        var dialogRef = this.dialog.open(_shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_6__["AddEventDialogComponent"], {
+            width: '800px',
+        });
+        // console.log(obj);
+        dialogRef.afterClosed().subscribe(function (res) {
+            _this.getList();
+            console.log(res);
+            console.log('uspesno');
+        });
+    };
+    // open edit dialog
+    EventsComponent.prototype.editDialog = function (obj) {
+        var _this = this;
+        // this.currentJob = job;
+        var dialogRef = this.dialog.open(_shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_5__["EditEventDialogComponent"], {
+            width: '800px',
+            data: obj
+        });
+        console.log(obj);
+        dialogRef.afterClosed().subscribe(function (res) {
+            _this.getList();
+            console.log(res);
+            console.log('uspesno');
+        });
+        // dialogRef.afterClosed().subscribe(res => {
+        //   if (res) {
+        //     this.contentService.updateContent(id).subscribe(
+        //       res => {
+        //         console.log(res);
+        //       },
+        //       err => console.log(err)
+        //     );
+        //   }
+        // });
+    };
+    // Delete Job
+    EventsComponent.prototype.deleteJob = function (id) {
+        var _this = this;
+        var dialogRef = this.dialog.open(_shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_7__["DeleteDialog"], {
+            width: '500px',
+            data: { id: id }
+        });
+        dialogRef.afterClosed().subscribe(function (res) {
+            if (res) {
+                _this.eventsService.deleteJob(id).subscribe(function (res) {
+                    console.log(res);
+                    _this.getList();
+                }, function (err) { return console.log(err); });
+            }
+        });
+    };
+    // Start Job
+    EventsComponent.prototype.start = function (job) {
+        var _this = this;
+        this.eventsService.startJob(job.id).subscribe(function (res) {
+            console.log(res);
+            _this.snackbar.openSnackBar('Success', res.message);
+            // this.successMessage(res.message);
+            return (job.status = 'ACTIVE');
+        }, function (err) {
+            console.log(err);
+            // this.errorMessage(err);
+        });
+    };
+    // Stop Job
+    EventsComponent.prototype.stop = function (job) {
+        this.eventsService.stopJob(job.id).subscribe(function (res) {
+            console.log(res);
+            // this.successMessage(res.message);
+            return (job.status = 'INACTIVE');
+        }, function (err) {
+            console.log(err);
+            // this.errorMessage(err);
+        });
+    };
+    EventsComponent.prototype.ngOnInit = function () {
+        if (localStorage.getItem('role') == 'ROLE_USER') {
+            this.router.navigate(['/client']);
+        }
+        this.getList();
+    };
+    EventsComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-events',
+            template: __webpack_require__(/*! ./events.component.html */ "./src/app/events/events.component.html"),
+            styles: [__webpack_require__(/*! ./events.component.scss */ "./src/app/events/events.component.scss")],
+            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewEncapsulation"].None
+        }),
+        __metadata("design:paramtypes", [_events_service__WEBPACK_IMPORTED_MODULE_1__["EventsService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _shared_services_snackbar_service__WEBPACK_IMPORTED_MODULE_3__["SnackBarService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]])
+    ], EventsComponent);
+    return EventsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/events/events.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/events/events.service.ts ***!
+  \******************************************/
+/*! exports provided: EventsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventsService", function() { return EventsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var EventsService = /** @class */ (function () {
+    function EventsService(_http) {
+        this._http = _http;
+        this.baseUrl = '/wscm/rest/scheduler/';
+    }
+    EventsService.prototype.getJobs = function () {
+        return this._http.get(this.baseUrl + 'events');
+    };
+    EventsService.prototype.startJob = function (id) {
+        return this._http.post(this.baseUrl + 'startJob/' + id, null);
+    };
+    EventsService.prototype.stopJob = function (id) {
+        return this._http.post(this.baseUrl + 'stopJob/' + id, null);
+    };
+    EventsService.prototype.deleteJob = function (id) {
+        return this._http.delete(this.baseUrl + 'events/' + id);
+    };
+    EventsService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], EventsService);
+    return EventsService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/home/home.component.html":
 /*!******************************************!*\
   !*** ./src/app/home/home.component.html ***!
@@ -828,7 +1066,7 @@ module.exports = "<div style=\"display:flex\">\r\n<app-panel></app-panel>\r\n<di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#home h1 {\n  color: #009688;\n  text-transform: uppercase;\n  margin: 100px; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#home h1 {\n  color: #009688;\n  text-transform: uppercase;\n  margin: 100px; }\n"
 
 /***/ }),
 
@@ -898,7 +1136,7 @@ module.exports = "\r\n    <div style=\"display:flex\">\r\n      <app-panel></app
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#scheduler {\n  width: 80%;\n  margin-left: 5%;\n  margin-right: 5%;\n  margin-top: 10%; }\n\n#scheduler h1 {\n    color: #009688;\n    text-transform: uppercase; }\n\n#scheduler table {\n    width: 100%;\n    text-align: center; }\n\n#scheduler tr.mat-header-row {\n    background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\n#scheduler th.mat-header-cell {\n    color: white;\n    font-size: 1em;\n    text-align: center; }\n\n#scheduler td::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#scheduler td::selection {\n    background: #009688;\n    color: white; }\n\n#scheduler th::-moz-selection {\n    background: #009688; }\n\n#scheduler th::selection {\n    background: #009688; }\n\n#scheduler span::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#scheduler span::selection {\n    background: #009688;\n    color: white; }\n\n#scheduler td {\n    padding: 0 10px;\n    font-size: 12px; }\n\n#scheduler .material-icons {\n    color: #009688;\n    font-size: 20px;\n    padding-right: 5px; }\n\n#scheduler .material-icons:hover {\n    cursor: pointer; }\n\n#scheduler .material-icons::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#scheduler .material-icons::selection {\n    background: #009688;\n    color: white; }\n\n#scheduler button {\n    background: #FFEE58;\n    border: none;\n    outline: none;\n    float: right;\n    margin-bottom: 10px; }\n\n#scheduler .plus {\n    font-size: 30px;\n    margin-top: -3px; }\n\n#scheduler .addJob-container {\n    display: flex;\n    flex-direction: column; }\n\n#scheduler button.formButton {\n    width: 20%;\n    margin-left: 80%;\n    background: #FFEE58; }\n\n#scheduler button.editButton {\n    width: 20%;\n    margin-left: 80%;\n    background: #009688;\n    color: white; }\n\n#scheduler #addTemplate {\n    display: none; }\n\n#scheduler #editForm {\n    display: none; }\n\n#scheduler h5 {\n    color: #bdbdbd; }\n\n#scheduler h5::-moz-selection {\n    background: #009688; }\n\n#scheduler h5::selection {\n    background: #009688; }\n\n#scheduler #addTemplate {\n    width: 50%; }\n\n#scheduler .mat-input-element::-moz-selection {\n    background: #009688; }\n\n#scheduler .mat-input-element::selection {\n    background: #009688; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#scheduler {\n  width: 80%;\n  margin-left: 5%;\n  margin-right: 5%;\n  margin-top: 10%; }\n\n#scheduler h1 {\n    color: #009688;\n    text-transform: uppercase; }\n\n#scheduler button {\n    background: #FFEE58;\n    border: none;\n    outline: none;\n    float: right;\n    margin-bottom: 10px; }\n\n#scheduler .plus {\n    font-size: 30px;\n    margin-top: -3px; }\n\n#scheduler .addJob-container {\n    display: flex;\n    flex-direction: column; }\n\n#scheduler button.formButton {\n    width: 20%;\n    margin-left: 80%;\n    background: #FFEE58; }\n\n#scheduler button.editButton {\n    width: 20%;\n    margin-left: 80%;\n    background: #009688;\n    color: white; }\n\n#scheduler #addTemplate {\n    display: none; }\n\n#scheduler #editForm {\n    display: none; }\n\n#scheduler h5 {\n    color: #bdbdbd; }\n\n#scheduler h5::-moz-selection {\n    background: #009688; }\n\n#scheduler h5::selection {\n    background: #009688; }\n\n#scheduler #addTemplate {\n    width: 50%; }\n\n#scheduler .mat-input-element::-moz-selection {\n    background: #009688; }\n\n#scheduler .mat-input-element::selection {\n    background: #009688; }\n"
 
 /***/ }),
 
@@ -1032,7 +1270,7 @@ module.exports = "<div style=\"display:flex\">\r\n    <app-panel></app-panel>\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#languages {\n  width: 80%;\n  margin: 200px auto; }\n\n#languages p {\n    color: black; }\n\n#languages p::-moz-selection {\n    background-color: #009688; }\n\n#languages p::selection {\n    background-color: #009688; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#languages {\n  width: 80%;\n  margin: 200px auto; }\n\n#languages p {\n    color: black; }\n\n#languages p::-moz-selection {\n    background-color: #009688; }\n\n#languages p::selection {\n    background-color: #009688; }\n"
 
 /***/ }),
 
@@ -1101,7 +1339,7 @@ module.exports = "<div id=\"login\">\r\n  <!-- Left Side -->\r\n  <div id=\"left
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n/**\n * Applies styles for users in high contrast mode. Note that this only applies\n * to Microsoft browsers. Chrome can be included by checking for the `html[hc]`\n * attribute, however Chrome handles high contrast differently.\n */\n\n/* Theme for the ripple elements.*/\n\n/* stylelint-disable material/no-prefixes */\n\n/* stylelint-enable */\n\n#login {\n  height: 100vh;\n  display: flex;\n  align-items: left;\n  justify-content: left;\n  overflow: hidden;\n  z-index: 10;\n  width: 100%; }\n\n#login #leftSide {\n    background-image: linear-gradient(rgba(0, 150, 136, 0.9), rgba(0, 150, 136, 0.1)), url('/wscm/wscm/dist/login4.jpg');\n    background-repeat: no-repeat;\n    display: flex;\n    flex-direction: column;\n    background-size: cover;\n    width: 70%;\n    height: 100%;\n    top: 0;\n    margin-left: -84px;\n    -webkit-transform-origin: bottom right;\n            transform-origin: bottom right;\n    -webkit-transform: skewX(-5deg);\n            transform: skewX(-5deg);\n    color: white;\n    align-items: center;\n    justify-content: center; }\n\n#login h1::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#login h1::selection {\n    background: #009688;\n    color: white; }\n\n#login h4::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#login h4::selection {\n    background: #009688;\n    color: white; }\n\n#login .card-login {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    width: 370px;\n    height: 50%;\n    box-shadow: 0px 3px 1px -2px rgba(119, 119, 119, 0.18), 0px 2px 2px 0px rgba(119, 119, 119, 0.126), 0px 1px 5px 0px rgba(119, 119, 119, 0.108); }\n\n#login .mat-card-header-text {\n    text-align: center; }\n\n#login .mat-form-field-infix {\n    width: 220px; }\n\n#login .card-login:hover {\n    box-shadow: 0 10px 6px -6px #777; }\n\n#login .mat-card-title {\n    font-size: 25px;\n    text-align: left;\n    color: #bdbdbd; }\n\n#login .mat-card-title::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#login .mat-card-title::selection {\n    background: #009688;\n    color: white; }\n\n#login .mat-card-subtitle::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#login .mat-card-subtitle::selection {\n    background: #009688;\n    color: white; }\n\n#login #rightSide {\n    padding: 0 1%;\n    background-color: #FFEE58;\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center; }\n\n#login .mat-card-actions {\n    margin-left: 0; }\n\n#login .mat-card-header-text {\n    margin: 0; }\n\n#login .mat-form-field.mat-form-field-invalid .mat-form-field-label {\n    color: #009688; }\n\n#login .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {\n    background-color: #64FFDA; }\n\n#login button {\n    float: right;\n    outline: none; }\n\n#login .mat-input-element {\n    color: black; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n/**\n * Applies styles for users in high contrast mode. Note that this only applies\n * to Microsoft browsers. Chrome can be included by checking for the `html[hc]`\n * attribute, however Chrome handles high contrast differently.\n */\n\n/* Theme for the ripple elements.*/\n\n/* stylelint-disable material/no-prefixes */\n\n/* stylelint-enable */\n\n#login {\n  height: 100vh;\n  display: flex;\n  align-items: left;\n  justify-content: left;\n  overflow: hidden;\n  z-index: 10;\n  width: 100%; }\n\n#login #leftSide {\n    background-image: linear-gradient(rgba(0, 150, 136, 0.9), rgba(0, 150, 136, 0.1)), url('/wscm/wscm/dist/login4.jpg');\n    background-repeat: no-repeat;\n    display: flex;\n    flex-direction: column;\n    background-size: cover;\n    width: 70%;\n    height: 100%;\n    top: 0;\n    margin-left: -84px;\n    -webkit-transform-origin: bottom right;\n            transform-origin: bottom right;\n    -webkit-transform: skewX(-5deg);\n            transform: skewX(-5deg);\n    color: white;\n    align-items: center;\n    justify-content: center; }\n\n#login h1::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#login h1::selection {\n    background: #009688;\n    color: white; }\n\n#login h4::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#login h4::selection {\n    background: #009688;\n    color: white; }\n\n#login .card-login {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    width: 370px;\n    height: 50%;\n    box-shadow: 0px 3px 1px -2px rgba(119, 119, 119, 0.18), 0px 2px 2px 0px rgba(119, 119, 119, 0.126), 0px 1px 5px 0px rgba(119, 119, 119, 0.108); }\n\n#login .mat-card-header-text {\n    text-align: center; }\n\n#login .mat-form-field-infix {\n    width: 220px; }\n\n#login .card-login:hover {\n    box-shadow: 0 10px 6px -6px #777; }\n\n#login .mat-card-title {\n    font-size: 25px;\n    text-align: left;\n    color: #bdbdbd; }\n\n#login .mat-card-title::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#login .mat-card-title::selection {\n    background: #009688;\n    color: white; }\n\n#login .mat-card-subtitle::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#login .mat-card-subtitle::selection {\n    background: #009688;\n    color: white; }\n\n#login #rightSide {\n    padding: 0 1%;\n    background-color: #FFEE58;\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center; }\n\n#login .mat-card-actions {\n    margin-left: 0; }\n\n#login .mat-card-header-text {\n    margin: 0; }\n\n#login .mat-form-field.mat-form-field-invalid .mat-form-field-label {\n    color: #009688; }\n\n#login .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {\n    background-color: #64FFDA; }\n\n#login button {\n    float: right;\n    outline: none; }\n\n#login .mat-input-element {\n    color: black; }\n"
 
 /***/ }),
 
@@ -1343,7 +1581,7 @@ module.exports = "<div id=\"panel\">\r\n  <!-- Sidenav content -->\r\n\r\n  <div
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#panel {\n  min-width: 100%;\n  min-height: 100%; }\n\n#panel .router-outlet {\n    width: 100%; }\n\n#panel #sidebar-content {\n    background: linear-gradient(to bottom, #009688, #64FFDA);\n    margin-left: 0;\n    text-align: left;\n    background-color: #009688;\n    min-height: 100vh;\n    width: 320px;\n    padding-right: 15px;\n    box-shadow: 0 5px 2px -1px rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 5px 10px 3px rgba(0, 0, 0, 0.12);\n    z-index: 1; }\n\n#panel mat-sidenav-container {\n    background: transparent;\n    min-height: auto;\n    width: 280px;\n    margin: 0 20px;\n    text-align: left; }\n\n#panel #placeholderUser {\n    background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC9klEQVRoQ+1YC0tqQRAeU1PsrVGWoihoSQ8x//9f8EkpJkoqGpaakCnm4/ItGN3uzbuzrYfong8Ois2cmW+/nZ1pLfP5fE4/ABaTyDdT0VTkmwlCpiKmIitagZVvrdlsRhaLRTyrxEqIPD8/U71ep+FwSIt+u7a2RpubmxQMBml9fV07J61EkHSpVCIQWYbDw0Py+/1ayWglks/naTweSyW4t7dH4XBYylbGSBuRSqVCvV5PJuabTSgUIrfbzfL5zFgLkdfXV8rlcuyEUDeJRILt9zcHLUSazSa1Wi2lhGKxGLlcLiXf905aiBQKBXp5eVFK5vj4mI6OjpR8tRPhFPnHjFEjqJWvQosiNzc3omeowOv1ks/nU3H9zUcLkbu7O3p8fFRKJhqN0tbWlpKv9q01Go3o+vqanQzGFpxaOsYXLYqAgUrBo8hR7DqgjQiGw2w2S/iUgdPppLOzMxlTKRttRBBtMpmILYbPZdjY2KCTkxMtW2oRR5nIdDoVE+7T0xPhu8fjEZMtcH9/L56P6tjtdgoEArS7uyt8bm9vaTAYEH4/ODggDJOq9aJEBM2vWCy+jeiLVbFaraIn7OzsiJ+gzIIM/oYHE3K73aZGo/GHaDabjc7Pz4UdF2wiWEnUwrJ7PcxQaHRQyeFwCFuQ73Q61O/3l/pCncvLSy4P/uVDuVwWyawS2KL7+/usECxFoEYmk2EFUDHGFovH4yxXFpGHhweq1WqsAKrGqBVsS1mwiKDAccoYAcxfmMNkwSKSSqWWFqpsUBk79JrT01MZU2EjTQQnD4gYBe7pJU3EqEJ/v1DJZFJ63aSJoLmhfxiJq6sr6U7//xExemth5oIispBWBC9Mp9PSY7psAp/Z4XoVE7IsWES63S5Vq1XZd3/J7uLignVHzCKCzHB/hXusVSISidD29jYrBJsI3o4TDOMKuvy//omSzQZ9A8ljYsb0zIUSEW4QI+xNIkasMieGqQhntYywNRUxYpU5MUxFOKtlhO2PUeQXm4vVetzzfTwAAAAASUVORK5CYII=\");\n    height: 50px;\n    width: 50px;\n    border-radius: 50%;\n    margin: 20px 0;\n    background-repeat: no-repeat; }\n\n#panel div#placeholderUser:hover {\n    opacity: 0.8;\n    transition: 1s; }\n\n#panel #userInfo {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    width: 100%;\n    height: 100%; }\n\n#panel p {\n    color: white; }\n\n#panel em::-moz-selection {\n    background: #009688; }\n\n#panel em::selection {\n    background: #009688; }\n\n#panel strong::-moz-selection {\n    background: #009688; }\n\n#panel strong::selection {\n    background: #009688; }\n\n#panel hr {\n    background-color: white;\n    width: 100%;\n    opacity: 0.6; }\n\n#panel mat-nav-list {\n    padding-bottom: 5px;\n    overflow: hidden; }\n\n#panel mat-nav-list:hover {\n    box-shadow: inset 0px 11px 8px -10px #fff, inset 0px -11px 8px -10px #fff;\n    transition: 1s; }\n\n#panel a {\n    text-decoration: none;\n    color: white;\n    text-transform: uppercase; }\n\n#panel .material-icons {\n    color: white;\n    margin-right: 10px; }\n\n#panel .secondSide {\n    margin-top: 140%; }\n\n#panel .logoutBut a {\n    color: #009688; }\n\n#panel .logoutBut i {\n    color: #009688; }\n\n#panel .logoutBut:hover {\n    box-shadow: none;\n    transition: 1s;\n    border: none; }\n\n#panel .mat-nav-list a.active {\n    background: #00998a; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#panel {\n  min-width: 100%;\n  min-height: 100%; }\n\n#panel .router-outlet {\n    width: 100%; }\n\n#panel #sidebar-content {\n    background: linear-gradient(to bottom, #009688, #64FFDA);\n    margin-left: 0;\n    text-align: left;\n    background-color: #009688;\n    min-height: 100vh;\n    width: 320px;\n    padding-right: 15px;\n    box-shadow: 0 5px 2px -1px rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 5px 10px 3px rgba(0, 0, 0, 0.12);\n    z-index: 1; }\n\n#panel mat-sidenav-container {\n    background: transparent;\n    min-height: auto;\n    width: 280px;\n    margin: 0 20px;\n    text-align: left; }\n\n#panel #placeholderUser {\n    background-image: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC9klEQVRoQ+1YC0tqQRAeU1PsrVGWoihoSQ8x//9f8EkpJkoqGpaakCnm4/ItGN3uzbuzrYfong8Ois2cmW+/nZ1pLfP5fE4/ABaTyDdT0VTkmwlCpiKmIitagZVvrdlsRhaLRTyrxEqIPD8/U71ep+FwSIt+u7a2RpubmxQMBml9fV07J61EkHSpVCIQWYbDw0Py+/1ayWglks/naTweSyW4t7dH4XBYylbGSBuRSqVCvV5PJuabTSgUIrfbzfL5zFgLkdfXV8rlcuyEUDeJRILt9zcHLUSazSa1Wi2lhGKxGLlcLiXf905aiBQKBXp5eVFK5vj4mI6OjpR8tRPhFPnHjFEjqJWvQosiNzc3omeowOv1ks/nU3H9zUcLkbu7O3p8fFRKJhqN0tbWlpKv9q01Go3o+vqanQzGFpxaOsYXLYqAgUrBo8hR7DqgjQiGw2w2S/iUgdPppLOzMxlTKRttRBBtMpmILYbPZdjY2KCTkxMtW2oRR5nIdDoVE+7T0xPhu8fjEZMtcH9/L56P6tjtdgoEArS7uyt8bm9vaTAYEH4/ODggDJOq9aJEBM2vWCy+jeiLVbFaraIn7OzsiJ+gzIIM/oYHE3K73aZGo/GHaDabjc7Pz4UdF2wiWEnUwrJ7PcxQaHRQyeFwCFuQ73Q61O/3l/pCncvLSy4P/uVDuVwWyawS2KL7+/usECxFoEYmk2EFUDHGFovH4yxXFpGHhweq1WqsAKrGqBVsS1mwiKDAccoYAcxfmMNkwSKSSqWWFqpsUBk79JrT01MZU2EjTQQnD4gYBe7pJU3EqEJ/v1DJZFJ63aSJoLmhfxiJq6sr6U7//xExemth5oIispBWBC9Mp9PSY7psAp/Z4XoVE7IsWES63S5Vq1XZd3/J7uLignVHzCKCzHB/hXusVSISidD29jYrBJsI3o4TDOMKuvy//omSzQZ9A8ljYsb0zIUSEW4QI+xNIkasMieGqQhntYywNRUxYpU5MUxFOKtlhO2PUeQXm4vVetzzfTwAAAAASUVORK5CYII=\");\n    height: 50px;\n    width: 50px;\n    border-radius: 50%;\n    margin: 20px 0;\n    background-repeat: no-repeat; }\n\n#panel div#placeholderUser:hover {\n    opacity: 0.8;\n    transition: 1s; }\n\n#panel #userInfo {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    width: 100%;\n    height: 100%; }\n\n#panel p {\n    color: white; }\n\n#panel em::-moz-selection {\n    background: #009688; }\n\n#panel em::selection {\n    background: #009688; }\n\n#panel strong::-moz-selection {\n    background: #009688; }\n\n#panel strong::selection {\n    background: #009688; }\n\n#panel hr {\n    background-color: white;\n    width: 100%;\n    opacity: 0.6; }\n\n#panel mat-nav-list {\n    padding-bottom: 5px;\n    overflow: hidden; }\n\n#panel mat-nav-list:hover {\n    box-shadow: inset 0px 11px 8px -10px #fff, inset 0px -11px 8px -10px #fff;\n    transition: 1s; }\n\n#panel a {\n    text-decoration: none;\n    color: white;\n    text-transform: uppercase; }\n\n#panel .material-icons {\n    color: white;\n    margin-right: 10px; }\n\n#panel .secondSide {\n    margin-top: 140%; }\n\n#panel .logoutBut a {\n    color: #009688; }\n\n#panel .logoutBut i {\n    color: #009688; }\n\n#panel .logoutBut:hover {\n    box-shadow: none;\n    transition: 1s;\n    border: none; }\n\n#panel .mat-nav-list a.active {\n    background: #00998a; }\n"
 
 /***/ }),
 
@@ -1472,244 +1710,6 @@ var PanelService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/scheduler/scheduler.component.html":
-/*!****************************************************!*\
-  !*** ./src/app/scheduler/scheduler.component.html ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div style=\"display:flex\">\r\n  <app-panel></app-panel>\r\n  <div id=\"scheduler\">\r\n<h1>Events page</h1>\r\n    <!-- Add Job Button -->\r\n    <button matTooltip=\"Add Job\" matTooltipPosition=\"above\" (click)=\"openAddDialog()\" mat-mini-fab>\r\n      <i class=\"material-icons plus\">add</i>\r\n    </button>\r\n    <!-- Table template -->\r\n    <div >\r\n      <!-- Table -->\r\n      <table mat-table [dataSource]=\"events\" class=\"mat-elevation-z8\">\r\n        <!-- ID -->\r\n        <ng-container matColumnDef=\"id\">\r\n          <th mat-header-cell *matHeaderCellDef> Id </th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.id}} </td>\r\n        </ng-container>\r\n        <!-- Event Name -->\r\n        <ng-container matColumnDef=\"eventName\">\r\n          <th mat-header-cell *matHeaderCellDef> Event Name </th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.eventName}} </td>\r\n        </ng-container>\r\n        <!-- Job Name -->\r\n        <ng-container matColumnDef=\"jobName\">\r\n          <th mat-header-cell *matHeaderCellDef> Job Name </th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.jobs.jobName}} </td>\r\n        </ng-container>\r\n        <!-- Event Type -->\r\n        <ng-container matColumnDef=\"eventType\">\r\n          <th mat-header-cell *matHeaderCellDef> Event Type </th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.eventType}} </td>\r\n        </ng-container>\r\n        <!-- Cron Ex -->\r\n        <ng-container matColumnDef=\"definition\">\r\n          <th mat-header-cell *matHeaderCellDef> Definition</th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.jobs.cronExpression}} </td>\r\n        </ng-container>\r\n        <!-- Description -->\r\n        <ng-container matColumnDef=\"description\">\r\n          <th mat-header-cell *matHeaderCellDef> Description</th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.description}} </td>\r\n        </ng-container>\r\n        <!-- Status -->\r\n        <ng-container matColumnDef=\"status\">\r\n          <th mat-header-cell *matHeaderCellDef> Status</th>\r\n          <td mat-cell *matCellDef=\"let element\"> {{element.status}} </td>\r\n        </ng-container>\r\n        <!-- Change Status -->\r\n        <ng-container matColumnDef=\"actions\">\r\n          <th mat-header-cell *matHeaderCellDef> Actions</th>\r\n          <td mat-cell *matCellDef=\"let element\">\r\n              <i matTooltip=\"Start Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"start(element)\">\r\n                  play_arrow\r\n                </i>\r\n            <i matTooltip=\"Stop Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"stop(element)\">\r\n              stop\r\n            </i>\r\n          </td>\r\n        </ng-container>\r\n        <!-- History -->\r\n        <ng-container matColumnDef=\"history\">\r\n          <th mat-header-cell *matHeaderCellDef> History</th>\r\n          <td mat-cell *matCellDef=\"let element\">\r\n            <i matTooltip=\"History\" matTooltipPosition=\"above\" class=\"material-icons\">\r\n              history\r\n            </i>\r\n          </td>\r\n        </ng-container>\r\n        <!-- Actions -->\r\n        <ng-container matColumnDef=\"editing\">\r\n          <th mat-header-cell *matHeaderCellDef> Editing</th>\r\n          <td mat-cell *matCellDef=\"let element\">\r\n              <i matTooltip=\"Edit Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"editDialog(element)\">\r\n                  edit\r\n                </i>\r\n            <i matTooltip=\"Delete Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"deleteJob(element.id)\">\r\n              delete\r\n            </i>\r\n          </td>\r\n        </ng-container>\r\n\r\n\r\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n      </table>\r\n    </div>\r\n    <!-- Add Job -->\r\n    <!-- <app-add-job *ngIf=\"addJobShow\"></app-add-job> -->\r\n\r\n    <!-- Edit Job Template -->\r\n    <!-- <app-edit-job *ngIf=\"editJobShow\" [currentJob]=\"currentJob\"></app-edit-job> -->\r\n\r\n\r\n  </div>\r\n</div>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/scheduler/scheduler.component.scss":
-/*!****************************************************!*\
-  !*** ./src/app/scheduler/scheduler.component.scss ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#scheduler {\n  width: 80%;\n  margin-left: 5%;\n  margin-right: 5%;\n  margin-top: 10%; }\n\n#scheduler h1 {\n    color: #009688;\n    text-transform: uppercase; }\n\n#scheduler table {\n    width: 100%;\n    text-align: center; }\n\n#scheduler tr.mat-header-row {\n    background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\n#scheduler th.mat-header-cell {\n    color: white;\n    font-size: 1em;\n    text-align: center; }\n\n#scheduler td::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#scheduler td::selection {\n    background: #009688;\n    color: white; }\n\n#scheduler th::-moz-selection {\n    background: #009688; }\n\n#scheduler th::selection {\n    background: #009688; }\n\n#scheduler td {\n    padding: 0 10px;\n    font-size: 12px; }\n\n#scheduler .material-icons {\n    color: #009688;\n    font-size: 20px;\n    padding-right: 2px; }\n\n#scheduler .material-icons:hover {\n    cursor: pointer; }\n\n#scheduler .material-icons::-moz-selection {\n    background: #009688;\n    color: white; }\n\n#scheduler .material-icons::selection {\n    background: #009688;\n    color: white; }\n\n#scheduler button {\n    background: #FFEE58;\n    border: none;\n    outline: none;\n    float: right;\n    margin-bottom: 10px; }\n\n#scheduler .plus {\n    font-size: 30px;\n    margin-top: -3px; }\n\n#scheduler .addJob-container {\n    display: flex;\n    flex-direction: column; }\n\n#scheduler button.formButton {\n    width: 20%;\n    margin-left: 80%;\n    background: #FFEE58; }\n\n#scheduler button.editButton {\n    width: 20%;\n    margin-left: 80%;\n    background: #009688;\n    color: white; }\n\n#scheduler #addTemplate {\n    display: none; }\n\n#scheduler #editForm {\n    display: none; }\n\n#scheduler h5 {\n    color: #bdbdbd; }\n\n#scheduler h5::-moz-selection {\n    background: #009688; }\n\n#scheduler h5::selection {\n    background: #009688; }\n\n#scheduler #addTemplate {\n    width: 50%; }\n\n#scheduler .mat-input-element::-moz-selection {\n    background: #009688; }\n\n#scheduler .mat-input-element::selection {\n    background: #009688; }\n"
-
-/***/ }),
-
-/***/ "./src/app/scheduler/scheduler.component.ts":
-/*!**************************************************!*\
-  !*** ./src/app/scheduler/scheduler.component.ts ***!
-  \**************************************************/
-/*! exports provided: SchedulerComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SchedulerComponent", function() { return SchedulerComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _scheduler_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scheduler.service */ "./src/app/scheduler/scheduler.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _shared_services_snackbar_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/services/snackbar.service */ "./src/app/shared/services/snackbar.service.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/dialogs/edit-event-dialog/edit-event-dialog.component */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/dialogs/add-event-dialog/add-event-dialog.component */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/dialogs/delete-dialog/delete-dialog.component */ "./src/app/shared/dialogs/delete-dialog/delete-dialog.component.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-var SchedulerComponent = /** @class */ (function () {
-    function SchedulerComponent(schedulerService, router, snackbar, dialog) {
-        this.schedulerService = schedulerService;
-        this.router = router;
-        this.snackbar = snackbar;
-        this.dialog = dialog;
-        this.displayedColumns = [
-            'id',
-            'eventName',
-            'jobName',
-            'eventType',
-            'definition',
-            'description',
-            'status',
-            'actions',
-            'history',
-            'editing'
-        ];
-    }
-    // Get List
-    SchedulerComponent.prototype.getList = function () {
-        var _this = this;
-        this.schedulerService.getJobs().subscribe(function (res) {
-            _this.events = res.data;
-            console.log(_this.events);
-        }, function (err) { return console.log(err); });
-    };
-    // open add dialog
-    SchedulerComponent.prototype.openAddDialog = function () {
-        var _this = this;
-        var dialogRef = this.dialog.open(_shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_6__["AddEventDialogComponent"], {
-            width: '800px',
-        });
-        // console.log(obj);
-        dialogRef.afterClosed().subscribe(function (res) {
-            _this.getList();
-            console.log(res);
-            console.log('uspesno');
-        });
-    };
-    // open edit dialog
-    SchedulerComponent.prototype.editDialog = function (obj) {
-        var _this = this;
-        // this.currentJob = job;
-        var dialogRef = this.dialog.open(_shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_5__["EditEventDialogComponent"], {
-            width: '800px',
-            data: obj
-        });
-        console.log(obj);
-        dialogRef.afterClosed().subscribe(function (res) {
-            _this.getList();
-            console.log(res);
-            console.log('uspesno');
-        });
-        // dialogRef.afterClosed().subscribe(res => {
-        //   if (res) {
-        //     this.contentService.updateContent(id).subscribe(
-        //       res => {
-        //         console.log(res);
-        //       },
-        //       err => console.log(err)
-        //     );
-        //   }
-        // });
-    };
-    // Delete Job
-    SchedulerComponent.prototype.deleteJob = function (id) {
-        var _this = this;
-        var dialogRef = this.dialog.open(_shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_7__["DeleteDialog"], {
-            width: '500px',
-            data: { id: id }
-        });
-        dialogRef.afterClosed().subscribe(function (res) {
-            if (res) {
-                _this.schedulerService.deleteJob(id).subscribe(function (res) {
-                    console.log(res);
-                    _this.getList();
-                }, function (err) { return console.log(err); });
-            }
-        });
-    };
-    // Start Job
-    SchedulerComponent.prototype.start = function (job) {
-        var _this = this;
-        this.schedulerService.startJob(job.id).subscribe(function (res) {
-            console.log(res);
-            _this.snackbar.openSnackBar('Success', res.message);
-            // this.successMessage(res.message);
-            return (job.status = 'ACTIVE');
-        }, function (err) {
-            console.log(err);
-            // this.errorMessage(err);
-        });
-    };
-    // Stop Job
-    SchedulerComponent.prototype.stop = function (job) {
-        this.schedulerService.stopJob(job.id).subscribe(function (res) {
-            console.log(res);
-            // this.successMessage(res.message);
-            return (job.status = 'INACTIVE');
-        }, function (err) {
-            console.log(err);
-            // this.errorMessage(err);
-        });
-    };
-    SchedulerComponent.prototype.ngOnInit = function () {
-        if (localStorage.getItem('role') == 'ROLE_USER') {
-            this.router.navigate(['/client']);
-        }
-        this.getList();
-    };
-    SchedulerComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-scheduler',
-            template: __webpack_require__(/*! ./scheduler.component.html */ "./src/app/scheduler/scheduler.component.html"),
-            styles: [__webpack_require__(/*! ./scheduler.component.scss */ "./src/app/scheduler/scheduler.component.scss")],
-            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewEncapsulation"].None
-        }),
-        __metadata("design:paramtypes", [_scheduler_service__WEBPACK_IMPORTED_MODULE_1__["SchedulerService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            _shared_services_snackbar_service__WEBPACK_IMPORTED_MODULE_3__["SnackBarService"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]])
-    ], SchedulerComponent);
-    return SchedulerComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/scheduler/scheduler.service.ts":
-/*!************************************************!*\
-  !*** ./src/app/scheduler/scheduler.service.ts ***!
-  \************************************************/
-/*! exports provided: SchedulerService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SchedulerService", function() { return SchedulerService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var SchedulerService = /** @class */ (function () {
-    function SchedulerService(_http) {
-        this._http = _http;
-        this.baseUrl = '/wscm/rest/scheduler/';
-    }
-    SchedulerService.prototype.getJobs = function () {
-        return this._http.get(this.baseUrl + 'events');
-    };
-    SchedulerService.prototype.startJob = function (id) {
-        return this._http.post(this.baseUrl + 'startJob/' + id, null);
-    };
-    SchedulerService.prototype.stopJob = function (id) {
-        return this._http.post(this.baseUrl + 'stopJob/' + id, null);
-    };
-    SchedulerService.prototype.deleteJob = function (id) {
-        return this._http.delete(this.baseUrl + 'events/' + id);
-    };
-    SchedulerService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
-    ], SchedulerService);
-    return SchedulerService;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/shared/dialogs/add-content-dialog/add-content-dialog.component.html":
 /*!*************************************************************************************!*\
   !*** ./src/app/shared/dialogs/add-content-dialog/add-content-dialog.component.html ***!
@@ -1728,7 +1728,7 @@ module.exports = "<div id=\"addContent\">\r\n  <h2 class=\"dialog-title\">Add Co
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#addContent .basic-fileds {\n  width: 50% !important; }\n\n#addContent .textarea-fields {\n  width: 100% !important; }\n\n#addContent .mat-tab-group {\n  width: 100%;\n  padding: 0 20px; }\n\n#addContent .mat-tab-labels {\n  justify-content: center;\n  align-items: center; }\n\n#addContent .tabs-body {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 50px; }\n\n#addContent .basic-inputs {\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center; }\n\n#addContent .code-body {\n  width: 100px;\n  height: 100px; }\n\n#addContent .tabs {\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n#addContent .categories {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start; }\n\n#addContent .categories-box {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin-top: 20px;\n  margin-left: 20px; }\n\n#addContent .selected-categories {\n  margin-left: 85px; }\n\n#addContent .selected-categories-box {\n  display: flex;\n  align-items: center; }\n\n#addContent .selected-categories-box > span {\n  font-size: 15px; }\n\n#addContent .mat-checkbox-layout .mat-checkbox-label {\n  font-size: 15px; }\n\n#addContent .label {\n  margin-top: 20px;\n  text-align: left;\n  color: #bdbdbd; }\n\n#addContent mat-slider {\n  width: 150px;\n  margin-bottom: 5px;\n  margin-left: 50px; }\n\n#addContent .buttons {\n  float: right; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#addContent .basic-fileds {\n  width: 50% !important; }\n\n#addContent .textarea-fields {\n  width: 100% !important; }\n\n#addContent .mat-tab-group {\n  width: 100%;\n  padding: 0 20px; }\n\n#addContent .mat-tab-labels {\n  justify-content: center;\n  align-items: center; }\n\n#addContent .tabs-body {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 50px; }\n\n#addContent .basic-inputs {\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center; }\n\n#addContent .code-body {\n  width: 100px;\n  height: 100px; }\n\n#addContent .tabs {\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n#addContent .categories {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start; }\n\n#addContent .categories-box {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin-top: 20px;\n  margin-left: 20px; }\n\n#addContent .selected-categories {\n  margin-left: 85px; }\n\n#addContent .selected-categories-box {\n  display: flex;\n  align-items: center; }\n\n#addContent .selected-categories-box > span {\n  font-size: 15px; }\n\n#addContent .mat-checkbox-layout .mat-checkbox-label {\n  font-size: 15px; }\n\n#addContent .label {\n  margin-top: 20px;\n  text-align: left;\n  color: #bdbdbd; }\n\n#addContent mat-slider {\n  width: 150px;\n  margin-bottom: 5px;\n  margin-left: 50px; }\n\n#addContent .buttons {\n  float: right; }\n"
 
 /***/ }),
 
@@ -1914,7 +1914,7 @@ module.exports = "<div id=\"addJob\">\r\n  <h1>Add Event </h1>\r\n  <!-- <div *n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#addJob {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  justify-content: space-between; }\n\n#addJob .mat-form-field {\n    width: 50%;\n    padding: 20px 20px; }\n\n#addJob .buttons {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    justify-content: flex-end;\n    margin-top: 50px;\n    outline: none; }\n\n#addJob .formButton {\n    margin-left: 72%; }\n\n#addJob .cancelButton {\n    background-color: #FFEE58; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#addJob {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  justify-content: space-between; }\n\n#addJob .mat-form-field {\n    width: 50%;\n    padding: 20px 20px; }\n\n#addJob .buttons {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    justify-content: flex-end;\n    margin-top: 50px;\n    outline: none; }\n\n#addJob .formButton {\n    margin-left: 72%; }\n\n#addJob .cancelButton {\n    background-color: #FFEE58; }\n"
 
 /***/ }),
 
@@ -2141,7 +2141,7 @@ module.exports = "<div id=\"editContent\">\r\n  <h2 class=\"dialog-title\">Edit 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#editContent .basic-fileds {\n  width: 50% !important; }\n\n#editContent .textarea-fields {\n  width: 100% !important; }\n\n#editContent .mat-tab-group {\n  width: 100%;\n  padding: 0 20px; }\n\n#editContent .mat-tab-labels {\n  justify-content: center;\n  align-items: center; }\n\n#editContent .tabs-body {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 50px; }\n\n#editContent .basic-inputs {\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center; }\n\n#editContent .code-body {\n  width: 100px;\n  height: 100px; }\n\n#editContent .tabs {\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n#editContent .categories {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start; }\n\n#editContent .categories-box {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin-left: 20px; }\n\n#editContent .selected-categories {\n  margin-left: 140px; }\n\n#editContent .selected-categories-box {\n  display: flex;\n  align-items: center; }\n\n#editContent .selected-categories-box > span {\n  font-size: 15px; }\n\n#editContent .mat-checkbox-layout .mat-checkbox-label {\n  font-size: 15px; }\n\n#editContent .label {\n  margin-top: 20px;\n  text-align: left;\n  color: #bdbdbd; }\n\n#editContent .label:first-child {\n  margin-bottom: 20px; }\n\n#editContent .unselect-icon {\n  color: #009688;\n  height: 18px;\n  font-size: 20px;\n  margin-right: 3px;\n  font-weight: 600; }\n\n#editContent .unselect-icon:hover {\n  cursor: pointer;\n  color: #424242; }\n\n#editContent mat-slider {\n  width: 150px;\n  margin-bottom: 0px;\n  margin-left: 20px; }\n\n#editContent .buttons {\n  float: right; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#editContent .basic-fileds {\n  width: 50% !important; }\n\n#editContent .textarea-fields {\n  width: 100% !important; }\n\n#editContent .mat-tab-group {\n  width: 100%;\n  padding: 0 20px; }\n\n#editContent .mat-tab-labels {\n  justify-content: center;\n  align-items: center; }\n\n#editContent .tabs-body {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 50px; }\n\n#editContent .basic-inputs {\n  padding: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center; }\n\n#editContent .code-body {\n  width: 100px;\n  height: 100px; }\n\n#editContent .tabs {\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n#editContent .categories {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start; }\n\n#editContent .categories-box {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  margin-left: 20px; }\n\n#editContent .selected-categories {\n  margin-left: 140px; }\n\n#editContent .selected-categories-box {\n  display: flex;\n  align-items: center; }\n\n#editContent .selected-categories-box > span {\n  font-size: 15px; }\n\n#editContent .mat-checkbox-layout .mat-checkbox-label {\n  font-size: 15px; }\n\n#editContent .label {\n  margin-top: 20px;\n  text-align: left;\n  color: #bdbdbd; }\n\n#editContent .label:first-child {\n  margin-bottom: 20px; }\n\n#editContent .unselect-icon {\n  color: #009688;\n  height: 18px;\n  font-size: 20px;\n  margin-right: 3px;\n  font-weight: 600; }\n\n#editContent .unselect-icon:hover {\n  cursor: pointer;\n  color: #424242; }\n\n#editContent mat-slider {\n  width: 150px;\n  margin-bottom: 0px;\n  margin-left: 20px; }\n\n#editContent .buttons {\n  float: right; }\n"
 
 /***/ }),
 
@@ -2409,7 +2409,7 @@ module.exports = "<div id=\"editJob\">\r\n  <h1>Edit  <h5>{{data.eventName}}</h5
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: linear-gradient(to right, #009688, #64FFDA) !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#editJob {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  justify-content: space-between; }\n\n#editJob p {\n    color: #009688; }\n\n#editJob .addJob-container {\n    width: 50%; }\n\n#editJob .mat-form-field {\n    width: 50%;\n    padding: 20px 20px; }\n\n#editJob h5 {\n    color: #bdbdbd; }\n\n#editJob .buttons {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    justify-content: flex-end;\n    margin-top: 50px; }\n\n#editJob .editButton {\n    margin-left: 60%; }\n\n#editJob .cancelButton {\n    background-color: #FFEE58; }\n"
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\ntable {\n  width: 100%;\n  text-align: center; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: center !important;\n  padding: 0 20px !important; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  text-align: center;\n  padding: 10px 0; }\n\ntd.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {\n  padding: 20px !important; }\n\n.material-icons {\n  color: #009688;\n  font-size: 20px;\n  padding-right: 5px; }\n\n.material-icons:hover {\n  cursor: pointer; }\n\n.material-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.material-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#editJob {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  justify-content: space-between; }\n\n#editJob p {\n    color: #009688; }\n\n#editJob .addJob-container {\n    width: 50%; }\n\n#editJob .mat-form-field {\n    width: 50%;\n    padding: 20px 20px; }\n\n#editJob h5 {\n    color: #bdbdbd; }\n\n#editJob .buttons {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    justify-content: flex-end;\n    margin-top: 50px; }\n\n#editJob .editButton {\n    margin-left: 60%; }\n\n#editJob .cancelButton {\n    background-color: #FFEE58; }\n"
 
 /***/ }),
 
