@@ -1,6 +1,5 @@
 package com.kirey.wscm.api.restcontrollers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,22 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
-import com.kirey.wscm.data.dao.CategoriesDao;
-import com.kirey.wscm.data.dao.IpAddressDao;
-import com.kirey.wscm.data.dao.IpAddressLinksDao;
-import com.kirey.wscm.data.dao.LinksCategoriesDao;
-import com.kirey.wscm.data.dao.LinksDao;
-import com.kirey.wscm.data.dao.UserLinksDao;
-import com.kirey.wscm.data.dao.WscmUserAccountsDao;
 import com.kirey.wscm.data.entity.Categories;
-import com.kirey.wscm.data.entity.Content;
-import com.kirey.wscm.data.entity.IpAddress;
-import com.kirey.wscm.data.entity.IpAddressLinks;
-import com.kirey.wscm.data.entity.Links;
-import com.kirey.wscm.data.entity.LinksCategories;
-import com.kirey.wscm.data.entity.UserLinks;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
-import com.kirey.wscm.security.SecurityUtils;
+import com.kirey.wscm.data.service.StatisticsService;
 
 /**
  * @author paunovicm
@@ -42,25 +28,7 @@ import com.kirey.wscm.security.SecurityUtils;
 public class StatisticsController {
 	
 	@Autowired
-	private WscmUserAccountsDao wscmUserAccountsDao;
-
-	@Autowired
-	private LinksDao linksDao;
-	
-	@Autowired
-	private LinksCategoriesDao linksCategoriesDao;
-	
-	@Autowired
-	private UserLinksDao userLinksDao;
-	
-	@Autowired
-	private IpAddressDao ipAddressDao;
-	
-	@Autowired
-	private IpAddressLinksDao ipAddressLinksDao;
-	
-	@Autowired
-	private CategoriesDao categoriesDao;
+	private StatisticsService statisticsService;
 	
 	
 	/**
@@ -70,27 +38,8 @@ public class StatisticsController {
 	 */
 	@RequestMapping(value = "/link/user/{id}", method = RequestMethod.GET)
 	public ResponseEntity<RestResponseDto> linksStatisticsByUser(@PathVariable Integer id) {
-		Map<String, Object> response = new HashMap<>();
 		
-		WscmUserAccounts user = wscmUserAccountsDao.findById(id);
-		response.put("username", user.getUsername());
-		response.put("name", user.getName());
-		
-		List<Map<String, Object>> listUrlWithNo = new ArrayList<>();
-		
-		List<UserLinks> listUserLinks = userLinksDao.findLinksByUser(user); 
-		for (UserLinks userLinks : listUserLinks) {
-			Map<String, Object> urlNo = new HashMap<>();
-			
-			
-			urlNo.put("link", userLinks.getLink());
-			urlNo.put("noOfRequests", userLinks.getNoRequests());
-//			List<LinksCategories> linksCategories = linksCategoriesDao.findByLink(userLinks.getLink());
-
-			
-			listUrlWithNo.add(urlNo);
-		}
-		response.put("links", listUrlWithNo);
+		Map<String, Object> response = statisticsService.linksStatisticsByUser(id);
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(response, HttpStatus.OK.value()), HttpStatus.OK);
 	}
@@ -101,23 +50,10 @@ public class StatisticsController {
 	 * @return ResponseEntity containing the HashMap with list of URL 
 	 */
 	@RequestMapping(value = "/link/ip", method = RequestMethod.GET)
-	public ResponseEntity<RestResponseDto> linksStatisticsByUser(@RequestParam String address) {
-		Map<String, Object> response = new HashMap<>();
-		IpAddress ipAddress = ipAddressDao.findByAddress(address);
-		response.put("ipAddress", ipAddress.getAddress());
+	public ResponseEntity<RestResponseDto> linksStatisticsByIpAddress(@RequestParam String address) {
 		
-		List<Map<String, Object>> listLinksNo = new ArrayList<>();
-		List<IpAddressLinks> listIpAddressLinks = ipAddressLinksDao.findByIpAddress(ipAddress);
-		for (IpAddressLinks ipAddressLinks : listIpAddressLinks) {
-			Map<String, Object> linksNo = new HashMap<>();
-			linksNo.put("link", ipAddressLinks.getLink());
-			linksNo.put("noOfRequests", ipAddressLinks.getNoRequests());
-			
-			listLinksNo.add(linksNo);
-//			List<LinksCategories> linksCategories = linksCategoriesDao.findByLink(ipAddressLinks.getLink());
-			
-		}
-		response.put("links", listLinksNo);
+		Map<String, Object> response = statisticsService.linksStatisticsByIpAddress(address);
+		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(response, HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
@@ -128,38 +64,8 @@ public class StatisticsController {
 	 */
 	@RequestMapping(value = "/categoryNo/user/{id}", method = RequestMethod.GET)
 	public ResponseEntity<RestResponseDto> categoryNoByUser(@PathVariable Integer id) {
-	Map<String, Object> response = new HashMap<>();
 		
-		WscmUserAccounts user = wscmUserAccountsDao.findById(id);
-		response.put("username", user.getUsername());
-		response.put("name", user.getName());
-		
-		List<Map<String, Object>> listCatNo = new ArrayList<>();
-		
-		List<UserLinks> listUserLinks = userLinksDao.findLinksByUser(user);
-		for (UserLinks userLinks : listUserLinks) {
-			List<LinksCategories> linksCategories = linksCategoriesDao.findByLink(userLinks.getLink());
-			for (LinksCategories linksCategory : linksCategories) {
-				boolean flag = true;
-				for (Map<String, Object> map : listCatNo) {
-					if(map.get("categoryName").equals(linksCategory.getCategories().getCategoryName())) {
-						Integer no = (Integer) map.get("noOfRequests");
-						no = no + userLinks.getNoRequests();
-						map.put("noOfRequests",  no);
-						flag = false;
-					}
-				}		
-				if(flag) {
-					Map<String, Object> catNo = new HashMap<>();
-					catNo.put("categoryName", linksCategory.getCategories().getCategoryName());
-					catNo.put("categoryDescription", linksCategory.getCategories().getDescription());	
-					catNo.put("noOfRequests", userLinks.getNoRequests());
-					listCatNo.add(catNo);
-				}
-				
-			}
-		}
-		response.put("categories", listCatNo);
+		Map<String, Object> response = statisticsService.categoryNoByUser(id);
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(response, HttpStatus.OK.value()), HttpStatus.OK);
 	}
@@ -172,36 +78,7 @@ public class StatisticsController {
 	@RequestMapping(value = "/categoryNo/ip", method = RequestMethod.GET)
 	public ResponseEntity<RestResponseDto> categoryNoIpAddress(@RequestParam String address) {
 
-		Map<String, Object> response = new HashMap<>();
-		IpAddress ipAddress = ipAddressDao.findByAddress(address);
-		response.put("ipAddress", ipAddress.getAddress());
-		
-		List<Map<String, Object>> listCatNo = new ArrayList<>();
-		
-		List<IpAddressLinks> listIpAddressLinks = ipAddressLinksDao.findByIpAddress(ipAddress);
-		for (IpAddressLinks addressLink : listIpAddressLinks) {
-			List<LinksCategories> linksCategories = linksCategoriesDao.findByLink(addressLink.getLink());
-			for (LinksCategories linksCategory : linksCategories) {
-				boolean flag = true;
-				for (Map<String, Object> map : listCatNo) {
-					if(map.get("categoryName").equals(linksCategory.getCategories().getCategoryName())) {
-						Integer no = (Integer) map.get("noOfRequests");
-						no = no + addressLink.getNoRequests();
-						map.put("noOfRequests",  no);
-						flag = false;
-					}
-				}		
-				if(flag) {
-					Map<String, Object> catNo = new HashMap<>();
-					catNo.put("categoryName", linksCategory.getCategories().getCategoryName());
-					catNo.put("categoryDescription", linksCategory.getCategories().getDescription());	
-					catNo.put("noOfRequests", addressLink.getNoRequests());
-					listCatNo.add(catNo);
-				}
-				
-			}
-		}
-		response.put("categories", listCatNo);
+		Map<String, Object> response = statisticsService.categoryNoByIpAddress(address);
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(response, HttpStatus.OK.value()), HttpStatus.OK);
 	}
@@ -211,27 +88,9 @@ public class StatisticsController {
 	 * @return ResponseEntity containing the List of HashMap with list of categories with number of request
 	 */
 	@RequestMapping(value = "/categoryNo", method = RequestMethod.GET)
-	public ResponseEntity<RestResponseDto> categoryNo() {
-//		Map<String, Object> responseMap = new HashMap<>();
-		List<HashMap<String, Object>> responseList = new ArrayList<>();
-		List<Categories> listCategories = categoriesDao.findAll();
-		for (Categories category : listCategories) {
-//			Categories category = categoriesDao.findById(id);
-			HashMap<String, Object> response = new HashMap<>();
-			response.put("categoryName", category.getCategoryName());
-			response.put("categoryDescription", category.getDescription());
-			Integer no = 0;
-			List<LinksCategories> listLinksCategories = linksCategoriesDao.findByCategory(category);
-			for (LinksCategories linksCategory : listLinksCategories) {
-				Links link = linksCategory.getLink();
-				List<IpAddressLinks> listIpAddressLinks = ipAddressLinksDao.findByLink(link);
-				for (IpAddressLinks ipAddressLinks : listIpAddressLinks) {
-					no = no + ipAddressLinks.getNoRequests();
-				}
-			}
-			response.put("noOfRequests", no);
-			responseList.add(response);
-		}
+	public ResponseEntity<RestResponseDto> categoryNo() {	
+		
+		List<HashMap<String, Object>> responseList = statisticsService.categoryNo();
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(responseList, HttpStatus.OK.value()), HttpStatus.OK);
 	}
@@ -243,28 +102,11 @@ public class StatisticsController {
 	 */
 	@RequestMapping(value = "/categoryNo/{id}", method = RequestMethod.GET)
 	public ResponseEntity<RestResponseDto> categoryNoByCategory(@PathVariable Integer id) {
-		Map<String, Object> response = new HashMap<>();
 		
-		Categories category = categoriesDao.findById(id);
-		response.put("categoryName", category.getCategoryName());
-		response.put("categoryDescription", category.getDescription());
-		List<HashMap<String, Object>> linkNoList = new ArrayList<>();
-		List<LinksCategories> listLinksCategories = linksCategoriesDao.findByCategory(category);
-		for (LinksCategories linksCategory : listLinksCategories) {
-			HashMap<String, Object> map = new HashMap<>();
-			Integer no = 0;
-			Links link = linksCategory.getLink();
-			List<IpAddressLinks> listIpAddressLinks = ipAddressLinksDao.findByLink(link);
-			for (IpAddressLinks ipAddressLinks : listIpAddressLinks) {
-				no = no + ipAddressLinks.getNoRequests();
-			}
-			map.put("link", link);
-			map.put("noOfRequests", no);
-			linkNoList.add(map);
-		}
-		response.put("links", linkNoList);
-		
+		Map<String, Object> response = statisticsService.categoryNoByCategory(id);
+	
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(response, HttpStatus.OK.value()), HttpStatus.OK);
 	}
+	
 	
 }

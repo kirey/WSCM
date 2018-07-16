@@ -1,8 +1,11 @@
 package com.kirey.wscm.data.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +24,12 @@ import com.kirey.wscm.data.entity.KjcReportBlobs;
 import com.kirey.wscm.data.entity.KjcReportParameters;
 import com.kirey.wscm.data.entity.KjcReports;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  * A service containing methods related to reports
@@ -76,6 +84,49 @@ public class ReportService {
 				return reportEngine.exportPdf(jp).toByteArray();
 			else
 				return reportEngine.exportXls(jp).toByteArray();
+		}
+		return null;
+	}
+	
+	public byte[] generateReportJavaBean(String format, Map<String, Object> reportParams, KjcReports kjcReports, Object javaBean) {
+		if (!kjcReports.getKjcReportBlobses().isEmpty()) {
+			
+//			JasperPrint jp = this.generateReport(reportParam, kjcReports.getKjcReportBlobses());
+			List<KjcReportBlobs> blobs = kjcReports.getKjcReportBlobses();
+			JasperPrint jasperPrint;
+			try {
+				byte[] masterReport = null;
+
+				for (int i = 0; i < blobs.size(); i++) {
+					// master report
+					if (blobs.get(i).getOrderBlob() == AppConstants.REPORT_MASTER_REPORT_ORDER) {
+						masterReport = blobs.get(i).getFileBlob();
+						// subreports
+					} else {
+						byte[] subByteArray = blobs.get(i).getFileBlob();
+						InputStream is = new ByteArrayInputStream(subByteArray);
+						JasperReport jasperSubreport = (JasperReport) JRLoader.loadObject(is);
+						String subreportParamName = blobs.get(i).getSubreportParameterKey();
+						// put subreport as parameter
+						reportParams.put(subreportParamName, jasperSubreport);
+					}
+				}
+				JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource((Collection<?>) javaBean);
+				InputStream reportStream = new ByteArrayInputStream(masterReport);
+				JasperReport jr = (JasperReport) JRLoader.loadObject(reportStream);
+				jasperPrint = JasperFillManager.fillReport(jr, reportParams, datasource);
+				
+			} catch (JRException e) {
+				throw new RuntimeException(e);
+			}
+
+			if (jasperPrint.getPages().isEmpty())
+				return null;
+
+			if ("pdf".equals(format))
+				return reportEngine.exportPdf(jasperPrint).toByteArray();
+			else
+				return reportEngine.exportXls(jasperPrint).toByteArray();
 		}
 		return null;
 	}

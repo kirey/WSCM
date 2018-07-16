@@ -2,10 +2,12 @@ package com.kirey.wscm.common.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -17,6 +19,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.kirey.wscm.common.constants.AppConstants;
+import com.kirey.wscm.data.entity.KjcReportParameters;
 import com.kirey.wscm.data.entity.LinksCategories;
 
 /**
@@ -355,6 +358,70 @@ public class Utilities {
         }
         return distinctList;
     }
+    
+    /**
+	 * Converts report parameters list to HashMap
+	 * @param reportParameters
+	 * @return Map<String, Object> containing report parameters for translation
+	 * 
+	 */
+	public static Map<String, Object> createParametersMap(List<KjcReportParameters> reportParameters) {
+		HashMap<String, Object> result = new HashMap<String, Object>();
+
+		for (KjcReportParameters param : reportParameters) {
+				if((param.getValue() == null && param.getType().equals("HashMap")) || param.getValue() != null) {
+					switch (param.getType()) {
+					case "String":
+						String stringValue = param.getValue();
+						String reverseValue;
+						if(stringValue.startsWith(AppConstants.TRANSLATION_REVERSE_START_TAG) &&
+								stringValue.endsWith(AppConstants.TRANSLATION_REVERSE_END_TAG)){
+							
+							reverseValue = stringValue.replaceFirst(AppConstants.TRANSLATION_REVERSE_START_TAG,
+									AppConstants.TRANSLATION_START_TAG);
+							reverseValue = reverseValue.replaceFirst(AppConstants.TRANSLATION_REVERSE_END_TAG,
+									AppConstants.TRANSLATION_END_TAG);
+							result.put(param.getKey(), reverseValue);
+						}else{
+							result.put(param.getKey(), stringValue);
+						}
+						break;
+					case "Integer":
+						String valueInt = param.getValue();
+						result.put(param.getKey(), Integer.parseInt(valueInt));
+						break;
+
+					case "Decimal":
+						String valueDouble = param.getValue();
+						result.put(param.getKey(), Double.parseDouble(valueDouble));
+						break;
+					case "Date":
+						String miliseconds = param.getValue();
+						Long milisecondsLong = Long.parseLong(miliseconds);
+						Date date = new Date(milisecondsLong);
+						result.put(param.getKey(), date);
+						break;
+					case "Timestamp":
+						String milisecondsTime = param.getValue();
+						Long milisecondsLongTime = Long.parseLong(milisecondsTime);
+						Timestamp timestamp = new Timestamp(milisecondsLongTime);
+						result.put(param.getKey(), timestamp);
+						break;
+					case "HashMap":
+						if(param.getKey().equals(AppConstants.REPORT_TRANSLATION_MAP)){
+							result.put(param.getKey(), true);
+						}
+						
+						break;
+					default:
+						break;
+					}
+				}
+		}
+
+		return result;
+
+	}
 
 
 }

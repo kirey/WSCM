@@ -1,7 +1,12 @@
 package com.kirey.wscm.api.restcontrollers;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.hibernate5.SessionFactoryUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,11 +39,21 @@ import com.kirey.wscm.data.dao.LinksCategoriesDao;
 import com.kirey.wscm.data.dao.UserLinksDao;
 import com.kirey.wscm.data.entity.Categories;
 import com.kirey.wscm.data.entity.IpAddressLinks;
+import com.kirey.wscm.data.entity.KjcReportBlobs;
 import com.kirey.wscm.data.entity.KjcReportParameters;
 import com.kirey.wscm.data.entity.KjcReports;
 import com.kirey.wscm.data.entity.Links;
 import com.kirey.wscm.data.entity.LinksCategories;
+import com.kirey.wscm.data.service.ReportEngine;
 import com.kirey.wscm.data.service.ReportService;
+import com.kirey.wscm.data.service.StatisticsService;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 
 
@@ -71,6 +87,13 @@ public class ReportController {
 	
 	@Autowired
 	private CategoriesDao categoriesDao;
+	
+	@Autowired
+	private ReportEngine reportEngine;
+	
+	@Autowired
+	private StatisticsService statisticsService;
+	
 
 
 	/**
@@ -381,51 +404,34 @@ public class ReportController {
 	@RequestMapping(value = "/preview", method = RequestMethod.PUT)
     public ResponseEntity<RestResponseDto> generateReport() {
 
-		
-		////////////////////////////////
-		List<HashMap<String, Object>> responseList = new ArrayList<>();
-		
-		List<Categories> listCategories = categoriesDao.findAll();
-		for (Categories category : listCategories) {
-//			Categories category = categoriesDao.findById(id);
-			HashMap<String, Object> response = new HashMap<>();
-			response.put("categoryName", category.getCategoryName());
-			response.put("categoryDescription", category.getDescription());
-			Integer no = 0;
-			List<LinksCategories> listLinksCategories = linksCategoriesDao.findByCategory(category);
-			for (LinksCategories linksCategory : listLinksCategories) {
-				Links link = linksCategory.getLink();
-				List<IpAddressLinks> listIpAddressLinks = ipAddressLinksDao.findByLink(link);
-				for (IpAddressLinks ipAddressLinks : listIpAddressLinks) {
-					no = no + ipAddressLinks.getNoRequests();
-				}
-			}
-			response.put("noOfRequests", no);
-			responseList.add(response);
-		}
-		////////////////////////////////
+		List<HashMap<String, Object>> responseList = statisticsService.categoryNo();
 
+		KjcReports report = kjcReportsDao.findByName("JavaBean");
+		
+		
+		byte[] reportGenerated = reportService.generateReportJavaBean("pdf", new HashMap<>(), report, responseList);
+
+		String encoded = Base64.getEncoder().encodeToString(reportGenerated);
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(encoded, HttpStatus.OK.value()), HttpStatus.OK);
+	}
+	
+	
+
+
+
+	@RequestMapping(value = "/preview/test", method = RequestMethod.PUT)
+    public ResponseEntity<RestResponseDto> generateReportTest() {
+		
+	
 		KjcReports report = kjcReportsDao.findByName("Category number");
 		
-		this.validateReportParameters(report);
-
-		List<KjcReportParameters> reportParametersList = report.getKjcReportParameterses();
-		for (KjcReportParameters kjcReportParameters : reportParametersList) {
-			for (HashMap<String, Object> hashMap : responseList) {
-				if(kjcReportParameters.getName().equals("categoryName") && hashMap.containsKey("categoryName")){
-					kjcReportParameters.setValue((String) hashMap.get("categoryName"));
-				}
-				if(kjcReportParameters.getName().equals("categoryDescription") && hashMap.containsKey("categoryDescription")){
-					kjcReportParameters.setValue((String) hashMap.get("categoryDescription"));
-				}
-				if(kjcReportParameters.getName().equals("noRequests") && hashMap.containsKey("noOfRequests")){
-					kjcReportParameters.setValue((String) hashMap.get("noOfRequests"));
-				}
-				
-			}
-			
+		RestResponseDto validateResponse = this.validateReportParameters(report);
+		if(validateResponse != null) {
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(validateResponse, HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
 		}
-
+		
+		List<KjcReportParameters> reportParametersList = report.getKjcReportParameterses();
 		HashMap<String, Object> reportParameters = (HashMap<String, Object>) Utilities.createParametersMap(reportParametersList);
 
 		byte[] reportGenerated = reportService.generateReport("pdf", reportParameters, report);
@@ -434,6 +440,4 @@ public class ReportController {
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(encoded, HttpStatus.OK.value()), HttpStatus.OK);
 	}
-	
-	
 }
