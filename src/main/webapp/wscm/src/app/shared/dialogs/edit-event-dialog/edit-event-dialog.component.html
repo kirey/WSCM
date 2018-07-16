@@ -1,37 +1,50 @@
 <div id="editJob">
-  <h1>Edit  <h5>{{data.eventName}}</h5></h1>
+  <h1>Edit
+    <h5>{{data.eventName}}</h5>
+  </h1>
   <div *ngIf="data">
-    <mat-dialog-content>
+    <form #editEventForm="ngForm" class="editJob-container">
+      <mat-dialog-content>
+        <mat-form-field id="idField">
+          <input matInput name="id" [(ngModel)]="data.id" autocomplete="off">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput name="eventName" type="text" [(ngModel)]="data.eventName" placeholder="Event Name" autocomplete="off">
+        </mat-form-field>
 
-          <mat-form-field>
-            <input matInput name="eventName" id="eventName" type="text" [(ngModel)]="data.eventName" placeholder="Event Name" autocomplete="off">
-          </mat-form-field>
-
-          <mat-form-field>
-              <input matInput name="eventType" id="eventType" type="text" [(ngModel)]="data.eventType" placeholder="Event Type" autocomplete="off">
-            </mat-form-field><br>
-          <mat-form-field>
-        <mat-select  [(ngModel)]="data.jobs.jobName"  name="jobName" id="jobName" placeholder="Job Name" required>
-            <!-- <mat-option [(value)]="data.jobs.jobName" ><span *ngFor="let job of data">{{data.jobs.jobName}}</span></mat-option> -->
-            <mat-option *ngFor="let job of events" [value]="job.jobs.jobName">{{job.jobs.jobName}}</mat-option>
+        <mat-form-field>
+          <input matInput name="eventType" type="text" [(ngModel)]="data.eventType" placeholder="Event Type" autocomplete="off">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-select name="jobs" [(ngModel)]="data.jobs" placeholder="Job Name" required>
+            <mat-option *ngFor="let job of events; let i = index" [value]="job.jobs">{{job.jobs.jobName}}</mat-option>
           </mat-select>
-          </mat-form-field>
+        </mat-form-field>
 
-          <mat-form-field>
-            <input matInput name="cronExpression" id="cronExpression" [(ngModel)]="data.jobs.cronExpression" placeholder="Definition" autocomplete="off">
-          </mat-form-field><br>
+        <!-- <mat-form-field>
+            <input matInput name="cronExpression" id="cronExpression" formControlName="cronExpression" [value]="data.jobs.cronExpression" placeholder="Definition" autocomplete="off">
+          </mat-form-field><br> -->
 
-          <mat-form-field>
-            <textarea matInput name="description" id="description" [(ngModel)]="data.description" placeholder="Description"></textarea>
-          </mat-form-field>
-          <mat-form-field>
-              <input matInput name="status" id="status" [(ngModel)]="data.status" placeholder="Status">
-            </mat-form-field>
+        <mat-form-field>
+          <input matInput name="definition" [(ngModel)]="data.definition" placeholder="Definition" autocomplete="off">
+        </mat-form-field>
+        <br>
 
-    </mat-dialog-content>
+        <mat-form-field>
+          <textarea matInput name="description" [(ngModel)]="data.description" placeholder="Description"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="status" [(ngModel)]="data.status" placeholder="Status">
+        </mat-form-field>
+
+      </mat-dialog-content>
+
+      <mat-dialog-actions class="buttons">
+        <button mat-raised-button class="editButton" (click)="editJob(editEventForm.value)">Save</button>
+        <button mat-button mat-dialog-close class="cancelButton">Cancel</button>
+      </mat-dialog-actions>
+    </form>
   </div>
-  <mat-dialog-actions class="buttons">
-    <button mat-raised-button class="editButton" (click)="editJob()">Save</button>
-    <button mat-button mat-dialog-close class="cancelButton">Cancel</button>
-  </mat-dialog-actions>
 </div>

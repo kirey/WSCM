@@ -12,7 +12,6 @@
       </mat-form-field>
       <mat-form-field>
         <mat-select  id="jobSelected" placeholder="Job Name" required [(ngModel)]="jobSelected"  name="jobSelected">
-          <!-- <mat-option [(value)]="data.jobs.jobName" ><span *ngFor="let job of data">{{data.jobs.jobName}}</span></mat-option> -->
           <mat-option *ngFor="let job of events; let i = index" [value]="job.jobs">{{job.jobs.jobName}}</mat-option>
         </mat-select>
       </mat-form-field>

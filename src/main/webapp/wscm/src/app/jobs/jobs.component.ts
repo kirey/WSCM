@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
+
 import {
   MatDialog,
   MatDialogRef,
@@ -36,13 +38,15 @@ export class JobsComponent implements OnInit {
       res => {
         this.jobs = res.data;
         console.log(this.jobs);
-        // this.dataSource = new MatTableDataSource<any>(res['data']);
-        // this.dataSource.paginator = this.paginator;
+
       },
       err => console.log(err)
     );
   }
-  ngOnInit() {
+  ngOnInit(): void {
     this.getList();
+    this.dataSource = new MatTableDataSource<Element>(this.jobs);
+    this.dataSource.paginator = this.paginator;
+
   }
 }

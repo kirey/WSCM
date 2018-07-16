@@ -44,7 +44,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-bootstrap@4.1.1
+bootstrap@4.1.2
 MIT
 The MIT License (MIT)
 
@@ -96,7 +96,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 MIT
 MIT
 
-@angular/cdk@6.2.1
+@angular/cdk@6.3.3
 MIT
 The MIT License
 
@@ -140,7 +140,7 @@ MIT
 MIT
 MIT
 
-@angular/material@6.2.1
+@angular/material@6.3.3
 MIT
 The MIT License
 
@@ -404,7 +404,7 @@ Apache License
  See the License for the specific language governing permissions and
  limitations under the License.
 
-tslib@1.9.1
+tslib@1.9.3
 Apache-2.0
 Apache License
 

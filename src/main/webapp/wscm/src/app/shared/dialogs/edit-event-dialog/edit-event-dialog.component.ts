@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   OnInit
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EditEventService } from './edit-event-dialog.service';
 
@@ -19,7 +20,7 @@ export class EditEventDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public editEventService: EditEventService
   ) {}
-
+  editEventsForm: FormGroup;
   cronExpression: string;
   status: string;
   eventType: string;
@@ -27,6 +28,8 @@ export class EditEventDialogComponent implements OnInit {
   events: any;
   eventName: string;
   selectValue: any;
+  jobs: any;
+  obj: any;
 
   getList() {
     this.editEventService.getJobs().subscribe(
@@ -37,19 +40,15 @@ export class EditEventDialogComponent implements OnInit {
       err => console.log(err)
     );
   }
-
-  jobObjectChanged(ev) {
-    console.log(ev);
-  }
-
   // Edit job form
-  editJob() {
-    console.log(this.data);
-    this.editEventService.editJobs(this.data).subscribe(
+  editJob(obj) {
+    console.log(obj);
+    this.editEventService.editJobs(obj).subscribe(
       res => {
         console.log(res);
         // this.successMessage(res.message);
         this.dialogRef.close();
+        this.getList();
       },
       err => {
         console.log(err);
