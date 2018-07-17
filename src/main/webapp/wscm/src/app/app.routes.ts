@@ -1,3 +1,5 @@
+import { ClassLoadingCategoriesComponent } from './class-loading-categories/class-loading-categories.component';
+import { ClassLoadingComponent } from './class-loading/class-loading.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'content', component: ContentComponent, canActivate: [AuthGuard] },
   { path: 'scheduler', component: EventsComponent, canActivate: [AuthGuard] },
   { path: 'jobs', component: JobsComponent, canActivate: [AuthGuard] },
+  { path: 'class-loading', component: ClassLoadingComponent, canActivate: [AuthGuard] },
+  { path: 'class-loading-categories', component: ClassLoadingCategoriesComponent, canActivate: [AuthGuard] },
   { path: 'languages', component: LanguagesComponent },
   { path: 'client', component: ClientComponent, canActivate: [AuthGuard] },
   { path: 'client-mail', component: MailRedirectComponent, canActivate: [AuthGuard] },

@@ -92,49 +92,55 @@ var AppComponent = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _app_routes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.routes */ "./src/app/app.routes.ts");
-/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
-/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _shared_modules_material_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./shared/modules/material.module */ "./src/app/shared/modules/material.module.ts");
-/* harmony import */ var _shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./shared/guards/auth.guard */ "./src/app/shared/guards/auth.guard.ts");
-/* harmony import */ var _panel_panel_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./panel/panel.service */ "./src/app/panel/panel.service.ts");
-/* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./shared/services/auth.service */ "./src/app/shared/services/auth.service.ts");
-/* harmony import */ var _login_login_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./login/login.service */ "./src/app/login/login.service.ts");
-/* harmony import */ var _events_events_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./events/events.service */ "./src/app/events/events.service.ts");
-/* harmony import */ var _client_client_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./client/client.service */ "./src/app/client/client.service.ts");
-/* harmony import */ var _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./shared/services/socket.service */ "./src/app/shared/services/socket.service.ts");
-/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shared/dialogs/edit-event-dialog/edit-event-dialog.service */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.service.ts");
-/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./shared/dialogs/add-event-dialog/add-event-dialog.service */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.service.ts");
-/* harmony import */ var _jobs_jobs_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./jobs/jobs.service */ "./src/app/jobs/jobs.service.ts");
-/* harmony import */ var _shared_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./shared/pipes/filter.pipe */ "./src/app/shared/pipes/filter.pipe.ts");
-/* harmony import */ var _panel_panel_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./panel/panel.component */ "./src/app/panel/panel.component.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _content_content_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./content/content.component */ "./src/app/content/content.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
-/* harmony import */ var _languages_languages_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./languages/languages.component */ "./src/app/languages/languages.component.ts");
-/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
-/* harmony import */ var _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./shared/dialogs/delete-dialog/delete-dialog.component */ "./src/app/shared/dialogs/delete-dialog/delete-dialog.component.ts");
-/* harmony import */ var _client_client_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./client/client.component */ "./src/app/client/client.component.ts");
-/* harmony import */ var _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./jobs/jobs.component */ "./src/app/jobs/jobs.component.ts");
-/* harmony import */ var _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./shared/dialogs/edit-dialog/edit-dialog.component */ "./src/app/shared/dialogs/edit-dialog/edit-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./shared/dialogs/edit-event-dialog/edit-event-dialog.component */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./shared/dialogs/add-content-dialog/add-content-dialog.component */ "./src/app/shared/dialogs/add-content-dialog/add-content-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./shared/dialogs/edit-content-dialog/edit-content-dialog.component */ "./src/app/shared/dialogs/edit-content-dialog/edit-content-dialog.component.ts");
-/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./shared/dialogs/add-event-dialog/add-event-dialog.component */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.component.ts");
-/* harmony import */ var _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./mail-redirect/mail-redirect.component */ "./src/app/mail-redirect/mail-redirect.component.ts");
+/* harmony import */ var _class_loading_categories_class_loading_categories_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./class-loading-categories/class-loading-categories.service */ "./src/app/class-loading-categories/class-loading-categories.service.ts");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _app_routes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.routes */ "./src/app/app.routes.ts");
+/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
+/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _shared_modules_material_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./shared/modules/material.module */ "./src/app/shared/modules/material.module.ts");
+/* harmony import */ var _shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./shared/guards/auth.guard */ "./src/app/shared/guards/auth.guard.ts");
+/* harmony import */ var _panel_panel_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./panel/panel.service */ "./src/app/panel/panel.service.ts");
+/* harmony import */ var _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./shared/services/auth.service */ "./src/app/shared/services/auth.service.ts");
+/* harmony import */ var _login_login_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./login/login.service */ "./src/app/login/login.service.ts");
+/* harmony import */ var _events_events_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./events/events.service */ "./src/app/events/events.service.ts");
+/* harmony import */ var _client_client_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./client/client.service */ "./src/app/client/client.service.ts");
+/* harmony import */ var _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shared/services/socket.service */ "./src/app/shared/services/socket.service.ts");
+/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./shared/dialogs/edit-event-dialog/edit-event-dialog.service */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.service.ts");
+/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./shared/dialogs/add-event-dialog/add-event-dialog.service */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.service.ts");
+/* harmony import */ var _jobs_jobs_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./jobs/jobs.service */ "./src/app/jobs/jobs.service.ts");
+/* harmony import */ var _shared_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./shared/pipes/filter.pipe */ "./src/app/shared/pipes/filter.pipe.ts");
+/* harmony import */ var _panel_panel_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./panel/panel.component */ "./src/app/panel/panel.component.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _content_content_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./content/content.component */ "./src/app/content/content.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
+/* harmony import */ var _languages_languages_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./languages/languages.component */ "./src/app/languages/languages.component.ts");
+/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
+/* harmony import */ var _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./shared/dialogs/delete-dialog/delete-dialog.component */ "./src/app/shared/dialogs/delete-dialog/delete-dialog.component.ts");
+/* harmony import */ var _client_client_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./client/client.component */ "./src/app/client/client.component.ts");
+/* harmony import */ var _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./jobs/jobs.component */ "./src/app/jobs/jobs.component.ts");
+/* harmony import */ var _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./shared/dialogs/edit-dialog/edit-dialog.component */ "./src/app/shared/dialogs/edit-dialog/edit-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./shared/dialogs/edit-event-dialog/edit-event-dialog.component */ "./src/app/shared/dialogs/edit-event-dialog/edit-event-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./shared/dialogs/add-content-dialog/add-content-dialog.component */ "./src/app/shared/dialogs/add-content-dialog/add-content-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./shared/dialogs/edit-content-dialog/edit-content-dialog.component */ "./src/app/shared/dialogs/edit-content-dialog/edit-content-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./shared/dialogs/add-event-dialog/add-event-dialog.component */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.component.ts");
+/* harmony import */ var _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./mail-redirect/mail-redirect.component */ "./src/app/mail-redirect/mail-redirect.component.ts");
+/* harmony import */ var _class_loading_class_loading_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./class-loading/class-loading.component */ "./src/app/class-loading/class-loading.component.ts");
+/* harmony import */ var _class_loading_categories_class_loading_categories_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./class-loading-categories/class-loading-categories.component */ "./src/app/class-loading-categories/class-loading-categories.component.ts");
+/* harmony import */ var _shared_dialogs_add_category_dialog_add_category_dialog_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./shared/dialogs/add-category-dialog/add-category-dialog.component */ "./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_edit_category_dialog_edit_category_dialog_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./shared/dialogs/edit-category-dialog/edit-category-dialog.component */ "./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -175,62 +181,73 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_21__["AppComponent"],
-                _panel_panel_component__WEBPACK_IMPORTED_MODULE_20__["PanelComponent"],
-                _content_content_component__WEBPACK_IMPORTED_MODULE_22__["ContentComponent"],
-                _home_home_component__WEBPACK_IMPORTED_MODULE_23__["HomeComponent"],
-                _login_login_component__WEBPACK_IMPORTED_MODULE_24__["LoginComponent"],
-                _languages_languages_component__WEBPACK_IMPORTED_MODULE_25__["LanguagesComponent"],
-                _shared_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_19__["FilterPipe"],
-                _events_events_component__WEBPACK_IMPORTED_MODULE_26__["EventsComponent"],
-                _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_27__["DeleteDialog"],
-                _client_client_component__WEBPACK_IMPORTED_MODULE_28__["ClientComponent"],
-                _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_29__["JobsComponent"],
-                _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_30__["EditDialogComponent"],
-                _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_31__["EditEventDialogComponent"],
-                _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_32__["AddContentDialogComponent"],
-                _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_33__["EditContentDialogComponent"],
-                _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_34__["AddEventDialogComponent"],
-                _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_35__["MailRedirectComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_22__["AppComponent"],
+                _panel_panel_component__WEBPACK_IMPORTED_MODULE_21__["PanelComponent"],
+                _content_content_component__WEBPACK_IMPORTED_MODULE_23__["ContentComponent"],
+                _home_home_component__WEBPACK_IMPORTED_MODULE_24__["HomeComponent"],
+                _login_login_component__WEBPACK_IMPORTED_MODULE_25__["LoginComponent"],
+                _languages_languages_component__WEBPACK_IMPORTED_MODULE_26__["LanguagesComponent"],
+                _shared_pipes_filter_pipe__WEBPACK_IMPORTED_MODULE_20__["FilterPipe"],
+                _events_events_component__WEBPACK_IMPORTED_MODULE_27__["EventsComponent"],
+                _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_28__["DeleteDialog"],
+                _client_client_component__WEBPACK_IMPORTED_MODULE_29__["ClientComponent"],
+                _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_30__["JobsComponent"],
+                _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_31__["EditDialogComponent"],
+                _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_32__["EditEventDialogComponent"],
+                _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_33__["AddContentDialogComponent"],
+                _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_34__["EditContentDialogComponent"],
+                _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_35__["AddEventDialogComponent"],
+                _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_36__["MailRedirectComponent"],
+                _class_loading_class_loading_component__WEBPACK_IMPORTED_MODULE_37__["ClassLoadingComponent"],
+                _class_loading_categories_class_loading_categories_component__WEBPACK_IMPORTED_MODULE_38__["ClassLoadingCategoriesComponent"],
+                _shared_dialogs_add_category_dialog_add_category_dialog_component__WEBPACK_IMPORTED_MODULE_39__["AddCategoryDialogComponent"],
+                _shared_dialogs_edit_category_dialog_edit_category_dialog_component__WEBPACK_IMPORTED_MODULE_40__["EditCategoryDialogComponent"]
             ],
             imports: [
-                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _app_routes__WEBPACK_IMPORTED_MODULE_6__["AppRoutes"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_2__["BrowserAnimationsModule"],
-                _angular_http__WEBPACK_IMPORTED_MODULE_4__["HttpModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"],
-                _shared_modules_material_module__WEBPACK_IMPORTED_MODULE_8__["MaterialModule"]
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
+                _app_routes__WEBPACK_IMPORTED_MODULE_7__["AppRoutes"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
+                _angular_http__WEBPACK_IMPORTED_MODULE_5__["HttpModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"],
+                _shared_modules_material_module__WEBPACK_IMPORTED_MODULE_9__["MaterialModule"]
             ],
             providers: [
-                _panel_panel_service__WEBPACK_IMPORTED_MODULE_10__["PanelService"],
-                _shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"],
-                _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"],
-                _login_login_service__WEBPACK_IMPORTED_MODULE_12__["LoginService"],
-                _events_events_service__WEBPACK_IMPORTED_MODULE_13__["EventsService"],
-                _client_client_service__WEBPACK_IMPORTED_MODULE_14__["ClientService"],
-                _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_15__["SocketService"],
-                _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_16__["EditEventService"],
-                _shared_dialogs_add_event_dialog_add_event_dialog_service__WEBPACK_IMPORTED_MODULE_17__["AddEventService"],
-                _jobs_jobs_service__WEBPACK_IMPORTED_MODULE_18__["JobsService"]
+                _panel_panel_service__WEBPACK_IMPORTED_MODULE_11__["PanelService"],
+                _shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_10__["AuthGuard"],
+                _shared_services_auth_service__WEBPACK_IMPORTED_MODULE_12__["AuthService"],
+                _login_login_service__WEBPACK_IMPORTED_MODULE_13__["LoginService"],
+                _events_events_service__WEBPACK_IMPORTED_MODULE_14__["EventsService"],
+                _client_client_service__WEBPACK_IMPORTED_MODULE_15__["ClientService"],
+                _shared_services_socket_service__WEBPACK_IMPORTED_MODULE_16__["SocketService"],
+                _shared_dialogs_edit_event_dialog_edit_event_dialog_service__WEBPACK_IMPORTED_MODULE_17__["EditEventService"],
+                _shared_dialogs_add_event_dialog_add_event_dialog_service__WEBPACK_IMPORTED_MODULE_18__["AddEventService"],
+                _jobs_jobs_service__WEBPACK_IMPORTED_MODULE_19__["JobsService"],
+                _class_loading_categories_class_loading_categories_service__WEBPACK_IMPORTED_MODULE_0__["ClassLoadingCategoriesService"]
             ],
             entryComponents: [
-                _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_27__["DeleteDialog"],
-                _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_30__["EditDialogComponent"],
-                _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_31__["EditEventDialogComponent"],
-                _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_32__["AddContentDialogComponent"],
-                _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_33__["EditContentDialogComponent"],
-                _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_34__["AddEventDialogComponent"]
+                _shared_dialogs_delete_dialog_delete_dialog_component__WEBPACK_IMPORTED_MODULE_28__["DeleteDialog"],
+                _shared_dialogs_edit_dialog_edit_dialog_component__WEBPACK_IMPORTED_MODULE_31__["EditDialogComponent"],
+                _shared_dialogs_edit_event_dialog_edit_event_dialog_component__WEBPACK_IMPORTED_MODULE_32__["EditEventDialogComponent"],
+                _shared_dialogs_add_content_dialog_add_content_dialog_component__WEBPACK_IMPORTED_MODULE_33__["AddContentDialogComponent"],
+                _shared_dialogs_edit_content_dialog_edit_content_dialog_component__WEBPACK_IMPORTED_MODULE_34__["EditContentDialogComponent"],
+                _shared_dialogs_add_event_dialog_add_event_dialog_component__WEBPACK_IMPORTED_MODULE_35__["AddEventDialogComponent"],
+                _shared_dialogs_add_category_dialog_add_category_dialog_component__WEBPACK_IMPORTED_MODULE_39__["AddCategoryDialogComponent"],
+                _shared_dialogs_edit_category_dialog_edit_category_dialog_component__WEBPACK_IMPORTED_MODULE_40__["EditCategoryDialogComponent"]
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_21__["AppComponent"]],
-            schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["CUSTOM_ELEMENTS_SCHEMA"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_22__["AppComponent"]],
+            schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_2__["CUSTOM_ELEMENTS_SCHEMA"]]
         })
     ], AppModule);
     return AppModule;
@@ -250,16 +267,20 @@ var AppModule = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutes", function() { return AppRoutes; });
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _content_content_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./content/content.component */ "./src/app/content/content.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _languages_languages_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./languages/languages.component */ "./src/app/languages/languages.component.ts");
-/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
-/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
-/* harmony import */ var _client_client_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./client/client.component */ "./src/app/client/client.component.ts");
-/* harmony import */ var _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mail-redirect/mail-redirect.component */ "./src/app/mail-redirect/mail-redirect.component.ts");
-/* harmony import */ var _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./jobs/jobs.component */ "./src/app/jobs/jobs.component.ts");
-/* harmony import */ var _shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./shared/guards/auth.guard */ "./src/app/shared/guards/auth.guard.ts");
+/* harmony import */ var _class_loading_categories_class_loading_categories_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./class-loading-categories/class-loading-categories.component */ "./src/app/class-loading-categories/class-loading-categories.component.ts");
+/* harmony import */ var _class_loading_class_loading_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./class-loading/class-loading.component */ "./src/app/class-loading/class-loading.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _content_content_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./content/content.component */ "./src/app/content/content.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _languages_languages_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./languages/languages.component */ "./src/app/languages/languages.component.ts");
+/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
+/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./events/events.component */ "./src/app/events/events.component.ts");
+/* harmony import */ var _client_client_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./client/client.component */ "./src/app/client/client.component.ts");
+/* harmony import */ var _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./mail-redirect/mail-redirect.component */ "./src/app/mail-redirect/mail-redirect.component.ts");
+/* harmony import */ var _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./jobs/jobs.component */ "./src/app/jobs/jobs.component.ts");
+/* harmony import */ var _shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./shared/guards/auth.guard */ "./src/app/shared/guards/auth.guard.ts");
+
+
 
 
 
@@ -271,18 +292,267 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
-    { path: '', redirectTo: '/login', canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]], pathMatch: 'full' },
-    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"] },
-    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
-    { path: 'content', component: _content_content_component__WEBPACK_IMPORTED_MODULE_1__["ContentComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
-    { path: 'scheduler', component: _events_events_component__WEBPACK_IMPORTED_MODULE_5__["EventsComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
-    { path: 'jobs', component: _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_8__["JobsComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
-    { path: 'languages', component: _languages_languages_component__WEBPACK_IMPORTED_MODULE_3__["LanguagesComponent"] },
-    { path: 'client', component: _client_client_component__WEBPACK_IMPORTED_MODULE_6__["ClientComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
-    { path: 'client-mail', component: _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_7__["MailRedirectComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
-    { path: '**', component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"] }
+    { path: '', redirectTo: '/login', canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]], pathMatch: 'full' },
+    { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"] },
+    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
+    { path: 'content', component: _content_content_component__WEBPACK_IMPORTED_MODULE_3__["ContentComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
+    { path: 'scheduler', component: _events_events_component__WEBPACK_IMPORTED_MODULE_7__["EventsComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
+    { path: 'jobs', component: _jobs_jobs_component__WEBPACK_IMPORTED_MODULE_10__["JobsComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
+    { path: 'class-loading', component: _class_loading_class_loading_component__WEBPACK_IMPORTED_MODULE_1__["ClassLoadingComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
+    { path: 'class-loading-categories', component: _class_loading_categories_class_loading_categories_component__WEBPACK_IMPORTED_MODULE_0__["ClassLoadingCategoriesComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
+    { path: 'languages', component: _languages_languages_component__WEBPACK_IMPORTED_MODULE_5__["LanguagesComponent"] },
+    { path: 'client', component: _client_client_component__WEBPACK_IMPORTED_MODULE_8__["ClientComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
+    { path: 'client-mail', component: _mail_redirect_mail_redirect_component__WEBPACK_IMPORTED_MODULE_9__["MailRedirectComponent"], canActivate: [_shared_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
+    { path: '**', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] }
 ];
-var AppRoutes = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(routes, { useHash: true });
+var AppRoutes = _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, { useHash: true });
+
+
+/***/ }),
+
+/***/ "./src/app/class-loading-categories/class-loading-categories.component.html":
+/*!**********************************************************************************!*\
+  !*** ./src/app/class-loading-categories/class-loading-categories.component.html ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div style=\"display:flex\">\n    <app-panel></app-panel>\n    <div id=\"myTable\">\n        <button matTooltip=\"Add Job\" matTooltipPosition=\"above\" (click)=\"openAddDialog()\" mat-mini-fab>\n            <i class=\"material-icons plus\">add</i> \n        </button>\n        <h1>Categories</h1>\n        <div *ngIf=\"dataSource\">\n            <table mat-table [dataSource]=\"dataSource\" class=\"mat-elevation-z8\">\n                <ng-container matColumnDef=\"categoryName\">\n                    <th mat-header-cell *matHeaderCellDef> Category Name </th>\n                    <td mat-cell *matCellDef=\"let category\"> {{category.name}} </td>\n                </ng-container>\n                <ng-container matColumnDef=\"editing\">\n                    <th mat-header-cell *matHeaderCellDef> Editing</th>\n                    <td mat-cell *matCellDef=\"let category\">\n                        <i matTooltip=\"Edit Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"openEditDialog(category)\"> edit </i>\n                        <i matTooltip=\"Delete Job\" matTooltipPosition=\"above\" class=\"material-icons\" (click)=\"deleteCategory(category.id)\"> delete </i>\n                    </td>\n                </ng-container>\n\n                <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n                <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n            </table>\n        </div>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/class-loading-categories/class-loading-categories.component.scss":
+/*!**********************************************************************************!*\
+  !*** ./src/app/class-loading-categories/class-loading-categories.component.scss ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\n.content-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\n.add-button {\n  align-self: flex-end;\n  margin-right: 50px !important;\n  margin-bottom: 50px !important;\n  margin-top: 10px !important; }\n\n.add-button:active {\n  outline: none; }\n\n.add-button:focus {\n  outline: none; }\n\nh1 {\n  color: #fff;\n  padding: 10px 3%;\n  font-size: 35px;\n  background: linear-gradient(to right, #009688, #64FFDA); }\n\ntable {\n  text-align: center;\n  margin-left: 3%;\n  margin-right: 3%; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: left !important;\n  padding-right: 24px !important;\n  padding-top: 10px !important;\n  padding-bottom: 10px; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  padding-right: 24px !important;\n  padding-top: 10px !important;\n  padding-bottom: 10px;\n  text-align: left !important; }\n\n.table-icons {\n  color: #009688;\n  font-size: 25px;\n  padding-right: 5px;\n  text-align: center; }\n\n.table-icons:hover {\n  cursor: pointer; }\n\n.table-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.table-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#myTable {\n  width: 420px;\n  margin-left: 12%;\n  margin-top: 15%; }\n\ntable {\n  width: 400px;\n  margin-top: 15px;\n  margin-left: 8px; }\n\nbutton {\n  background: #FFEE58;\n  float: right; }\n"
+
+/***/ }),
+
+/***/ "./src/app/class-loading-categories/class-loading-categories.component.ts":
+/*!********************************************************************************!*\
+  !*** ./src/app/class-loading-categories/class-loading-categories.component.ts ***!
+  \********************************************************************************/
+/*! exports provided: ClassLoadingCategoriesComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClassLoadingCategoriesComponent", function() { return ClassLoadingCategoriesComponent; });
+/* harmony import */ var _shared_services_snackbar_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../shared/services/snackbar.service */ "./src/app/shared/services/snackbar.service.ts");
+/* harmony import */ var _shared_dialogs_edit_category_dialog_edit_category_dialog_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../shared/dialogs/edit-category-dialog/edit-category-dialog.component */ "./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.ts");
+/* harmony import */ var _shared_dialogs_add_category_dialog_add_category_dialog_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../shared/dialogs/add-category-dialog/add-category-dialog.component */ "./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.ts");
+/* harmony import */ var _class_loading_categories_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./class-loading-categories.service */ "./src/app/class-loading-categories/class-loading-categories.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var ClassLoadingCategoriesComponent = /** @class */ (function () {
+    function ClassLoadingCategoriesComponent(_classLoadingCategoriesService, dialog, snackBarService) {
+        this._classLoadingCategoriesService = _classLoadingCategoriesService;
+        this.dialog = dialog;
+        this.snackBarService = snackBarService;
+        this.displayedColumns = ['categoryName', 'editing'];
+    }
+    ClassLoadingCategoriesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //takes all categories
+        this._classLoadingCategoriesService.getCategories().subscribe(function (res) {
+            _this.categories = JSON.parse(res.text()).data;
+            _this.dataSource = _this.categories;
+            console.log(_this.categories);
+        });
+    };
+    ClassLoadingCategoriesComponent.prototype.deleteCategory = function (id) {
+        var _this = this;
+        console.log(id);
+        this._classLoadingCategoriesService.deleteCategory(id).subscribe(function (res) { }, function (err) {
+            _this.snackBarService.openSnackBar('Failed deleting!', 'Error');
+        }, function () {
+            _this._classLoadingCategoriesService.getCategories().subscribe(function (res) {
+                _this.categories = JSON.parse(res.text()).data;
+                _this.dataSource = _this.categories;
+                _this.snackBarService.openSnackBar('Successfuly deleted!', 'Succes');
+            });
+        });
+    };
+    ClassLoadingCategoriesComponent.prototype.openAddDialog = function () {
+        var _this = this;
+        var dialogRef = this.dialog.open(_shared_dialogs_add_category_dialog_add_category_dialog_component__WEBPACK_IMPORTED_MODULE_2__["AddCategoryDialogComponent"], {
+            width: '800px'
+        });
+        dialogRef.afterClosed().subscribe(function (res) {
+            _this._classLoadingCategoriesService.getCategories().subscribe(function (res) {
+                _this.categories = JSON.parse(res.text()).data;
+                _this.dataSource = _this.categories;
+            });
+        }, function (err) {
+            _this.snackBarService.openSnackBar('Failed adding!', 'Error');
+        }, function () {
+            _this.snackBarService.openSnackBar('Successfuly added!', 'Succes');
+        });
+    };
+    ClassLoadingCategoriesComponent.prototype.openEditDialog = function (obj) {
+        var _this = this;
+        var dialogRef = this.dialog.open(_shared_dialogs_edit_category_dialog_edit_category_dialog_component__WEBPACK_IMPORTED_MODULE_1__["EditCategoryDialogComponent"], {
+            width: '800px',
+            data: obj
+        });
+        dialogRef.afterClosed().subscribe(function (res) {
+            _this._classLoadingCategoriesService.getCategories().subscribe(function (res) {
+                _this.categories = JSON.parse(res.text()).data;
+                _this.dataSource = _this.categories;
+            });
+        }, function (err) {
+            _this.snackBarService.openSnackBar('Failed editing!', 'Error');
+        }, function () {
+            _this.snackBarService.openSnackBar('Successfuly edited!', 'Succes');
+        });
+    };
+    ClassLoadingCategoriesComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
+            selector: 'app-class-loading-categories',
+            template: __webpack_require__(/*! ./class-loading-categories.component.html */ "./src/app/class-loading-categories/class-loading-categories.component.html"),
+            styles: [__webpack_require__(/*! ./class-loading-categories.component.scss */ "./src/app/class-loading-categories/class-loading-categories.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_class_loading_categories_service__WEBPACK_IMPORTED_MODULE_3__["ClassLoadingCategoriesService"], _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialog"], _shared_services_snackbar_service__WEBPACK_IMPORTED_MODULE_0__["SnackBarService"]])
+    ], ClassLoadingCategoriesComponent);
+    return ClassLoadingCategoriesComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/class-loading-categories/class-loading-categories.service.ts":
+/*!******************************************************************************!*\
+  !*** ./src/app/class-loading-categories/class-loading-categories.service.ts ***!
+  \******************************************************************************/
+/*! exports provided: ClassLoadingCategoriesService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClassLoadingCategoriesService", function() { return ClassLoadingCategoriesService; });
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ClassLoadingCategoriesService = /** @class */ (function () {
+    function ClassLoadingCategoriesService(_http) {
+        this._http = _http;
+        this.baseUrl = 'rest/classLoading/';
+    }
+    ClassLoadingCategoriesService.prototype.getCategories = function () {
+        return this._http.get(this.baseUrl + 'categories');
+    };
+    ClassLoadingCategoriesService.prototype.addCategory = function (obj) {
+        return this._http.post(this.baseUrl + 'categories', obj);
+    };
+    ClassLoadingCategoriesService.prototype.editCategory = function (obj) {
+        return this._http.put(this.baseUrl + 'categories', obj);
+    };
+    ClassLoadingCategoriesService.prototype.deleteCategory = function (id) {
+        console.log("ID je: " + id);
+        return this._http.delete(this.baseUrl + 'categories/' + id);
+    };
+    ClassLoadingCategoriesService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_0__["Http"]])
+    ], ClassLoadingCategoriesService);
+    return ClassLoadingCategoriesService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/class-loading/class-loading.component.html":
+/*!************************************************************!*\
+  !*** ./src/app/class-loading/class-loading.component.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  class-loading works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/class-loading/class-loading.component.scss":
+/*!************************************************************!*\
+  !*** ./src/app/class-loading/class-loading.component.scss ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/class-loading/class-loading.component.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/class-loading/class-loading.component.ts ***!
+  \**********************************************************/
+/*! exports provided: ClassLoadingComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClassLoadingComponent", function() { return ClassLoadingComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ClassLoadingComponent = /** @class */ (function () {
+    function ClassLoadingComponent() {
+    }
+    ClassLoadingComponent.prototype.ngOnInit = function () {
+    };
+    ClassLoadingComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-class-loading',
+            template: __webpack_require__(/*! ./class-loading.component.html */ "./src/app/class-loading/class-loading.component.html"),
+            styles: [__webpack_require__(/*! ./class-loading.component.scss */ "./src/app/class-loading/class-loading.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ClassLoadingComponent);
+    return ClassLoadingComponent;
+}());
+
 
 
 /***/ }),
@@ -406,7 +676,7 @@ var ClientComponent = /** @class */ (function () {
     ClientComponent.prototype.socketLogic = function () {
         var _this = this;
         this.messages = this.wsService
-            .connect('ws://192.168.60.13:8097/wscm/socket')
+            .connect('ws://localhost:8083/wscm/socket')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) {
             console.log(response.data);
             //// work with response from socket
@@ -1125,7 +1395,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display:flex\">\r\n  <app-panel></app-panel>\r\n  <div id=\"jobs\">\r\n    <h1>Jobs</h1>\r\n    <div class=\"content-wrapper\">\r\n      <!-- Add Job Button -->\r\n      <button class=\"add-button\" color=\"warn\" matTooltip=\"Add Job\" matTooltipPosition=\"above\" (click)=\"openAddDialog()\" mat-mini-fab>\r\n        <i class=\"material-icons\">add</i>\r\n      </button>\r\n      <!-- Table template -->\r\n      <div *ngIf=\"jobs\">\r\n        <!-- Table -->\r\n        <table mat-table [dataSource]=\"jobs\" class=\"mat-elevation-z8\">\r\n          <!-- Job Name -->\r\n          <ng-container matColumnDef=\"jobName\">\r\n            <th mat-header-cell *matHeaderCellDef> Job Name </th>\r\n            <td mat-cell *matCellDef=\"let element\"> {{element.jobName}} </td>\r\n          </ng-container>\r\n          <!-- Job Type -->\r\n          <ng-container matColumnDef=\"jobType\">\r\n            <th mat-header-cell *matHeaderCellDef> Job Type </th>\r\n            <td mat-cell *matCellDef=\"let element\">\r\n              <span *ngIf=\"element.jobType\">{{element.jobType.typeName}}</span>\r\n            </td>\r\n          </ng-container>\r\n          <!-- Job Status -->\r\n          <ng-container matColumnDef=\"status\">\r\n            <th mat-header-cell *matHeaderCellDef> Status </th>\r\n            <td mat-cell *matCellDef=\"let element\"> {{element.status}} </td>\r\n          </ng-container>\r\n          <!-- Class Loading -->\r\n          <ng-container matColumnDef=\"classLoading\">\r\n            <th mat-header-cell *matHeaderCellDef> Class Loading </th>\r\n            <td mat-cell *matCellDef=\"let element\"> {{element.classLoading}} </td>\r\n          </ng-container>\r\n          <!-- CronExpression -->\r\n          <ng-container matColumnDef=\"cronExpression\">\r\n            <th mat-header-cell *matHeaderCellDef> Definition </th>\r\n            <td mat-cell *matCellDef=\"let element\">\r\n              <span *ngIf=\"element.cronExpression\">{{element.cronExpression}}</span>\r\n            </td>\r\n          </ng-container>\r\n          <!-- Actions -->\r\n          <ng-container matColumnDef=\"actions\">\r\n            <th mat-header-cell *matHeaderCellDef> Actions</th>\r\n            <td mat-cell *matCellDef=\"let element\">\r\n              <i matTooltip=\"Start Job\" matTooltipPosition=\"above\" class=\"material-icons table-icons\" (click)=\"start(element)\">\r\n                play_arrow\r\n              </i>\r\n              <i matTooltip=\"Stop Job\" matTooltipPosition=\"above\" class=\"material-icons table-icons\" (click)=\"stop(element)\">\r\n                stop\r\n              </i>\r\n            </td>\r\n          </ng-container>\r\n          <!-- Editing -->\r\n          <ng-container matColumnDef=\"editing\">\r\n            <th mat-header-cell *matHeaderCellDef> Editing</th>\r\n            <td mat-cell *matCellDef=\"let element\">\r\n              <i matTooltip=\"Edit Job\" matTooltipPosition=\"above\" class=\"material-icons table-icons\">\r\n                edit\r\n              </i>\r\n              <i matTooltip=\"Delete Job\" matTooltipPosition=\"above\" class=\"material-icons table-icons\">\r\n                delete\r\n              </i>\r\n            </td>\r\n          </ng-container>\r\n\r\n          <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n          <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n        </table>\r\n        <!-- PAGINATOR -->\r\n        <mat-paginator *ngIf=\"jobs\" #paginator [length]=\"jobs.length\" [pageIndex]=\"0\" [pageSize]=\"5\" [pageSizeOptions]=\"[5, 10, 20]\"\r\n          [showFirstLastButtons]=\"true\">\r\n        </mat-paginator>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div style=\"display:flex\">\r\n  <app-panel></app-panel>\r\n  <div id=\"jobs\">\r\n    <h1>Jobs</h1>\r\n    <div class=\"content-wrapper\">\r\n      <!-- Add Job Button -->\r\n      <button class=\"add-button\" color=\"warn\" matTooltip=\"Add Job\" matTooltipPosition=\"above\" (click)=\"openAddDialog()\" mat-mini-fab>\r\n        <i class=\"material-icons\">add</i>\r\n      </button>\r\n      <!-- Table template -->\r\n      <div *ngIf=\"jobs\">\r\n        <!-- Table -->\r\n        <table mat-table [dataSource]=\"jobs\" class=\"mat-elevation-z8\">\r\n          <!-- Job Name -->\r\n          <ng-container matColumnDef=\"jobName\">\r\n            <th mat-header-cell *matHeaderCellDef> Job Name </th>\r\n            <td mat-cell *matCellDef=\"let element\"> {{element.jobName}} </td>\r\n          </ng-container>\r\n          <!-- Job Type -->\r\n          <ng-container matColumnDef=\"jobType\">\r\n            <th mat-header-cell *matHeaderCellDef> Job Type </th>\r\n            <td mat-cell *matCellDef=\"let element\">\r\n              <span *ngIf=\"element.jobType\">{{element.jobType.typeName}}</span>\r\n            </td>\r\n          </ng-container>\r\n          <!-- Job Status -->\r\n          <ng-container matColumnDef=\"status\">\r\n            <th mat-header-cell *matHeaderCellDef> Status </th>\r\n            <td mat-cell *matCellDef=\"let element\"> {{element.status}} </td>\r\n          </ng-container>\r\n          <!-- Class Loading -->\r\n          <ng-container matColumnDef=\"classLoading\">\r\n            <th mat-header-cell *matHeaderCellDef> Class Loading </th>\r\n            <td mat-cell *matCellDef=\"let element\"> {{element.classLoading}} </td>\r\n          </ng-container>\r\n          <!-- CronExpression -->\r\n          <ng-container matColumnDef=\"cronExpression\">\r\n            <th mat-header-cell *matHeaderCellDef> Definition </th>\r\n            <td mat-cell *matCellDef=\"let element\">\r\n              <span *ngIf=\"element.cronExpression\">{{element.cronExpression}}</span>\r\n            </td>\r\n          </ng-container>\r\n          <!-- Actions -->\r\n          <ng-container matColumnDef=\"actions\">\r\n            <th mat-header-cell *matHeaderCellDef> Actions</th>\r\n            <td mat-cell *matCellDef=\"let element\">\r\n              <i matTooltip=\"Start Job\" matTooltipPosition=\"above\" class=\"material-icons table-icons\" (click)=\"start(element)\">\r\n                play_arrow\r\n              </i>\r\n              <i matTooltip=\"Stop Job\" matTooltipPosition=\"above\" class=\"material-icons table-icons\" (click)=\"stop(element)\">\r\n                stop\r\n              </i>\r\n            </td>\r\n          </ng-container>\r\n          <!-- Editing -->\r\n          <ng-container matColumnDef=\"editing\">\r\n            <th mat-header-cell *matHeaderCellDef> Editing</th>\r\n            <td mat-cell *matCellDef=\"let element\">\r\n              <i matTooltip=\"Edit Job\" matTooltipPosition=\"above\" class=\"material-icons table-icons\">\r\n                edit\r\n              </i>\r\n              <i matTooltip=\"Delete Job\" matTooltipPosition=\"above\" class=\"material-icons table-icons\">\r\n                delete\r\n              </i>\r\n            </td>\r\n          </ng-container>\r\n\r\n          <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n          <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n        </table>\r\n        <!-- PAGINATOR -->\r\n        <mat-paginator *ngIf=\"jobs\" #paginator [length]=\"jobs.length\" [pageIndex]=\"0\" [pageSize]=\"5\" [pageSizeOptions]=\"[5, 10, 20]\"\r\n          [showFirstLastButtons]=\"true\">\r\n        </mat-paginator>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1536,7 +1806,7 @@ var LoginService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar\" style=\"background-color:rgb(52, 82, 255);\">\r\n    <a class=\"navbar-brand\" href=\"#\" style=\"color:white\">ICAP - Intelligent Content and Ad Provider</a>\r\n</nav>\r\n<nav class=\"navbar navbar-expand-lg navbar-light bg-light rounded\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExample10\" aria-controls=\"navbarsExample10\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n          <span class=\"navbar-toggler-icon\"></span>\r\n    </button>\r\n\r\n    <div class=\"collapse navbar-collapse justify-content-md-center\" id=\"navbarsExample10\">\r\n        <ul class=\"navbar-nav\">\r\n            <li class=\"nav-item active\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" href=\"#\">HOME<span class=\"sr-only\">(current)</span></a>\r\n            </li>\r\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" href=\"#\">ABOUT US</a>\r\n            </li>\r\n            <li class=\"nav-item dropdown\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link dropdown-toggle\" href=\"https://example.com\" id=\"dropdown10\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Services</a>\r\n                <div class=\"dropdown-menu\" aria-labelledby=\"dropdown10\">\r\n                    <a class=\"dropdown-item\" href=\"#\">Banking</a>\r\n                    <a class=\"dropdown-item\" href=\"#\">Insurance</a>\r\n                </div>\r\n            </li>\r\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" href=\"#\">WORKS</a>\r\n            </li>\r\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" href=\"#\">CONTACT</a>\r\n            </li>\r\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\r\n                <a class=\"nav-link\" (click)=\"logout()\">\r\n                    <span class=\"material-icons\" id=\"forHover\">\r\n                        exit_to_app\r\n                    </span>\r\n                </a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</nav>\r\n<div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\r\n    <ol class=\"carousel-indicators\">\r\n        <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\r\n        <li data-target=\"#myCarousel\" data-slide-to=\"1\"></li>\r\n    </ol>\r\n    <div class=\"carousel-inner\">\r\n        <div class=\"carousel-item active\">\r\n            <img class=\"first-slide img-fluid\" src=\"wscm/src/assets/mail2.jpg\" alt=\"First slide\">\r\n            <div class=\"container\">\r\n                <div class=\"carousel-caption text-left\">\r\n                    <h1>Prepare for the future with our advisors</h1>\r\n                    <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively foster cutting-edge manufactured products and distinctive.</p>\r\n                    <a class=\"btn btn-lg\" href=\"#\" role=\"button\" style=\"background-color:rgb(52, 82, 255);color:white;\">Meet Experts</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"carousel-item\">\r\n            <img class=\"second-slide img-fluid\" src=\"wscm/src/assets/mail3.jpg\" alt=\"Second slide\">\r\n            <div class=\"container\">\r\n                <div class=\"carousel-caption\">\r\n                    <h1>Prepare for the future with our advisors</h1>\r\n                    <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively foster cutting-edge manufactured products and distinctive.</p>\r\n                    <a class=\"btn btn-lg\" href=\"#\" role=\"button\" style=\"background-color:rgb(52, 82, 255);color:white;\">Meet Experts</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <a class=\"carousel-control-prev\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\r\n        <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\" style=\"background-color:rgb(52, 82, 255);\"></span>\r\n        <span class=\"sr-only\">Previous</span>\r\n    </a>\r\n    <a class=\"carousel-control-next\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\r\n        <span class=\"carousel-control-next-icon\" aria-hidden=\"true\" style=\"background-color:rgb(52, 82, 255);\"></span>\r\n        <span class=\"sr-only\">Next</span>\r\n    </a>\r\n</div>\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div id=\"welcome\" class=\"col-sm-12\">\r\n            <h2>Welcom to ICAP</h2>\r\n            <br>\r\n            <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively</p>\r\n            <p style=\"margin-top:10px;\">foster cutting-edge manufactured products and distinctive.</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"row cards\">\r\n        <div class=\"col-sm-4\">\r\n            <div class=\"card \">\r\n                <img class=\"card-img-top\" src=\"wscm/src/assets/card.jpg\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title\">About Business</h5>\r\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n            <div class=\"card \">\r\n                <img class=\"card-img-top\" src=\"wscm/src/assets/growth.jpg\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title\">Business Growth</h5>\r\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n            <div class=\"card\" >\r\n                <img class=\"card-img-top\" src=\"wscm/src/assets/strategy.jpg\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title\">Sustainability</h5>\r\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\" id=\"like\" style=\"margin-top:6%;margin-bottom:5%;\">\r\n        <div class=\"col-md-6\">\r\n            <h2>A Finance Agency Crafting Beautiful & Engaging Online Experiences</h2>\r\n            <br>\r\n            <p>Seamlessly communicate distinctive alignments and business models. Efficiently whiteboard robust meta-services whereas stand-alone synergy. Enthusiastically engage premier supply chains after intuitive testing procedures. Conveniently parallel\r\n                task robust imperatives through corporate customer service.\r\n            </p>\r\n            <br>\r\n            <p>\r\n                Dynamically productivate tactical mindshare via business collaboration and idea-sharing. Credibly conceptualize extensive schemas for functionalized metrics.\r\n            </p>\r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <img class=\"img-fluid\" src=\"wscm/src/assets/like.jpg\" alt=\"\">\r\n        </div>\r\n    </div>\r\n</div>\r\n<footer class=\"page-footer font-small blue pt-4\" style=\"background-color:rgb(52, 82, 255);\">\r\n    <div class=\"container-fluid text-center text-md-left\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-9 mt-md-0 mt-3\">\r\n                <h5 class=\"text-uppercase\">ICAP</h5>\r\n                <p>Intelligent Content and Ad Provider</p>\r\n            </div>\r\n            <hr class=\"clearfix w-100 d-md-none pb-3\">\r\n            <div class=\"col-md-3 mb-md-0 mb-3\">\r\n                <h5 class=\"text-uppercase\">Useful Links</h5>\r\n                <ul class=\"list-unstyled\">\r\n                    <li>\r\n                        <a href=\"#!\">HOME</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#!\">ABOUT US</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#!\">SERVICES</a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#!\">CONTACT</a>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"footer-copyright text-center py-3\">\r\n        <a href=\"http://kireygroup.com/\" style=\"\">© 2018 Copyright:Kirey Group</a>\r\n    </div>\r\n</footer>"
+module.exports = "<nav class=\"navbar\" style=\"background-color:rgb(52, 82, 255);\">\n    <a class=\"navbar-brand\" href=\"#\" style=\"color:white\">ICAP - Intelligent Content and Ad Provider</a>\n</nav>\n<nav class=\"navbar navbar-expand-lg navbar-light bg-light rounded\">\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExample10\" aria-controls=\"navbarsExample10\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n          <span class=\"navbar-toggler-icon\"></span>\n    </button>\n\n    <div class=\"collapse navbar-collapse justify-content-md-center\" id=\"navbarsExample10\">\n        <ul class=\"navbar-nav\">\n            <li class=\"nav-item active\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" href=\"#\">HOME<span class=\"sr-only\">(current)</span></a>\n            </li>\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" href=\"#\">ABOUT US</a>\n            </li>\n            <li class=\"nav-item dropdown\" style=\"margin-left:20px;\">\n                <a class=\"nav-link dropdown-toggle\" href=\"https://example.com\" id=\"dropdown10\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Services</a>\n                <div class=\"dropdown-menu\" aria-labelledby=\"dropdown10\">\n                    <a class=\"dropdown-item\" href=\"#\">Banking</a>\n                    <a class=\"dropdown-item\" href=\"#\">Insurance</a>\n                </div>\n            </li>\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" href=\"#\">WORKS</a>\n            </li>\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" href=\"#\">CONTACT</a>\n            </li>\n            <li class=\"nav-item\" style=\"margin-left:20px;\">\n                <a class=\"nav-link\" (click)=\"logout()\">\n                    <span class=\"material-icons\" id=\"forHover\">\n                        exit_to_app\n                    </span>\n                </a>\n            </li>\n        </ul>\n    </div>\n</nav>\n<div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\n    <ol class=\"carousel-indicators\">\n        <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\n        <li data-target=\"#myCarousel\" data-slide-to=\"1\"></li>\n    </ol>\n    <div class=\"carousel-inner\">\n        <div class=\"carousel-item active\">\n            <img class=\"first-slide img-fluid\" src=\"wscm/src/assets/mail2.jpg\" alt=\"First slide\">\n            <div class=\"container\">\n                <div class=\"carousel-caption text-left\">\n                    <h1>Prepare for the future with our advisors</h1>\n                    <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively foster cutting-edge manufactured products and distinctive.</p>\n                    <a class=\"btn btn-lg\" href=\"#\" role=\"button\" style=\"background-color:rgb(52, 82, 255);color:white;\">Meet Experts</a>\n                </div>\n            </div>\n        </div>\n        <div class=\"carousel-item\">\n            <img class=\"second-slide img-fluid\" src=\"wscm/src/assets/mail3.jpg\" alt=\"Second slide\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>Prepare for the future with our advisors</h1>\n                    <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively foster cutting-edge manufactured products and distinctive.</p>\n                    <a class=\"btn btn-lg\" href=\"#\" role=\"button\" style=\"background-color:rgb(52, 82, 255);color:white;\">Meet Experts</a>\n                </div>\n            </div>\n        </div>\n    </div>\n    <a class=\"carousel-control-prev\" href=\"#myCarousel\" role=\"button\" data-slide=\"prev\">\n        <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\" style=\"background-color:rgb(52, 82, 255);\"></span>\n        <span class=\"sr-only\">Previous</span>\n    </a>\n    <a class=\"carousel-control-next\" href=\"#myCarousel\" role=\"button\" data-slide=\"next\">\n        <span class=\"carousel-control-next-icon\" aria-hidden=\"true\" style=\"background-color:rgb(52, 82, 255);\"></span>\n        <span class=\"sr-only\">Next</span>\n    </a>\n</div>\n<div class=\"container\">\n    <div class=\"row\">\n        <div id=\"welcome\" class=\"col-sm-12\">\n            <h2>Welcom to ICAP</h2>\n            <br>\n            <p>Interactively simplify 24/7 markets through 24/7 best practices. Authoritatively</p>\n            <p style=\"margin-top:10px;\">foster cutting-edge manufactured products and distinctive.</p>\n        </div>\n    </div>\n    <div class=\"row cards\">\n        <div class=\"col-sm-4\">\n            <div class=\"card \">\n                <img class=\"card-img-top\" src=\"wscm/src/assets/card.jpg\">\n                <div class=\"card-body\">\n                    <h5 class=\"card-title\">About Business</h5>\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-sm-4\">\n            <div class=\"card \">\n                <img class=\"card-img-top\" src=\"wscm/src/assets/growth.jpg\">\n                <div class=\"card-body\">\n                    <h5 class=\"card-title\">Business Growth</h5>\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\n                </div>\n            </div>\n        </div>\n        <div class=\"col-sm-4\">\n            <div class=\"card\" >\n                <img class=\"card-img-top\" src=\"wscm/src/assets/strategy.jpg\">\n                <div class=\"card-body\">\n                    <h5 class=\"card-title\">Sustainability</h5>\n                    <p class=\"card-text\">Seamlessly envisioneer extensive interfaces and back wardcompatible applications. Proactively promote timely best.</p>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"row\" id=\"like\" style=\"margin-top:6%;margin-bottom:5%;\">\n        <div class=\"col-md-6\">\n            <h2>A Finance Agency Crafting Beautiful & Engaging Online Experiences</h2>\n            <br>\n            <p>Seamlessly communicate distinctive alignments and business models. Efficiently whiteboard robust meta-services whereas stand-alone synergy. Enthusiastically engage premier supply chains after intuitive testing procedures. Conveniently parallel\n                task robust imperatives through corporate customer service.\n            </p>\n            <br>\n            <p>\n                Dynamically productivate tactical mindshare via business collaboration and idea-sharing. Credibly conceptualize extensive schemas for functionalized metrics.\n            </p>\n        </div>\n        <div class=\"col-md-6\">\n            <img class=\"img-fluid\" src=\"wscm/src/assets/like.jpg\" alt=\"\">\n        </div>\n    </div>\n</div>\n<footer class=\"page-footer font-small blue pt-4\" style=\"background-color:rgb(52, 82, 255);\">\n    <div class=\"container-fluid text-center text-md-left\">\n        <div class=\"row\">\n            <div class=\"col-md-9 mt-md-0 mt-3\">\n                <h5 class=\"text-uppercase\">ICAP</h5>\n                <p>Intelligent Content and Ad Provider</p>\n            </div>\n            <hr class=\"clearfix w-100 d-md-none pb-3\">\n            <div class=\"col-md-3 mb-md-0 mb-3\">\n                <h5 class=\"text-uppercase\">Useful Links</h5>\n                <ul class=\"list-unstyled\">\n                    <li>\n                        <a href=\"#!\">HOME</a>\n                    </li>\n                    <li>\n                        <a href=\"#!\">ABOUT US</a>\n                    </li>\n                    <li>\n                        <a href=\"#!\">SERVICES</a>\n                    </li>\n                    <li>\n                        <a href=\"#!\">CONTACT</a>\n                    </li>\n                </ul>\n            </div>\n        </div>\n    </div>\n    <div class=\"footer-copyright text-center py-3\">\n        <a href=\"http://kireygroup.com/\" style=\"\">© 2018 Copyright:Kirey Group</a>\n    </div>\n</footer>"
 
 /***/ }),
 
@@ -1733,6 +2003,100 @@ var PanelService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"]])
     ], PanelService);
     return PanelService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.html":
+/*!***************************************************************************************!*\
+  !*** ./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.html ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"addCategory\">\n    <h1>Add Category </h1>\n    <mat-dialog-content>\n        <form [formGroup]=\"categoryForm\" (ngSubmit)=\"addCategory()\">\n            <mat-form-field>\n                <input matInput formControlName=\"name\" class=\"form-control\" type=\"text\" placeholder=\"Category Name\" autocomplete=\"off\" [(ngModel)]=\"name\">\n            </mat-form-field>\n            <div class=\"alert alert-danger\" *ngIf=\"categoryForm.get('name').touched && categoryForm.get('name').hasError('required')\">\n                Must enter name!\n            </div>\n            <mat-dialog-actions>\n                <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"categoryForm.invalid\">Add category</button>\n            </mat-dialog-actions>\n        </form>\n    </mat-dialog-content>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.scss":
+/*!***************************************************************************************!*\
+  !*** ./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.scss ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\n.content-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\n.add-button {\n  align-self: flex-end;\n  margin-right: 50px !important;\n  margin-bottom: 50px !important;\n  margin-top: 10px !important; }\n\n.add-button:active {\n  outline: none; }\n\n.add-button:focus {\n  outline: none; }\n\nh1 {\n  color: #fff;\n  padding: 10px 3%;\n  font-size: 35px;\n  background: linear-gradient(to right, #009688, #64FFDA); }\n\ntable {\n  text-align: center;\n  margin-left: 3%;\n  margin-right: 3%; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: left !important;\n  padding-right: 24px !important;\n  padding-top: 10px !important;\n  padding-bottom: 10px; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  padding-right: 24px !important;\n  padding-top: 10px !important;\n  padding-bottom: 10px;\n  text-align: left !important; }\n\n.table-icons {\n  color: #009688;\n  font-size: 25px;\n  padding-right: 5px;\n  text-align: center; }\n\n.table-icons:hover {\n  cursor: pointer; }\n\n.table-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.table-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#addCategory {\n  width: 100%;\n  justify-content: space-between; }\n\n#addCategory .mat-form-field {\n    width: 50%;\n    padding: 20px 20px; }\n\n#addCategory .formButton {\n    margin-left: 72%; }\n\n#addCategory .cancelButton {\n    background-color: #FFEE58; }\n\n#addCategory .mat-dialog-content {\n    height: 250px; }\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.ts":
+/*!*************************************************************************************!*\
+  !*** ./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.ts ***!
+  \*************************************************************************************/
+/*! exports provided: AddCategoryDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddCategoryDialogComponent", function() { return AddCategoryDialogComponent; });
+/* harmony import */ var _class_loading_categories_class_loading_categories_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../../class-loading-categories/class-loading-categories.service */ "./src/app/class-loading-categories/class-loading-categories.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+var AddCategoryDialogComponent = /** @class */ (function () {
+    function AddCategoryDialogComponent(dialogRef, data, _categoryService, formBuilder) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this._categoryService = _categoryService;
+        this.formBuilder = formBuilder;
+    }
+    AddCategoryDialogComponent.prototype.ngOnInit = function () {
+        this.categoryForm = this.formBuilder.group({
+            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
+        });
+    };
+    AddCategoryDialogComponent.prototype.addCategory = function () {
+        var category = {
+            name: this.name
+        };
+        console.log(this.name);
+        this._categoryService.addCategory(category).subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log(err);
+        });
+        this.dialogRef.close();
+    };
+    AddCategoryDialogComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+            selector: 'app-add-category-dialog',
+            template: __webpack_require__(/*! ./add-category-dialog.component.html */ "./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.html"),
+            styles: [__webpack_require__(/*! ./add-category-dialog.component.scss */ "./src/app/shared/dialogs/add-category-dialog/add-category-dialog.component.scss")],
+            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewEncapsulation"].None
+        }),
+        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_3__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"], Object, _class_loading_categories_class_loading_categories_service__WEBPACK_IMPORTED_MODULE_0__["ClassLoadingCategoriesService"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])
+    ], AddCategoryDialogComponent);
+    return AddCategoryDialogComponent;
 }());
 
 
@@ -2193,6 +2557,99 @@ var DeleteDialog = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"], Object])
     ], DeleteDialog);
     return DeleteDialog;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.html":
+/*!*****************************************************************************************!*\
+  !*** ./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.html ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"editCategory\">\n    <h1>Edit Category </h1>\n    <mat-dialog-content>\n        <form [formGroup]=\"categoryForm\" (ngSubmit)=\"editCategory()\">\n            <mat-form-field>\n                <input matInput formControlName=\"name\" class=\"form-control\" type=\"text\" placeholder=\"Category Name\" autocomplete=\"off\" [(ngModel)]=\"name\">\n            </mat-form-field>\n            <div class=\"alert alert-danger\" *ngIf=\"categoryForm.get('name').touched && categoryForm.get('name').hasError('required')\">\n                Must enter name!\n            </div>\n            <mat-dialog-actions>\n                <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"categoryForm.invalid\">Edit category</button>\n            </mat-dialog-actions>\n        </form>\n    </mat-dialog-content>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.scss":
+/*!*****************************************************************************************!*\
+  !*** ./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.scss ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".flex {\n  display: flex; }\n\n.column {\n  flex-direction: column; }\n\n.wrap {\n  flex-wrap: wrap; }\n\n.center {\n  align-items: center;\n  justify-content: center; }\n\n.content-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\n.add-button {\n  align-self: flex-end;\n  margin-right: 50px !important;\n  margin-bottom: 50px !important;\n  margin-top: 10px !important; }\n\n.add-button:active {\n  outline: none; }\n\n.add-button:focus {\n  outline: none; }\n\nh1 {\n  color: #fff;\n  padding: 10px 3%;\n  font-size: 35px;\n  background: linear-gradient(to right, #009688, #64FFDA); }\n\ntable {\n  text-align: center;\n  margin-left: 3%;\n  margin-right: 3%; }\n\ntr.mat-header-row {\n  background: #009688 !important; }\n\nth.mat-header-cell {\n  color: white;\n  font-size: 1em;\n  text-align: center; }\n\ntd::-moz-selection {\n  background: #009688;\n  color: white; }\n\ntd::selection {\n  background: #009688;\n  color: white; }\n\nth::-moz-selection {\n  background: #009688; }\n\nth::selection {\n  background: #009688; }\n\nth.mat-header-cell {\n  text-align: left !important;\n  padding-right: 24px !important;\n  padding-top: 10px !important;\n  padding-bottom: 10px; }\n\ntd.mat-cell, td.mat-footer-cell, th.mat-header-cell {\n  padding-right: 24px !important;\n  padding-top: 10px !important;\n  padding-bottom: 10px;\n  text-align: left !important; }\n\n.table-icons {\n  color: #009688;\n  font-size: 25px;\n  padding-right: 5px;\n  text-align: center; }\n\n.table-icons:hover {\n  cursor: pointer; }\n\n.table-icons::-moz-selection {\n  background: #009688;\n  color: white; }\n\n.table-icons::selection {\n  background: #009688;\n  color: white; }\n\n.dialog-title {\n  color: #424242;\n  padding: 20px; }\n\n.dialog-subtitle {\n  display: flex;\n  align-items: center;\n  color: #009688;\n  padding-left: 20px; }\n\n.dialog-subtitle > i {\n  margin-right: 5px; }\n\n#editCategory {\n  width: 100%;\n  justify-content: space-between; }\n\n#editCategory .mat-form-field {\n    width: 50%;\n    padding: 20px 20px; }\n\n#editCategory .formButton {\n    margin-left: 72%; }\n\n#editCategory .cancelButton {\n    background-color: #FFEE58; }\n\n#editCategory .mat-dialog-content {\n    height: 250px; }\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.ts":
+/*!***************************************************************************************!*\
+  !*** ./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.ts ***!
+  \***************************************************************************************/
+/*! exports provided: EditCategoryDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditCategoryDialogComponent", function() { return EditCategoryDialogComponent; });
+/* harmony import */ var _class_loading_categories_class_loading_categories_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../../class-loading-categories/class-loading-categories.service */ "./src/app/class-loading-categories/class-loading-categories.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+var EditCategoryDialogComponent = /** @class */ (function () {
+    function EditCategoryDialogComponent(dialogRef, data, formBuilder, _categoryService) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.formBuilder = formBuilder;
+        this._categoryService = _categoryService;
+    }
+    EditCategoryDialogComponent.prototype.ngOnInit = function () {
+        this.categoryForm = this.formBuilder.group({
+            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
+        });
+        this.objForEditing = this.data;
+        this.name = this.objForEditing.name;
+    };
+    EditCategoryDialogComponent.prototype.editCategory = function () {
+        console.log(this.name);
+        this.objForEditing.name = this.name;
+        this._categoryService.addCategory(this.objForEditing).subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log(err);
+        });
+        this.dialogRef.close();
+    };
+    EditCategoryDialogComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+            selector: 'app-edit-category-dialog',
+            template: __webpack_require__(/*! ./edit-category-dialog.component.html */ "./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.html"),
+            styles: [__webpack_require__(/*! ./edit-category-dialog.component.scss */ "./src/app/shared/dialogs/edit-category-dialog/edit-category-dialog.component.scss")]
+        }),
+        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_3__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"], Object, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"],
+            _class_loading_categories_class_loading_categories_service__WEBPACK_IMPORTED_MODULE_0__["ClassLoadingCategoriesService"]])
+    ], EditCategoryDialogComponent);
+    return EditCategoryDialogComponent;
 }());
 
 
@@ -3063,7 +3520,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Projects\WSCM\src\main\webapp\wscm\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! c:\Users\jovanovicn\Documents\WSCM\src\main\webapp\wscm\src\main.ts */"./src/main.ts");
 
 
 /***/ })

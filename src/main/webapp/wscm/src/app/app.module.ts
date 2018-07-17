@@ -1,3 +1,4 @@
+import { ClassLoadingCategoriesService } from './class-loading-categories/class-loading-categories.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -46,6 +47,10 @@ import { AddContentDialogComponent } from './shared/dialogs/add-content-dialog/a
 import { EditContentDialogComponent } from './shared/dialogs/edit-content-dialog/edit-content-dialog.component';
 import { AddEventDialogComponent } from './shared/dialogs/add-event-dialog/add-event-dialog.component';
 import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
+import { ClassLoadingComponent } from './class-loading/class-loading.component';
+import { ClassLoadingCategoriesComponent } from './class-loading-categories/class-loading-categories.component';
+import { AddCategoryDialogComponent } from './shared/dialogs/add-category-dialog/add-category-dialog.component';
+import { EditCategoryDialogComponent } from './shared/dialogs/edit-category-dialog/edit-category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +70,11 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     AddContentDialogComponent,
     EditContentDialogComponent,
     AddEventDialogComponent,
-    MailRedirectComponent
+    MailRedirectComponent,
+    ClassLoadingComponent,
+    ClassLoadingCategoriesComponent,
+    AddCategoryDialogComponent,
+    EditCategoryDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +96,8 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     SocketService,
     EditEventService,
     AddEventService,
-    JobsService
+    JobsService,
+    ClassLoadingCategoriesService
   ],
   entryComponents: [
     DeleteDialog,
@@ -95,7 +105,9 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     EditEventDialogComponent,
     AddContentDialogComponent,
     EditContentDialogComponent,
-    AddEventDialogComponent
+    AddEventDialogComponent,
+    AddCategoryDialogComponent,
+    EditCategoryDialogComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

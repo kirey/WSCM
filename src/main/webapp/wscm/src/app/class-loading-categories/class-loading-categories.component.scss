@@ -1,0 +1,16 @@
+@import '../app.component.scss';
+
+#myTable {
+    width: 420px;
+    margin-left: 12%;
+    margin-top: 15%;
+}
+table{
+    width: 400px;
+    margin-top: 15px;
+    margin-left: 8px;
+}
+button{
+    background: $warn;
+    float:right;
+}

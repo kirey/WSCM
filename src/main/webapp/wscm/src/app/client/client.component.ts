@@ -49,7 +49,7 @@ export class ClientComponent implements OnInit, OnDestroy {
       // });
     });
   }
-
+  
   logout() {
     this.auth.logout()
       .subscribe(
@@ -81,7 +81,7 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   socketLogic() {
     this.messages = <Subject<any>>this.wsService
-      .connect('ws://192.168.60.13:8097/wscm/socket')
+      .connect('ws://localhost:8083/wscm/socket')
       .pipe(
         map((response: MessageEvent): any => {
           console.log(response.data);
