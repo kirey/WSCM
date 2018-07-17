@@ -1932,7 +1932,7 @@ var AddContentDialogComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"addJob\">\r\n  <h1>Add Event </h1>\r\n  <!-- <div *ngIf=\"data\"> -->\r\n  <mat-dialog-content>\r\n    <form [formGroup]=\"addEventForm\" (ngSubmit)=\"addEvent()\" class=\"addJob-container\" autocomplete=\"off\">\r\n      <mat-form-field>\r\n        <input matInput name=\"eventName\" formControlName=\"eventName\" type=\"text\" placeholder=\"Event Name\">\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput name=\"eventType\" formControlName=\"eventType\" placeholder=\"Event Type\">\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <mat-select id=\"jobSelected\" placeholder=\"Job Name\" required formControlName=\"jobSelected\" name=\"jobSelected\">\r\n          <mat-option *ngFor=\"let job of events; let i = index\" [value]=\"job.jobs\">{{job.jobs.jobName}}</mat-option>\r\n        </mat-select>\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <textarea matInput name=\"description\" formControlName=\"description\" placeholder=\"Description\"></textarea>\r\n      </mat-form-field>\r\n\r\n    </form>\r\n  </mat-dialog-content>\r\n  <mat-dialog-actions>\r\n    <button type=\"submit\" mat-raised-button class=\"formButton\">Submit</button>\r\n    <button mat-button mat-dialog-close class=\"cancelButton\">Cancel</button>\r\n  </mat-dialog-actions>\r\n  <!-- </div> -->\r\n</div>"
+module.exports = "<div id=\"addJob\">\r\n  <h1>Add Event </h1>\r\n  <mat-dialog-content>\r\n    <form [formGroup]=\"addEventForm\" class=\"addJob-container\" autocomplete=\"off\">\r\n      <!-- Event name -->\r\n      <mat-form-field>\r\n        <input matInput name=\"eventName\" formControlName=\"eventName\" type=\"text\" placeholder=\"Event Name\">\r\n      </mat-form-field>\r\n      <!-- Event Type -->\r\n      <mat-form-field>\r\n        <input matInput name=\"eventType\" formControlName=\"eventType\" placeholder=\"Event Type\">\r\n      </mat-form-field>\r\n      <!-- Definition -->\r\n      <mat-form-field>\r\n        <input matInput name=\"definition\" formControlName=\"definition\" placeholder=\"Definition\">\r\n      </mat-form-field>\r\n      <!-- Status -->\r\n      <mat-form-field>\r\n        <input matInput name=\"status\" formControlName=\"status\" placeholder=\"Status\">\r\n      </mat-form-field>\r\n      <!-- Job Select -->\r\n      <mat-form-field>\r\n        <mat-select id=\"jobSelected\" placeholder=\"Job Name\" required formControlName=\"jobs\" name=\"jobSelected\">\r\n          <mat-option *ngFor=\"let job of events; let i = index\" [value]=\"job.jobs\">{{job.jobs.jobName}}</mat-option>\r\n        </mat-select>\r\n      </mat-form-field>\r\n      <!-- Description -->\r\n      <mat-form-field>\r\n        <textarea matInput name=\"description\" formControlName=\"description\" placeholder=\"Description\"></textarea>\r\n      </mat-form-field>\r\n\r\n    </form>\r\n  </mat-dialog-content>\r\n  <mat-dialog-actions>\r\n    <button mat-button mat-dialog-close>Cancel</button>\r\n    <button type=\"submit\" mat-raised-button color=\"warn\" (click)=\"addEvent()\" [disabled]=\"eventName.errors || eventType.errors || jobs.errors || description.errors || status.errors || definition.errors\">Submit</button>\r\n  </mat-dialog-actions>\r\n  <!-- </div> -->\r\n</div>"
 
 /***/ }),
 
@@ -1961,6 +1961,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _add_event_dialog_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-event-dialog.service */ "./src/app/shared/dialogs/add-event-dialog/add-event-dialog.service.ts");
 /* harmony import */ var _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/@angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _services_snackbar_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/snackbar.service */ "./src/app/shared/services/snackbar.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1977,12 +1978,14 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
 
 
 
+
 var AddEventDialogComponent = /** @class */ (function () {
-    function AddEventDialogComponent(dialogRef, data, addEventService, formBuilder) {
+    function AddEventDialogComponent(dialogRef, data, addEventService, formBuilder, snackbar) {
         this.dialogRef = dialogRef;
         this.data = data;
         this.addEventService = addEventService;
         this.formBuilder = formBuilder;
+        this.snackbar = snackbar;
     }
     AddEventDialogComponent.prototype.getList = function () {
         var _this = this;
@@ -1993,30 +1996,17 @@ var AddEventDialogComponent = /** @class */ (function () {
     };
     // Add Event 
     AddEventDialogComponent.prototype.addEvent = function () {
-        // console.log('Job selected:');
-        // console.log(this.jobSelected);
+        var _this = this;
+        this.addEventForm.value['id'] = this.addEventForm.value['jobs']['id'];
         console.log(this.addEventForm.value);
-        // const jobs = {
-        //   id: jobId,
-        //   eventName: this.eventName,
-        //   eventType: this.eventType,
-        //   jobs: this.jobSelected,
-        //   definition: 'test',
-        //   description: this.description,
-        //   status: 'test'
-        // };
-        // this.addEventService.addEvents(jobs).subscribe(
-        //   res => {
-        //     console.log(res);
-        //     // this.jobs = res.data;
-        //     // this.successMessage(res.message);
-        //     this.dialogRef.close();
-        //   },
-        //   err => {
-        //     console.log(err);
-        //     // this.errorMessage(err);
-        //   }
-        // );
+        this.addEventService.addEvents(this.addEventForm.value).subscribe(function (res) {
+            // console.log(res);
+            _this.snackbar.openSnackBar(res['data'], 'Success');
+            _this.dialogRef.close();
+        }, function (err) {
+            console.log(err);
+            _this.snackbar.openSnackBar('Something went wrong.', 'Error');
+        });
     };
     AddEventDialogComponent.prototype.ngOnInit = function () {
         this.getList();
@@ -2024,8 +2014,10 @@ var AddEventDialogComponent = /** @class */ (function () {
         this.addEventForm = this.formBuilder.group({
             eventName: ['', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             eventType: ['', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            jobSelected: ['', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            description: ['', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]
+            jobs: ['', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            description: ['', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            definition: ['', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            status: ['', _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]
         });
     };
     Object.defineProperty(AddEventDialogComponent.prototype, "eventName", {
@@ -2043,9 +2035,9 @@ var AddEventDialogComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(AddEventDialogComponent.prototype, "jobSelected", {
+    Object.defineProperty(AddEventDialogComponent.prototype, "jobs", {
         get: function () {
-            return this.addEventForm.get('jobSelected');
+            return this.addEventForm.get('jobs');
         },
         enumerable: true,
         configurable: true
@@ -2053,6 +2045,20 @@ var AddEventDialogComponent = /** @class */ (function () {
     Object.defineProperty(AddEventDialogComponent.prototype, "description", {
         get: function () {
             return this.addEventForm.get('description');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AddEventDialogComponent.prototype, "definition", {
+        get: function () {
+            return this.addEventForm.get('definition');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AddEventDialogComponent.prototype, "status", {
+        get: function () {
+            return this.addEventForm.get('status');
         },
         enumerable: true,
         configurable: true
@@ -2066,7 +2072,8 @@ var AddEventDialogComponent = /** @class */ (function () {
         }),
         __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"], Object, _add_event_dialog_service__WEBPACK_IMPORTED_MODULE_2__["AddEventService"],
-            _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]])
+            _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"],
+            _services_snackbar_service__WEBPACK_IMPORTED_MODULE_4__["SnackBarService"]])
     ], AddEventDialogComponent);
     return AddEventDialogComponent;
 }());

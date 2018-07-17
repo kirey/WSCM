@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddEventService } from './add-event-dialog.service';
 import { FormGroup, FormBuilder, Validators } from '../../../../../node_modules/@angular/forms';
+import { SnackBarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-add-event-dialog',
@@ -12,28 +13,14 @@ import { FormGroup, FormBuilder, Validators } from '../../../../../node_modules/
 export class AddEventDialogComponent implements OnInit {
 
   addEventForm: FormGroup;
-
-  // jobName: string;
-  // jobSelected: any;
-  // cronExpression: string;
-  // eventName: string;
-  // eventType: string;
-  // description: string;
-  id: number;
   events: any;
-  classLoading: null;
-  jobCategorieses: null;
-  typeName: null;
-  kjcClasses: null;
-  listNotificationses: null;
-  definition: string;
-  jobId: number;
 
   constructor(
     public dialogRef: MatDialogRef<AddEventDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public addEventService: AddEventService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public snackbar: SnackBarService
   ) { }
 
   getList() {
@@ -48,43 +35,32 @@ export class AddEventDialogComponent implements OnInit {
 
   // Add Event 
   addEvent() {
-    // console.log('Job selected:');
-    // console.log(this.jobSelected);
-
+    this.addEventForm.value['id'] = this.addEventForm.value['jobs']['id'];
     console.log(this.addEventForm.value);
-    // const jobs = {
-    //   id: jobId,
-    //   eventName: this.eventName,
-    //   eventType: this.eventType,
-    //   jobs: this.jobSelected,
-    //   definition: 'test',
-    //   description: this.description,
-    //   status: 'test'
-    // };
 
-    // this.addEventService.addEvents(jobs).subscribe(
-    //   res => {
-    //     console.log(res);
-
-    //     // this.jobs = res.data;
-    //     // this.successMessage(res.message);
-    //     this.dialogRef.close();
-    //   },
-    //   err => {
-    //     console.log(err);
-    //     // this.errorMessage(err);
-    //   }
-    // );
+    this.addEventService.addEvents(this.addEventForm.value).subscribe(
+      res => {
+        // console.log(res);
+        this.snackbar.openSnackBar(res['data'], 'Success');
+        this.dialogRef.close();
+      },
+      err => {
+        console.log(err);
+        this.snackbar.openSnackBar('Something went wrong.', 'Error');
+      }
+    );
   }
   ngOnInit() {
     this.getList();
-    // Build Form
 
+    // Build Form
     this.addEventForm = this.formBuilder.group({
       eventName: ['', Validators.required],
       eventType: ['', Validators.required],
-      jobSelected: ['', Validators.required],
-      description: ['', Validators.required]
+      jobs: ['', Validators.required],
+      description: ['', Validators.required],
+      definition: ['', Validators.required],
+      status: ['', Validators.required]
     });
   }
 
@@ -95,10 +71,16 @@ export class AddEventDialogComponent implements OnInit {
   get eventType() {
     return this.addEventForm.get('eventType');
   }
-  get jobSelected() {
-    return this.addEventForm.get('jobSelected');
+  get jobs() {
+    return this.addEventForm.get('jobs');
   }
   get description() {
     return this.addEventForm.get('description');
+  }
+  get definition() {
+    return this.addEventForm.get('definition');
+  }
+  get status() {
+    return this.addEventForm.get('status');
   }
 }
