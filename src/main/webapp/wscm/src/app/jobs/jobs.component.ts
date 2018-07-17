@@ -26,10 +26,11 @@ export class JobsComponent implements OnInit {
     'editing'
   ];
 
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // dataSource = new MatTableDataSource<Element>(this.jobs);
 
-  constructor(public jobService: JobsService) {}
+  constructor(public jobService: JobsService) { }
 
   getList() {
     this.jobService.getJobs().subscribe(

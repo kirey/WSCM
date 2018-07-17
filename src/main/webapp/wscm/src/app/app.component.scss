@@ -18,10 +18,20 @@ $warn: #FFEE58;
     justify-content: center;
 }
 
+// Title Bar
+h1 {
+    color: #fff;
+    padding: 10px 3%;
+    font-size: 35px;
+    background: linear-gradient(to right, $primary, $accent);
+  }
+
 // Table
 table {
-    width: 100%;
     text-align: center;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 100px;
 }
 tr.mat-header-row {
     background: $primary!important;
@@ -39,32 +49,36 @@ th::selection {
     background: $primary;
 }
 th.mat-header-cell {
-    text-align: center!important;
-    padding: 0 20px!important;
+    text-align: left!important;
+    padding-right: 24px !important;
+    padding-top: 10px!important;
+    padding-bottom: 10px;
 }
 td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
-    text-align: center;
-    padding: 10px 0;
+    padding-right: 24px !important;
+    padding-top: 10px!important;
+    padding-bottom: 10px;
+    text-align: left!important;
 }
 td.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {
-    padding: 20px!important;
+    // padding: 20px!important;
 }
 
-  .material-icons {
+.material-icons {
     color: $primary;
-    font-size: 20px;
+    font-size: 25px;
     padding-right: 5px;
-  }
-  .material-icons:hover {
+    text-align: center;
+}
+.material-icons:hover {
     cursor: pointer;
-  }
-  .material-icons::selection {
+}
+.material-icons::selection {
     background: $primary;
     color: white;
-  }
+}
 
 // Dialogs
-
 .dialog-title {
     color: #424242;
     padding: 20px;

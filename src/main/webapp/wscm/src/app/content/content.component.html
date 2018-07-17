@@ -2,6 +2,7 @@
   <app-panel></app-panel>
 
   <div id="content" *ngIf="dataSource">
+    <h1>Content</h1>
     <!-- Add Content Button -->
     <button mat-mini-fab color="warn" class="addButton" (click)="addContentDialog()">
       <i class="material-icons plus" matTooltip="Back to Content Page" matTooltipPosition="above">add</i>
@@ -29,7 +30,9 @@
       <ng-container matColumnDef="categories">
         <th mat-header-cell *matHeaderCellDef> Categories </th>
         <td mat-cell *matCellDef="let element">
-          <span *ngFor="let cat of element.contentCategorieses">{{cat.categories.description}}</span>
+          <span *ngFor="let cat of element.contentCategorieses">{{cat.categories.description}}
+            <br>
+          </span>
         </td>
       </ng-container>
       <ng-container matColumnDef="edit">

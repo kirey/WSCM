@@ -1,13 +1,7 @@
 @import '../app.component.scss';
-#scheduler {
+
+#jobs {
   width: 80%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 10%;
-  h1 {
-    color: $primary;
-    text-transform: uppercase;
-  }
   
   button {
     background: $warn;
