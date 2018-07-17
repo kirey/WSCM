@@ -1,50 +1,6 @@
 @import '../app.component.scss';
 
 #jobs {
-  width: 80%;
-  
-  button {
-    background: $warn;
-    border: none;
-    outline: none;
-    float: right;
-    margin-bottom: 10px;
-  }
-  .plus {
-    font-size: 30px;
-    margin-top: -3px;
-  }
-  .addJob-container {
-    display: flex;
-    flex-direction: column;
-  }
-  button.formButton {
-    width: 20%;
-    margin-left: 80%;
-    background: $warn;
-  }
-  button.editButton {
-    width: 20%;
-    margin-left: 80%;
-    background: $primary;
-    color: white;
-  }
-  #addTemplate {
-    display: none;
-  }
-  #editForm {
-    display: none;
-  }
-  h5 {
-    color: #bdbdbd;
-  }
-  h5::selection {
-    background: $primary;
-  }
-  #addTemplate {
-    width: 50%;
-  }
-  .mat-input-element::selection {
-    background: $primary;
-  }
+  width: 100%;
+
 }

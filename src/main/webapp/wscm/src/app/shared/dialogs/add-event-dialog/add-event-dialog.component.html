@@ -2,27 +2,27 @@
   <h1>Add Event </h1>
   <!-- <div *ngIf="data"> -->
   <mat-dialog-content>
-    <form #addForm="ngForm" class="addJob-container">
+    <form [formGroup]="addEventForm" (ngSubmit)="addEvent()" class="addJob-container" autocomplete="off">
       <mat-form-field>
-        <input matInput name="eventName" [(ngModel)]="eventName" type="text" placeholder="Event Name" autocomplete="off">
+        <input matInput name="eventName" formControlName="eventName" type="text" placeholder="Event Name">
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput name="eventType" [(ngModel)]="eventType" placeholder="Event Type" autocomplete="off">
+        <input matInput name="eventType" formControlName="eventType" placeholder="Event Type">
       </mat-form-field>
       <mat-form-field>
-        <mat-select  id="jobSelected" placeholder="Job Name" required [(ngModel)]="jobSelected"  name="jobSelected">
+        <mat-select id="jobSelected" placeholder="Job Name" required formControlName="jobSelected" name="jobSelected">
           <mat-option *ngFor="let job of events; let i = index" [value]="job.jobs">{{job.jobs.jobName}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <textarea matInput name="description" [(ngModel)]="description" placeholder="Description"></textarea>
+        <textarea matInput name="description" formControlName="description" placeholder="Description"></textarea>
       </mat-form-field>
 
     </form>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button type="submit" mat-raised-button class="formButton" (click)="addJob()">Submit</button>
+    <button type="submit" mat-raised-button class="formButton">Submit</button>
     <button mat-button mat-dialog-close class="cancelButton">Cancel</button>
   </mat-dialog-actions>
   <!-- </div> -->
