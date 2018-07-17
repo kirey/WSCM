@@ -17,18 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
+import com.kirey.wscm.data.dao.CategoriesDao;
+import com.kirey.wscm.data.dao.DicJobTypeDao;
 import com.kirey.wscm.data.dao.EventDao;
 import com.kirey.wscm.data.dao.JobCategoriesDao;
 import com.kirey.wscm.data.dao.JobExecutionLogDao;
 import com.kirey.wscm.data.dao.JobParametersDao;
 import com.kirey.wscm.data.dao.JobsDao;
+import com.kirey.wscm.data.dao.KjcClassesDao;
+import com.kirey.wscm.data.dao.NotificationsDao;
+import com.kirey.wscm.data.entity.Categories;
 import com.kirey.wscm.data.entity.Content;
 import com.kirey.wscm.data.entity.ContentCategories;
+import com.kirey.wscm.data.entity.DicJobType;
 import com.kirey.wscm.data.entity.Event;
 import com.kirey.wscm.data.entity.JobCategories;
 import com.kirey.wscm.data.entity.JobExecutionLog;
 import com.kirey.wscm.data.entity.JobParameters;
 import com.kirey.wscm.data.entity.Jobs;
+import com.kirey.wscm.data.entity.KjcClasses;
 import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.service.JobService;
 
@@ -54,6 +61,18 @@ public class SchedulerController {
 	
 	@Autowired
 	private JobParametersDao jobParametersDao;
+	
+	@Autowired
+	private NotificationsDao notificationsDao;
+	
+	@Autowired
+	private CategoriesDao categoriesDao;
+	
+	@Autowired
+	private DicJobTypeDao dicJobTypeDao;
+	
+	@Autowired
+	private KjcClassesDao kjcClassesDao;
 
 	/**
 	 * get all jobs
@@ -291,5 +310,28 @@ public class SchedulerController {
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted parameter", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/categories", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> getAllCategories() {
+		List<Categories> categories = categoriesDao.findAll();
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(categories, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/jobTypes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> getAllJobTypes() {
+		List<DicJobType> jobTypes = dicJobTypeDao.findAll();
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobTypes, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/notifications", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> getAllNotifications() {
+		List<Notifications> notifications = notificationsDao.findAll();
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(notifications, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/classes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> getAllClasses() {
+		List<KjcClasses> classes = kjcClassesDao.findAll();
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(classes, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
 
 }

@@ -1,6 +1,6 @@
 <div style="display:flex">
   <app-panel></app-panel>
-  <div id="jobs">
+  <div id="scheduler">
     <h1>Jobs</h1>
     <!-- Add Job Button -->
     <!-- <button matTooltip="Add Job" matTooltipPosition="above" (click)="openAddDialog()" mat-mini-fab> -->
@@ -10,47 +10,48 @@
     <div *ngIf="jobs">
       <!-- Table -->
       <table mat-table [dataSource]="jobs" class="mat-elevation-z8">
-        <!-- ID -->
+        <!-- Job Name -->
         <ng-container matColumnDef="jobName">
           <th mat-header-cell *matHeaderCellDef> Job Name </th>
           <td mat-cell *matCellDef="let element"> {{element.jobName}} </td>
         </ng-container>
-        <!-- Event Name -->
+        <!-- Job Type -->
         <ng-container matColumnDef="jobType">
           <th mat-header-cell *matHeaderCellDef> Job Type </th>
           <td mat-cell *matCellDef="let element">
             <span *ngIf="element.jobType">{{element.jobType.typeName}}</span>
           </td>
         </ng-container>
-        <!-- Job Name -->
+        <!-- Job Status -->
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let element"> </td>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
         </ng-container>
-        <!-- Event Type -->
+        <!-- Class Loading -->
         <ng-container matColumnDef="classLoading">
           <th mat-header-cell *matHeaderCellDef> Class Loading </th>
           <td mat-cell *matCellDef="let element"> {{element.classLoading}} </td>
         </ng-container>
+        <!-- CronExpression -->
         <ng-container matColumnDef="cronExpression">
           <th mat-header-cell *matHeaderCellDef> Definition </th>
           <td mat-cell *matCellDef="let element">
             <span *ngIf="element.cronExpression">{{element.cronExpression}}</span>
           </td>
         </ng-container>
-        <!-- Description -->
+        <!-- Actions -->
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions</th>
           <td mat-cell *matCellDef="let element">
-            <i matTooltip="Start Job" matTooltipPosition="above" class="material-icons">
+            <i matTooltip="Start Job" matTooltipPosition="above" class="material-icons" (click)="start(element)">
               play_arrow
             </i>
-            <i matTooltip="Stop Job" matTooltipPosition="above" class="material-icons">
+            <i matTooltip="Stop Job" matTooltipPosition="above" class="material-icons" (click)="stop(element)">
               stop
             </i>
           </td>
         </ng-container>
-        <!-- Cron Ex -->
+        <!-- Editing -->
         <ng-container matColumnDef="editing">
           <th mat-header-cell *matHeaderCellDef> Editing</th>
           <td mat-cell *matCellDef="let element">
@@ -67,8 +68,11 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
       <!-- PAGINATOR -->
-      <!-- <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-            </mat-paginator> -->
+      <mat-paginator *ngIf="jobs" #paginator [length]="jobs.length" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+        [showFirstLastButtons]="true">
+      </mat-paginator>
     </div>
   </div>
+</div>
+</div>
 </div>
