@@ -53,7 +53,8 @@ public class StatisticsService {
 		Map<String, Object> response = new HashMap<>();
 		WscmUserAccounts user = wscmUserAccountsDao.findById(userId);
 		response.put("username", user.getUsername());
-		response.put("name", user.getName());
+		response.put("firstName", user.getFirstName());
+		response.put("lastName", user.getLastName());
 		
 		List<Map<String, Object>> listUrlWithNo = new ArrayList<>();
 		
@@ -61,9 +62,10 @@ public class StatisticsService {
 		for (UserLinks userLinks : listUserLinks) {
 			Map<String, Object> urlNo = new HashMap<>();
 			
-			
+			Links link = userLinks.getLink();
+			link.setNoOfRequests(userLinks.getNoRequests());
 			urlNo.put("link", userLinks.getLink());
-			urlNo.put("noOfRequests", userLinks.getNoRequests());
+//			urlNo.put("noOfRequests", userLinks.getNoRequests());
 //			List<LinksCategories> linksCategories = linksCategoriesDao.findByLink(userLinks.getLink());
 
 			

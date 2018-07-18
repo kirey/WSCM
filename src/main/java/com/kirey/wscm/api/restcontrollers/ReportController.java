@@ -53,6 +53,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.data.JRMapArrayDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 
@@ -394,29 +395,47 @@ public class ReportController {
 		List<Object> reportList = kjcReportsDao.findAllColumnsByTableName(tableName);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(reportList, HttpStatus.OK.value()), HttpStatus.OK);
 	}
-	
+
 	/**
-	 * This method is used for generating loss prevention plan
-	 * @param locationId
-	 * @param listPlaceholders
+	 * Method used for generating report which contains list of categories with number of requests for each
 	 * @return base64 encoded pdf for preview
 	 */
 	@RequestMapping(value = "/preview", method = RequestMethod.PUT)
     public ResponseEntity<RestResponseDto> generateReport() {
 
 		List<HashMap<String, Object>> responseList = statisticsService.categoryNo();
-
 		KjcReports report = kjcReportsDao.findByName("JavaBean");
 		
+		HashMap<String, Object> params = new HashMap<>();
 		
-		byte[] reportGenerated = reportService.generateReportJavaBean("pdf", new HashMap<>(), report, responseList);
+		byte[] reportGenerated = reportService.generateReportJavaBean("pdf", params, report, responseList);
 
 		String encoded = Base64.getEncoder().encodeToString(reportGenerated);
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(encoded, HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
-	
+	@RequestMapping(value = "/preview/userLinks", method = RequestMethod.PUT)
+    public ResponseEntity<RestResponseDto> generateReportUserLinks() {
+
+		Map<String, Object> response = statisticsService.linksStatisticsByUser(1);
+//		KjcReports report = kjcReportsDao.findByName("JavaBean");
+		KjcReports report = kjcReportsDao.findByName("LinksNoByUser");
+		
+		HashMap<String, Object> params = new HashMap<>();
+		JRMapArrayDataSource arrDatasource = new JRMapArrayDataSource(new Map[]{response});
+		
+		JRBeanCollectionDataSource listDatasource = new JRBeanCollectionDataSource((Collection<?>) response.get("links"));
+		
+		params.put("DS1", arrDatasource);
+		params.put("DS2", listDatasource);
+		
+		byte[] reportGenerated = reportService.generateReportJavaBean("pdf", params, report, response);
+
+		String encoded = Base64.getEncoder().encodeToString(reportGenerated);
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(encoded, HttpStatus.OK.value()), HttpStatus.OK);
+	}
 
 
 

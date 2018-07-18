@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,11 +25,15 @@ import com.kirey.wscm.data.entity.KjcReportBlobs;
 import com.kirey.wscm.data.entity.KjcReportParameters;
 import com.kirey.wscm.data.entity.KjcReports;
 
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRField;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.data.JRMapArrayDataSource;
+import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
@@ -112,6 +117,9 @@ public class ReportService {
 					}
 				}
 				JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource((Collection<?>) javaBean);
+//				HashMap<String, Object> some = (HashMap<String, Object>) javaBean;
+//				JRMapCollectionDataSource mapDatasource = new JRMapCollectionDataSource((Collection<Map<String, ?>>) some);
+//				JRMapArrayDataSource arrDatasource = new JRMapArrayDataSource(new Map[]{some});
 				InputStream reportStream = new ByteArrayInputStream(masterReport);
 				JasperReport jr = (JasperReport) JRLoader.loadObject(reportStream);
 				jasperPrint = JasperFillManager.fillReport(jr, reportParams, datasource);
