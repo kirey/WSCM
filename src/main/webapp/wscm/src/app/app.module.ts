@@ -53,6 +53,8 @@ import { ClassLoadingCategoriesComponent } from './class-loading-categories/clas
 import { AddCategoryDialogComponent } from './shared/dialogs/add-category-dialog/add-category-dialog.component';
 import { EditCategoryDialogComponent } from './shared/dialogs/edit-category-dialog/edit-category-dialog.component';
 import { AddJobDialogComponent } from './shared/dialogs/add-job-dialog/add-job-dialog.component';
+import { AddClassDialogComponent } from './shared/dialogs/add-class-dialog/add-class-dialog.component';
+import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edit-class-dialog.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,9 @@ import { AddJobDialogComponent } from './shared/dialogs/add-job-dialog/add-job-d
     ClassLoadingCategoriesComponent,
     AddCategoryDialogComponent,
     EditCategoryDialogComponent,
-    AddJobDialogComponent
+    AddJobDialogComponent,
+    AddClassDialogComponent,
+    EditClassDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +116,9 @@ import { AddJobDialogComponent } from './shared/dialogs/add-job-dialog/add-job-d
     AddEventDialogComponent,
     AddCategoryDialogComponent,
     EditCategoryDialogComponent,
-    AddJobDialogComponent
+    AddJobDialogComponent,
+    AddClassDialogComponent,
+    EditClassDialogComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
