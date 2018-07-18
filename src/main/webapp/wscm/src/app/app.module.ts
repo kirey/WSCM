@@ -27,6 +27,7 @@ import { EditEventService } from './shared/dialogs/edit-event-dialog/edit-event-
 import { AddEventService } from './shared/dialogs/add-event-dialog/add-event-dialog.service';
 import { JobsService } from './jobs/jobs.service';
 import { AddJobService } from './shared/dialogs/add-job-dialog/add-job-dialog.service';
+import { EditJobService } from './shared/dialogs/edit-job-dialog/edit-job-dialog.service';
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -42,7 +43,6 @@ import { EventsComponent } from './events/events.component';
 import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.component';
 import { ClientComponent } from './client/client.component';
 import { JobsComponent } from './jobs/jobs.component';
-import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.component';
 import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edit-event-dialog.component';
 import { AddContentDialogComponent } from './shared/dialogs/add-content-dialog/add-content-dialog.component';
 import { EditContentDialogComponent } from './shared/dialogs/edit-content-dialog/edit-content-dialog.component';
@@ -55,6 +55,8 @@ import { EditCategoryDialogComponent } from './shared/dialogs/edit-category-dial
 import { AddJobDialogComponent } from './shared/dialogs/add-job-dialog/add-job-dialog.component';
 import { AddClassDialogComponent } from './shared/dialogs/add-class-dialog/add-class-dialog.component';
 import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edit-class-dialog.component';
+import { EditJobDialogComponent } from './shared/dialogs/edit-job-dialog/edit-job-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +71,6 @@ import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edi
     DeleteDialog,
     ClientComponent,
     JobsComponent,
-    EditDialogComponent,
     EditEventDialogComponent,
     AddContentDialogComponent,
     EditContentDialogComponent,
@@ -80,6 +81,7 @@ import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edi
     AddCategoryDialogComponent,
     EditCategoryDialogComponent,
     AddJobDialogComponent,
+    EditJobDialogComponent,
     AddClassDialogComponent,
     EditClassDialogComponent
   ],
@@ -105,11 +107,11 @@ import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edi
     AddEventService,
     JobsService,
     ClassLoadingCategoriesService,
-    AddJobService
+    AddJobService,
+    EditJobService
   ],
   entryComponents: [
     DeleteDialog,
-    EditDialogComponent,
     EditEventDialogComponent,
     AddContentDialogComponent,
     EditContentDialogComponent,
@@ -117,8 +119,7 @@ import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edi
     AddCategoryDialogComponent,
     EditCategoryDialogComponent,
     AddJobDialogComponent,
-    AddClassDialogComponent,
-    EditClassDialogComponent
+    EditJobDialogComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

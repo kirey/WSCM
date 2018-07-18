@@ -7,6 +7,7 @@ import {
 } from '@angular/material';
 import { JobsService } from './jobs.service';
 import { AddJobDialogComponent } from '../shared/dialogs/add-job-dialog/add-job-dialog.component';
+import { EditJobDialogComponent } from '../shared/dialogs/edit-job-dialog/edit-job-dialog.component';
 
 @Component({
   selector: 'app-jobs',
@@ -58,6 +59,31 @@ export class JobsComponent implements OnInit {
     // });
   }
 
+// open edit dialog
+editJobDialog(obj) {
+  // this.currentJob = job;
+  const dialogRef = this.dialog.open(EditJobDialogComponent, {
+    width: '800px',
+    data: obj
+  });
+  console.log(obj);
+
+  dialogRef.afterClosed().subscribe(res => {
+    this.getList();
+    console.log(res);
+    console.log('uspesno');
+  });
+  // dialogRef.afterClosed().subscribe(res => {
+  //   if (res) {
+  //     this.contentService.updateContent(id).subscribe(
+  //       res => {
+  //         console.log(res);
+  //       },
+  //       err => console.log(err)
+  //     );
+  //   }
+  // });
+}
   // Start Job
   start(job) {
     this.jobService.startJob(job.id).subscribe(
