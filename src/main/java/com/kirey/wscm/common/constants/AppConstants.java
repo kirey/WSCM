@@ -297,6 +297,19 @@ public class AppConstants {
 	
 	public static final String URL_LINK_CONTROLLER = "/wscm/rest/link";
 	
+	//REPORTS
+	public static final Integer REPORT_MASTER_REPORT_ORDER = 1;
+	public static final String REPORT_TRANSLATION_MAP = "translationMap";
+	public static final String REPORT_MASTER_REPORT = "master";
+	
+	public static final String JASPER_REPORT = "jr";
+	public static final String TRANSLATION_START_TAG = "njamb.";
+	public static final String TRANSLATION_REVERSE_START_TAG = "bmajn.";
+	
+	public static final String TRANSLATION_END_TAG = ".bljab";
+	public static final String TRANSLATION_REVERSE_END_TAG = ".bajlb";
+	public static final int TRANSLATION_KEY_MAX_LENGTH = 150;
+	
 	
 	/**
 	 * Constructor from superClass.

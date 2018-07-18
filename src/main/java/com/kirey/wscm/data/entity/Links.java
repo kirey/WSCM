@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "links")
@@ -18,6 +19,8 @@ public class Links implements Serializable {
 	
 	private Integer id;
 	private String url;
+	@Transient
+	private Integer noOfRequests;
 	
 //	@JsonBackReference(value="linksUserLinks")
 //	private List<UserLinks> userLinkses = new ArrayList<>();
@@ -43,6 +46,14 @@ public class Links implements Serializable {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	@Transient
+	public Integer getNoOfRequests() {
+		return noOfRequests;
+	}
+	@Transient
+	public void setNoOfRequests(Integer noOfRequests) {
+		this.noOfRequests = noOfRequests;
 	}
 	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
