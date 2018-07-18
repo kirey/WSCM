@@ -80,8 +80,7 @@ getNotifications() {
   );
 }
 // Class Loading checkbox
-doCheck($event) {
-  console.log($event);
+doCheck(ev) {
   this.isChecked = true;
 }
   // Select category - checkbox
@@ -108,42 +107,22 @@ doCheck($event) {
           });
         }
       }
-    } else {
-      const index = this.listCategoryWeight.findIndex(
-        item => item['category'] == category
-      );
-      this.listCategoryWeight.splice(index, 1);
-
-      const index2 = this.jobCategorieses.findIndex(
-        item => item['category'] == category
-      );
-      this.jobCategorieses.splice(index2, 1);
     }
     console.log(this.listCategoryWeight);
   }
 
   // REMOVE  from list 'Selected categories'
   unchecked(position) {
-    if (this.listCategoryWeight.length !== 0) {
-      const index = this.listCategoryWeight.findIndex(
-        item => item['category'] == position.category
-      );
-      this.listCategoryWeight.splice(index, 1);
-
-      const index2 = this.jobCategorieses.findIndex(
-        item => item['category'] == position.category
-      );
-      this.jobCategorieses.splice(index2, 1);
-
-    }
+    const index = this.listCategoryWeight.findIndex(item => item['category'] == position.category);
+    this.listCategoryWeight.splice(index, 1);
     console.log(this.listCategoryWeight);
   }
 
   // Slider change fo each category
-  sliderChange(ev, id, index) {
+  sliderChange(ev, selected) {
     if (this.listCategoryWeight.length !== 0) {
       for (let i = 0; i < this.listCategoryWeight.length; i++) {
-        if (this.listCategoryWeight[i]['category']['id'] === id) {
+        if (this.listCategoryWeight[i]['category']['id'] === selected.category.id) {
           this.listCategoryWeight[i]['weight'] = ev.value;
         }
       }
