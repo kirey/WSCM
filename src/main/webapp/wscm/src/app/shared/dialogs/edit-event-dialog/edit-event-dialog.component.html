@@ -1,36 +1,43 @@
 <div id="editJob">
-  <h1>Edit
-    <h5>{{data.eventName}}</h5>
-  </h1>
+  <h2 class="dialog-title">Edit {{data.eventName}} event</h2>
   <div *ngIf="data">
     <form #editEventForm="ngForm" class="editJob-container">
       <mat-dialog-content>
-        <mat-form-field>
-          <input matInput name="eventName" type="text" [(ngModel)]="data.eventName" placeholder="Event Name" autocomplete="off" required>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput name="eventType" type="text" [(ngModel)]="data.eventType" placeholder="Event Type" autocomplete="off" required>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <mat-select name="jobs" [(ngModel)]="data.jobs" placeholder="Job Name" required>
-            <mat-option *ngFor="let job of events; let i = index" [value]="job.jobs">{{job.jobs.jobName}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput name="definition" [(ngModel)]="data.definition" placeholder="Definition" autocomplete="off">
-        </mat-form-field>
-        <br>
-
-        <mat-form-field>
-          <textarea matInput name="description" [(ngModel)]="data.description" placeholder="Description"></textarea>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput name="status" [(ngModel)]="data.status" placeholder="Status">
-        </mat-form-field>
-
+        <!-- Subtitle -->
+        <h3 class="dialog-subtitle">
+          Basic information</h3>
+        <div class="basic-inputs">
+          <!-- Event Name -->
+          <mat-form-field class="basic-fileds">
+            <input matInput name="eventName" type="text" [(ngModel)]="data.eventName" placeholder="Event Name" autocomplete="off" required>
+          </mat-form-field>
+          <!-- Event Type -->
+          <mat-form-field class="basic-fileds">
+            <input matInput name="eventType" type="text" [(ngModel)]="data.eventType" placeholder="Event Type" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="basic-inputs">
+          <!-- Job Name -->
+          <mat-form-field class="basic-fileds">
+            <mat-select name="jobs" [(ngModel)]="data.jobs" placeholder="Job Name" required>
+              <mat-option *ngFor="let job of events; let i = index" [value]="job.jobs">{{job.jobs.jobName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Definition -->
+          <mat-form-field class="basic-fileds">
+            <input matInput name="definition" [(ngModel)]="data.definition" placeholder="Definition" autocomplete="off">
+          </mat-form-field>
+        </div>
+        <div class="basic-inputs">
+          <!-- Description -->
+          <mat-form-field class="basic-fileds">
+            <textarea rows="1" matInput name="description" [(ngModel)]="data.description" placeholder="Description"></textarea>
+          </mat-form-field>
+          <!-- Status -->
+          <mat-form-field class="basic-fileds">
+            <input matInput name="status" [(ngModel)]="data.status" placeholder="Status">
+          </mat-form-field>
+        </div>
       </mat-dialog-content>
 
       <mat-dialog-actions class="buttons">
