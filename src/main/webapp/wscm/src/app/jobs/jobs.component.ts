@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-
 import {
   MatDialog,
   MatDialogRef,
@@ -45,23 +43,23 @@ export class JobsComponent implements OnInit {
       err => console.log(err)
     );
   }
- // open add dialog
- openAddDialog() {
-  const dialogRef = this.dialog.open(AddJobDialogComponent, {
-    width: '1000px',
-    // data: this.data
-  });
-  // console.log(obj);
+  // open add dialog
+  openAddDialog() {
+    const dialogRef = this.dialog.open(AddJobDialogComponent, {
+      width: '1000px',
+      // data: this.data
+    });
+    // console.log(obj);
 
-      // dialogRef.afterClosed().subscribe(res => {
-      //     this.getList();
-      //     console.log(res);
-      //     console.log('uspesno');
-      // });
-}
+    // dialogRef.afterClosed().subscribe(res => {
+    //     this.getList();
+    //     console.log(res);
+    //     console.log('uspesno');
+    // });
+  }
 
-   // Start Job
-   start(job) {
+  // Start Job
+  start(job) {
     this.jobService.startJob(job.id).subscribe(
       res => {
         console.log(res);

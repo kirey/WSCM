@@ -30,7 +30,7 @@ export class EditEventDialogComponent implements OnInit {
     this.editEventService.getEvents().subscribe(
       res => {
         this.events = res.data;
-        console.log(this.events);
+        // console.log(this.events);
       },
       err => console.log(err)
     );
@@ -63,7 +63,7 @@ export class EditEventDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
+    // console.log(this.data);
     this.getList();
   }
 }

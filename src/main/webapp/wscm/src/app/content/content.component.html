@@ -30,13 +30,21 @@
             <td mat-cell *matCellDef="let element"> {{element.language}} </td>
           </ng-container>
 
-          <!-- Weight -->
+          <!-- Categories -->
           <ng-container matColumnDef="categories">
             <th mat-header-cell *matHeaderCellDef> Categories </th>
             <td mat-cell *matCellDef="let element">
-              <span *ngFor="let cat of element.contentCategorieses; let i = index">{{i+1}}. {{cat.categories.description}}
-                <br>
+              <span *ngIf="element.contentCategorieses.length>0; else no_data">
+                <span *ngFor="let cat of element.contentCategorieses; let i = index">
+                  {{i+1}}. {{cat.categories.description}}
+                  <br>
+                </span>
               </span>
+              <ng-template #no_data>
+                <span class="no-data">
+                  No data.
+                </span>
+              </ng-template>
             </td>
           </ng-container>
           <ng-container matColumnDef="edit">

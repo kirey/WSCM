@@ -109,3 +109,9 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 .dialog-subtitle>i {
     margin-right: 5px;
 }
+
+// No data class
+.no-data {
+    color: gray;
+    font-style: italic;
+}

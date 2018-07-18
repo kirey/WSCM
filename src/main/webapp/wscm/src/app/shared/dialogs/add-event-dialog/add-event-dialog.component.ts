@@ -27,7 +27,7 @@ export class AddEventDialogComponent implements OnInit {
     this.addEventService.getEvents().subscribe(
       res => {
         this.events = res.data;
-        console.log(this.events);
+        // console.log(this.events);
       },
       err => console.log(err)
     );

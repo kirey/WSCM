@@ -1,7 +1,9 @@
 <div id="addJob">
-  <h1>Add Event </h1>
+  <h2 class="dialog-title">Add Event</h2>
   <mat-dialog-content>
     <form [formGroup]="addEventForm" class="addJob-container" autocomplete="off">
+      <!-- Subtitle -->
+      <h3 class="dialog-subtitle">Basic Information</h3>
       <!-- Event name -->
       <mat-form-field>
         <input matInput name="eventName" formControlName="eventName" type="text" placeholder="Event Name">
@@ -31,7 +33,7 @@
 
     </form>
   </mat-dialog-content>
-  <mat-dialog-actions>
+  <mat-dialog-actions class="buttons">
     <button mat-button mat-dialog-close>Cancel</button>
     <button type="submit" mat-raised-button color="warn" (click)="addEvent()" [disabled]="eventName.errors || eventType.errors || jobs.errors || description.errors || status.errors || definition.errors">Submit</button>
   </mat-dialog-actions>

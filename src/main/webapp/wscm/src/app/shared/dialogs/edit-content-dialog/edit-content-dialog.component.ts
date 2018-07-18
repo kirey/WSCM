@@ -79,7 +79,6 @@ export class EditContentDialogComponent implements OnInit {
   getCategories() {
     this.contentService.getCategories().subscribe(
       res => {
-        console.log(res);
         this.categories = res['data'];
         console.log(this.categories);
       },
@@ -101,7 +100,7 @@ export class EditContentDialogComponent implements OnInit {
       this.contentService.updateContent(value)
         .subscribe(
           res => {
-            console.log(res)
+            // console.log(res);
             this.snackBarService.openSnackBar(res['data'], 'Success');
             this.dialogRef.close();
           },

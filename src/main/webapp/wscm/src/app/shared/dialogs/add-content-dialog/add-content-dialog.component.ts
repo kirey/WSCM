@@ -78,7 +78,6 @@ export class AddContentDialogComponent implements OnInit {
   getCategories() {
     this.contentService.getCategories().subscribe(
       res => {
-        console.log(res);
         this.categories = res['data'];
         console.log(this.categories);
       },
