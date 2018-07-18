@@ -1,0 +1,86 @@
+<div id="addJob">
+  <h2 class="dialog-title">Add Job </h2>
+  <!-- <div *ngIf="data"> -->
+
+  <mat-dialog-content>
+    <h3 class="dialog-subtitle">Basic information</h3>
+    <form [formGroup]="addJobForm">
+        <div class="basic-inputs">
+      <!-- Job Name -->
+      <mat-form-field class="basic-fileds">
+        <input formControlName="jobName" matInput name="jobName" type="text" placeholder="Job Name" autocomplete="off">
+      </mat-form-field>
+      <!-- Cron Expression -->
+      <mat-form-field class="basic-fileds">
+        <input formControlName="cronExpression"  matInput name="cronExpression" type="text" placeholder="Cron Expression" autocomplete="off">
+      </mat-form-field>
+      <!-- Class Loading true/false  -->
+      <div>
+        <mat-checkbox color="warn" (click)="doCheck($event)" [checked]="isChecked"> Class Loading </mat-checkbox>
+      </div>
+       <!-- ClassLoading -->
+       <mat-form-field *ngIf="isChecked" class="basic-fileds">
+        <mat-select formControlName="kjcClasses"  placeholder="kjcClasses" required name="name">
+          <mat-option *ngFor="let job of classLoading; let i = index" [value]="job">{{job.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+     </div>
+      <hr>
+      <h3 class="dialog-subtitle">Select categories & weight for each category</h3>
+      <div class="categories">
+          <div class="categories-box">
+        <div *ngFor="let job of categories; let i = index">
+          <mat-checkbox color="warn" (change)="checked($event, job)" labelPosition="after" multiple>
+            {{job.categoryName}}
+          </mat-checkbox>
+          <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, job.id, i)">
+          </mat-slider>
+        </div>
+        </div>
+        <!-- Selected Categories -->
+        <div class="selected-categories">
+          <h5 class="label">Selected categories</h5>
+          <div>
+            <div *ngFor="let selected of listCategoryWeight" class="selected-categories-box">
+              <span>{{selected.category.categoryName}}</span>
+              <mat-icon *ngIf="selected.category.categoryName"(click)="unchecked(selected)">close</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      <h5 class="label"> Add Job Type &` status</h5>
+      <!-- Job Type -->
+      <mat-form-field>
+        <mat-select  formControlName="jobType" placeholder="Job Type" required name="typeName">
+          <mat-option *ngFor="let job of jobTypes; let i = index" [value]="job">{{job.typeName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- Status -->
+      <mat-form-field>
+        <input formControlName="status" matInput name="status" placeholder="Status" autocomplete="off">
+      </mat-form-field>
+
+      <!-- Params -->
+      <!-- Job Params -->
+      <h5 class="label"> Add Job Params</h5>
+      <!-- <mat-form-field> -->
+       <!-- J O B     P A R A M S name and value -->
+      <!-- </mat-form-field> -->
+      <hr>
+      <!-- Notifications -->
+      <mat-form-field>
+        <mat-select formControlName="listNotificationses" placeholder="Notifications" required name="jobSelected">
+          <mat-option *ngFor="let job of notification; let i = index" [value]="job">{{job.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="submit" mat-raised-button class="formButton" (click)="addJob()">Submit</button>
+    <button mat-button mat-dialog-close class="cancelButton">Cancel</button>
+  </mat-dialog-actions>
+  <!-- </div> -->
+</div>

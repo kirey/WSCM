@@ -8,6 +8,7 @@ import {
   MatPaginator, MatTableDataSource
 } from '@angular/material';
 import { JobsService } from './jobs.service';
+import { AddJobDialogComponent } from '../shared/dialogs/add-job-dialog/add-job-dialog.component';
 
 @Component({
   selector: 'app-jobs',
@@ -44,7 +45,20 @@ export class JobsComponent implements OnInit {
       err => console.log(err)
     );
   }
+ // open add dialog
+ openAddDialog() {
+  const dialogRef = this.dialog.open(AddJobDialogComponent, {
+    width: '1000px',
+    // data: this.data
+  });
+  // console.log(obj);
 
+      // dialogRef.afterClosed().subscribe(res => {
+      //     this.getList();
+      //     console.log(res);
+      //     console.log('uspesno');
+      // });
+}
 
    // Start Job
    start(job) {

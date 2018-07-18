@@ -26,6 +26,7 @@ import { SocketService } from './shared/services/socket.service';
 import { EditEventService } from './shared/dialogs/edit-event-dialog/edit-event-dialog.service';
 import { AddEventService } from './shared/dialogs/add-event-dialog/add-event-dialog.service';
 import { JobsService } from './jobs/jobs.service';
+import { AddJobService } from './shared/dialogs/add-job-dialog/add-job-dialog.service';
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -51,6 +52,7 @@ import { ClassLoadingComponent } from './class-loading/class-loading.component';
 import { ClassLoadingCategoriesComponent } from './class-loading-categories/class-loading-categories.component';
 import { AddCategoryDialogComponent } from './shared/dialogs/add-category-dialog/add-category-dialog.component';
 import { EditCategoryDialogComponent } from './shared/dialogs/edit-category-dialog/edit-category-dialog.component';
+import { AddJobDialogComponent } from './shared/dialogs/add-job-dialog/add-job-dialog.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import { EditCategoryDialogComponent } from './shared/dialogs/edit-category-dial
     ClassLoadingComponent,
     ClassLoadingCategoriesComponent,
     AddCategoryDialogComponent,
-    EditCategoryDialogComponent
+    EditCategoryDialogComponent,
+    AddJobDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,8 @@ import { EditCategoryDialogComponent } from './shared/dialogs/edit-category-dial
     EditEventService,
     AddEventService,
     JobsService,
-    ClassLoadingCategoriesService
+    ClassLoadingCategoriesService,
+    AddJobService
   ],
   entryComponents: [
     DeleteDialog,
@@ -107,7 +111,8 @@ import { EditCategoryDialogComponent } from './shared/dialogs/edit-category-dial
     EditContentDialogComponent,
     AddEventDialogComponent,
     AddCategoryDialogComponent,
-    EditCategoryDialogComponent
+    EditCategoryDialogComponent,
+    AddJobDialogComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
