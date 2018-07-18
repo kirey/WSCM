@@ -97,10 +97,10 @@ export class EventsComponent implements OnInit {
     // });
   }
   // Delete Job
-  deleteJob(id) {
+  deleteJob(id, type, value) {
     const dialogRef = this.dialog.open(DeleteDialog, {
       width: '500px',
-      data: { id: id }
+      data: { type: type, value: value }
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
