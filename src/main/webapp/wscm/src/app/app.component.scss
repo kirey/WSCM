@@ -56,7 +56,6 @@ tr.mat-header-row {
 }
 th.mat-header-cell {
     color: white;
-    font-size: 1em;
     text-align: center;
 }
 td::selection {
@@ -78,13 +77,13 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     padding-bottom: 10px;
     text-align: left!important;
 }
-td.mat-cell:first-child, td.mat-footer-cell:first-child, th.mat-header-cell:first-child {
-    // padding: 20px!important;
+.mat-cell, .mat-footer-cell {
+    font-size: 13px;
 }
 
 .table-icons {
     color: $primary;
-    font-size: 25px;
+    font-size: 19px;
     padding-right: 5px;
     text-align: center;
 }

@@ -5,10 +5,6 @@
   <div *ngIf="data">
     <form #editEventForm="ngForm" class="editJob-container">
       <mat-dialog-content>
-        <mat-form-field id="idField">
-          <input matInput name="id" [(ngModel)]="data.id" autocomplete="off">
-        </mat-form-field>
-        <br>
         <mat-form-field>
           <input matInput name="eventName" type="text" [(ngModel)]="data.eventName" placeholder="Event Name" autocomplete="off" required>
         </mat-form-field>
@@ -22,10 +18,6 @@
             <mat-option *ngFor="let job of events; let i = index" [value]="job.jobs">{{job.jobs.jobName}}</mat-option>
           </mat-select>
         </mat-form-field>
-
-        <!-- <mat-form-field>
-            <input matInput name="cronExpression" id="cronExpression" formControlName="cronExpression" [value]="data.jobs.cronExpression" placeholder="Definition" autocomplete="off">
-          </mat-form-field><br> -->
 
         <mat-form-field>
           <input matInput name="definition" [(ngModel)]="data.definition" placeholder="Definition" autocomplete="off">
@@ -42,8 +34,8 @@
       </mat-dialog-content>
 
       <mat-dialog-actions class="buttons">
-        <button mat-raised-button class="editButton" [disabled]="editEventForm.invalid" (click)="editJob(editEventForm.value)">Save</button>
-        <button mat-button mat-dialog-close class="cancelButton">Cancel</button>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-raised-button color="warn" [disabled]="editEventForm.invalid" (click)="editJob(editEventForm.value)">Save</button>
       </mat-dialog-actions>
     </form>
   </div>
