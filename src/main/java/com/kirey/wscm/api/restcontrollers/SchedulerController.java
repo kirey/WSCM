@@ -212,8 +212,8 @@ public class SchedulerController {
 	 * @throws ClassNotFoundException 
 	 * @throws SchedulerException
 	 */
-	@RequestMapping(value = "/startJob/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RestResponseDto> startJob(@PathVariable int id) throws ClassNotFoundException {
+	@RequestMapping(value = "/startJob/event/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> startJobEvent(@PathVariable int id) throws ClassNotFoundException {
 
 		try {
 			Event event = eventDao.findById(id);
@@ -228,19 +228,61 @@ public class SchedulerController {
 			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), AppConstants.MSG_JOB_START_FAILED), HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	/**
+	 * Method for stopping job with given id
+	 * @param id
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
+	@RequestMapping(value = "/startJob/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> startJob(@PathVariable int id) throws ClassNotFoundException {
+
+		
+		try {
+			Jobs job = jobsDao.findById(id);
+			if(job != null && job.getClassLoading()) {
+				jobService.startJobClassLoading(job);	
+			}else if (job != null && !job.getClassLoading()) {
+				jobService.startJobImmediately(job);
+			}
+			
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.OK.value(), AppConstants.MSG_JOB_SUCCESSFULL_STARTED), HttpStatus.OK);
+		} catch (SchedulerException e) {
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), AppConstants.MSG_JOB_START_FAILED), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 
 	/**
-	 * MEthod for stopping job with given id
+	 * MEthod for stopping job with given event id
 	 * 
-	 * @param id
+	 * @param id - of {@link Event}
+	 * @return
+	 */
+	@RequestMapping(value = "/stopJob/event/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> stopJobEvent(@PathVariable Integer id) {
+
+		try {
+			Event event = eventDao.findById(id);
+			jobService.stopJob(event.getJobs().getId());
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.OK.value(), AppConstants.MSG_JOB_SUCCESSFULL_STOPPED), HttpStatus.OK);
+		} catch (SchedulerException e) {
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), AppConstants.MSG_JOB_STOP_FAILED), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	/**
+	 * MEthod for stopping job with given id
+	 * @param id - of {@link Jobs}
 	 * @return
 	 */
 	@RequestMapping(value = "/stopJob/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> stopJob(@PathVariable Integer id) {
 
 		try {
-			Event event = eventDao.findById(id);
-			jobService.stopJob(event.getJobs().getId());
+			Jobs job = jobsDao.findById(id);
+			jobService.stopJob(job.getId());
 			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.OK.value(), AppConstants.MSG_JOB_SUCCESSFULL_STOPPED), HttpStatus.OK);
 		} catch (SchedulerException e) {
 			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), AppConstants.MSG_JOB_STOP_FAILED), HttpStatus.BAD_REQUEST);

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.quartz.JobExecutionException;
 import org.springframework.context.ApplicationContext;
 
 import com.kirey.wscm.classloading.classes.interfaces.BaseObject;
@@ -13,16 +12,17 @@ import com.kirey.wscm.classloading.classes.interfaces.WebRequestJob;
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.JobCategoriesDao;
 import com.kirey.wscm.data.dao.JobExecutionLogDao;
-import com.kirey.wscm.data.dao.JobsDao;
+import com.kirey.wscm.data.dao.NotificationsDao;
 import com.kirey.wscm.data.dao.WscmUserAccountsDao;
 import com.kirey.wscm.data.entity.Categories;
 import com.kirey.wscm.data.entity.JobExecutionLog;
+import com.kirey.wscm.data.entity.JobParameters;
 import com.kirey.wscm.data.entity.Jobs;
 import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
-import com.kirey.wscm.websocket.WebSocketHandler;
+import com.kirey.wscm.email.MailService;
 
-public class SendBankWebRequestJob implements WebRequestJob, BaseObject {
+public class SendCircularEmail implements WebRequestJob, BaseObject {
 
 	@Override
 	public void execute(HashMap<String, Object> inputMap) {
@@ -32,7 +32,8 @@ public class SendBankWebRequestJob implements WebRequestJob, BaseObject {
 		JobExecutionLogDao jobExecutionLogDao = (JobExecutionLogDao) applicationContext.getBean("jobExecutionLogDao");
 		JobCategoriesDao jobCategoriesDao = (JobCategoriesDao) applicationContext.getBean("jobCategoriesDao");
 		WscmUserAccountsDao wscmUserAccountsDao = (WscmUserAccountsDao) applicationContext.getBean("wscmUserAccountsDao");
-		WebSocketHandler webSocketHandler = (WebSocketHandler) applicationContext.getBean("webSocketHandler");
+		NotificationsDao notificationsDao = (NotificationsDao) applicationContext.getBean("notificationsDao");
+		MailService mailService = (MailService) applicationContext.getBean("mailService");
 		JobExecutionLog jobLog = new JobExecutionLog();
 		jobLog.setStartTimestamp(new Date());
 		jobLog.setStatus(AppConstants.JOB_STATUS_STARTED);
@@ -41,15 +42,26 @@ public class SendBankWebRequestJob implements WebRequestJob, BaseObject {
 		jobExecutionLogDao.merge(jobLog);
 		try {
 			
-			System.out.println("execute()::***EXECUTING SEND NOTIFICATION JOB USING CLASS LOADING*******");
-			
+			System.out.println("execute()::***EXECUTING SEND CIRCULAR EMAIL USING CLASS LOADING*******");
+			Integer userWeight = null;
+			Integer notifWeight = null;
+			List<JobParameters> listJobParameters = job.getJobParameterses();
+			for (JobParameters jobParameters : listJobParameters) {
+				if(jobParameters.getName().equals("userMinWeight")) {
+					userWeight = Integer.parseInt(jobParameters.getValue());
+				}
+				if(jobParameters.getName().equals("notifWeight")) {
+					notifWeight = Integer.parseInt(jobParameters.getValue());
+				}
+			}
 			List<Categories> listCategories = jobCategoriesDao.findByJob(job);
-			List<Notifications> notifications = job.getListNotificationses();
-			for (Notifications notification : notifications) {
-				Map<String, Object> templateModel = new HashMap<>();
-				for(Categories category : listCategories) {
-					List<WscmUserAccounts> usersByCategory = wscmUserAccountsDao.findUsersByCategory(category.getCategoryName());
-					webSocketHandler.sendNotificationToSpecificUsers(usersByCategory, notification, templateModel);
+			for (Categories category : listCategories) {
+				Notifications notification = notificationsDao.findNotificationsByCategoryWeightType(category, AppConstants.NOTIFICATION_TYPE_EMAIL, notifWeight);
+				List<WscmUserAccounts> usersByCategory = wscmUserAccountsDao.findUsersByCategoryWeight(category.getCategoryName(), userWeight);//.findUsersByCategory(category.getCategoryName());
+				for (WscmUserAccounts wscmUserAccounts : usersByCategory) {
+					Map<String, Object> templateModel = new HashMap<>();
+					templateModel.put("user", wscmUserAccounts.getFirstName() + " " + wscmUserAccounts.getLastName());
+					mailService.sendDefaultEmail(notification.getName(), wscmUserAccounts.getEmail(), "New Offer", templateModel, null);
 				}
 			}
 			
@@ -58,12 +70,7 @@ public class SendBankWebRequestJob implements WebRequestJob, BaseObject {
 		} catch (Exception e) {
 			jobLog.setStatus( AppConstants.JOB_STATUS_FINISHED_FAILED);
 			jobExecutionLogDao.merge(jobLog);
-		} 
-//		finally {
-//			JobExecutionException jobExecutionException = new JobExecutionException();
-//			jobExecutionException.setUnscheduleAllTriggers(true);
-//		}
-		
+		}
 		
 	}
 
