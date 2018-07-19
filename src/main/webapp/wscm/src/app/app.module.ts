@@ -1,3 +1,4 @@
+import { ClassLoadingCategoriesService } from './class-loading-categories/class-loading-categories.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,13 +20,14 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { PanelService } from './panel/panel.service';
 import { AuthService } from './shared/services/auth.service';
 import { LoginService } from './login/login.service';
-import { SchedulerService } from './scheduler/scheduler.service';
-import { AddNewPositionService } from './shared/components/add-new-position/add-new-position.service';
+import { EventsService } from './events/events.service';
 import { ClientService } from './client/client.service';
 import { SocketService } from './shared/services/socket.service';
 import { EditEventService } from './shared/dialogs/edit-event-dialog/edit-event-dialog.service';
 import { AddEventService } from './shared/dialogs/add-event-dialog/add-event-dialog.service';
 import { JobsService } from './jobs/jobs.service';
+import { AddJobService } from './shared/dialogs/add-job-dialog/add-job-dialog.service';
+import { EditJobService } from './shared/dialogs/edit-job-dialog/edit-job-dialog.service';
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -37,17 +39,24 @@ import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LanguagesComponent } from './languages/languages.component';
-import { SchedulerComponent } from './scheduler/scheduler.component';
+import { EventsComponent } from './events/events.component';
 import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.component';
-import { AddNewPositionComponent } from './shared/components/add-new-position/add-new-position.component';
 import { ClientComponent } from './client/client.component';
 import { JobsComponent } from './jobs/jobs.component';
-import { EditDialogComponent } from './shared/dialogs/edit-dialog/edit-dialog.component';
 import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edit-event-dialog.component';
 import { AddContentDialogComponent } from './shared/dialogs/add-content-dialog/add-content-dialog.component';
 import { EditContentDialogComponent } from './shared/dialogs/edit-content-dialog/edit-content-dialog.component';
 import { AddEventDialogComponent } from './shared/dialogs/add-event-dialog/add-event-dialog.component';
 import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
+import { ClassLoadingComponent } from './class-loading/class-loading.component';
+import { ClassLoadingCategoriesComponent } from './class-loading-categories/class-loading-categories.component';
+import { AddCategoryDialogComponent } from './shared/dialogs/add-category-dialog/add-category-dialog.component';
+import { EditCategoryDialogComponent } from './shared/dialogs/edit-category-dialog/edit-category-dialog.component';
+import { AddJobDialogComponent } from './shared/dialogs/add-job-dialog/add-job-dialog.component';
+import { AddClassDialogComponent } from './shared/dialogs/add-class-dialog/add-class-dialog.component';
+import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edit-class-dialog.component';
+import { EditJobDialogComponent } from './shared/dialogs/edit-job-dialog/edit-job-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -58,17 +67,23 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     LoginComponent,
     LanguagesComponent,
     FilterPipe,
-    SchedulerComponent,
+    EventsComponent,
     DeleteDialog,
-    AddNewPositionComponent,
     ClientComponent,
     JobsComponent,
-    EditDialogComponent,
     EditEventDialogComponent,
     AddContentDialogComponent,
     EditContentDialogComponent,
     AddEventDialogComponent,
-    MailRedirectComponent
+    MailRedirectComponent,
+    ClassLoadingComponent,
+    ClassLoadingCategoriesComponent,
+    AddCategoryDialogComponent,
+    EditCategoryDialogComponent,
+    AddJobDialogComponent,
+    EditJobDialogComponent,
+    AddClassDialogComponent,
+    EditClassDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -85,21 +100,26 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
     AuthGuard,
     AuthService,
     LoginService,
-    SchedulerService,
-    AddNewPositionService,
+    EventsService,
     ClientService,
     SocketService,
     EditEventService,
     AddEventService,
-    JobsService
+    JobsService,
+    ClassLoadingCategoriesService,
+    AddJobService,
+    EditJobService
   ],
   entryComponents: [
     DeleteDialog,
-    EditDialogComponent,
     EditEventDialogComponent,
     AddContentDialogComponent,
     EditContentDialogComponent,
-    AddEventDialogComponent
+    AddEventDialogComponent,
+    AddCategoryDialogComponent,
+    EditCategoryDialogComponent,
+    AddJobDialogComponent,
+    EditJobDialogComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

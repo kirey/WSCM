@@ -229,7 +229,7 @@ public class KjcClassesDao extends KjcBaseDao {
 		KjcClasses preparedKjcClass;
 		try {
 			preparedKjcClass = prepareClassForUpload(kjcClass, javaFile == null ? null : javaFile.getBytes(),
-					compiledFile == null ? null : compiledFile.getBytes(), javaFile == null ? null : javaFile.getOriginalFilename(), bindingResult);
+					compiledFile == null ? null : compiledFile.getBytes(), javaFile == null ? null : javaFile.getOriginalFilename());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -244,9 +244,8 @@ public class KjcClassesDao extends KjcBaseDao {
 	 * @param bindingResult
 	 */
 	@Transactional
-	public void uploadClass(KjcClasses kjcClass, byte[] javaFileBytes, byte[] compiledFileBytes, String javaFileName,
-			BindingResult bindingResult)  {
-		KjcClasses preparedKjcClass = prepareClassForUpload(kjcClass, javaFileBytes, compiledFileBytes, javaFileName, bindingResult);
+	public void uploadClass(KjcClasses kjcClass, byte[] javaFileBytes, byte[] compiledFileBytes, String javaFileName)  {
+		KjcClasses preparedKjcClass = prepareClassForUpload(kjcClass, javaFileBytes, compiledFileBytes, javaFileName);
 		this.persist(preparedKjcClass);
 	}
 
@@ -261,7 +260,7 @@ public class KjcClassesDao extends KjcBaseDao {
 	 * @return KjcClasses prepared class for uploading
 	 */
 	public KjcClasses prepareClassForUpload(KjcClasses kjcClass, byte[] javaFileBytes, byte[] compiledFileBytes,
-			String javaFileName, BindingResult bindingResult)  {
+			String javaFileName)  {
 
 		String javaCode = new String(javaFileBytes);
 		final String packageName = "packageName";

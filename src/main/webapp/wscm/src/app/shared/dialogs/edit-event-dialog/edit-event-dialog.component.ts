@@ -4,8 +4,10 @@ import {
   ViewEncapsulation,
   OnInit
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EditEventService } from './edit-event-dialog.service';
+import { SnackBarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-edit-event-dialog',
@@ -17,52 +19,51 @@ export class EditEventDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditEventDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public editEventService: EditEventService
-  ) {}
+    public editEventService: EditEventService,
+    public snackbar: SnackBarService
+  ) { }
 
-  cronExpression: string;
-  status: string;
-  eventType: string;
-  id: number;
+  editEventsForm: FormGroup;
   events: any;
-  eventName: string;
-  selectValue: any;
 
   getList() {
-    this.editEventService.getJobs().subscribe(
+    this.editEventService.getEvents().subscribe(
       res => {
         this.events = res.data;
-        console.log(this.events);
+        // console.log(this.events);
       },
       err => console.log(err)
     );
   }
 
-  jobObjectChanged(ev) {
-    console.log(ev);
+  // Edit job form
+  editJob(obj) {
+    obj['id'] = this.data.id;
+    console.log(obj);
+
+    if (!obj.eventName) this.snackbar.openSnackBar('Please, enter event name.', '');
+    else if (!obj.eventType) this.snackbar.openSnackBar('Please, enter event type.', '');
+    else if (!obj.jobs) this.snackbar.openSnackBar('Please, select job name.', '');
+    else if (!obj.definition) this.snackbar.openSnackBar('Please, enter definition.', '');
+    else if (!obj.description) this.snackbar.openSnackBar('Please, enter description.', '');
+    else if (!obj.status) this.snackbar.openSnackBar('Please, enter status.', '');
+    else {
+      this.editEventService.editEvents(obj).subscribe(
+        res => {
+          // console.log(res);
+          this.snackbar.openSnackBar(res['data'], 'Success');
+          this.dialogRef.close();
+        },
+        err => {
+          console.log(err);
+          this.snackbar.openSnackBar('Something went wrong.', 'Error');
+        }
+      );
+    }
   }
 
-  // Edit job form
-  editJob() {
-    console.log(this.data);
-    this.editEventService.editJobs(this.data).subscribe(
-      res => {
-        console.log(res);
-        // this.successMessage(res.message);
-        this.dialogRef.close();
-      },
-      err => {
-        console.log(err);
-        // this.errorMessage(err);
-        // this.editJobModal.hide();
-      }
-    );
-  }
-  cancel(): void {
-    this.dialogRef.close();
-  }
   ngOnInit() {
-    console.log(this.data);
+    // console.log(this.data);
     this.getList();
   }
 }

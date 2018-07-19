@@ -2,7 +2,7 @@
   <h2 class="dialog-title">Edit Content
     <!-- <h5>{{data.eventName}}</h5> -->
   </h2>
-  <form [formGroup]="addContentForm" (ngSubmit)="addContent()">
+  <form #editContentForm="ngForm" (ngSubmit)="editContent(editContentForm.value)">
     <mat-dialog-content>
       <!-- BASIC INPUT FIELDS -->
       <!-- Page -->
@@ -13,15 +13,15 @@
         Basic information</h3>
       <div class="basic-inputs">
         <mat-form-field class="basic-fileds">
-          <input formControlName="page" matInput placeholder="Page Name" [value]="positionData.page">
+          <input matInput placeholder="Page Name" name="page" [(ngModel)]="positionData.page">
         </mat-form-field>
         <!-- Position -->
         <mat-form-field class="basic-fileds">
-          <input formControlName="position" matInput placeholder="Position" [value]="positionData.position">
+          <input matInput placeholder="Position" name="position" [(ngModel)]="positionData.position">
         </mat-form-field>
         <!-- Language -->
         <mat-form-field class="basic-fileds">
-          <input formControlName="language" matInput placeholder="Language" [value]="positionData.language">
+          <input matInput placeholder="Language" name="language" [(ngModel)]="positionData.language">
         </mat-form-field>
       </div>
       <hr>
@@ -39,7 +39,7 @@
             <div class="tabs-body">
               <mat-form-field class="textarea-fields" appearance="outline">
                 <mat-label>HTML</mat-label>
-                <textarea formControlName="html" rows="10" matInput [value]="positionData.html"></textarea>
+                <textarea rows="10" matInput name="html" [(ngModel)]="positionData.html"></textarea>
                 <mat-hint>Enter your HTML code</mat-hint>
               </mat-form-field>
             </div>
@@ -49,7 +49,7 @@
             <div class="tabs-body">
               <mat-form-field class="textarea-fields" appearance="outline">
                 <mat-label>CSS</mat-label>
-                <textarea formControlName="css" rows="10" matInput [value]="positionData.css"></textarea>
+                <textarea rows="10" matInput name="css" [(ngModel)]="positionData.css"></textarea>
                 <mat-hint>Enter your CSS code</mat-hint>
               </mat-form-field>
             </div>
@@ -59,7 +59,7 @@
             <div class="tabs-body">
               <mat-form-field class="textarea-fields" appearance="outline">
                 <mat-label>JavaScript</mat-label>
-                <textarea formControlName="script" rows="10" matInput [value]="positionData.script"></textarea>
+                <textarea rows="10" matInput name="script" [(ngModel)]="positionData.script"></textarea>
                 <mat-hint>Enter your JavaScript code</mat-hint>
               </mat-form-field>
             </div>
@@ -76,20 +76,24 @@
         Select categories & weight for each category</h3>
       <div class="categories">
         <div class="categories-box">
-          <div *ngFor="let category of categories; let i = index">
-            <mat-checkbox [checked]="checkCheckboxVar" color="warn" (change)="checked($event, category)" labelPosition="after">
-              {{category.description}}
-            </mat-checkbox>
-            <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" (change)="sliderChange($event, category.id, i)">
-            </mat-slider>
+          <div *ngIf="categories">
+            <h5 class="label">Choose categories</h5>
+            <div *ngFor="let category of categories | filter: positionData.contentCategorieses : 'categories'">
+              <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after">
+                {{category.description}}
+              </mat-checkbox>
+            </div>
           </div>
         </div>
         <!-- Selected Categories -->
         <div class="selected-categories">
-          <h5 class="label">Selected categories</h5>
+          <h5 class="label">Choose weight for selected categories</h5>
           <div>
             <div *ngFor="let selected of positionData.contentCategorieses" class="selected-categories-box">
+              <mat-icon class="unselect-icon" (click)="unchecked(selected)">close</mat-icon>
               <span>{{selected.categories.description}}</span>
+              <mat-slider color="warn" max="5" min="1" step="1" thumbLabel="true" tickInterval="5" [value]="selected.weight" (change)="sliderChange($event, selected)">
+              </mat-slider>
             </div>
           </div>
         </div>
@@ -98,7 +102,7 @@
     </mat-dialog-content>
     <mat-dialog-actions class="buttons">
       <button mat-button mat-dialog-close class="cancelButton">Cancel</button>
-      <button type="submit" mat-raised-button color="warn" [disabled]="html.errors || page.errors || position.errors || language.errors">Save</button>
+      <button type="submit" mat-raised-button color="warn">Save</button>
     </mat-dialog-actions>
   </form>
 </div>

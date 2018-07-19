@@ -2,35 +2,15 @@
 // @import '~@angular/material/theming';
 
 #editJob {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: space-between;
-  p {
-    color: $primary;
-  }
-  .addJob-container {
-    width: 50%;
-  }
-  .mat-form-field {
-    width: 50%;
-    padding: 20px 20px;
-  }
-  h5 {
-    color: #bdbdbd;
-  }
   .buttons {
+    float: right;
+  }
+  .basic-fileds {
+    width: 45%!important;
+  }
+  .basic-inputs {
+    padding: 20px;
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: flex-end;
-    margin-top: 50px;
+    justify-content: space-around;
   }
-  .editButton{
-    margin-left: 60%;
-  }
-  .cancelButton {
-    background-color: $warn;
-  }
-
 }

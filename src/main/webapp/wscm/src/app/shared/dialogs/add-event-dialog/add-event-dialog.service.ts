@@ -5,15 +5,15 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AddEventService {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
   baseUrl = '/wscm/rest/scheduler/';
 
 
-  addJobs(jobs): Observable<any> {
+  addEvents(jobs): Observable<any> {
     return this._http.post(this.baseUrl + 'events', jobs);
   }
-  getJobs(): Observable<any> {
+  getEvents(): Observable<any> {
     return this._http.get(this.baseUrl + 'events');
   }
   // editJobs(obj): Observable<any> {

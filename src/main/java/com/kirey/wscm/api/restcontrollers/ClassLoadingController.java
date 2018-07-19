@@ -85,12 +85,15 @@ public class ClassLoadingController {
 	 * @param bindingResult
 	 * @return ResponseEntity containing the request status message and HTTP status code
 	 */
-	@RequestMapping(value = "/classes", method = RequestMethod.POST, consumes="multipart/form-data")
+	@RequestMapping(value = "/classes",method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> uploadFile(@RequestPart(name="javaFile", required=true) MultipartFile javaFile,  
 			@RequestPart(name="compiledFile", required=true) MultipartFile compiledFile, 
-			@RequestPart(name="kjcClass") @Valid KjcClasses kjcClass, BindingResult bindingResult) {
+			@RequestPart(name="kjcClass", required = true) KjcClasses kjcClass) {
 
-		kjcClassesDao.uploadClass(kjcClass, javaFile, compiledFile, bindingResult);
+		System.out.println(kjcClass);
+		System.out.println(javaFile);
+		System.out.println(compiledFile);
+		kjcClassesDao.uploadClass(kjcClass, javaFile, compiledFile);
 		return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.OK.value(),"Successfully uploaded: "+ " " + kjcClass.getName()), HttpStatus.OK);
 	}
 	

@@ -14,30 +14,14 @@ export class EditContentDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<EditContentDialogComponent>, @Inject(MAT_DIALOG_DATA) public positionData: any, public contentService: ContentService, public formBuilder: FormBuilder, public snackBarService: SnackBarService) { }
 
   categories: any;
-  listCategoryWeight = [];
+  listCategoryWeight = this.positionData.contentCategorieses;
   contentCategorieses = [];
-  addContentForm: FormGroup;
-  checkCheckboxVar: boolean;
-
-
-  // Check Checkbox
-  checkCheckbox() {
-    for (let i = 0; i < this.positionData.contentCategorieses.length; i++) {
-      for (let y = 0; y < this.categories.length; y++) {
-        if (this.positionData.contentCategorieses[i].categories.id == this.categories[y].id) {
-          this.checkCheckboxVar = true;
-        }
-        else this.checkCheckboxVar = false;
-      }
-    }
-  }
 
   // Select category - checkbox
   checked(ev, categories) {
     if (ev.checked) {
       if (this.listCategoryWeight.length == 0) {
-        this.listCategoryWeight.push({ categories: categories, weight: 1 });
-        this.contentCategorieses.push({
+        this.positionData.contentCategorieses.push({
           categories: categories,
           weight: 1
         });
@@ -50,32 +34,36 @@ export class EditContentDialogComponent implements OnInit {
           }
         }
         if (push) {
-          this.listCategoryWeight.push({ categories, weight: 1 });
-          this.contentCategorieses.push({
-            categories,
+          this.positionData.contentCategorieses.push({
+            categories: categories,
             weight: 1
           });
         }
       }
-    } else {
-      let index = this.listCategoryWeight.findIndex(
-        item => item['categories'] == categories
-      );
-      this.listCategoryWeight.splice(index, 1);
-
-      let index2 = this.contentCategorieses.findIndex(
-        item => item['categories'] == categories
-      );
-      this.contentCategorieses.splice(index2, 1);
+    }
+    else {
+      // let index = this.positionData.contentCategorieses.findIndex(
+      //   item => item['categories'] == categories
+      // );
+      // this.positionData.contentCategorieses.splice(index3, 1);
     }
     console.log(this.listCategoryWeight);
   }
 
+  unchecked(position) {
+    let index = this.positionData.contentCategorieses.findIndex(item => item['categories'] == position.categories);
+    this.positionData.contentCategorieses.splice(index, 1);
+
+    console.log(this.listCategoryWeight);
+  }
+
+
   // Slider change fo each category
-  sliderChange(ev, id, index) {
+  sliderChange(ev, selected) {
+    console.log(selected);
     if (this.listCategoryWeight.length !== 0) {
       for (let i = 0; i < this.listCategoryWeight.length; i++) {
-        if (this.listCategoryWeight[i]['categories']['id'] === id) {
+        if (this.listCategoryWeight[i]['categories']['id'] === selected.categories.id) {
           this.listCategoryWeight[i]['weight'] = ev.value;
         }
       }
@@ -91,30 +79,34 @@ export class EditContentDialogComponent implements OnInit {
   getCategories() {
     this.contentService.getCategories().subscribe(
       res => {
-        console.log(res);
         this.categories = res['data'];
         console.log(this.categories);
-        this.checkCheckbox();
       },
       err => console.log(err)
     );
   }
 
   // Send request
-  addContent() {
-    let obj = this.addContentForm.value;
-    obj['contentCategorieses'] = this.listCategoryWeight;
+  editContent(value) {
+    value['contentCategorieses'] = this.positionData.contentCategorieses;
+    console.log(value);
 
-    this.contentService.addContent(obj)
-      .subscribe(
-        res => {
-          // console.log(res)
-          this.snackBarService.openSnackBar(res['data'], 'Success');
-          this.dialogRef.close();
-        },
-        err => this.snackBarService.openSnackBar('Something went wrong.', 'Error')
-      );
-
+    // Validation for required fields
+    if (!value.page) this.snackBarService.openSnackBar('Please, enter page name.', '');
+    else if (!value.position) this.snackBarService.openSnackBar('Please, enter position name.', '');
+    else if (!value.language) this.snackBarService.openSnackBar('Please, enter language.', '');
+    else if (!value.html) this.snackBarService.openSnackBar('Please, enter HTML code.', '');
+    else {
+      this.contentService.updateContent(value)
+        .subscribe(
+          res => {
+            // console.log(res);
+            this.snackBarService.openSnackBar(res['data'], 'Success');
+            this.dialogRef.close();
+          },
+          err => this.snackBarService.openSnackBar('Something went wrong.', 'Error')
+        );
+    }
   }
 
   ngOnInit() {
@@ -122,27 +114,28 @@ export class EditContentDialogComponent implements OnInit {
     this.getCategories();
 
     // Build Form
-    this.addContentForm = this.formBuilder.group({
-      html: ['', Validators.required],
-      css: [''],
-      script: [''],
-      page: ['', Validators.required],
-      position: ['', Validators.required],
-      language: ['', Validators.required]
-    });
-  }
+    //   this.editContentForm = this.formBuilder.group({
+    //     html: ['', Validators.required],
+    //     css: [''],
+    //     script: [''],
+    //     page: ['', Validators.required],
+    //     position: ['', Validators.required],
+    //     language: ['', Validators.required]
+    //   });
+    // }
 
-  // Form Getters
-  get html() {
-    return this.addContentForm.get('html');
-  }
-  get page() {
-    return this.addContentForm.get('page');
-  }
-  get position() {
-    return this.addContentForm.get('position');
-  }
-  get language() {
-    return this.addContentForm.get('language');
+    // Form Getters
+    // get html() {
+    //   return this.editContentForm.get('html');
+    // }
+    // get page() {
+    //   return this.editContentForm.get('page');
+    // }
+    // get position() {
+    //   return this.editContentForm.get('position');
+    // }
+    // get language() {
+    //   return this.editContentForm.get('language');
+    // }
   }
 }
