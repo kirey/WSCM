@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kirey.kjcore.api.dto.ValidationErrorDto;
+import com.kirey.kjcore.common.constants.ValidationErrorConstants;
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.classloading.BaseObjectFactory;
 import com.kirey.wscm.classloading.ClassLoadingUtil;
@@ -90,9 +92,6 @@ public class ClassLoadingController {
 			@RequestPart(name="compiledFile", required=true) MultipartFile compiledFile, 
 			@RequestPart(name="kjcClass", required = true) KjcClasses kjcClass) {
 
-		System.out.println(kjcClass);
-		System.out.println(javaFile);
-		System.out.println(compiledFile);
 		kjcClassesDao.uploadClass(kjcClass, javaFile, compiledFile);
 		return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.OK.value(),"Successfully uploaded: "+ " " + kjcClass.getName()), HttpStatus.OK);
 	}
@@ -196,9 +195,14 @@ public class ClassLoadingController {
 	 */
 	@RequestMapping(value = "/categories", method = RequestMethod.POST)
 	public ResponseEntity<Object> addCategories(@RequestBody KjcClassCategories kjcClassCategories){
-//		classLoadingValidation.validationForAddNewCategory(kjcClassCategories);
-		kjcClassCategoriesDao.attachDirty(kjcClassCategories);
-		return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.OK.value(),"Successfully added new category"), HttpStatus.OK);
+		KjcClassCategories classCategoryFromDb = kjcClassCategoriesDao.findByName(kjcClassCategories.getName());
+		if(classCategoryFromDb == null) {
+			return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(),"Category with name " + kjcClassCategories.getName() + " already exists"), HttpStatus.BAD_REQUEST);
+		}else {
+			kjcClassCategoriesDao.attachDirty(kjcClassCategories);
+			return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.OK.value(),"Successfully added new category"), HttpStatus.OK);	
+		}
+		
 	}
 	
 	/**
@@ -208,9 +212,14 @@ public class ClassLoadingController {
 	 */
 	@RequestMapping(value = "/categories", method = RequestMethod.PUT)
 	public ResponseEntity<Object> editCategories(@RequestBody KjcClassCategories kjcClassCategories){
-//		classLoadingValidation.validationForEditCategory(kjcClassCategories);
-		kjcClassCategoriesDao.editCategory(kjcClassCategories);
-		return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.OK.value(),"Successfully edited category"), HttpStatus.OK);
+		List<String> listCategories = kjcClassCategoriesDao.findAllCategoryNamesWithoutOne(kjcClassCategories);	
+		if(listCategories.contains(kjcClassCategories.getName())){
+			return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(),"Category with name " + kjcClassCategories.getName() + " already exists"), HttpStatus.BAD_REQUEST);
+		}else {
+			kjcClassCategoriesDao.editCategory(kjcClassCategories);
+			return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.OK.value(),"Successfully edited category"), HttpStatus.OK);	
+		}
+		
 	}
 	
 	/**
@@ -220,10 +229,14 @@ public class ClassLoadingController {
 	 */
 	@RequestMapping(value = "/categories/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> deleteCategories(@PathVariable int id){
-//		KjcClassCategories kjcClassCategories = classLoadingValidation.validationForDeleteCategory(id);
 		KjcClassCategories kjcClassCategories = kjcClassCategoriesDao.findById(id);
-		kjcClassCategoriesDao.delete(kjcClassCategories);
-		return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.OK.value(),"Successfully deleted"), HttpStatus.OK);
+		if(!kjcClassCategories.getKjcClasseses().isEmpty()){
+			return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(),"There are classes that contains" +  kjcClassCategories.getName() + " category"), HttpStatus.BAD_REQUEST);
+		}else {
+			kjcClassCategoriesDao.delete(kjcClassCategories);
+			return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.OK.value(),"Successfully deleted"), HttpStatus.OK);	
+		}
+		
 	}
 	
 	@RequestMapping(value = "/testUpload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
