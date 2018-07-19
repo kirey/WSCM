@@ -39,12 +39,22 @@ public class IpAddressLinksDao extends KjcBaseDao {
 		return ipAddressLinks;
 	}
 
+	/**
+	 * Method for getting {@link List} of {@link IpAddressLinks} by {@link IpAddress}
+	 * @param ipAddress 
+	 * @return {@link List}<{@link IpAddressLinks}>
+	 */
 	public List<IpAddressLinks> findByIpAddress(IpAddress ipAddress) {
 		String hql = "from IpAddressLinks ipl where ipl.ipAddress.id = :ipAddrId";
 		List<IpAddressLinks> list = sessionFactory.getCurrentSession().createQuery(hql).setParameter("ipAddrId", ipAddress.getId()).list();
 		return list;
 	}
 
+	/**
+	 * Method for getting {@link List} of {@link IpAddressLinks} by {@link Links}
+	 * @param link
+	 * @return {@link List}<{@link IpAddressLinks}>
+	 */
 	public List<IpAddressLinks> findByLink(Links link) {
 		String hql = "from IpAddressLinks ipl where ipl.link.id = :linkId";
 		List<IpAddressLinks> list = sessionFactory.getCurrentSession().createQuery(hql).setParameter("linkId", link.getId()).list();

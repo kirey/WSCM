@@ -289,6 +289,10 @@ public class SchedulerController {
 		}
 	}
 	
+	/**
+	 * Method for getting all {@link Event}
+	 * @return ResponseEntity containing the list of all events along with HTTP status
+	 */
 	@RequestMapping(value = "/events", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getEvents() {
 		List<Event> listEvents = eventDao.findAll();
@@ -300,6 +304,11 @@ public class SchedulerController {
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listEvents, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for adding new {@link Event}
+	 * @param event
+	 * @return ResponseEntity containing the request status message and HTTP status code
+	 */
 	@RequestMapping(value = "/events", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> addNewEvent(@RequestBody Event event) {
 		
@@ -307,6 +316,11 @@ public class SchedulerController {
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully added new event", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for editing {@link Event}
+	 * @param event
+	 * @return ResponseEntity containing the request status message and HTTP status code
+	 */
 	@RequestMapping(value = "/events", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> editEvent(@RequestBody Event event) {
 		
@@ -314,6 +328,11 @@ public class SchedulerController {
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited event", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for deleting {@link Event}
+	 * @param id
+	 * @return ResponseEntity containing the request status message and HTTP status code
+	 */
 	@RequestMapping(value = "/events/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> deleteEvent(@PathVariable Integer id) {
 		Event event = eventDao.findById(id);
@@ -321,55 +340,95 @@ public class SchedulerController {
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted event", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for getting all {@link JobParameters}
+	 * @return ResponseEntity containing the list of all job parameters along with HTTP status
+	 */
 	@RequestMapping(value = "/params", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getAllParams() {
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobParametersDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for getting {@link List} of {@link JobParameters} by job id
+	 * @param id - of {@link Jobs}
+	 * @return ResponseEntity containing the list of all job parameters along with HTTP status
+	 */
 	@RequestMapping(value = "/{id}/params", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getParamsByJob(@PathVariable Integer id) {
 		List<JobParameters> listJobParameters = jobParametersDao.findByJob(id);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listJobParameters, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for adding new {@link JobParameters}
+	 * @param jobParameter
+	 * @return ResponseEntity containing the request status message and HTTP status code
+	 */
 	@RequestMapping(value = "/params", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> addNewParams(@RequestBody JobParameters jobParameter) {
 		jobParametersDao.attachDirty(jobParameter);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobParametersDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for editing {@link JobParameters}
+	 * @param jobParameter
+	 * @return ResponseEntity containing the request status message and HTTP status code
+	 */
 	@RequestMapping(value = "/params", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> edit(@RequestBody JobParameters jobParameter) {
 		jobParametersDao.merge(jobParameter);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobParametersDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for deleting {@link JobParameters} by id
+	 * @param id - of {@link JobParameters}
+	 * @return ResponseEntity containing the request status message and HTTP status code
+	 */
 	@RequestMapping(value = "/params/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RestResponseDto> edit(@PathVariable Integer id) {
+	public ResponseEntity<RestResponseDto> deleteParameter(@PathVariable Integer id) {
 		JobParameters jobParameter = jobParametersDao.findById(id);
 		jobParametersDao.delete(jobParameter);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully deleted parameter", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for getting all {@link Categories}
+	 * @return ResponseEntity containing the list of all categories along with HTTP status
+	 */
 	@RequestMapping(value = "/categories", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getAllCategories() {
 		List<Categories> categories = categoriesDao.findAll();
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(categories, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for getting all {@link DicJobType}
+	 * @return ResponseEntity containing the list of all job types along with HTTP status
+	 */
 	@RequestMapping(value = "/jobTypes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getAllJobTypes() {
 		List<DicJobType> jobTypes = dicJobTypeDao.findAll();
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobTypes, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for getting all {@link Notifications} 
+	 * @return ResponseEntity containing the list of all notifications along with HTTP status
+	 */
 	@RequestMapping(value = "/notifications", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getAllNotifications() {
 		List<Notifications> notifications = notificationsDao.findAll();
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(notifications, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 	
+	/**
+	 * Method for getting all {@link KjcClasses} 
+	 * @return ResponseEntity containing the list of all classes along with HTTP status
+	 */
 	@RequestMapping(value = "/classes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> getAllClasses() {
 		List<KjcClasses> classes = kjcClassesDao.findAll();

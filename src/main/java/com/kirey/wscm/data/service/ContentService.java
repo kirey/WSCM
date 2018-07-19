@@ -93,6 +93,14 @@ public class ContentService {
 		
 	}
 
+	/**
+	 * Method for getting {@link Content} by {@link Categories} and max weight
+	 * @param user - {@link WscmUserAccounts}
+	 * @param page
+	 * @param position
+	 * @param lang
+	 * @return {@link Content}
+	 */
 	public Content getContentByUserPagePositionLang(WscmUserAccounts user, String page, String position, String lang) {
 		Categories category = userCategoriesDao.findCategoryByUserMaxWeight(user);
 		Content content = contentCategoriesDao.findContentByCategoryMaxWeightPagePositionLang(category, page, position, lang);

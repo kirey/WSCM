@@ -4,17 +4,13 @@ import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.quartz.CronTrigger;
-import org.quartz.InterruptableJob;
 import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -22,8 +18,6 @@ import org.quartz.Trigger;
 import org.quartz.Trigger.TriggerState;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
-import org.quartz.impl.JobExecutionContextImpl;
-import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -147,6 +141,12 @@ public class JobService {
 		
 	}
 	
+	/**
+	 * Method starts the job immediately 
+	 * @param schedulerEnt - {@link Jobs} entity
+	 * @throws SchedulerException
+	 * @throws ClassNotFoundException
+	 */
 	public void startJobImmediately(Jobs schedulerEnt) throws SchedulerException, ClassNotFoundException {
 		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(schedulerEnt.getJobName(), AppConstants.GROUP_NAME).startNow().build();
 		JobDetail jobDetail = createJob(schedulerEnt.getJobName(), AppConstants.GROUP_NAME);
@@ -292,6 +292,10 @@ public class JobService {
 		return false;
 	}
 
+	/**
+	 * Method used for executing job through class loading system
+	 * @param job
+	 */
 	public void startJobClassLoading(Jobs job) {
 		String qName = classLoadingUtil.getQualifiedName(job.getKjcClasses());
 		

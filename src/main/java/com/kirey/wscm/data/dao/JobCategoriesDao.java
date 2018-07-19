@@ -49,7 +49,12 @@ public class JobCategoriesDao extends KjcBaseDao {
 		return jobCategories;
 	}
 
-	
+	/**
+	 * Method for getting {@link JobCategories} by job id and category id
+	 * @param jobId - of {@link Jobs}
+	 * @param categoryId - of {@link Categories}
+	 * @return {@link JobCategories}
+	 */
 	public JobCategories findByJobAndCategory(Integer jobId, Integer categoryId) {
 		String hql = "from JobCategories jc where jc.job.id = :jobId and jc.category.id = :categoryId";
 		JobCategories jobCategory = (JobCategories) sessionFactory.getCurrentSession().createQuery(hql).setParameter("jobId", jobId).setParameter("categoryId", categoryId).uniqueResult();

@@ -35,6 +35,12 @@ public class EventsService {
 		allEvents = Collections.synchronizedList(new ArrayList<>());
 	}
 	
+	/**
+	 * Method for starting all jobs with status ACTIVE and with type CRON
+	 * Method is executed on server startup after dependency injection 
+	 * @throws ClassNotFoundException
+	 * @throws SchedulerException
+	 */
 	@PostConstruct
 	private void loadAllCronsAndExecute() throws ClassNotFoundException, SchedulerException {
 		List<Event> listEvents = eventDao.findByType(AppConstants.EVENT_TYPE_CRON);
