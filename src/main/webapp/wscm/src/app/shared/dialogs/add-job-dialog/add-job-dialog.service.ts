@@ -21,7 +21,7 @@ getAllJobs(): Observable<any> {
 getAllClasses(): Observable<any> {
   return this._http.get(this.baseUrl + '/' + 'classes');
 }
-
+// Get All Notifications - multiselect
 getAllNotification(): Observable<any> {
   return this._http.get(this.baseUrl + '/' + 'notifications');
 }

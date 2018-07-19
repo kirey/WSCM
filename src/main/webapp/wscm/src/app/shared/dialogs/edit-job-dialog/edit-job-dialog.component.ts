@@ -12,25 +12,123 @@ import { SnackBarService } from '../../services/snackbar.service';
 })
 export class EditJobDialogComponent implements OnInit {
   jobs: any;
-  constructor(public dialogRef: MatDialogRef<EditJobDialogComponent>,
+  jobTypes: any;
+  classLoading: any;
+  notification: any;
+  categories: any;
+  listCategoryWeight = this.data.jobCategorieses;
+  jobCategorieses = [];
+
+  constructor(
+    public dialogRef: MatDialogRef<EditJobDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public editJobService: EditJobService,
-    public snackbar: SnackBarService) {}
+    public snackbar: SnackBarService
+  ) {}
 
-    getJob() {
-      this.editJobService. getJobs().subscribe(
-        res => {
-          this.jobs = res.data;
-          console.log(this.jobs);
-        },
-        err => console.log(err)
-      );
+  getJob() {
+    this.editJobService.getJobs().subscribe(
+      res => {
+        this.jobs = res.data;
+        console.log(this.jobs);
+      },
+      err => console.log(err)
+    );
+  }
+  // Get All Job Types
+  getJobTypes() {
+    this.editJobService.getAllJobs().subscribe(
+      res => {
+        this.jobTypes = res.data;
+      },
+      err => console.log(err)
+    );
+  }
+
+  // Get Class Loading -  Get All Classes
+  getAllClasses() {
+    this.editJobService.getAllClasses().subscribe(
+      res => {
+        console.log(res);
+        this.classLoading = res.data;
+      },
+      err => console.log(err)
+    );
+  }
+
+  // Get Notification
+  getNotifications() {
+    this.editJobService.getAllNotification().subscribe(
+      res => {
+        console.log(res);
+        this.notification = res.data;
+      },
+      err => console.log(err)
+    );
+  }
+
+  // Get All Categories
+  getCategories() {
+    this.editJobService.getAllCategories().subscribe(
+      res => {
+        console.log(res);
+        this.categories = res['data'];
+      },
+      err => console.log(err)
+    );
+  }
+  // Select category - checkbox
+  checked(ev, category) {
+    if (ev.checked) {
+      if (this.listCategoryWeight.length == 0) {
+        this.listCategoryWeight.push({
+          category: category,
+          weight: 1
+        });
+      } else {
+        let push: boolean = false;
+        for (let i = 0; i < this.listCategoryWeight.length; i++) {
+          if (this.listCategoryWeight[i]['categoryId'] != category.id) {
+            push = true;
+          }
+        }
+        if (push) {
+          this.listCategoryWeight.push({
+            category: category,
+            weight: 1
+          });
+        }
+      }
     }
+    console.log(this.listCategoryWeight);
+  }
+  // REMOVE  from list 'Selected categories'
+  unchecked(position) {
+    const index = this.listCategoryWeight.findIndex(
+      item => item['category'] == position.category
+    );
+    this.listCategoryWeight.splice(index, 1);
+    console.log(this.listCategoryWeight);
+  }
 
+  // Slider change fo each category
+  sliderChange(ev, selected) {
+    if (this.listCategoryWeight.length !== 0) {
+      for (let i = 0; i < this.listCategoryWeight.length; i++) {
+        if (
+          this.listCategoryWeight[i]['category']['id'] === selected.category.id
+        ) {
+          this.listCategoryWeight[i]['weight'] = ev.value;
+        }
+      }
+    }
+    console.log(this.listCategoryWeight);
+  }
   // Edit job form
-  editJob(obj) {
-    obj['id'] = this.data.id;
-    console.log(obj);
+  editJob(value) {
+    // obj['id'] = this.data.id;
+    value['jobCategorieses'] = this.data.jobCategorieses;
+    console.log(value);
 
     // if (!obj.eventName) this.snackbar.openSnackBar('Please, enter event name.', '');
     // else if (!obj.eventType) this.snackbar.openSnackBar('Please, enter event type.', '');
@@ -55,5 +153,10 @@ export class EditJobDialogComponent implements OnInit {
 
   ngOnInit() {
     this.getJob();
+    this.getJobTypes();
+    this.getAllClasses();
+    this.getNotifications();
+    this.getCategories();
+    console.log(this.listCategoryWeight);
   }
 }
