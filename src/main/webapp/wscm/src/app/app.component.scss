@@ -18,6 +18,14 @@ $warn: #FFEE58;
     justify-content: center;
 }
 
+// Titles
+.page-title {
+    background: linear-gradient(to right, $primary, $accent);
+    font-size: 32px;
+    color: #fff;
+    padding: 15px 20px;
+}
+
 // Wrapper
 .content-wrapper {
     display: flex;
