@@ -1,8 +1,10 @@
 import { EditClassDialogComponent } from './../shared/dialogs/edit-class-dialog/edit-class-dialog.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddClassDialogComponent } from './../shared/dialogs/add-class-dialog/add-class-dialog.component';
 import { ClassLoadingService } from './class-loading.service';
 import { Component, OnInit } from '@angular/core';
+import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
+import { SnackBarService } from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-class-loading',
@@ -11,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClassLoadingComponent implements OnInit {
 
-  constructor(private _classLoadingService: ClassLoadingService, private dialog: MatDialog) { }
+  constructor(private _classLoadingService: ClassLoadingService, private dialog: MatDialog, private snackBarService: SnackBarService) { }
 
   private displayedColumns: string[] = ['package', 'class', 'category', 'description', 'editing'];
   private dataSource;
@@ -25,13 +27,25 @@ export class ClassLoadingComponent implements OnInit {
     });
   }
 
-  deleteClass(fullClassName) {
-    this._classLoadingService.deleteClass(fullClassName).subscribe(res => { }, err => { }, () => {
-      this._classLoadingService.getClasses().subscribe(res => {
-        this.classes = JSON.parse(res.text()).data;
-        this.dataSource = this.classes;
-        console.log(this.classes);
-      });
+  deleteClass(fullClassName, type, value) {
+    const dialogRef = this.dialog.open(DeleteDialog, {
+      width: '500px',
+      data: { type: type, value: value }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res == true) {
+        console.log(res);
+        this._classLoadingService.deleteClass(fullClassName).subscribe(res => { }, err => {
+          this.snackBarService.openSnackBar('Error', 'Something went wrong!');
+        }, () => {
+          this._classLoadingService.getClasses().subscribe(res => {
+            this.classes = JSON.parse(res.text()).data;
+            this.dataSource = this.classes;
+            console.log(this.classes);
+            this.snackBarService.openSnackBar('Success', 'You have successfuly deleted class!');
+          });
+        });
+      }
     });
   }
 
@@ -41,10 +55,6 @@ export class ClassLoadingComponent implements OnInit {
       data: obj
     });
     dialogRef.afterClosed().subscribe(res => {
-
-    }, (err) => {
-
-    }, () => {
       this._classLoadingService.getClasses().subscribe(res => {
         this.classes = JSON.parse(res.text()).data;
         this.dataSource = this.classes;

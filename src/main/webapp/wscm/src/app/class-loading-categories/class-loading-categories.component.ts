@@ -4,6 +4,7 @@ import { AddCategoryDialogComponent } from './../shared/dialogs/add-category-dia
 import { ClassLoadingCategoriesService } from './class-loading-categories.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-class-loading-categories',
@@ -27,16 +28,23 @@ export class ClassLoadingCategoriesComponent implements OnInit {
     });
   }
 
-  deleteCategory(id) {
-    console.log(id);
-    this._classLoadingCategoriesService.deleteCategory(id).subscribe(res => { }, (err) => {
-      this.snackBarService.openSnackBar('Failed deleting!', 'Error');
-    }, () => {
-      this._classLoadingCategoriesService.getCategories().subscribe(res => {
-        this.categories = JSON.parse(res.text()).data;
-        this.dataSource = this.categories;
-        this.snackBarService.openSnackBar('Successfuly deleted!', 'Succes');
-      });
+  deleteCategory(id, type, value) {
+    const dialogRef = this.dialog.open(DeleteDialog, {
+      width: '500px',
+      data: { type: type, value: value }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res == true) {
+        this._classLoadingCategoriesService.deleteCategory(id).subscribe(res => { }, (err) => {
+          this.snackBarService.openSnackBar('Error', 'Something went wrong!');
+        }, () => {
+          this._classLoadingCategoriesService.getCategories().subscribe(res => {
+            this.categories = JSON.parse(res.text()).data;
+            this.dataSource = this.categories;
+            this.snackBarService.openSnackBar('Success', 'You have successfuly deleted category!');
+          });
+        });
+      }
     });
   }
 
@@ -49,10 +57,6 @@ export class ClassLoadingCategoriesComponent implements OnInit {
         this.categories = JSON.parse(res.text()).data;
         this.dataSource = this.categories;
       });
-    }, (err) => {
-      this.snackBarService.openSnackBar('Failed adding!', 'Error');
-     }, () => {
-      this.snackBarService.openSnackBar('Successfuly added!', 'Succes');
     });
   }
   openEditDialog(obj) {
@@ -65,10 +69,6 @@ export class ClassLoadingCategoriesComponent implements OnInit {
         this.categories = JSON.parse(res.text()).data;
         this.dataSource = this.categories;
       });
-    }, (err) => {
-      this.snackBarService.openSnackBar('Failed editing!', 'Error');
-     }, () => {
-      this.snackBarService.openSnackBar('Successfuly edited!', 'Succes');
     });
   }
 

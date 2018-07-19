@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClassLoadingCategoriesService } from './../../../class-loading-categories/class-loading-categories.service';
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { SnackBarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-add-class-dialog',
@@ -17,7 +18,8 @@ export class AddClassDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AddClassDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private _classLoadingService: ClassLoadingService) { }
+    private _classLoadingService: ClassLoadingService,
+    private snackBarService: SnackBarService) { }
 
   private categories;
   private classForm: FormGroup;
@@ -55,6 +57,7 @@ export class AddClassDialogComponent implements OnInit {
   }
 
   addClass() {
+    console.log("ulazi");
     console.log(this.javaFile);
     console.log(this.compiledFile);
     const classObj = {
@@ -74,8 +77,10 @@ export class AddClassDialogComponent implements OnInit {
       console.log(res);
     }, err => {
       console.log(err);
+      this.snackBarService.openSnackBar('Error', 'Something went wrong!');
     }, () => {
       this.dialogRef.close();
+      this.snackBarService.openSnackBar('Success', 'You have successfuly added class!');
     });
 
   }
