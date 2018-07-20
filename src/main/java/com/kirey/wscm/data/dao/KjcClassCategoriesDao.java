@@ -15,6 +15,8 @@ import com.kirey.wscm.data.entity.KjcClassCategories;
 
 /**
  * Dao object for domain model class KjcClassCategories.
+ * 
+ *  @author paunovicm
  */
 
 @Repository(value = "kjcClassCategoriesDao")

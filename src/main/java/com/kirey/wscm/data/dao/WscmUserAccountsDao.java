@@ -77,7 +77,12 @@ public class WscmUserAccountsDao extends KjcBaseDao implements UserDetailsServic
 	}
 
 
-
+	/**
+	 * Method for getting {@link List} of {@link WscmUserAccounts} by category name and weight
+	 * @param categoryName of {@link Categories}
+	 * @param userWeight
+	 * @return {@link List}<{@link WscmUserAccounts}>
+	 */
 	public List<WscmUserAccounts> findUsersByCategoryWeight(String categoryName, Integer userWeight) {
 		String hql;
 		List<WscmUserAccounts> users = new ArrayList<>();

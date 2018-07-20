@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kirey.wscm.data.entity.JobExecutionLog;
+import com.kirey.wscm.data.entity.Jobs;
+
+/**
+ * @author paunovicm
+ *
+ */
 
 
 @Repository(value = "jobExecutionLogDao")
@@ -26,6 +32,11 @@ public class JobExecutionLogDao extends KjcBaseDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	/**
+	 * Method for getting {@link List} of {@link JobExecutionLog} by job id
+	 * @param idJob - of {@link Jobs}
+	 * @return {@link List}<{@link JobExecutionLog}>
+	 */
 	@Transactional
 	public List<JobExecutionLog> getLogsByJobId(int idJob) {
 
@@ -37,6 +48,11 @@ public class JobExecutionLogDao extends KjcBaseDao {
 		return lista;
 	}
 
+	/**
+	 * Method for getting latest {@link JobExecutionLog} by {@link Jobs} 
+	 * @param jobName of {@link Jobs}
+	 * @return {@link JobExecutionLog}
+	 */
 	@Transactional
 	public JobExecutionLog getLatestLogByJob(String jobName) {
 

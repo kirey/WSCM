@@ -17,6 +17,7 @@ import com.kirey.wscm.data.entity.KjcReports;
 
 /**
  * Dao object for domain model class KjcReportParameters.
+ * 
  * @author paunovicm
  */
 @Repository(value = "kjcReportParametersDao")

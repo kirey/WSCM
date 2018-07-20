@@ -1,22 +1,14 @@
 package com.kirey.wscm.api.restcontrollers;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.orm.hibernate5.SessionFactoryUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,35 +18,18 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.common.util.Utilities;
-import com.kirey.wscm.data.dao.CategoriesDao;
-import com.kirey.wscm.data.dao.IpAddressDao;
-import com.kirey.wscm.data.dao.IpAddressLinksDao;
 import com.kirey.wscm.data.dao.KjcReportParametersDao;
 import com.kirey.wscm.data.dao.KjcReportsDao;
-import com.kirey.wscm.data.dao.LinksCategoriesDao;
-import com.kirey.wscm.data.dao.UserLinksDao;
-import com.kirey.wscm.data.entity.Categories;
-import com.kirey.wscm.data.entity.IpAddressLinks;
-import com.kirey.wscm.data.entity.KjcReportBlobs;
 import com.kirey.wscm.data.entity.KjcReportParameters;
 import com.kirey.wscm.data.entity.KjcReports;
-import com.kirey.wscm.data.entity.Links;
-import com.kirey.wscm.data.entity.LinksCategories;
-import com.kirey.wscm.data.service.ReportEngine;
 import com.kirey.wscm.data.service.ReportService;
 import com.kirey.wscm.data.service.StatisticsService;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.data.JRMapArrayDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
 
 
 
@@ -73,24 +48,6 @@ public class ReportController {
 	
 	@Autowired
 	private KjcReportParametersDao kjcReportParametersDao;
-	
-	@Autowired
-	private LinksCategoriesDao linksCategoriesDao;
-	
-	@Autowired
-	private UserLinksDao userLinksDao;
-	
-	@Autowired
-	private IpAddressDao ipAddressDao;
-	
-	@Autowired
-	private IpAddressLinksDao ipAddressLinksDao;
-	
-	@Autowired
-	private CategoriesDao categoriesDao;
-	
-	@Autowired
-	private ReportEngine reportEngine;
 	
 	@Autowired
 	private StatisticsService statisticsService;

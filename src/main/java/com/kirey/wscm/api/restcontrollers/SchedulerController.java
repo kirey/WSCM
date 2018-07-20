@@ -135,7 +135,7 @@ public class SchedulerController {
 			jobCategories.setJob(savedJob);
 			jobCategoriesDao.attachDirty(jobCategories);
 		}
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.OK.value(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 
 	}
 
@@ -203,7 +203,7 @@ public class SchedulerController {
 			}
 		}
 	
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.OK.value(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 
 	}
 
@@ -228,7 +228,7 @@ public class SchedulerController {
 		jobsDao.merge(job);
 		
 		jobsDao.delete(job);
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobsDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.OK.value(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 
 	/**

@@ -22,6 +22,7 @@ import com.kirey.wscm.security.SecurityUtils;
 
 /**
  * Dao object for domain model class KjcReports.
+ * 
  * @author paunovicm
  */
 @Repository(value = "kjcReportsDao")

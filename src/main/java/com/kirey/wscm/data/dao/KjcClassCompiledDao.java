@@ -8,7 +8,11 @@ import com.kirey.wscm.data.entity.KjcClassCompiled;
 
 /**
  * Dao object for domain model class KjcClassCompiled.
+ * 
+ * @author paunovicm
  */
+
+
 @Repository(value="kjcClassCompiledDao")
 public class KjcClassCompiledDao extends KjcBaseDao{
 

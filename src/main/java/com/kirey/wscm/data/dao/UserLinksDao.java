@@ -39,6 +39,11 @@ public class UserLinksDao extends KjcBaseDao {
 		return userLinks;
 	}
 
+	/**
+	 * Method for getting {@link List} of {@link UserLinks} by {@link WscmUserAccounts}
+	 * @param user
+	 * @return {@link List}<{@link UserLinks}>
+	 */
 	public List<UserLinks> findLinksByUser(WscmUserAccounts user) {
 		String hql = "from UserLinks ul where ul.userAccount.id = :userId";
 		List<UserLinks> listUserLinks = sessionFactory.getCurrentSession().createQuery(hql).setParameter("userId", user.getId()).list();

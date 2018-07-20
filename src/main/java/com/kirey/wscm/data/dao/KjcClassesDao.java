@@ -25,6 +25,8 @@ import com.kirey.wscm.data.entity.KjcPackages;
 
 /**
  * Dao object for domain model class KjcClasses.
+ * 
+ * @author paunovicm
  */
 @Repository(value = "kjcClassesDao")
 public class KjcClassesDao extends KjcBaseDao {

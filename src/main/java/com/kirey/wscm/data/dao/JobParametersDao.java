@@ -26,6 +26,11 @@ public class JobParametersDao extends KjcBaseDao {
 		entityClass = JobParameters.class;
 	}
 
+	/**
+	 * Method for finding {@link List} {@link JobParameters} by job id
+	 * @param jobId - of {@link Jobs}
+	 * @return {@link List}<{@link JobParameters}>
+	 */
 	public List<JobParameters> findByJob(Integer jobId) {
 		String hql = "from JobParameters jp where jp.job.id = :jobId";
 		List<JobParameters> listJobParameters = sessionFactory.getCurrentSession().createQuery(hql).setParameter("jobId", jobId).list();
