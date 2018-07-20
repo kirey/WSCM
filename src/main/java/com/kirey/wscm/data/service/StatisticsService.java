@@ -49,6 +49,11 @@ public class StatisticsService {
 	private CategoriesDao categoriesDao;
 	
 
+	/**
+	 *  Method for getting {@link List} of URL with number of request for each URL for given user 
+	 * @param userId - of {@link WscmUserAccounts}
+	 * @return 
+	 */
 	public Map<String, Object> linksStatisticsByUser(Integer userId) {
 		Map<String, Object> response = new HashMap<>();
 		WscmUserAccounts user = wscmUserAccountsDao.findById(userId);
@@ -76,6 +81,11 @@ public class StatisticsService {
 		return response;
 	}
 
+	/**
+	 * Method for getting {@link List} of URL with number of request for each URL for given ip address 
+	 * @param address - ip address
+	 * @return
+	 */
 	public Map<String, Object> linksStatisticsByIpAddress(String address) {
 		Map<String, Object> response = new HashMap<>();
 		IpAddress ipAddress = ipAddressDao.findByAddress(address);
@@ -96,6 +106,11 @@ public class StatisticsService {
 		return response;
 	}
 
+	/**
+	 * Method for getting {@link List} of {@link Categories} to which is accessed by given user 
+	 * @param id
+	 * @return
+	 */
 	public Map<String, Object> categoryNoByUser(Integer id) {
 		Map<String, Object> response = new HashMap<>();
 		WscmUserAccounts user = wscmUserAccountsDao.findById(id);
@@ -131,6 +146,11 @@ public class StatisticsService {
 		return response;
 	}
 
+	/**
+	 * Method for getting {@link List} of {@link Categories} to which is accessed by given ip address
+	 * @param address
+	 * @return
+	 */
 	public Map<String, Object> categoryNoByIpAddress(String address) {
 		Map<String, Object> response = new HashMap<>();
 		IpAddress ipAddress = ipAddressDao.findByAddress(address);
@@ -165,6 +185,10 @@ public class StatisticsService {
 		return response;
 	}
 
+	/**
+	 * Method for getting number of requests for each category 
+	 * @return
+	 */
 	public List<HashMap<String, Object>> categoryNo() {
 		List<HashMap<String, Object>> responseList = new ArrayList<>();
 		List<Categories> listCategories = categoriesDao.findAll();
@@ -188,6 +212,11 @@ public class StatisticsService {
 		return responseList;
 	}
 
+	/**
+	 * Method for getting {@link List} of URL with number of requests by given category
+	 * @param id - of {@link Categories}
+	 * @return
+	 */
 	public Map<String, Object> categoryNoByCategory(Integer id) {
 		Map<String, Object> response = new HashMap<>();
 		Categories category = categoriesDao.findById(id);

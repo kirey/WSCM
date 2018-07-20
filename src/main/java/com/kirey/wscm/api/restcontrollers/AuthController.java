@@ -49,7 +49,7 @@ public class AuthController {
 	 * @return
 	 */
 	@RequestMapping(value = "/authentication", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> createUser(@RequestBody UserAccount userAccount, @CookieValue("JSESSIONID") String cookie) {
+	public ResponseEntity<RestResponseDto> createUser(@RequestBody UserAccount userAccount, @CookieValue("JSESSIONID") String cookie) {
 		
 		Authentication authentication = null;
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -61,7 +61,7 @@ public class AuthController {
 		
 		wscmUser.setSessionId(cookie);
 
-		return new ResponseEntity<Object>(wscmUser, HttpStatus.OK);
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(wscmUser, HttpStatus.OK.value()), HttpStatus.OK);
 	}
 	
 	/**
@@ -78,11 +78,11 @@ public class AuthController {
 	@RequestMapping(value = "/subscribeToTopic/{fbToken}/{topic}", method = RequestMethod.POST)
 	public ResponseEntity<RestResponseDto> subscribeToTopic(@PathVariable String fbToken, @PathVariable String topic) {
 		
-		String serverKey = AppConstants.FIREBASE_SERVERKEY;
+		String serverKey = "key=AAAAtKCMvfY:APA91bEK9RCNEuMnRYTi9KrBcuFaGoHeaA_aEZnaMrWDHbaBTKtZFApNvdHkx9OJPdmfbuUpsSzkJmb-Rp7mspI1lu5VtJ4Sy4LOisY1UD3iW9Hyd1BR98Ap_yIawRZUvQTPX4WVoGtZN0awvHrEA9VekWE1-rIAug";//AppConstants.FIREBASE_SERVERKEY;
 		
 		//String url = "https://iid.googleapis.com/iid/v1/"+fbToken+"/rel/topics/"+topic;
-		String urlPart1 =  AppConstants.FIREBASE_SUBSCRIBE_PART1_URL;
-		String urlPart2 =  AppConstants.FIREBASE_SUBSCRIBE_PART1_URL;
+		String urlPart1 =  "https://iid.googleapis.com/iid/v1/";        //AppConstants.FIREBASE_SUBSCRIBE_PART1_URL;
+		String urlPart2 =  "/rel/topics/";                              //AppConstants.FIREBASE_SUBSCRIBE_PART1_URL;
 		
 		String url = urlPart1 + fbToken + urlPart2 + topic;
 				

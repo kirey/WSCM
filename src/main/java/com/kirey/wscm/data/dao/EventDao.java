@@ -36,6 +36,12 @@ public class EventDao extends KjcBaseDao {
 		return listEvents;
 	}
 
+	/**
+	 * Method for getting {@link List} of {@link Event} by type and definition
+	 * @param eventType
+	 * @param definition
+	 * @return {@link List}<{@link Event}>
+	 */
 	public List<Event> findByTypeAndDefinition(String eventType, String definition) {
 		String hql = "from Event ev where ev.eventType = :eventType and ev.definition = :definition";
 		List<Event> listEvents = sessionFactory.getCurrentSession().createQuery(hql).setParameter("eventType", eventType).setParameter("definition", definition).list();

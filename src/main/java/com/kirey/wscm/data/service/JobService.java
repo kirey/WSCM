@@ -4,17 +4,14 @@ import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.quartz.CronTrigger;
-import org.quartz.InterruptableJob;
 import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -22,8 +19,6 @@ import org.quartz.Trigger;
 import org.quartz.Trigger.TriggerState;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
-import org.quartz.impl.JobExecutionContextImpl;
-import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -34,8 +29,10 @@ import com.kirey.wscm.classloading.classes.interfaces.WebRequestJob;
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.EventDao;
 import com.kirey.wscm.data.dao.JobsDao;
+import com.kirey.wscm.data.dao.KjcClassesDao;
 import com.kirey.wscm.data.entity.Event;
 import com.kirey.wscm.data.entity.Jobs;
+import com.kirey.wscm.data.entity.KjcClasses;
 import com.kirey.wscm.quartz.jobs.SchedJobListener;
 
 /**
@@ -66,7 +63,9 @@ public class JobService {
 	
 	@Autowired
 	private ClassLoadingUtil classLoadingUtil;
-
+	
+	@Autowired
+	private KjcClassesDao kjcClassesDao;
 
 	/**
 	 * Method creates {@link CronTrigger}
@@ -147,6 +146,12 @@ public class JobService {
 		
 	}
 	
+	/**
+	 * Method starts the job immediately 
+	 * @param schedulerEnt - {@link Jobs} entity
+	 * @throws SchedulerException
+	 * @throws ClassNotFoundException
+	 */
 	public void startJobImmediately(Jobs schedulerEnt) throws SchedulerException, ClassNotFoundException {
 		Trigger trigger = TriggerBuilder.newTrigger().withIdentity(schedulerEnt.getJobName(), AppConstants.GROUP_NAME).startNow().build();
 		JobDetail jobDetail = createJob(schedulerEnt.getJobName(), AppConstants.GROUP_NAME);
@@ -292,6 +297,10 @@ public class JobService {
 		return false;
 	}
 
+	/**
+	 * Method used for executing job through class loading system
+	 * @param job
+	 */
 	public void startJobClassLoading(Jobs job) {
 		String qName = classLoadingUtil.getQualifiedName(job.getKjcClasses());
 		
@@ -301,6 +310,29 @@ public class JobService {
 		inputMap.put("job", job);
 		
 		webReqJob.execute(inputMap);
+	}
+
+	/**
+	 * Method for getting {@link List} of {@link KjcClasses} which are not used by any {@link Jobs}
+	 * @return {@link List}<{@link KjcClasses}>
+	 */
+	public List<KjcClasses> getAllUnusedKjcClasses() {
+		List<KjcClasses> unusedClasses = new ArrayList<>();
+		List<KjcClasses> allClasses = kjcClassesDao.findAll();
+		List<Jobs> classLoadingJobs = jobsDao.findAllClassLoading();
+		
+		for (KjcClasses kjcClasses : allClasses) {
+			boolean flag = true;
+			for (Jobs jobs : classLoadingJobs) {
+				if(kjcClasses.getId().equals(jobs.getKjcClasses().getId())) {
+					flag = false;
+				}
+			}
+			if(flag) {
+				unusedClasses.add(kjcClasses);
+			}
+		}
+		return unusedClasses;
 	}
 
 	
