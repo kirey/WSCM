@@ -1,9 +1,5 @@
 <div id="addJob">
-<<<<<<< Updated upstream
   <h1 class="dialog-title">Add Job </h1>
-=======
-  <h1>Add Job </h1>
->>>>>>> Stashed changes
   <!-- <div *ngIf="data"> -->
   <mat-dialog-content>
     <h3 class="dialog-subtitle">Basic information</h3>
@@ -93,11 +89,14 @@
       </div>
       <hr>
       <!-- Notifications -->
-      <mat-form-field>
-        <mat-select formControlName="listNotificationses" placeholder="Notifications" multiple required>
-          <mat-option *ngFor="let job of notification; let i = index" [value]="job">{{job.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="basic-inputs">
+        <h5 class="label">Choose notifications from list</h5>
+        <mat-form-field>
+          <mat-select formControlName="listNotificationses" placeholder="Notifications" multiple required>
+            <mat-option *ngFor="let job of notification; let i = index" [value]="job">{{job.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <hr>
       <!-- Categories -->
       <h3 class="dialog-subtitle">Select categories & weight for each category</h3>
