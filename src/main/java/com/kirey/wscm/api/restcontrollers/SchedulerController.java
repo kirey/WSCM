@@ -2,6 +2,8 @@ package com.kirey.wscm.api.restcontrollers;
 
 import java.util.List;
 
+import javax.xml.validation.Validator;
+
 import org.quartz.CronExpression;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,6 +124,20 @@ public class SchedulerController {
 		}
 
 		Jobs savedJob = (Jobs) jobsDao.merge(scheduler);
+		List<JobParameters> listParameters = scheduler.getJobParameterses();
+		if(!listParameters.isEmpty()) {
+			for (JobParameters param : listParameters) {
+				boolean exist = listParameters.stream().anyMatch(p -> p.getName().equals(param.getName()));
+				if(!exist) {
+					param.setJob(savedJob);
+					jobParametersDao.attachDirty(param);	
+				}else {
+					return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "parameter with name " + param.getName() + "already exist"), HttpStatus.BAD_REQUEST);
+				}
+				
+			}
+		}
+		
 		List<JobCategories> listJobCategories = scheduler.getJobCategorieses();
 		for (JobCategories jobCategories : listJobCategories) {
 			jobCategories.setJob(savedJob);
@@ -148,6 +164,20 @@ public class SchedulerController {
 		}
 		
 		Jobs savedScheduler = (Jobs) jobsDao.merge(scheduler);
+		
+		List<JobParameters> listParameters = scheduler.getJobParameterses();
+		if(!listParameters.isEmpty()) {
+			for (JobParameters param : listParameters) {
+				boolean exist = listParameters.stream().anyMatch(p -> p.getName().equals(param.getName()));
+				if(!exist) {
+					param.setJob(savedScheduler);
+					jobParametersDao.merge(param);	
+				}else {
+					return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "parameter with name " + param.getName() + "already exist"), HttpStatus.BAD_REQUEST);
+				}
+				
+			}
+		}
 		
 		List<JobCategories> jobCategoriesFromDb = jobCategoriesDao.findByJobId(savedScheduler.getId());
 		
