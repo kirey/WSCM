@@ -2,9 +2,6 @@ package com.kirey.wscm.api.restcontrollers;
 
 import java.util.List;
 
-import javax.xml.validation.Validator;
-
-import org.quartz.CronExpression;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kirey.wscm.api.dto.RestResponseDto;
@@ -29,8 +25,6 @@ import com.kirey.wscm.data.dao.JobsDao;
 import com.kirey.wscm.data.dao.KjcClassesDao;
 import com.kirey.wscm.data.dao.NotificationsDao;
 import com.kirey.wscm.data.entity.Categories;
-import com.kirey.wscm.data.entity.Content;
-import com.kirey.wscm.data.entity.ContentCategories;
 import com.kirey.wscm.data.entity.DicJobType;
 import com.kirey.wscm.data.entity.Event;
 import com.kirey.wscm.data.entity.JobCategories;
@@ -73,8 +67,6 @@ public class SchedulerController {
 	@Autowired
 	private DicJobTypeDao dicJobTypeDao;
 	
-	@Autowired
-	private KjcClassesDao kjcClassesDao;
 
 	/**
 	 * get all jobs
@@ -223,7 +215,15 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/deleteJob/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> deleteScheduler(@PathVariable int id) {
+		
 		Jobs job = jobsDao.findById(id);
+		
+		List<Event> listEvents = eventDao.findAll();
+		boolean exist = listEvents.stream().anyMatch(e -> e.getJobs().getId().equals(job.getId()));
+		if(exist) {
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "There is Event using this job"), HttpStatus.BAD_REQUEST);
+		}
+		
 		job.getListNotificationses().clear();
 		jobsDao.merge(job);
 		

@@ -39,7 +39,7 @@ public class Jobs implements Serializable {
 	
 	private static final long serialVersionUID = 1703338942103035773L;
 
-	private int id;
+	private Integer id;
 
 	private String jobName;
 
@@ -69,11 +69,11 @@ public class Jobs implements Serializable {
 	@SequenceGenerator(name = "seq_jobs_gen", sequenceName = "seq_jobs", allocationSize = 1, initialValue = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_jobs_gen")
 	@Column(name = "ID", unique = true, nullable = false, precision = 10, scale = 0)
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
