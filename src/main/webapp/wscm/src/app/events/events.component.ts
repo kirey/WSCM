@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EditEventDialogComponent } from '../shared/dialogs/edit-event-dialog/edit-event-dialog.component';
 import { AddEventDialogComponent } from '../shared/dialogs/add-event-dialog/add-event-dialog.component';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
+import { EventHistoryComponent } from '../shared/dialogs/event-history-dialog/event-history.component';
 
 @Component({
   selector: 'app-events',
@@ -25,6 +26,9 @@ export class EventsComponent implements OnInit {
   cronExpression: any;
   currentJob: any;
   tableShow: true;
+  history: any;
+  id: any;
+  dialogRef: any;
 
 
   constructor(
@@ -57,6 +61,30 @@ export class EventsComponent implements OnInit {
       err => console.log(err)
     );
   }
+   // Get History
+   getHistory(id) {
+    this.eventsService.getHisory(id).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => console.log(err)
+    );
+  }
+openHistoryDialog() {
+  const dialogRef = this.dialog.open(EventHistoryComponent, {
+    // width: '800px',
+    // data: this.history
+  });
+  // console.log(obj);
+  // this.eventsService.getHisory(id).subscribe(
+  //   res => {
+  //     this.dialogRef.data = res.data;
+  //     console.log(this.dialogRef.data);
+  //   },
+  //   err => console.log(err)
+  // );
+}
+
   // open add dialog
   openAddDialog() {
     const dialogRef = this.dialog.open(AddEventDialogComponent, {

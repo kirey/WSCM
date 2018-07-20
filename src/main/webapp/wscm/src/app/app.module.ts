@@ -28,6 +28,9 @@ import { AddEventService } from './shared/dialogs/add-event-dialog/add-event-dia
 import { JobsService } from './jobs/jobs.service';
 import { AddJobService } from './shared/dialogs/add-job-dialog/add-job-dialog.service';
 import { EditJobService } from './shared/dialogs/edit-job-dialog/edit-job-dialog.service';
+import { EventHistoryService } from './shared/dialogs/event-history-dialog/event-history-dialog.service';
+
+
 
 // Pipes
 import { FilterPipe } from './shared/pipes/filter.pipe';
@@ -57,6 +60,7 @@ import { AddClassDialogComponent } from './shared/dialogs/add-class-dialog/add-c
 import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edit-class-dialog.component';
 import { EditJobDialogComponent } from './shared/dialogs/edit-job-dialog/edit-job-dialog.component';
 import { ReportsComponent } from './reports/reports.component';
+import { EventHistoryComponent } from './shared/dialogs/event-history-dialog/event-history.component';
 
 
 @NgModule({
@@ -85,7 +89,8 @@ import { ReportsComponent } from './reports/reports.component';
     EditJobDialogComponent,
     AddClassDialogComponent,
     EditClassDialogComponent,
-    ReportsComponent
+    ReportsComponent,
+    EventHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +115,8 @@ import { ReportsComponent } from './reports/reports.component';
     JobsService,
     ClassLoadingCategoriesService,
     AddJobService,
-    EditJobService
+    EditJobService,
+    EventHistoryService
   ],
   entryComponents: [
     DeleteDialog,
@@ -122,7 +128,8 @@ import { ReportsComponent } from './reports/reports.component';
     AddClassDialogComponent,
     EditCategoryDialogComponent,
     AddJobDialogComponent,
-    EditJobDialogComponent
+    EditJobDialogComponent,
+    EventHistoryComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -198,9 +198,22 @@ public class SchedulerController {
 	 * @param idJob
 	 * @return
 	 */
-	@RequestMapping(value = "/jobHistory/{idJob}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RestResponseDto> getHistoryByJobId(@PathVariable int idJob) {
-		List<JobExecutionLog> listHistoryByJobId = jobExecutionLogDao.getLogsByJobId(idJob);
+	@RequestMapping(value = "/jobHistory/event/{eventId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> getHistoryByEventId(@PathVariable int eventId) {
+		Event event = eventDao.findById(eventId);
+		List<JobExecutionLog> listHistoryByJobId = jobExecutionLogDao.getLogsByJobId(event.getJobs().getId());
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listHistoryByJobId, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	}
+	
+	/**
+	 * returns all logs for selected job
+	 * 
+	 * @param idJob
+	 * @return
+	 */
+	@RequestMapping(value = "/jobHistory/{jobId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponseDto> getHistoryByJobId(@PathVariable int jobId) {
+		List<JobExecutionLog> listHistoryByJobId = jobExecutionLogDao.getLogsByJobId(jobId);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listHistoryByJobId, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 
