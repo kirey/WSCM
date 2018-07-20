@@ -41,6 +41,7 @@
     }
     .label {
       margin-top: 20px;
+      margin-bottom: 20px;
       text-align: left;
       color: #bdbdbd;
     }
@@ -55,12 +56,7 @@
     .buttons {
         float: right;
     }
-    .formButton:active, .formButton:visited, .formButton:focus {
-      outline: none;
-    }
-    .cancelButton:active, .cancelButton:visited, .cancelButton:focus {
-      outline: none;
-    }
+  
     .jobName {
       margin-right: 50px;
     }
@@ -72,6 +68,51 @@
     }
     .mat-dialog-content {
       margin-left: 0px;
+    }
+
+    //Params
+    .params-container {
+      padding: 20px;
+    }
+    .params {
+      width: 50%;
+      padding-left: 15px;
+    }
+    .param-field {
+      width: 70%;
+    }
+    .param-button {
+      width: 35%;
+    }
+    .params-show {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+    }
+    .params-expand-icon {
+      padding-top: 2px;
+      font-size: 29px;
+      padding-left: 5px;
+      color: $primary;
+    }
+    .params-expand-icon:hover {
+      cursor: pointer;
+      color: #424242;
+    }
+    .params-expanded {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+    }
+    .param-value {
+      margin-right: 50px;
+    }
+    .param-description {
+      word-break: break-word;
+      width: 200px;
+    }
+    .param-value>strong, .param-description>strong {
+      color: $primary;
     }
 
 }

@@ -11,35 +11,32 @@ import { FormControl } from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class AddJobDialogComponent implements OnInit {
-  jobName: string;
-  cronExpression: string;
+
+  addJobForm: FormGroup;
   categories: any;
-  category = {};
-  listCategoryWeight = [];
-  jobCategorieses = [];
-  categoryName: string;
-  id: number;
-  selectedPosition: any;
-  check: false;
-  jobTypes: any;
   classLoading: any;
   notification: any;
-  addJobForm: FormGroup;
-  isChecked:boolean = false;
+  jobTypes: any;
+  jobCategorieses: any = [];
+  listCategoryWeight = [];
+  isChecked: boolean = false;
+  paramsArray: Array<Object> = [];
+  expand: boolean = false;
+  selectedParam: number;
+
   constructor(
     public dialogRef: MatDialogRef<AddJobDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public addJobService: AddJobService,
     public formBuilder: FormBuilder
-  ) {}
+  ) { }
 
- // Get All Categories
+  // Get All Categories
   getCategories() {
     this.addJobService.getAllCategories().subscribe(
       res => {
-        console.log(res);
         this.categories = res['data'];
-        // console.log(this.categories);
+        console.log(this.categories);
       },
       err => console.log(err)
     );
@@ -54,35 +51,60 @@ export class AddJobDialogComponent implements OnInit {
       },
       err => console.log(err)
     );
-}
+  }
 
-// Get Class Loading -  Get All Classes
-getAllClasses() {
-  this.addJobService.getAllClasses().subscribe(
-    res => {
-      console.log(res);
-      this.classLoading = res.data;
-      console.log(this.classLoading);
-    },
-    err => console.log(err)
-  );
-}
+  // Get Class Loading -  Get All Classes
+  getAllClasses() {
+    this.addJobService.getAllClasses().subscribe(
+      res => {
+        console.log(res);
+        this.classLoading = res.data;
+        console.log(this.classLoading);
+      },
+      err => console.log(err)
+    );
+  }
 
-// Get Notification
-getNotifications() {
-  this.addJobService.getAllNotification().subscribe(
-    res => {
-      console.log(res);
-      this.notification = res.data;
-      console.log(this.notification);
-    },
-    err => console.log(err)
-  );
-}
-// Class Loading checkbox
-doCheck(ev) {
-  this.isChecked = true;
-}
+  // Get Notification
+  getNotifications() {
+    this.addJobService.getAllNotification().subscribe(
+      res => {
+        console.log(res);
+        this.notification = res.data;
+        console.log(this.notification);
+      },
+      err => console.log(err)
+    );
+  }
+  // Class Loading checkbox
+  doCheck(ev) {
+    this.isChecked = !this.isChecked;
+
+    if (!this.isChecked) {
+      delete this.addJobForm.value['kjcClasses'];
+    }
+  }
+
+  // Params
+  addJobParam() {
+    this.paramsArray.push({
+      name: this.addJobForm.value['name'],
+      value: this.addJobForm.value['value'],
+      description: this.addJobForm.value['description']
+    });
+    console.log(this.paramsArray);
+  }
+  removeJobParam(param, index) {
+    this.paramsArray.splice(index, 1)
+  }
+  expandParamsInfo(i) {
+    this.expand = !this.expand;
+
+    if (this.expand) this.selectedParam = i;
+    else this.selectedParam = null;
+
+  }
+
   // Select category - checkbox
   checked(ev, category) {
     console.log(this.listCategoryWeight);
@@ -95,7 +117,7 @@ doCheck(ev) {
       } else {
         let push: boolean = false;
         for (let i = 0; i < this.listCategoryWeight.length; i++) {
-          if (this.listCategoryWeight[i]['categoryId'] != category.id) {
+          if (this.listCategoryWeight[i]['id'] != category.id) {
             push = true;
           }
         }
@@ -133,37 +155,17 @@ doCheck(ev) {
   addJob() {
     let obj = this.addJobForm.value;
     obj['jobCategorieses'] = this.listCategoryWeight;
+    obj['jobParameterses'] = this.paramsArray;
     console.log(obj);
-  }
-  // Add Event function
-  // addJob(jobId) {
-  //   console.log('Job selected:');
-  //   console.log(this.jobSelected);
-  //   const jobs = {
-  //     id: jobId,
-  //     eventName: this.eventName,
-  //     eventType: this.eventType,
-  //     jobs: this.jobSelected,
-  //     definition: 'test',
-  //     description: this.description,
-  //     status: 'test'
-  //   };
-  //   console.log(jobs);
-  //   this.addEventService.addJobs(jobs).subscribe(
-  //     res => {
-  //       console.log('blaba');
-  //       console.log(res);
 
-  //       // this.jobs = res.data;
-  //       // this.successMessage(res.message);
-  //       this.dialogRef.close();
-  //     },
-  //     err => {
-  //       console.log(err);
-  //       // this.errorMessage(err);
-  //     }
-  //   );
-  // }
+    this.addJobService.addJob(obj)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => console.log(err)
+      )
+  }
 
   ngOnInit() {
     this.getCategories();
@@ -172,15 +174,18 @@ doCheck(ev) {
     this.getNotifications();
 
 
-      // Build Form
-      this.addJobForm = this.formBuilder.group({
-        jobName: ['', Validators.required],
-        cronExpression: [''],
-        kjcClasses: ['', Validators.required],
-        jobType: [''],
-        status: ['', Validators.required],
-        jobParameterses: ['', Validators.required],
-        listNotificationses: ['', Validators.required]
-      });
+    // Build Form
+    this.addJobForm = this.formBuilder.group({
+      jobName: ['', Validators.required],
+      cronExpression: [''],
+      kjcClasses: ['', Validators.required],
+      jobType: [''],
+      status: ['', Validators.required],
+      jobParameterses: ['', Validators.required],
+      listNotificationses: ['', Validators.required],
+      name: ['', Validators.required],
+      value: ['', Validators.required],
+      description: ['']
+    });
   }
 }

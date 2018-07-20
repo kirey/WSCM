@@ -22,6 +22,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTreeModule } from '@angular/material/tree';
+
 
 @NgModule({
     imports: [
@@ -46,7 +48,8 @@ import { MatMenuModule } from '@angular/material/menu';
         MatDialogModule,
         MatTableModule,
         MatPaginatorModule,
-        MatMenuModule
+        MatMenuModule,
+        MatTreeModule
     ],
     exports: [
         MatButtonModule,
@@ -69,7 +72,8 @@ import { MatMenuModule } from '@angular/material/menu';
         MatDialogModule,
         MatTableModule,
         MatPaginatorModule,
-        MatMenuModule
+        MatMenuModule,
+        MatTreeModule
     ],
     declarations: []
 })

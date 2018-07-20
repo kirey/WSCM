@@ -73,17 +73,7 @@
   .label:first-child {
     margin-bottom: 20px;
   }
-  .unselect-icon {
-    color: $primary;
-    height: 18px;
-    font-size: 20px;
-    margin-right: 3px;
-    font-weight: 600;
-  }
-  .unselect-icon:hover {
-      cursor: pointer;
-      color: #424242;
-  }
+  
 
   mat-slider {
     width: 150px;

@@ -1,6 +1,26 @@
 $primary: #009688;
 $accent: #64FFDA;
-$warn: #FFEE58;
+$warn: #ffd740;
+
+// Buttons
+button:active {
+    outline: none;
+}
+button:focus {
+    outline: none;
+}
+
+.unselect-icon {
+    color: $warn;
+    height: 18px;
+    font-size: 20px;
+    margin-right: 3px;
+    font-weight: 600;
+  }
+  .unselect-icon:hover {
+      cursor: pointer;
+      color: #424242;
+  }
 
 // Flexbox classes
 .flex {
@@ -15,6 +35,14 @@ $warn: #FFEE58;
 .center {
     align-items: center;
     justify-content: center;
+}
+
+// Titles
+.page-title {
+    background: linear-gradient(to right, $primary, $accent);
+    font-size: 32px;
+    color: #fff;
+    padding: 15px 20px;
 }
 
 // Wrapper
