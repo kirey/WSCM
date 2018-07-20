@@ -8,6 +8,8 @@ import {
 import { JobsService } from './jobs.service';
 import { AddJobDialogComponent } from '../shared/dialogs/add-job-dialog/add-job-dialog.component';
 import { EditJobDialogComponent } from '../shared/dialogs/edit-job-dialog/edit-job-dialog.component';
+import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
+import { SnackBarService } from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-jobs',
@@ -32,7 +34,7 @@ export class JobsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // dataSource = new MatTableDataSource<Element>(this.jobs);
 
-  constructor(public jobService: JobsService, public dialog: MatDialog) { }
+  constructor(public jobService: JobsService, public dialog: MatDialog, public snackbar: SnackBarService) { }
 
   getList() {
     this.jobService.getJobs().subscribe(
@@ -84,6 +86,31 @@ export class JobsComponent implements OnInit {
     //   }
     // });
   }
+
+  // Delete Dialog
+  deleteDialog(id, type, value) {
+    let dialogRef = this.dialog.open(DeleteDialog, {
+      width: '500px',
+      data: { type: type, value: value }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.jobService.deleteJob(id).subscribe(
+          res => {
+            // console.log(res);
+            this.snackbar.openSnackBar(res['data'], 'Successful');
+            this.getList()
+          },
+          err => {
+            this.snackbar.openSnackBar(res['error']['message'], 'Error');
+            console.log(err);
+          }
+        );
+      }
+    });
+  }
+
+
   // Start Job
   start(job) {
     this.jobService.startJob(job.id).subscribe(

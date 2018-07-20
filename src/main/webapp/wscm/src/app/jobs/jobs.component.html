@@ -59,15 +59,15 @@
               </span>
             </td>
           </ng-container>
-           <!-- History -->
-           <ng-container matColumnDef="history">
-              <th mat-header-cell *matHeaderCellDef> History</th>
-              <td mat-cell *matCellDef="let element">
-                <i matTooltip="History" matTooltipPosition="above" class="material-icons table-icons">
-                  history
-                </i>
-              </td>
-            </ng-container>
+          <!-- History -->
+          <ng-container matColumnDef="history">
+            <th mat-header-cell *matHeaderCellDef> History</th>
+            <td mat-cell *matCellDef="let element">
+              <i matTooltip="History" matTooltipPosition="above" class="material-icons table-icons">
+                history
+              </i>
+            </td>
+          </ng-container>
           <!-- Editing -->
           <ng-container matColumnDef="editing">
             <th mat-header-cell *matHeaderCellDef> Editing</th>
@@ -76,7 +76,7 @@
                 <i matTooltip="Edit Job" matTooltipPosition="above" class="material-icons table-icons" (click)="editJobDialog(element)">
                   edit
                 </i>
-                <i matTooltip="Delete Job" matTooltipPosition="above" class="material-icons table-icons">
+                <i matTooltip="Delete Job" matTooltipPosition="above" class="material-icons table-icons" (click)="deleteDialog(element.id, 'job', element.jobName)">
                   delete
                 </i>
               </span>

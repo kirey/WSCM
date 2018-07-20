@@ -14,6 +14,10 @@ export class JobsService {
         return this._http.get(this.baseUrl + 'jobs');
     }
 
+    deleteJob(id): Observable<any> {
+        return this._http.delete(this.baseUrl + 'deleteJob/' + id);
+    }
+
     startJob(id): Observable<any> {
         return this._http.post(this.baseUrl + 'startJob/' + id, null);
     }
