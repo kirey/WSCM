@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClassLoadingCategoriesService } from './../../../class-loading-categories/class-loading-categories.service';
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { SnackBarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-edit-class-dialog',
@@ -23,7 +24,8 @@ export class EditClassDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<EditClassDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private _classLoadingService: ClassLoadingService) { }
+    private _classLoadingService: ClassLoadingService, 
+    private snackBarService: SnackBarService) { }
 
   ngOnInit() {
     this.initialCategory = this.data.kjcClassCategories;
@@ -70,9 +72,11 @@ export class EditClassDialogComponent implements OnInit {
     this._classLoadingService.editClass(formData).subscribe(res => {
       console.log(res);
     }, err => {
+      this.snackBarService.openSnackBar('Error', 'Something went wrong!');
       console.log(err);
     }, () => {
       this.dialogRef.close();
+      this.snackBarService.openSnackBar('Success', 'You have successfuly edited class!');
     });
 
   }

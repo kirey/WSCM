@@ -56,6 +56,7 @@ import { AddJobDialogComponent } from './shared/dialogs/add-job-dialog/add-job-d
 import { AddClassDialogComponent } from './shared/dialogs/add-class-dialog/add-class-dialog.component';
 import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edit-class-dialog.component';
 import { EditJobDialogComponent } from './shared/dialogs/edit-job-dialog/edit-job-dialog.component';
+import { ReportsComponent } from './reports/reports.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { EditJobDialogComponent } from './shared/dialogs/edit-job-dialog/edit-jo
     AddJobDialogComponent,
     EditJobDialogComponent,
     AddClassDialogComponent,
-    EditClassDialogComponent
+    EditClassDialogComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -117,6 +119,7 @@ import { EditJobDialogComponent } from './shared/dialogs/edit-job-dialog/edit-jo
     EditContentDialogComponent,
     AddEventDialogComponent,
     AddCategoryDialogComponent,
+    AddClassDialogComponent,
     EditCategoryDialogComponent,
     AddJobDialogComponent,
     EditJobDialogComponent

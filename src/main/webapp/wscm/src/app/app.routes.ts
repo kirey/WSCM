@@ -11,6 +11,7 @@ import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
 import { JobsComponent } from './jobs/jobs.component';
 
 import { AuthGuard } from './shared/guards/auth.guard';
+import { ReportsComponent } from './reports/reports.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', canActivate: [AuthGuard], pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'languages', component: LanguagesComponent },
   { path: 'client', component: ClientComponent, canActivate: [AuthGuard] },
   { path: 'client-mail', component: MailRedirectComponent, canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
 
   { path: '**', component: HomeComponent }
 ];

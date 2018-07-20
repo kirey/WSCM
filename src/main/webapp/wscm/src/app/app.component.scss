@@ -2,7 +2,6 @@ $primary: #009688;
 $accent: #64FFDA;
 $warn: #FFEE58;
 
-
 // Flexbox classes
 .flex {
     display: flex;
@@ -97,8 +96,10 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 
 // Dialogs
 .dialog-title {
-    color: #424242;
-    padding: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, $primary, $accent);
+    color: #fff;
 }
 .dialog-subtitle {
     display: flex;

@@ -1,0 +1,57 @@
+@import '~@angular/material/theming';
+@import '../app.component.scss';
+
+#reports{
+    min-width: 100%;
+}
+.topForm{
+    margin-left: 10%;
+    margin-top: 2%;
+}
+.topForm .mat-form-field{
+    margin-right: 20px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    background: #64FFDA;
+    margin-right: 10px;
+}
+
+form .btn{
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: #64FFDA;
+    cursor: inherit;
+    display: block;
+}
+#params{
+    margin-right: 20%;
+    margin-top:3%;
+}
+.mat-card{
+    background: #64FFDA;
+    margin-top: 1%;
+    margin-left: 10%;
+    margin-right:20%;
+}
+.mat-card-content{
+    margin-top: 30px;
+}
+.ediBtn{
+    color:primary;
+}

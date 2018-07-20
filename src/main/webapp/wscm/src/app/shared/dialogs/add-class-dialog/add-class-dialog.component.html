@@ -1,5 +1,5 @@
 <div id="addClass">
-    <h1>Add Class </h1>
+    <h1 class="dialog-title">Add Class </h1>
     <mat-dialog-content>
         <form [formGroup]="classForm" (ngSubmit)="addClass()">
             <mat-form-field>
@@ -16,7 +16,7 @@
                 Must enter description!
             </div>
             <label class="btn btn-default btn-file">
-                 {{javaFileButton}} <input style="display: none;" formControlName="javaFile" class="form-control" type="file" accept=".java" (change)="handleJavaFile($event.target.files)"> 
+                 {{javaFileButton}} <input style="display: none;" formControlName="javaFile" class="form-control" type="file" accept=".java" (change)="handleJavaFile($event.target.files)">
             </label>
             <label class="btn btn-default btn-file">
                  {{compiledFileButton}} <input style="display: none;" formControlName="compiledFile" class="form-control" type="file" accept=".class" (change)="handleCompiledFile($event.target.files)">

@@ -14,6 +14,7 @@ import { AuthService } from '../shared/services/auth.service';
 export class PanelComponent implements OnInit {
 
   role: any;
+  private user:string;
 
   constructor(
     public panelService: PanelService,
@@ -39,6 +40,7 @@ export class PanelComponent implements OnInit {
       );
   }
   ngOnInit() {
+    this.user = localStorage.getItem('username');
     this.role = localStorage.getItem('role');
     console.log("PANEL ROLE:  " + this.role);
     // Get TEMPLATE

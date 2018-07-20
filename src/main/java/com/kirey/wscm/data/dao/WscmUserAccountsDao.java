@@ -76,4 +76,19 @@ public class WscmUserAccountsDao extends KjcBaseDao implements UserDetailsServic
 		return users;
 	}
 
+
+
+	public List<WscmUserAccounts> findUsersByCategoryWeight(String categoryName, Integer userWeight) {
+		String hql;
+		List<WscmUserAccounts> users = new ArrayList<>();
+		if(userWeight != null) {
+			hql = "select uc.userAccount from UserCategories uc where uc.categories.categoryName = :name and uc.weight > :userWeight";
+			users = sessionFactory.getCurrentSession().createQuery(hql).setParameter("name", categoryName).setParameter("userWeight", userWeight).list();
+		}else {
+			hql = "select uc.userAccount from UserCategories uc where uc.categories.categoryName = :name and and uc.weight in (select max(ucc.weight) from UserCategories ucc)";
+			users = sessionFactory.getCurrentSession().createQuery(hql).setParameter("name", categoryName).setParameter("userWeight", userWeight).list();
+		}
+		return users;
+	}
+
 }
