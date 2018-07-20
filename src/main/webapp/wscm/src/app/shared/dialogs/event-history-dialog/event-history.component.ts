@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { EventHistoryService } from './event-history-dialog.service';
+import { EventsService } from '../../../events/events.service';
+
 
 @Component({
   selector: 'app-event-history',
@@ -10,14 +11,15 @@ import { EventHistoryService } from './event-history-dialog.service';
 })
 export class EventHistoryComponent implements OnInit {
   history: any;
-  id: number;
-  obj: any;
+  id: any;
+
 
   constructor( public dialogRef: MatDialogRef<EventHistoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public eventHistoryService: EventHistoryService) { }
+    public eventHistoryService: EventsService) { }
 
   ngOnInit() {
+console.log(this.data);
   }
 
 }

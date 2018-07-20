@@ -23,6 +23,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { MatTreeModule } from '@angular/material/tree';
         MatTableModule,
         MatPaginatorModule,
         MatMenuModule,
-        MatTreeModule
+        MatTreeModule,
+        MatChipsModule
     ],
     exports: [
         MatButtonModule,
@@ -73,7 +75,9 @@ import { MatTreeModule } from '@angular/material/tree';
         MatTableModule,
         MatPaginatorModule,
         MatMenuModule,
-        MatTreeModule
+        MatTreeModule,
+        MatChipsModule
+
     ],
     declarations: []
 })
