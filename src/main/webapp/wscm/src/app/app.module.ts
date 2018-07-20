@@ -28,7 +28,7 @@ import { AddEventService } from './shared/dialogs/add-event-dialog/add-event-dia
 import { JobsService } from './jobs/jobs.service';
 import { AddJobService } from './shared/dialogs/add-job-dialog/add-job-dialog.service';
 import { EditJobService } from './shared/dialogs/edit-job-dialog/edit-job-dialog.service';
-import { EventHistoryService } from './shared/dialogs/event-history-dialog/event-history-dialog.service';
+// import { EventHistoryService } from './shared/dialogs/event-history-dialog/event-history-dialog.service';
 
 
 
@@ -117,8 +117,8 @@ import { EditParameterDialogComponent } from './shared/dialogs/edit-parameter-di
     JobsService,
     ClassLoadingCategoriesService,
     AddJobService,
-    EditJobService,
-    EventHistoryService
+    EditJobService
+    // EventHistoryService
   ],
   entryComponents: [
     DeleteDialog,

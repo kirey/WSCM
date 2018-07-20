@@ -6,60 +6,88 @@
     <form [formGroup]="addJobForm" autocomplete="off">
       <div class="basic-inputs">
         <!-- Job Name -->
-        <mat-form-field class="jobName">
+        <mat-form-field>
           <input formControlName="jobName" matInput name="jobName" type="text" placeholder="Job Name">
         </mat-form-field>
+        <mat-error *ngIf="jobName.touched && jobName.errors">
+          Job name is
+          <strong>required</strong>
+        </mat-error>
         <!-- Cron Expression -->
         <mat-form-field>
           <input formControlName="cronExpression" matInput name="cronExpression" type="text" placeholder="Cron Expression">
         </mat-form-field>
       </div>
-      <div class="basic-inputs">
+      <div class="basic-inputs" *ngIf="classLoading">
         <!-- Class Loading true/false  -->
         <div class="checkbox">
-          <mat-checkbox color="warn" (change)="doCheck($event)" [checked]="isChecked"> Class Loading </mat-checkbox>
+          <mat-checkbox formControlName="classLoading" color="warn" (change)="doCheck($event)" [checked]="isChecked" [disabled]="this.classLoading.length == 0">
+            Class Loading </mat-checkbox>
         </div>
         <!-- ClassLoading -->
-        <mat-form-field *ngIf="isChecked">
+        <mat-form-field *ngIf="classLoading.length > 0">
           <mat-select formControlName="kjcClasses" placeholder="KjcClasses" required name="name">
             <mat-option *ngFor="let job of classLoading; let i = index" [value]="job">{{job.name}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <div *ngIf="classLoading.length == 0" class="no-data">
+          No classes to show.
+        </div>
       </div>
       <hr>
       <div class="basic-inputs">
         <h5 class="label"> Add Job Type & Status</h5>
         <!-- Job Type -->
-        <mat-form-field class="jobName">
+        <mat-form-field>
           <mat-select formControlName="jobType" placeholder="Job Type" required name="typeName">
             <mat-option *ngFor="let job of jobTypes; let i = index" [value]="job">{{job.typeName}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="jobType.touched && jobType.errors">
+            Job type is
+            <strong>required</strong>
+          </mat-error>
         </mat-form-field>
         <!-- Status -->
         <mat-form-field>
           <input formControlName="status" matInput name="status" placeholder="Status">
         </mat-form-field>
+        <mat-error *ngIf="status.touched && status.errors">
+          Status is
+          <strong>required</strong>
+        </mat-error>
       </div>
       <!-- ----------- JOB PARAMS -------------- -->
       <div class="params-container">
-        <h5 class="label"> Add Job Params</h5>
         <div class="flex row">
           <div class="flex column params">
+            <h5 class="label"> Add Job Params</h5>
             <!--  Param Name -->
             <mat-form-field class="param-field">
               <input formControlName="name" matInput name="name" placeholder="Name">
             </mat-form-field>
+            <mat-error *ngIf="nameError">
+              Param name is
+              <strong>required</strong>
+            </mat-error>
             <!-- Param Value -->
             <mat-form-field class="param-field">
               <input formControlName="value" matInput name="value" placeholder="Value">
             </mat-form-field>
+            <mat-error *ngIf="valueError">
+              Param value is
+              <strong>required</strong>
+            </mat-error>
             <!-- Description -->
             <mat-form-field class="param-field">
               <input formControlName="description" matInput name="description" placeholder="Description">
             </mat-form-field>
             <button class="param-button" mat-stroked-button color="primary" (click)="addJobParam()">Add</button>
+            <div class="param-message" *ngIf="paramMesssage">
+              <strong>Param with this name exists.</strong>
+            </div>
           </div>
           <div class="added-params">
+            <h5 class="label"> Added Params</h5>
             <div *ngFor="let param of paramsArray; let i = index">
               <span class="params-show">
                 <mat-icon class="unselect-icon" (click)="removeJobParam(param, i)">close</mat-icon>
@@ -127,7 +155,7 @@
   </mat-dialog-content>
   <mat-dialog-actions class="buttons">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button color="warn" (click)="addJob()">Submit</button>
+    <button mat-raised-button color="warn" (click)="addJob()" [disabled]="jobName.errors || jobType.errors || status.errors">Submit</button>
   </mat-dialog-actions>
   <!-- </div> -->
 </div>
