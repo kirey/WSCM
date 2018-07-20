@@ -26,9 +26,11 @@ export class EventsComponent implements OnInit {
   cronExpression: any;
   currentJob: any;
   tableShow: true;
-  history: any;
+  evHistory: any;
   id: any;
   dialogRef: any;
+  data: any;
+  obj: any;
 
 
   constructor(
@@ -66,23 +68,23 @@ export class EventsComponent implements OnInit {
     this.eventsService.getHisory(id).subscribe(
       res => {
         console.log(res);
+        this.evHistory = res.data;
       },
       err => console.log(err)
     );
   }
-openHistoryDialog() {
+openHistoryDialog(id) {
+  this.getHistory(id);
+  console.log(this.evHistory);
   const dialogRef = this.dialog.open(EventHistoryComponent, {
-    // width: '800px',
-    // data: this.history
+    width: '800px',
+    data: this.evHistory
   });
-  // console.log(obj);
-  // this.eventsService.getHisory(id).subscribe(
-  //   res => {
-  //     this.dialogRef.data = res.data;
-  //     console.log(this.dialogRef.data);
-  //   },
-  //   err => console.log(err)
-  // );
+  dialogRef.afterClosed().subscribe(res => {
+
+    console.log(res);
+    console.log('uspesno');
+  });
 }
 
   // open add dialog
@@ -174,6 +176,7 @@ openHistoryDialog() {
   }
 
   ngOnInit() {
+
     if (localStorage.getItem('role') == 'ROLE_USER') {
       this.router.navigate(['/client']);
     }

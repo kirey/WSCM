@@ -1,3 +1,24 @@
-<p *ngFor="let nesto of history; let i = index">
-event-history works!{{nesto.endTimestamp}}
-</p>
+<div id="historyDialog">
+  <h2 class="dialog-title">Event History</h2>
+  <mat-dialog-content *ngFor="let history of data">
+    <div class="flex">
+      <div class="column">
+        <mat-chip-list>
+          <mat-chip color="primary" selected>{{history.status}}</mat-chip>
+        </mat-chip-list>
+        <span>Id: {{history.id}}</span><br>
+        <span>Job Name: {{history.jobName}}</span>
+      </div>
+      <div class="column">
+        Start Time:
+        <span *ngIf="history.startTimestamp">{{history.startTimestamp | date }}</span><br>
+        End Time:
+        <span *ngIf="history.endTimestamp">{{history.endTimestamp | date }}</span>
+      </div>
+    </div>
+    <hr>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close [mat-dialog-close]="true">Close</button>
+  </mat-dialog-actions>
+</div>
