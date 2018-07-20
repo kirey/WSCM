@@ -44,13 +44,13 @@ export class JobsComponent implements OnInit {
       err => console.log(err)
     );
   }
- // open add dialog
- openAddDialog() {
-  const dialogRef = this.dialog.open(AddJobDialogComponent, {
-    // width: '1000px',
-    // data: this.data
-  });
-  // console.log(obj);
+  // open add dialog
+  openAddDialog() {
+    const dialogRef = this.dialog.open(AddJobDialogComponent, {
+      width: '1000px'
+      // data: this.data
+    });
+    // console.log(obj);
 
     // dialogRef.afterClosed().subscribe(res => {
     //     this.getList();
@@ -59,31 +59,31 @@ export class JobsComponent implements OnInit {
     // });
   }
 
-// open edit dialog
-editJobDialog(obj) {
-  // this.currentJob = job;
-  const dialogRef = this.dialog.open(EditJobDialogComponent, {
-    width: '800px',
-    data: obj
-  });
-  console.log(obj);
+  // open edit dialog
+  editJobDialog(obj) {
+    // this.currentJob = job;
+    const dialogRef = this.dialog.open(EditJobDialogComponent, {
+      width: '800px',
+      data: obj
+    });
+    console.log(obj);
 
-  dialogRef.afterClosed().subscribe(res => {
-    this.getList();
-    console.log(res);
-    console.log('uspesno');
-  });
-  // dialogRef.afterClosed().subscribe(res => {
-  //   if (res) {
-  //     this.contentService.updateContent(id).subscribe(
-  //       res => {
-  //         console.log(res);
-  //       },
-  //       err => console.log(err)
-  //     );
-  //   }
-  // });
-}
+    dialogRef.afterClosed().subscribe(res => {
+      this.getList();
+      console.log(res);
+      console.log('uspesno');
+    });
+    // dialogRef.afterClosed().subscribe(res => {
+    //   if (res) {
+    //     this.contentService.updateContent(id).subscribe(
+    //       res => {
+    //         console.log(res);
+    //       },
+    //       err => console.log(err)
+    //     );
+    //   }
+    // });
+  }
   // Start Job
   start(job) {
     this.jobService.startJob(job.id).subscribe(
