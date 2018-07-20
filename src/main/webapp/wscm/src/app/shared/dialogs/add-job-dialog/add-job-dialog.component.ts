@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddJobService } from './add-job-dialog.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
+import { SnackBarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-add-job-dialog',
@@ -23,12 +24,16 @@ export class AddJobDialogComponent implements OnInit {
   paramsArray: Array<Object> = [];
   expand: boolean = false;
   selectedParam: number;
+  nameError: boolean; // Validation for params
+  valueError: boolean; // Validation for params
+  paramMesssage: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<AddJobDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public addJobService: AddJobService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public snackbar: SnackBarService
   ) { }
 
   // Get All Categories
@@ -57,7 +62,6 @@ export class AddJobDialogComponent implements OnInit {
   getAllClasses() {
     this.addJobService.getAllClasses().subscribe(
       res => {
-        console.log(res);
         this.classLoading = res.data;
         console.log(this.classLoading);
       },
@@ -82,17 +86,34 @@ export class AddJobDialogComponent implements OnInit {
 
     if (!this.isChecked) {
       delete this.addJobForm.value['kjcClasses'];
+
     }
   }
 
   // Params
   addJobParam() {
-    this.paramsArray.push({
-      name: this.addJobForm.value['name'],
-      value: this.addJobForm.value['value'],
-      description: this.addJobForm.value['description']
-    });
-    console.log(this.paramsArray);
+    if (!this.addJobForm.value['name']) this.nameError = true;
+    else if (!this.addJobForm.value['value']) this.valueError = true;
+    else {
+      if (this.paramsArray.length > 0) {
+        for (let i = 0; i < this.paramsArray.length; i++) {
+          if (this.addJobForm.value['name'] == this.paramsArray[i]['name']) {
+            return this.paramMesssage = true;
+          }
+          else this.paramMesssage = false;
+        }
+      }
+      if (!this.paramMesssage) {
+        this.paramsArray.push({
+          name: this.addJobForm.value['name'],
+          value: this.addJobForm.value['value'],
+          description: this.addJobForm.value['description']
+        });
+        this.nameError = false;
+        this.valueError = false;
+        console.log(this.paramsArray);
+      }
+    }
   }
   removeJobParam(param, index) {
     this.paramsArray.splice(index, 1)
@@ -152,18 +173,31 @@ export class AddJobDialogComponent implements OnInit {
     console.log(this.listCategoryWeight);
   }
 
+  // Send request
   addJob() {
     let obj = this.addJobForm.value;
     obj['jobCategorieses'] = this.listCategoryWeight;
     obj['jobParameterses'] = this.paramsArray;
+    delete obj['value'];
+    delete obj['description'];
+    delete obj['name'];
+
+    // kjcClasses
+    if (obj['kjcClasses'] == "") delete obj['kjcClasses'];
+
     console.log(obj);
 
     this.addJobService.addJob(obj)
       .subscribe(
         res => {
           console.log(res);
+          this.snackbar.openSnackBar(res['data'], 'Success');
+          this.dialogRef.close();
         },
-        err => console.log(err)
+        err => {
+          console.log(err);
+          this.snackbar.openSnackBar('Something went wrong.', 'Error');
+        }
       )
   }
 
@@ -173,19 +207,24 @@ export class AddJobDialogComponent implements OnInit {
     this.getAllClasses();
     this.getNotifications();
 
-
     // Build Form
     this.addJobForm = this.formBuilder.group({
       jobName: ['', Validators.required],
-      cronExpression: [''],
-      kjcClasses: ['', Validators.required],
-      jobType: [''],
+      cronExpression: [null],
+      kjcClasses: [[]],
+      classLoading: [false, Validators.required],
+      jobType: ['', Validators.required],
       status: ['', Validators.required],
-      jobParameterses: ['', Validators.required],
-      listNotificationses: ['', Validators.required],
-      name: ['', Validators.required],
-      value: ['', Validators.required],
-      description: ['']
+      jobParameterses: [[]],
+      listNotificationses: [[]],
+      name: [''],
+      value: [''],
+      description: [null]
     });
   }
+
+  // Getters for Form Group
+  get jobName() { return this.addJobForm.get('jobName'); }
+  get status() { return this.addJobForm.get('status'); }
+  get jobType() { return this.addJobForm.get('jobType'); }
 }
