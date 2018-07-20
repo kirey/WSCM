@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kirey.wscm.data.entity.JobParameters;
+import com.kirey.wscm.data.entity.Jobs;
 
 /**
  * @author paunovicm
@@ -29,5 +30,17 @@ public class JobParametersDao extends KjcBaseDao {
 		String hql = "from JobParameters jp where jp.job.id = :jobId";
 		List<JobParameters> listJobParameters = sessionFactory.getCurrentSession().createQuery(hql).setParameter("jobId", jobId).list();
 		return listJobParameters;
+	}
+
+	/**
+	 * Method used for getting {@link JobParameters} by name and job id
+	 * @param paramName
+	 * @param job
+	 * @return {@link JobParameters}
+	 */
+	public JobParameters findByNameAndJob(String paramName, Jobs job) {
+		String hql = "from JobParameters jp where jp.job.id = :jobId and jp.name = :paramName";
+		JobParameters param = (JobParameters) sessionFactory.getCurrentSession().createQuery(hql).setParameter("paramName", paramName).setParameter("jobId", job.getId()).uniqueResult();
+		return param;
 	}
 }

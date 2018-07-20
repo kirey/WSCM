@@ -66,14 +66,9 @@ public class StatisticsService {
 		List<UserLinks> listUserLinks = userLinksDao.findLinksByUser(user); 
 		for (UserLinks userLinks : listUserLinks) {
 			Map<String, Object> urlNo = new HashMap<>();
-			
-			Links link = userLinks.getLink();
-			link.setNoOfRequests(userLinks.getNoRequests());
-			urlNo.put("link", userLinks.getLink());
-//			urlNo.put("noOfRequests", userLinks.getNoRequests());
-//			List<LinksCategories> linksCategories = linksCategoriesDao.findByLink(userLinks.getLink());
-
-			
+			Integer n = userLinks.getNoRequests();
+			urlNo.put("url", userLinks.getLink().getUrl());
+			urlNo.put("number", n);
 			listUrlWithNo.add(urlNo);
 		}
 		response.put("links", listUrlWithNo);

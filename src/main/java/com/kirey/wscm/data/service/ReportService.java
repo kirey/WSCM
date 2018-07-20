@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,6 +15,7 @@ import java.util.Map;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.orm.hibernate5.SessionFactoryUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -125,6 +128,56 @@ public class ReportService {
 				jasperPrint = JasperFillManager.fillReport(jr, reportParams, datasource);
 				
 			} catch (JRException e) {
+				throw new RuntimeException(e);
+			}
+
+			if (jasperPrint.getPages().isEmpty())
+				return null;
+
+			if ("pdf".equals(format))
+				return reportEngine.exportPdf(jasperPrint).toByteArray();
+			else
+				return reportEngine.exportXls(jasperPrint).toByteArray();
+		}
+		return null;
+	}
+	
+	public byte[] generateReportDatasource(String format, Map<String, Object> reportParams, KjcReports kjcReports, Object datasource) {
+		if (!kjcReports.getKjcReportBlobses().isEmpty()) {
+			
+			List<KjcReportBlobs> blobs = kjcReports.getKjcReportBlobses();
+			JasperPrint jasperPrint;
+			try {
+				byte[] masterReport = null;
+
+				for (int i = 0; i < blobs.size(); i++) {
+					// master report
+					if (blobs.get(i).getOrderBlob() == AppConstants.REPORT_MASTER_REPORT_ORDER) {
+						masterReport = blobs.get(i).getFileBlob();
+						// subreports
+					} else {
+						byte[] subByteArray = blobs.get(i).getFileBlob();
+						InputStream is = new ByteArrayInputStream(subByteArray);
+						JasperReport jasperSubreport = (JasperReport) JRLoader.loadObject(is);
+						String subreportParamName = blobs.get(i).getSubreportParameterKey();
+						// put subreport as parameter
+						reportParams.put(subreportParamName, jasperSubreport);
+					}
+				}
+				
+				InputStream reportStream = new ByteArrayInputStream(masterReport);
+				JasperReport jr = (JasperReport) JRLoader.loadObject(reportStream);
+				
+				if(datasource instanceof JRBeanCollectionDataSource) {
+					jasperPrint = JasperFillManager.fillReport(jr, reportParams, (JRBeanCollectionDataSource)datasource);
+				} else if (datasource instanceof JRMapArrayDataSource) {
+					jasperPrint = JasperFillManager.fillReport(jr, reportParams, (JRMapArrayDataSource) datasource);
+				}else {
+					datasource=SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+					jasperPrint = JasperFillManager.fillReport(jr, reportParams, (Connection) datasource);
+				}
+				
+			} catch (JRException | SQLException e) {
 				throw new RuntimeException(e);
 			}
 

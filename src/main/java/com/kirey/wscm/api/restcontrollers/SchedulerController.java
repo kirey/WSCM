@@ -115,6 +115,11 @@ public class SchedulerController {
 				}
 			}
 		}
+		
+		Jobs jobFromDb = jobsDao.findByJobName(scheduler.getJobName());
+		if(jobFromDb != null) {
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(),"Job with name " + jobFromDb.getJobName() + " already exists"), HttpStatus.BAD_REQUEST);
+		}
 
 		Jobs savedJob = (Jobs) jobsDao.merge(scheduler);
 		List<JobCategories> listJobCategories = scheduler.getJobCategorieses();
@@ -134,6 +139,13 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/editJob", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> editScheduler(@RequestBody Jobs scheduler) {
+		Jobs jobById = jobsDao.findById(scheduler.getId());
+		if(!jobById.getJobName().equals(scheduler.getJobName())) {
+			Jobs jobFromDb = jobsDao.findByJobName(scheduler.getJobName());
+			if(jobFromDb != null) {
+				return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(),"Job with name " + jobFromDb.getJobName() + " already exists"), HttpStatus.BAD_REQUEST);
+			}	
+		}
 		
 		Jobs savedScheduler = (Jobs) jobsDao.merge(scheduler);
 		
@@ -333,7 +345,10 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/events", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> addNewEvent(@RequestBody Event event) {
-		
+		Event eventFromDb = eventDao.findByName(event.getEventName());
+		if(eventFromDb != null) {
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "Event with name " + event.getEventName() + "already exist"), HttpStatus.BAD_REQUEST);
+		}
 		eventDao.attachDirty(event);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully added new event", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
@@ -345,7 +360,13 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/events", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> editEvent(@RequestBody Event event) {
-		
+		Event eventById = eventDao.findById(event.getId());
+		if(!eventById.getEventName().equals(event.getEventName())) {
+			Event eventByName = eventDao.findByName(event.getEventName());
+			if(eventByName != null) {
+				return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "Event with name " + event.getEventName() + "already exist"), HttpStatus.BAD_REQUEST);
+			}
+		}
 		eventDao.merge(event);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto("Successfully edited event", AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
@@ -390,6 +411,11 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/params", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> addNewParams(@RequestBody JobParameters jobParameter) {
+		JobParameters jobParamFromDb = jobParametersDao.findByNameAndJob(jobParameter.getName(), jobParameter.getJob());
+		if(jobParamFromDb != null) {
+			return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "parameter with name " + jobParameter.getName() + "already exist"), HttpStatus.BAD_REQUEST);
+		}
+	
 		jobParametersDao.attachDirty(jobParameter);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobParametersDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
@@ -401,6 +427,13 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/params", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> edit(@RequestBody JobParameters jobParameter) {
+		JobParameters jobParamFromDb = jobParametersDao.findById(jobParameter.getId());
+		if(!jobParamFromDb.getName().equals(jobParameter.getName())){
+			JobParameters jobParamFromDbByName = jobParametersDao.findByNameAndJob(jobParameter.getName(), jobParameter.getJob());
+			if(jobParamFromDbByName != null) {
+				return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "parameter with name " + jobParameter.getName() + "already exist"), HttpStatus.BAD_REQUEST);
+			}
+		}
 		jobParametersDao.merge(jobParameter);
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(jobParametersDao.findAll(), AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}

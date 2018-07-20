@@ -419,7 +419,6 @@ public class ReportController {
     public ResponseEntity<RestResponseDto> generateReportUserLinks() {
 
 		Map<String, Object> response = statisticsService.linksStatisticsByUser(1);
-//		KjcReports report = kjcReportsDao.findByName("JavaBean");
 		KjcReports report = kjcReportsDao.findByName("LinksNoByUser");
 		
 		HashMap<String, Object> params = new HashMap<>();
@@ -430,7 +429,8 @@ public class ReportController {
 		params.put("DS1", arrDatasource);
 		params.put("DS2", listDatasource);
 		
-		byte[] reportGenerated = reportService.generateReportJavaBean("pdf", params, report, response);
+		
+		byte[] reportGenerated = reportService.generateReportDatasource("pdf", params, report, arrDatasource);
 
 		String encoded = Base64.getEncoder().encodeToString(reportGenerated);
 		
