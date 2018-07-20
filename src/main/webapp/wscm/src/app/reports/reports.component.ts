@@ -1,5 +1,7 @@
+import { EditParameterDialogComponent } from './../shared/dialogs/edit-parameter-dialog/edit-parameter-dialog.component';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 @Component({
@@ -18,9 +20,11 @@ export class ReportsComponent implements OnInit {
   private jrxmlFile;
   private jasperFile;
   private parameters;
+  private customParameters = [];
+  private subreports = [];
+  private subreportFiles = [];
 
-  constructor(private formBuilder: FormBuilder) { }
-
+  constructor(private formBuilder: FormBuilder, private dialog: MatDialog) { }
   ngOnInit() {
     this.topForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -32,24 +36,73 @@ export class ReportsComponent implements OnInit {
     }, { validator: this.compareNames });
   }
 
+  openEditDialog(obj) {
+    const dialogRef = this.dialog.open(EditParameterDialogComponent, {
+      width: '800px',
+      data: obj
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+    });
+  }
+
   addReport() { }
 
-  handleJRXMLFile(files: FileList) {
-    this.jrxml = files[0].name + ' Size:' + files[0].size;
-    console.log(files[0]);
-    let fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      let parser = new DOMParser();
-      let xmlDoc = parser.parseFromString(fileReader.result, "text/xml");
-      this.parameters = Array.prototype.slice.call(xmlDoc.getElementsByTagName("parameter"));
-      console.log(this.parameters);
-      //console.log(xmlDoc.getElementsByTagName("parameter"));
-      //console.log(fileReader.result);
+  handleJRXMLFile(event) {
+    this.subreportFiles = [];
+    Object.keys(this.bottomForm.controls).forEach(key => {
+      let control = this.bottomForm.get(key);
+      if (!(key == 'jrxml' || key == 'jasper')) {
+        control.setValue("");
+      }
+    });
+    if (event.target.files[0] != undefined) {
+      this.jrxml = event.target.files[0].name + ' Size:' + event.target.files[0].size;
+      let fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        let parser = new DOMParser();
+        let xmlDoc = parser.parseFromString(fileReader.result, "text/xml");
+        this.parameters = Array.prototype.slice.call(xmlDoc.getElementsByTagName("parameter"));
+        console.log(this.parameters);
+        let flag = false;
+        for (let index = 0; index < this.parameters.length; index++) {
+          if (this.parameters[index].className == 'net.sf.jasperreports.engine.JasperReport') {
+            flag = true;
+            this.bottomForm.addControl(this.parameters[index].attributes.name.value, new FormControl('', Validators.required));
+            this.subreports.push(this.parameters[index]);
+          } else {
+            let customParam = {
+              key: this.parameters[index].attributes.name.value,
+              name: this.parameters[index].attributes.name.value,
+              type: this.parameters[index].className.substring(this.parameters[index].className.lastIndexOf('.') + 1),
+              isMandatory: false,
+              description: "",
+              minValue: 0,
+              maxValue: 0,
+            };
+            this.customParameters.push(customParam);
+          }
+        }
+        if (flag == false) {
+          this.subreports = [];
+        }
+
+      }
+      fileReader.readAsText(event.target.files[0]);
+      document.getElementById('jrxmlLabel').style.background = '#FFEE58';
+      console.log(this.customParameters);
     }
-    fileReader.readAsText(files[0]);
   }
-  handleJasperFile(files: FileList) {
-    this.jasper = files[0].name + ' Size:' + files[0].size;
+  handleSubreportFile(event) {
+    let parentId = event.target.parentElement.id;
+    this.subreportFiles.push(event.target.files[0]);
+    let fileNameAndSize = event.target.files[0].name + ' Size:' + event.target.files[0].size;
+    document.getElementById(parentId).style.background = '#FFEE58';
+    document.getElementById(parentId).childNodes[0].nodeValue = parentId + ":" + fileNameAndSize;
+  }
+  handleJasperFile(event) {
+    this.jasper = event.target.files[0].name + ' Size:' + event.target.files[0].size;
+    document.getElementById('jasperLabel').style.background = '#FFEE58';
   }
 
   trimToFilename(file) {

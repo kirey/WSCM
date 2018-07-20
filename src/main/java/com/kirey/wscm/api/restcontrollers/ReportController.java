@@ -104,7 +104,7 @@ public class ReportController {
 			@RequestPart(required = true, name = "masterFile") MultipartFile masterFile,
 			@RequestPart(required = false, name = "subreportFiles") MultipartFile[] subreportFiles,
 			@RequestPart(required = false, name = "subreportFilesParams") Map<String, String> supbreportFilesNames,
-			@RequestParam(required = true, name = "checked") int checked) {
+			@RequestParam(required = false, name = "checked") int checked) {
 
 		List<String> listReportNames = kjcReportsDao.findAllReportNames();
 		
