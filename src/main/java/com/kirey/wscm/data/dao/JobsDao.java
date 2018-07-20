@@ -1,5 +1,7 @@
 package com.kirey.wscm.data.dao;
 
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -41,6 +43,12 @@ public class JobsDao extends KjcBaseDao {
 		return (Jobs) sessionFactory.getCurrentSession().createQuery("from Jobs s where s.jobName= :jobName")
 				.setParameter("jobName", jobName).uniqueResult();
 		
+	}
+
+	public List<Jobs> findAllClassLoading() {
+		String hql = "from Jobs j where j.classLoading = true";
+		List<Jobs> classLoadingJobs = sessionFactory.getCurrentSession().createQuery(hql).list();
+		return classLoadingJobs;
 	}
 
 }

@@ -106,6 +106,15 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "/addJob", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RestResponseDto> addScheduler(@RequestBody Jobs scheduler) {
+		
+		if(scheduler.getClassLoading()) {
+			List<Jobs> classLoadingJobs = jobsDao.findAllClassLoading();
+			for (Jobs classLoadingJob : classLoadingJobs) {
+				if(classLoadingJob.getKjcClasses().getId().equals(scheduler.getKjcClasses().getId())) {
+					return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(),scheduler.getKjcClasses().getName() + " class already in use"), HttpStatus.BAD_REQUEST);
+				}
+			}
+		}
 
 		Jobs savedJob = (Jobs) jobsDao.merge(scheduler);
 		List<JobCategories> listJobCategories = scheduler.getJobCategorieses();
@@ -430,9 +439,9 @@ public class SchedulerController {
 	 * @return ResponseEntity containing the list of all classes along with HTTP status
 	 */
 	@RequestMapping(value = "/classes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RestResponseDto> getAllClasses() {
-		List<KjcClasses> classes = kjcClassesDao.findAll();
-		return new ResponseEntity<RestResponseDto>(new RestResponseDto(classes, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
+	public ResponseEntity<RestResponseDto> getAllUnusedClasses() {
+		List<KjcClasses> listClasses = jobService.getAllUnusedKjcClasses();
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(listClasses, AppConstants.MSG_SUCCESSFULL), HttpStatus.OK);
 	}
 
 }

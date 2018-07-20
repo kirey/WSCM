@@ -4,6 +4,7 @@ import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,8 +29,10 @@ import com.kirey.wscm.classloading.classes.interfaces.WebRequestJob;
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.EventDao;
 import com.kirey.wscm.data.dao.JobsDao;
+import com.kirey.wscm.data.dao.KjcClassesDao;
 import com.kirey.wscm.data.entity.Event;
 import com.kirey.wscm.data.entity.Jobs;
+import com.kirey.wscm.data.entity.KjcClasses;
 import com.kirey.wscm.quartz.jobs.SchedJobListener;
 
 /**
@@ -60,7 +63,9 @@ public class JobService {
 	
 	@Autowired
 	private ClassLoadingUtil classLoadingUtil;
-
+	
+	@Autowired
+	private KjcClassesDao kjcClassesDao;
 
 	/**
 	 * Method creates {@link CronTrigger}
@@ -305,6 +310,29 @@ public class JobService {
 		inputMap.put("job", job);
 		
 		webReqJob.execute(inputMap);
+	}
+
+	/**
+	 * Method for getting {@link List} of {@link KjcClasses} which are not used by any {@link Jobs}
+	 * @return {@link List}<{@link KjcClasses}>
+	 */
+	public List<KjcClasses> getAllUnusedKjcClasses() {
+		List<KjcClasses> unusedClasses = new ArrayList<>();
+		List<KjcClasses> allClasses = kjcClassesDao.findAll();
+		List<Jobs> classLoadingJobs = jobsDao.findAllClassLoading();
+		
+		for (KjcClasses kjcClasses : allClasses) {
+			boolean flag = true;
+			for (Jobs jobs : classLoadingJobs) {
+				if(kjcClasses.getId().equals(jobs.getKjcClasses().getId())) {
+					flag = false;
+				}
+			}
+			if(flag) {
+				unusedClasses.add(kjcClasses);
+			}
+		}
+		return unusedClasses;
 	}
 
 	
