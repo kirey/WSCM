@@ -13,18 +13,18 @@ public class DataDto implements Serializable{
 	
 	private Integer id;
 	private String messageText;
-	private String targetTimestamp;
-	private String location;
-	private String address;
+	//private String targetTimestamp;
+	//private String location;
+	//private String address;
 	
 
 	public DataDto(){}
 	
-	public DataDto(String msg,  String targetTimestamp, String location, String address){
+	public DataDto(String msg /*, String targetTimestamp, String location, String address*/){
 		this.messageText = msg;
-		this.location = location;
-		this.address = address;
-		this.setTargetTimestamp(targetTimestamp);
+		//this.location = location;
+		//this.address = address;
+		//this.setTargetTimestamp(targetTimestamp);
 	}
 	
 	public String getMessageText() {
@@ -35,7 +35,7 @@ public class DataDto implements Serializable{
 		this.messageText = messageText;
 	}
 
-	public String getTargetTimestamp() {
+	/*public String getTargetTimestamp() {
 		return targetTimestamp;
 	}
 
@@ -49,7 +49,7 @@ public class DataDto implements Serializable{
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
+	}*/
 
 	public Integer getId() {
 		return id;
@@ -59,12 +59,12 @@ public class DataDto implements Serializable{
 		this.id = id;
 	}
 
-	public String getAddress() {
+	/*public String getAddress() {
 		return address;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
+	}*/
 	
 }

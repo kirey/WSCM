@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.Notification;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.kirey.wscm.api.dto.AlertDataToSend;
 import com.kirey.wscm.api.dto.RestResponseDto;
 import com.kirey.wscm.common.constants.AppConstants;
 import com.kirey.wscm.data.dao.CategoriesDao;
@@ -37,6 +40,7 @@ import com.kirey.wscm.data.entity.IpAddress;
 import com.kirey.wscm.data.entity.Notifications;
 import com.kirey.wscm.data.entity.WscmUserAccounts;
 import com.kirey.wscm.data.service.ContentService;
+import com.kirey.wscm.data.service.FireAlertService;
 import com.kirey.wscm.data.service.TemplateEngine;
 import com.kirey.wscm.email.MailService;
 import com.kirey.wscm.security.SecurityUtils;
@@ -54,7 +58,6 @@ public class TestController {
 
 	@Autowired
 	private ContentDao contentDao;
-	
 	
 	@Autowired
 	private TemplateEngine templateEngine;
@@ -82,6 +85,9 @@ public class TestController {
 	
 	@Autowired
 	private ContentCategoriesDao contentCategoriesDao;
+	
+	@Autowired
+	private FireAlertService fireAlertService;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(@RequestParam String name) {
@@ -348,6 +354,49 @@ public class TestController {
 	public ResponseEntity<RestResponseDto> getAllNotifications() {
 		
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(notificationsDao.findAll(), HttpStatus.OK.value()), HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value = "/sendNotifications", method = RequestMethod.GET)
+	public ResponseEntity<RestResponseDto> sendNotifications() {
+		
+		AlertDataToSend alertDataToSend = null;
+		//TODO dodati u notificationDao findByType i vratiti listu svih android notifikacija
+		//Notifications notification = notificationsDao.findNotificationByName("androidTestBank");
+		List<Notifications> listNotification = notificationsDao.findNotificationByType("android");
+		
+		//String text = "<html> Dinar Cash Loan with Fixed Interest Rate <br/> Your's UniCredit Bank </html>";
+		//String text2 = "<html> By using <i><b> Mastercard and DinaCard credit cards</b></i>, you can buy anything you want, at home or abroad, in <b>3, 6 </b>or <b>12</b> monthly installments without interest rates. Just send us a SMS with the number of installments in which you want the transaction to be divided, and the rest is our concern. Even when you withdraw cash from UniCredit Bank’s ATM, you return the amount within the deadline, of course, without interest rates!</html>";
+		
+		List<WscmUserAccounts> usersList = wscmUserAccountsDao.findAll();
+		for (WscmUserAccounts wscmUser : usersList) {
+			if(wscmUser.getFbToken() != null) {
+				//sending all notfications to each user
+				for (Notifications notification : listNotification) {
+				
+				/*alertDataToSend = new AlertDataToSend();
+				alertDataToSend.setFbToken(wscmUser.getFbToken());
+				alertDataToSend.setNotificationIconName("cache_icon");
+				alertDataToSend.setMessageBody("Easy cache loan!");  // dodati u notification tabelu
+				alertDataToSend.setMessageText(notification.getNotificationTemplate()); // povuci iz notifikacije
+				alertDataToSend.setMessageTitle("UniCredit Bank"); // dodati u notification tabelu
+				fireAlertService.sendAlertToUser(alertDataToSend);*/
+			    
+				//pitati za title i body text
+				alertDataToSend = new AlertDataToSend();
+				alertDataToSend.setFbToken(wscmUser.getFbToken());
+				alertDataToSend.setNotificationIconName("piggy_bank_icon");
+				alertDataToSend.setMessageBody("Start saving today!");  // dodati u notification tabelu
+				alertDataToSend.setMessageText(notification.getNotificationTemplate()); // povuci iz notifikacije
+				alertDataToSend.setMessageTitle("UniCredit Bank"); // dodati u notification tabelu
+				fireAlertService.sendAlertToUser(alertDataToSend);
+				
+				}
+			}
+		}
+		
+		
+		return new ResponseEntity<RestResponseDto>(new RestResponseDto(alertDataToSend, HttpStatus.OK.value()), HttpStatus.OK);
 		
 	}
 }

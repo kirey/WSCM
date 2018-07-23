@@ -22,6 +22,9 @@ public class NotificationsDao extends KjcBaseDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	@Autowired
+	private DicNotificationTypeDao dicNotificationTypeDao;
+	
 	public NotificationsDao() {
 		log = LogFactory.getLog(NotificationsDao.class);
 		entityClass = Notifications.class;
@@ -57,6 +60,14 @@ public class NotificationsDao extends KjcBaseDao {
 		}
 		
 		return notification;
+	}
+	
+	public List<Notifications> findNotificationByType(String type) {
+		
+		String hql = "from Notifications notif where notif.dicNotificationType.typeName = :type";
+		List<Notifications> notification = (List<Notifications>) sessionFactory.getCurrentSession().createQuery(hql).setParameter("type", type).getResultList();
+		return notification;
+		
 	}
 
 }

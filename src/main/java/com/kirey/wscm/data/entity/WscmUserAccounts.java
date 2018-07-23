@@ -29,6 +29,7 @@ public class WscmUserAccounts implements UserDetails{
 	private String socketSessionId;
 	private String firstName;
 	private String lastName;
+	private String fbToken;
 	
 //	@JsonBackReference(value = "wscmUserIpAddress")
 //	private List<UserIpAddress> userIpAddress = new ArrayList<>();
@@ -200,7 +201,12 @@ public class WscmUserAccounts implements UserDetails{
 		this.sessionId = sessionId;
 	}
 	
-	
-	
+	@Column(name = "firebase_token", nullable = true, length = 200)
+	public String getFbToken() {
+		return fbToken;
+	}
+	public void setFbToken(String fbToken) {
+		this.fbToken = fbToken;
+	}
 
 }

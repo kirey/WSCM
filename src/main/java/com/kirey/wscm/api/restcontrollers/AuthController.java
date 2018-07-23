@@ -1,5 +1,7 @@
 package com.kirey.wscm.api.restcontrollers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -49,7 +51,7 @@ public class AuthController {
 	 * @return
 	 */
 	@RequestMapping(value = "/authentication", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RestResponseDto> createUser(@RequestBody UserAccount userAccount, @CookieValue("JSESSIONID") String cookie) {
+	public ResponseEntity<RestResponseDto> createUser(@RequestBody UserAccount userAccount, @CookieValue("JSESSIONID") String cookie,  HttpServletRequest request) {
 		
 		Authentication authentication = null;
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -60,6 +62,12 @@ public class AuthController {
 		WscmUserAccounts wscmUser = (WscmUserAccounts) authentication.getPrincipal();
 		
 		wscmUser.setSessionId(cookie);
+		
+		String firebaseToken = request.getHeader("fbToken");
+		if(firebaseToken !=null) {
+			wscmUser.setFbToken(firebaseToken);
+			wscmUserAccountsDao.attachDirty(wscmUser);
+		}
 
 		return new ResponseEntity<RestResponseDto>(new RestResponseDto(wscmUser, HttpStatus.OK.value()), HttpStatus.OK);
 	}

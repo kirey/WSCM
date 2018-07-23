@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.kirey.wscm.api.dto.AlertDataToSend;
@@ -22,12 +23,16 @@ import com.kirey.wscm.api.dto.DataDto;
 import com.kirey.wscm.api.dto.NotificationDto;
 import com.kirey.wscm.common.constants.AppConstants;
 
+@Service
 public class FireAlertService {
 	
 public void sendAlertToUser(AlertDataToSend alertDataToSend){
 		
-		String serverKey = AppConstants.FIREBASE_SERVERKEY;
-		String url =  AppConstants.FIREBASE_SEND_ALERT_URL;
+		//String serverKey = AppConstants.FIREBASE_SERVERKEY;
+		//String url =  AppConstants.FIREBASE_SEND_ALERT_URL;
+		String url = "https://fcm.googleapis.com/fcm/send";
+		String serverKey = "key=AAAAtKCMvfY:APA91bEK9RCNEuMnRYTi9KrBcuFaGoHeaA_aEZnaMrWDHbaBTKtZFApNvdHkx9OJPdmfbuUpsSzkJmb-Rp7mspI1lu5VtJ4Sy4LOisY1UD3iW9Hyd1BR98Ap_yIawRZUvQTPX4WVoGtZN0awvHrEA9VekWE1-rIAug";//AppConstants.FIREBASE_SERVERKEY;
+						
 		
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -41,21 +46,9 @@ public void sendAlertToUser(AlertDataToSend alertDataToSend){
 		AlertDto alertDto = new AlertDto();
 		alertDto.setTo(alertDataToSend.getFbToken());
 		alertDto.setNotification(new NotificationDto(alertDataToSend.getMessageBody(), alertDataToSend.getMessageTitle(), alertDataToSend.getNotificationIconName(), "default", new Timestamp(new Date().getTime())));
-		alertDto.setData(new DataDto(alertDataToSend.getMessageText(), alertDataToSend.getTargetTimeStampString(),alertDataToSend.getCompanyName()+", "+alertDataToSend.getLocationName(), alertDataToSend.getLocationFullAddress()));
+		alertDto.setData(new DataDto(alertDataToSend.getMessageText()));
 		
-		//SEND EMAIL TO USER
-		/*Map<String, Object> templateModel = new HashMap<>();
-		StringWriter outputWriter = new StringWriter();
-		outputWriter.write(alertDataToSend.getMessageText());
-
-
-		templateModel.put("body", outputWriter);
-		templateModel.put("username", alertDataToSend.getUsername());
-		templateModel.put("alert_name", alertDataToSend.getNameAlert());
-		templateModel.put("location",  alertDataToSend.getCompanyLocationCityName());
-		templateModel.put("address", alertDataToSend.getLocation());*/
-		
-		
+				
 		//SEND ALERT TO USER
 		HttpEntity<?> requestEntity = new HttpEntity<Object>(alertDto,requestHeaders);		
 	    ResponseEntity response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, Object.class);
@@ -66,7 +59,8 @@ public void sendAlertToUser(AlertDataToSend alertDataToSend){
 			if(((HashMap) (res.get(0))).get("message_id") != null)
 			{
 				String messageId = ((HashMap) (res.get(0))).get("message_id").toString();
-				//NotificationsSent = new NotificationsSent();s
+				//NotificationsSent = new NotificationsSent();
+				// to do update notification with message id got from firebase response
 			}
 		}
 		
