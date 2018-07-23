@@ -1,6 +1,6 @@
 import { Component, Inject, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material';
 import { EditJobService } from './edit-job-dialog.service';
 import { SnackBarService } from '../../services/snackbar.service';
 
@@ -14,23 +14,25 @@ export class EditJobDialogComponent implements OnInit {
   jobs: any;
   jobTypes: any;
   classLoading: any;
-  notification: any;
+  notifications: any;
   categories: any;
   listCategoryWeight = this.data.jobCategorieses;
   jobCategorieses = [];
+  isChecked: boolean;
+  selectedNotifications = [];
 
   constructor(
     public dialogRef: MatDialogRef<EditJobDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public editJobService: EditJobService,
     public snackbar: SnackBarService
-  ) {}
+  ) { }
 
   getJob() {
     this.editJobService.getJobs().subscribe(
       res => {
         this.jobs = res.data;
-        console.log(this.jobs);
+        // console.log(this.jobs);
       },
       err => console.log(err)
     );
@@ -40,6 +42,7 @@ export class EditJobDialogComponent implements OnInit {
     this.editJobService.getAllJobs().subscribe(
       res => {
         this.jobTypes = res.data;
+        // console.log(this.jobTypes);
       },
       err => console.log(err)
     );
@@ -49,7 +52,7 @@ export class EditJobDialogComponent implements OnInit {
   getAllClasses() {
     this.editJobService.getAllClasses().subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.classLoading = res.data;
       },
       err => console.log(err)
@@ -60,8 +63,8 @@ export class EditJobDialogComponent implements OnInit {
   getNotifications() {
     this.editJobService.getAllNotification().subscribe(
       res => {
-        console.log(res);
-        this.notification = res.data;
+        // console.log(res);
+        this.notifications = res.data;
       },
       err => console.log(err)
     );
@@ -71,11 +74,30 @@ export class EditJobDialogComponent implements OnInit {
   getCategories() {
     this.editJobService.getAllCategories().subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.categories = res['data'];
       },
       err => console.log(err)
     );
+  }
+
+  // Set Notifications list
+  setSelectedNotifications() {
+    for (let i = 0; i < this.data['listNotificationses'].length; i++) {
+      this.selectedNotifications.push(this.data['listNotificationses'][i]['name']);
+    }
+    // console.log(this.selectedNotifications);
+  }
+
+  // Class Loading checkbox
+  doCheck(ev) {
+    this.isChecked = !this.isChecked;
+
+    if (!this.isChecked) {
+      // TODO Remove kjcClasses from object
+      // delete this..value['kjcClasses'];
+
+    }
   }
   // Select category - checkbox
   checked(ev, category) {
@@ -128,7 +150,15 @@ export class EditJobDialogComponent implements OnInit {
   editJob(value) {
     // obj['id'] = this.data.id;
     value['jobCategorieses'] = this.data.jobCategorieses;
-    console.log(value);
+    // console.log(value);
+
+    // let list = [];
+    // for (let i = 0; i < this.jobTypes.length; i++) {
+    //   if (value['jobType'] == this.jobTypes[i]['typeName']) {
+    //     list.push(this.jobTypes[i]);
+    //   }
+    // }
+    // console.log(list)
 
     // if (!obj.eventName) this.snackbar.openSnackBar('Please, enter event name.', '');
     // else if (!obj.eventType) this.snackbar.openSnackBar('Please, enter event type.', '');
@@ -158,5 +188,6 @@ export class EditJobDialogComponent implements OnInit {
     this.getNotifications();
     this.getCategories();
     console.log(this.listCategoryWeight);
+    this.setSelectedNotifications();
   }
 }

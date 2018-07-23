@@ -13,6 +13,11 @@
     justify-content: center;
 }
 
+.selected-job-title {
+  padding: 0px 0px 20px 5px;
+  color: $warn;
+  font-weight: 600;
+}
      //Categories
      .categories {
       display: flex;
@@ -41,26 +46,22 @@
     }
     .label {
       margin-top: 20px;
+      margin-bottom: 20px;
       text-align: left;
       color: #bdbdbd;
     }
     mat-slider {
       width: 150px;
-      margin-bottom: 0px;
-      margin-left: 20px;
+      margin-bottom: 5px;
+      margin-left: 50px;
     }
-    // .mat-slider-horizontal {
-    //   height: 30px;
-    // }
+    .mat-slider-horizontal {
+      height: 30px;
+    }
     .buttons {
         float: right;
     }
-    .formButton:active, .formButton:visited, .formButton:focus {
-      outline: none;
-    }
-    .cancelButton:active, .cancelButton:visited, .cancelButton:focus {
-      outline: none;
-    }
+  
     .jobName {
       margin-right: 50px;
     }
@@ -73,7 +74,52 @@
     .mat-dialog-content {
       margin-left: 0px;
     }
-    .unselect-icon {
+
+    //Params
+    .params-container {
+      padding: 20px;
+    }
+    .params {
+      width: 50%;
+      padding-left: 15px;
+    }
+    .param-field {
+      width: 70%;
+    }
+    .param-button {
+      width: 35%;
+    }
+    .params-show {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+    }
+    .params-expand-icon {
+      padding-top: 2px;
+      font-size: 29px;
+      padding-left: 5px;
+      color: $primary;
+    }
+    .params-expand-icon:hover {
       cursor: pointer;
+      color: #424242;
+    }
+    .params-expanded {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+    }
+    .param-value {
+      margin-right: 50px;
+    }
+    .param-description {
+      word-break: break-word;
+      width: 200px;
+    }
+    .param-value>strong, .param-description>strong {
+      color: $primary;
+    }
+    .param-message {
+      color: $primary;
     }
 }

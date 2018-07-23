@@ -97,7 +97,7 @@ export class JobsComponent implements OnInit {
   editJobDialog(obj) {
     // this.currentJob = job;
     const dialogRef = this.dialog.open(EditJobDialogComponent, {
-      width: '800px',
+      width: '1000px',
       data: obj
     });
     console.log(obj);

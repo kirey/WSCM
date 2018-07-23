@@ -119,13 +119,13 @@ public class SchedulerController {
 		List<JobParameters> listParameters = scheduler.getJobParameterses();
 		if(!listParameters.isEmpty()) {
 			for (JobParameters param : listParameters) {
-				boolean exist = listParameters.stream().anyMatch(p -> p.getName().equals(param.getName()));
-				if(!exist) {
+//				boolean exist = listParameters.stream().anyMatch(p -> p.getName().equals(param.getName()));
+//				if(!exist) {
 					param.setJob(savedJob);
 					jobParametersDao.attachDirty(param);	
-				}else {
-					return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "parameter with name " + param.getName() + "already exist"), HttpStatus.BAD_REQUEST);
-				}
+//				}else {
+//					return new ResponseEntity<RestResponseDto>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(), "parameter with name " + param.getName() + "already exist"), HttpStatus.BAD_REQUEST);
+//				}
 				
 			}
 		}
