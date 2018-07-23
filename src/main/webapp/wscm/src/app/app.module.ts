@@ -62,6 +62,7 @@ import { EditJobDialogComponent } from './shared/dialogs/edit-job-dialog/edit-jo
 import { ReportsComponent } from './reports/reports.component';
 import { EventHistoryComponent } from './shared/dialogs/event-history-dialog/event-history.component';
 import { EditParameterDialogComponent } from './shared/dialogs/edit-parameter-dialog/edit-parameter-dialog.component';
+import { JobsHistoryDialogComponent } from './shared/dialogs/jobs-history-dialog/jobs-history-dialog.component';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import { EditParameterDialogComponent } from './shared/dialogs/edit-parameter-di
     ReportsComponent,
     EventHistoryComponent,
     EditParameterDialogComponent,
+    JobsHistoryDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,7 +120,6 @@ import { EditParameterDialogComponent } from './shared/dialogs/edit-parameter-di
     ClassLoadingCategoriesService,
     AddJobService,
     EditJobService
-    // EventHistoryService
   ],
   entryComponents: [
     DeleteDialog,
@@ -132,7 +133,8 @@ import { EditParameterDialogComponent } from './shared/dialogs/edit-parameter-di
     AddJobDialogComponent,
     EditJobDialogComponent,
     EventHistoryComponent,
-    EditParameterDialogComponent
+    EditParameterDialogComponent,
+    JobsHistoryDialogComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

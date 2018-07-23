@@ -1,22 +1,20 @@
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { EventsService } from '../../../events/events.service';
+import { JobsService } from '../../../jobs/jobs.service';
 
 @Component({
-  selector: 'app-event-history',
-  templateUrl: './event-history.component.html',
-  styleUrls: ['./event-history.component.scss'],
+  selector: 'app-jobs-history-dialog',
+  templateUrl: './jobs-history-dialog.component.html',
+  styleUrls: ['./jobs-history-dialog.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class EventHistoryComponent implements OnInit {
-  history: any;
-  id: any;
-
+export class JobsHistoryDialogComponent implements OnInit {
   constructor(
-    public dialogRef: MatDialogRef<EventHistoryComponent>,
+    public dialogRef: MatDialogRef<JobsHistoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public eventHistoryService: EventsService
+    public jobsHistoryService: JobsService
   ) {}
+
   getColor(status) {
     switch (status) {
       case 'SUCCESSFULL':

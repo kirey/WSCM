@@ -29,8 +29,8 @@ export class JobsService {
     // deleteJob(id: number): Observable<any> {
     //     return this._http.delete(this.baseUrl + 'deleteJob/' + id);
     // }
-    // getHisory(id): Observable<any> {
-    //     return this._http.get(this.baseUrl + 'jobHistory/' + id);
-    // }
+    getHisory(id): Observable<any> {
+        return this._http.get(this.baseUrl + 'jobHistory/' + id);
+    }
 
 }

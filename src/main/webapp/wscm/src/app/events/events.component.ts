@@ -73,6 +73,7 @@ export class EventsComponent implements OnInit {
       err => console.log(err)
     );
   }
+  // Open History Dialog
 openHistoryDialog(id) {
   this.getHistory(id);
   console.log(this.evHistory);

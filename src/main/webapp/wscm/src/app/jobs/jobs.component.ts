@@ -3,13 +3,15 @@ import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
-  MatPaginator, MatTableDataSource
+  MatPaginator,
+  MatTableDataSource
 } from '@angular/material';
 import { JobsService } from './jobs.service';
 import { AddJobDialogComponent } from '../shared/dialogs/add-job-dialog/add-job-dialog.component';
 import { EditJobDialogComponent } from '../shared/dialogs/edit-job-dialog/edit-job-dialog.component';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 import { SnackBarService } from '../shared/services/snackbar.service';
+import { JobsHistoryDialogComponent } from '../shared/dialogs/jobs-history-dialog/jobs-history-dialog.component';
 
 @Component({
   selector: 'app-jobs',
@@ -17,9 +19,11 @@ import { SnackBarService } from '../shared/services/snackbar.service';
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
-
   dataSource: any;
   jobs: any;
+  jobHistory: any;
+  data: any;
+
   displayedColumns = [
     'jobName',
     'jobType',
@@ -27,24 +31,52 @@ export class JobsComponent implements OnInit {
     'classLoading',
     'cronExpression',
     'actions',
+    'history',
     'editing'
   ];
-
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // dataSource = new MatTableDataSource<Element>(this.jobs);
 
-  constructor(public jobService: JobsService, public dialog: MatDialog, public snackbar: SnackBarService) { }
+  constructor(
+    public jobService: JobsService,
+    public dialog: MatDialog,
+    public snackbar: SnackBarService
+  ) {}
 
   getList() {
     this.jobService.getJobs().subscribe(
       res => {
         this.jobs = res.data;
         console.log(this.jobs);
-
       },
       err => console.log(err)
     );
+  }
+
+   // Get History
+   getHistory(id) {
+    this.jobService.getHisory(id).subscribe(
+      res => {
+        console.log(res);
+        this.jobHistory = res.data;
+        console.log(this.jobHistory);
+      },
+      err => console.log(err)
+    );
+  }
+
+  // Open History dialog
+  openHistoryDialog(id) {
+    this.getHistory(id);
+    const dialogRef = this.dialog.open(JobsHistoryDialogComponent, {
+      width: '800px',
+      data: this.jobHistory
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+      console.log('uspesno');
+    });
   }
   // open add dialog
   openAddDialog() {
@@ -99,7 +131,7 @@ export class JobsComponent implements OnInit {
           res => {
             // console.log(res);
             this.snackbar.openSnackBar(res['data'], 'Successful');
-            this.getList()
+            this.getList();
           },
           err => {
             this.snackbar.openSnackBar(res['error']['message'], 'Error');
@@ -109,7 +141,6 @@ export class JobsComponent implements OnInit {
       }
     });
   }
-
 
   // Start Job
   start(job) {
@@ -146,6 +177,5 @@ export class JobsComponent implements OnInit {
     this.getList();
     this.dataSource = new MatTableDataSource<Element>(this.jobs);
     this.dataSource.paginator = this.paginator;
-
   }
 }
