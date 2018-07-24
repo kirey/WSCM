@@ -15,7 +15,7 @@ export class AddJobDialogComponent implements OnInit {
 
   addJobForm: FormGroup;
   categories: any;
-  classLoading: any;
+  classLoadingList: any;
   notification: any;
   jobTypes: any;
   jobCategorieses: any = [];
@@ -62,8 +62,8 @@ export class AddJobDialogComponent implements OnInit {
   getAllClasses() {
     this.addJobService.getAllClasses().subscribe(
       res => {
-        this.classLoading = res.data;
-        console.log(this.classLoading);
+        this.classLoadingList = res.data;
+        console.log(this.classLoadingList);
       },
       err => console.log(err)
     );

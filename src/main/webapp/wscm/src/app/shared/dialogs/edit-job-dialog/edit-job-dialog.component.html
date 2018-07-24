@@ -2,9 +2,9 @@
   <h1 class="dialog-title">Edit Job </h1>
   <h5 class="selected-job-title">{{data.jobName}}</h5>
   <div *ngIf="data">
-    <mat-dialog-content>
-      <h3 class="dialog-subtitle">Basic information</h3>
-      <form #editJobForm="ngForm">
+    <form #editJobForm="ngForm" (ngSubmit)="editJob(editJobForm.value)">
+      <mat-dialog-content>
+        <h3 class="dialog-subtitle">Basic information</h3>
         <div class="basic-inputs">
           <!-- Job Name -->
           <mat-form-field class="jobName">
@@ -109,7 +109,8 @@
         <!-- Notifications -->
         <div class="basic-inputs" *ngIf="data.listNotificationses">
           <mat-form-field>
-            <mat-select [(ngModel)]="selectedNotifications" placeholder="Notifications" name="listNotificationses" multiple required>
+            <mat-select [(ngModel)]="selectedNotifications" placeholder="Notifications" [ngModelOptions]="{standalone: true}" multiple
+              required>
               <mat-option *ngFor="let notification of notifications; let i = index" [value]="notification.name">{{notification.name}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -140,11 +141,12 @@
           </div>
         </div>
         <hr>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions class="buttons">
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button type="submit" mat-raised-button color="warn" (click)="editJob(editJobForm.value)">Submit</button>
-    </mat-dialog-actions>
+
+      </mat-dialog-content>
+      <mat-dialog-actions class="buttons">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button type="submit" mat-raised-button color="warn">Submit</button>
+      </mat-dialog-actions>
+    </form>
   </div>
 </div>

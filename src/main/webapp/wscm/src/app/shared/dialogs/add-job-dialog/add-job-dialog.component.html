@@ -17,19 +17,19 @@
           <input formControlName="cronExpression" matInput name="cronExpression" type="text" placeholder="Cron Expression">
         </mat-form-field>
       </div>
-      <div class="basic-inputs" *ngIf="classLoading">
+      <div class="basic-inputs" *ngIf="classLoadingList">
         <!-- Class Loading true/false  -->
         <div class="checkbox">
-          <mat-checkbox formControlName="classLoading" color="warn" (change)="doCheck($event)" [checked]="isChecked" [disabled]="this.classLoading.length == 0">
+          <mat-checkbox formControlName="classLoading" color="warn" (change)="doCheck($event)" [checked]="isChecked" [disabled]="this.classLoadingList.length == 0">
             Class Loading </mat-checkbox>
         </div>
         <!-- ClassLoading -->
-        <mat-form-field *ngIf="classLoading.length > 0">
+        <mat-form-field *ngIf="classLoadingList.length > 0 && isChecked">
           <mat-select formControlName="kjcClasses" placeholder="KjcClasses" required name="name">
-            <mat-option *ngFor="let job of classLoading; let i = index" [value]="job">{{job.name}}</mat-option>
+            <mat-option *ngFor="let job of classLoadingList; let i = index" [value]="job">{{job.name}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <div *ngIf="classLoading.length == 0" class="no-data">
+        <div *ngIf="classLoadingList.length == 0" class="no-data">
           No classes to show.
         </div>
       </div>

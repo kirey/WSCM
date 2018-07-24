@@ -148,9 +148,32 @@ export class EditJobDialogComponent implements OnInit {
   }
   // Edit job form
   editJob(value) {
-    // obj['id'] = this.data.id;
-    value['jobCategorieses'] = this.data.jobCategorieses;
     // console.log(value);
+
+    // Set ID
+    value['id'] = this.data.id;
+
+    // Set Categories
+    value['jobCategorieses'] = this.data.jobCategorieses;
+
+    // JobType
+    for (let i = 0; i < this.jobTypes.length; i++) {
+      if (this.jobTypes[i]['typeName'] == value['jobType']) {
+        value['jobType'] = this.jobTypes[i];
+      }
+    }
+
+    // List Notificationses
+    value['listNotificationses'] = [];
+    for (let i = 0; i < this.notifications.length; i++) {
+      for (let x = 0; x < this.selectedNotifications.length; x++) {
+        if (this.notifications[i]['name'] == this.selectedNotifications[x]) {
+          value['listNotificationses'].push(this.notifications[i]);
+        }
+      }
+    }
+
+    console.log(value);
 
     // let list = [];
     // for (let i = 0; i < this.jobTypes.length; i++) {
