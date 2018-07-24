@@ -4,7 +4,7 @@
     <div id="classCategories">
         <div id="myTable">
             <button color="warn" matTooltip="Add Category" matTooltipPosition="above" (click)="openAddDialog()" mat-mini-fab>
-            <i class="material-icons plus">add</i> 
+            <i class="material-icons plus">add</i>
         </button>
             <div *ngIf="dataSource">
                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -15,8 +15,8 @@
                     <ng-container matColumnDef="editing">
                         <th mat-header-cell *matHeaderCellDef> Editing</th>
                         <td mat-cell *matCellDef="let category">
-                            <i matTooltip="Edit category" matTooltipPosition="above" class="material-icons" (click)="openEditDialog(category)"> edit </i>
-                            <i matTooltip="Delete category" matTooltipPosition="above" class="material-icons" (click)="deleteCategory(category.id,'category',category.name)"> delete </i>
+                            <i matTooltip="Edit category" matTooltipPosition="above" class="material-icons table-icons" (click)="openEditDialog(category)"> edit </i>
+                            <i matTooltip="Delete category" matTooltipPosition="above" class="material-icons table-icons" (click)="deleteCategory(category.id,'category',category.name)"> delete </i>
                         </td>
                     </ng-container>
 

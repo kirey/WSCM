@@ -24,7 +24,7 @@ export class EditClassDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<EditClassDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private _classLoadingService: ClassLoadingService, 
+    private _classLoadingService: ClassLoadingService,
     private snackBarService: SnackBarService) { }
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class EditClassDialogComponent implements OnInit {
     this.compiledFile = files[0];
     this.compiledFileButton = files[0].name + ' Size:' + files[0].size;
   }
-  
+
   editClass() {
     let formData = new FormData();
     formData.append('qualifiedClassName', new Blob([this.data.kjcPackages.name + '.' + this.data.name],

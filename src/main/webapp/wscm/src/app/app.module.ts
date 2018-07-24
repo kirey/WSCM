@@ -129,12 +129,14 @@ import { JobsHistoryDialogComponent } from './shared/dialogs/jobs-history-dialog
     AddEventDialogComponent,
     AddCategoryDialogComponent,
     AddClassDialogComponent,
+    ClassLoadingCategoriesComponent,
     EditCategoryDialogComponent,
     AddJobDialogComponent,
     EditJobDialogComponent,
     EventHistoryComponent,
     EditParameterDialogComponent,
-    JobsHistoryDialogComponent
+    JobsHistoryDialogComponent,
+    EditClassDialogComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

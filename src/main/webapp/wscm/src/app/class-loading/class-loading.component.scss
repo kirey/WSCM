@@ -1,11 +1,13 @@
 @import '../app.component.scss';
+#classLoading{
+  width: 100%;
 
-#myTable {
+  #myTable {
     margin-left: 12%;
     margin-top: 15%;
 }
 table{
-    min-width: 100%;
+    min-width: 80%;
     margin-top: 15px;
     margin-left: 8px;;
 }
@@ -14,11 +16,9 @@ button{
     background: $warn;
     float:right;
 }
-h1{
-    width: 600px;
-    margin-left: 15px;
-}
 #classLoading{
     width:100%;
     margin-right: 10%;
+}
+
 }

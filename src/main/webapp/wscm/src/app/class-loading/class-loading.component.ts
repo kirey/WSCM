@@ -1,15 +1,17 @@
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
 import { EditClassDialogComponent } from './../shared/dialogs/edit-class-dialog/edit-class-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddClassDialogComponent } from './../shared/dialogs/add-class-dialog/add-class-dialog.component';
 import { ClassLoadingService } from './class-loading.service';
-import { Component, OnInit } from '@angular/core';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 import { SnackBarService } from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-class-loading',
   templateUrl: './class-loading.component.html',
-  styleUrls: ['./class-loading.component.scss']
+  styleUrls: ['./class-loading.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ClassLoadingComponent implements OnInit {
 

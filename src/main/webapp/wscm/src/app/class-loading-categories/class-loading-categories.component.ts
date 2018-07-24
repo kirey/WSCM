@@ -1,15 +1,18 @@
+
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
 import { SnackBarService } from './../shared/services/snackbar.service';
 import { EditCategoryDialogComponent } from './../shared/dialogs/edit-category-dialog/edit-category-dialog.component';
 import { AddCategoryDialogComponent } from './../shared/dialogs/add-category-dialog/add-category-dialog.component';
 import { ClassLoadingCategoriesService } from './class-loading-categories.service';
-import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DeleteDialog } from '../shared/dialogs/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-class-loading-categories',
   templateUrl: './class-loading-categories.component.html',
-  styleUrls: ['./class-loading-categories.component.scss']
+  styleUrls: ['./class-loading-categories.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ClassLoadingCategoriesComponent implements OnInit {
 
