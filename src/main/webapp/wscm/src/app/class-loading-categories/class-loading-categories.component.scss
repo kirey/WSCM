@@ -1,14 +1,11 @@
 @import '../app.component.scss';
-
-#myTable {
-    width: 420px;
-    margin-left: 12%;
-    margin-top: 15%;
+#classCategories {
+  width: 100%;
 
 table{
-    width: 400px;
-    margin-top: 15px;
-    margin-left: 8px;
+    min-width: 500px;
+    // margin-top: 15px;
+    // margin-left: 8px;
 }
 button{
     background: $warn;
@@ -22,3 +19,4 @@ button{
     margin-top: 6%;
 }
 }
+

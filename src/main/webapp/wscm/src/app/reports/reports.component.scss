@@ -1,29 +1,30 @@
 @import '~@angular/material/theming';
 @import '../app.component.scss';
-
-#reports{
-    min-width: 100%;
-}
-.topForm{
-    margin-left: 10%;
-    margin-top: 2%;
-}
-.topForm .mat-form-field{
-    margin-right: 20px;
-}
-.btn-file {
+#reports {
+  width: 100%;
+  form {
+    margin-top: 3%;
+    width: 70%;
+  }
+  .mat-form-field {
+    width: 40%;
+    margin-right: 10px;
+  }
+  mat-checkbox {
+    margin-left: 30px;
+  }
+  .btn-file {
     position: relative;
     overflow: hidden;
     background: #64FFDA;
     margin-right: 10px;
-}
-
-form .btn{
+  }
+  form .btn {
     width: 400px;
     height: 60px;
     padding-top: 17px;
-}
-.btn-file input[type=file] {
+  }
+  .btn-file input[type=file] {
     position: absolute;
     top: 0;
     right: 0;
@@ -37,32 +38,35 @@ form .btn{
     background: #64FFDA;
     cursor: inherit;
     display: block;
-}
-#params{
-    margin-right: 20%;
-    margin-top:3%;
-}
-.mat-card{
-    background: #64FFDA;
+  }
+  #params {
+    // margin-right: 20%;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+  .mat-card {
+    // background: #64FFDA;
     margin-top: 1%;
-    margin-left: 10%;
-    margin-right:20%;
-}
-.mat-card-content{
+    margin-left: 2%;
+    // margin-right: 20%;
+  }
+  .mat-card-content {
     margin-top: 30px;
-}
-.ediBtn{
-    background:$warn;
-    width: 200px;
-}
-.createBtn{
-    background:$warn;
-    width: 200px!important;
-    padding-top: 7px!important;
-    height: 40px!important;
+  }
+  .ediBtn {
+    background: $warn;
+    width: 70%;
+  }
+  .createBtn {
+    background: $warn;
+    width: 200px !important;
+    padding-top: 7px !important;
+    height: 40px !important;
     margin-left: 15px;
-}
-#required{
+  }
+  #required {
     margin-top: 0;
     margin-bottom: -0px;
     background-color: #d9534f;
@@ -72,5 +76,5 @@ form .btn{
     border-radius: 4px;
     font-size: 13px;
     margin-left: 340px;
-
+  }
 }

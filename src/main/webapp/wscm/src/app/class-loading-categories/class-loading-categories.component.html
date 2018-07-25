@@ -1,9 +1,9 @@
 <div style="display:flex">
     <app-panel></app-panel>
-    <h1>Categories</h1>
     <div id="classCategories">
-        <div id="myTable">
-            <button color="warn" matTooltip="Add Category" matTooltipPosition="above" (click)="openAddDialog()" mat-mini-fab>
+        <h1 class="page-title">Categories</h1>
+        <div class="content-wrapper">
+            <button class="add-button" color="warn" matTooltip="Add Category" matTooltipPosition="above" (click)="openAddDialog()" mat-mini-fab>
             <i class="material-icons plus">add</i>
         </button>
             <div *ngIf="dataSource">
@@ -19,7 +19,6 @@
                             <i matTooltip="Delete category" matTooltipPosition="above" class="material-icons table-icons" (click)="deleteCategory(category.id,'category',category.name)"> delete </i>
                         </td>
                     </ng-container>
-
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>

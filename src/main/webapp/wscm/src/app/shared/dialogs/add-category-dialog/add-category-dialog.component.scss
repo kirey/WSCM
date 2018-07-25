@@ -1,23 +1,16 @@
 @import '../../../app.component.scss';
 // @import '~@angular/material/theming';
-
 #addCategory {
   width: 100%;
   justify-content: space-between;
-
   .mat-form-field {
-    width: 50%;
+    width: 100%;
     padding: 20px 20px;
   }
-  .formButton{
-    margin-left: 72%;
+  .mat-dialog-content {
+    height: 200px;
   }
-  .cancelButton {
-    background-color: $warn;
+  .buttons {
+    float: right;
   }
-  .mat-dialog-content{
-    height:250px;
-  }
-
-
 }

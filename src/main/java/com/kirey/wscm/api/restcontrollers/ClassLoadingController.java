@@ -194,7 +194,7 @@ public class ClassLoadingController {
 	@RequestMapping(value = "/categories", method = RequestMethod.POST)
 	public ResponseEntity<Object> addCategories(@RequestBody KjcClassCategories kjcClassCategories){
 		KjcClassCategories classCategoryFromDb = kjcClassCategoriesDao.findByName(kjcClassCategories.getName());
-		if(classCategoryFromDb == null) {
+		if(classCategoryFromDb != null) {
 			return new ResponseEntity<Object>(new RestResponseDto(HttpStatus.BAD_REQUEST.value(),"Category with name " + kjcClassCategories.getName() + " already exists"), HttpStatus.BAD_REQUEST);
 		}else {
 			kjcClassCategoriesDao.attachDirty(kjcClassCategories);

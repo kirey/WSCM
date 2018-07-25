@@ -1,36 +1,40 @@
 <div style="display:flex">
     <app-panel></app-panel>
     <div id="reports">
-        <h1>Create report</h1>
-        <form [formGroup]="topForm" (ngSubmit)="addReport()" class="mui-form--inline topForm">
+        <h1 class="page-title">Create report</h1>
+        <div class="content-wrapper">
+        <form [formGroup]="topForm" (ngSubmit)="addReport()">
             <mat-form-field>
-                <input matInput formControlName="name" class="form-control" type="text" placeholder="Report name" autocomplete="off" [(ngModel)]="name">
+                <input matInput formControlName="name" type="text" placeholder="Report name" autocomplete="off" [(ngModel)]="name">
             </mat-form-field>
             <mat-form-field>
-                <input matInput formControlName="description" class="form-control" type="text" placeholder="Description" autocomplete="off" [(ngModel)]="description">
+                <input matInput formControlName="description" type="text" placeholder="Description" autocomplete="off" [(ngModel)]="description">
             </mat-form-field>
-            <mat-checkbox>Enabled</mat-checkbox>
-            <button type="submit" class="createBtn btn btn-default" [disabled]="bottomForm.invalid || topForm.invalid">Create report</button>
+            <mat-checkbox>Enabled</mat-checkbox><br>
+            <button type="submit" mat-raised-button color="warn"  [disabled]="bottomForm.invalid || topForm.invalid">Create report</button>
         </form>
         <mat-divider></mat-divider>
         <form [formGroup]="bottomForm" (ngSubmit)="addReport()" class="mui-form--inline topForm">
             <label class="btn btn-default btn-file" id="jrxmlLabel">
         {{jrxml}}
-        <input style="display: none;" formControlName="jrxml" class="form-control" type="file" accept=".jrxml" (change)="handleJRXMLFile($event)">
+        <input style="display: none;" formControlName="jrxml" type="file" accept=".jrxml" (change)="handleJRXMLFile($event)">
       </label>
             <label class="btn btn-default btn-file" id="jasperLabel">
         {{jasper}}
-        <input style="display: none;" formControlName="jasper" class="form-control" type="file" accept=".jasper" (change)="handleJasperFile($event)">
+        <input style="display: none;" formControlName="jasper" type="file" accept=".jasper" (change)="handleJasperFile($event)">
       </label>
-            <div style="color:#d9534f;margin-bottom:10px;" *ngIf="bottomForm.hasError('nomatch')">
+      <mat-error *ngIf="bottomForm.hasError('nomatch')">
+          You must upload files with same names!
+        </mat-error>
+            <!-- <div style="color:#d9534f;margin-bottom:10px;" *ngIf="bottomForm.hasError('nomatch')">
                 You must upload files with same names!
-            </div>
+            </div> -->
             <div *ngIf="subreports.length > 0">
                 <div *ngFor="let subreport of subreports">
                     <p id="required" *ngIf="bottomForm.get(subreport.attributes.name.value).pristine">Required</p>
                     <label class="btn btn-default btn-file" id="{{subreport.attributes.name.value}}">
                       {{subreport.attributes.name.value}}
-                      <input [formControlName]="subreport.attributes.name.value" class="form-control" style="display: none;" type="file" accept=".jasper"
+                      <input [formControlName]="subreport.attributes.name.value" style="display: none;" type="file" accept=".jasper"
                         (change)="handleSubreportFile($event)">
                     </label>
                 </div>
@@ -55,6 +59,7 @@
                     </mat-card-actions>
                 </mat-card>
             </div>
+        </div>
         </div>
     </div>
 </div>

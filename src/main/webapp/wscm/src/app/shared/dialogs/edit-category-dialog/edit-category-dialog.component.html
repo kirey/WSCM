@@ -1,16 +1,16 @@
 <div id="editCategory">
-    <h1 class="dialog-title">Edit Category </h1>
-    <mat-dialog-content>
-        <form [formGroup]="categoryForm" (ngSubmit)="editCategory()">
-            <mat-form-field>
-                <input matInput formControlName="name" class="form-control" type="text" placeholder="Category Name" autocomplete="off" [(ngModel)]="name">
-            </mat-form-field>
-            <div class="alert alert-danger" *ngIf="categoryForm.get('name').touched && categoryForm.get('name').hasError('required')">
-                Must enter name!
-            </div>
-            <mat-dialog-actions>
-                <button type="submit" class="btn btn-default" [disabled]="categoryForm.invalid">Edit category</button>
-            </mat-dialog-actions>
-        </form>
-    </mat-dialog-content>
+  <h1 class="dialog-title">Edit Category </h1>
+  <mat-dialog-content>
+    <form [formGroup]="categoryForm" (ngSubmit)="editCategory()">
+      <mat-form-field>
+        <input matInput formControlName="name" type="text" placeholder="Category Name" autocomplete="off" [(ngModel)]="name">
+      </mat-form-field>
+      <mat-error *ngIf="categoryForm.get('name').touched && categoryForm.get('name').hasError('required')">
+        Please enter category name!
+      </mat-error>
+      <mat-dialog-actions class="buttons">
+        <button type="submit" mat-raised-button color="warn" [disabled]="categoryForm.invalid">Edit category</button>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
 </div>
