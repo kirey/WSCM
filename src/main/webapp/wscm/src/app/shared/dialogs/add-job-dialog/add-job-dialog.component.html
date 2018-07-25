@@ -130,7 +130,7 @@
       <div class="categories">
         <div class="categories-box">
           <h5 class="label">Choose categories</h5>
-          <div *ngFor="let category of categories | filter: listCategoryWeight : 'categories_add'">
+          <div *ngFor="let category of categories | filter: listCategoryWeight : 'categories_add_edit'">
             <mat-checkbox color="warn" (change)="checked($event, category)" labelPosition="after" multiple>
               {{category.categoryName}}
             </mat-checkbox>

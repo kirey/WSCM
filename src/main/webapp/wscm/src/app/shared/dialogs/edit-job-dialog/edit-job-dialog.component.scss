@@ -110,9 +110,11 @@
       padding: 10px;
     }
     .param-value {
-      margin-right: 50px;
+      max-width: 160px;
+      margin-right: 25px;
     }
     .param-description {
+      max-width: 160px;
       word-break: break-word;
       width: 200px;
     }

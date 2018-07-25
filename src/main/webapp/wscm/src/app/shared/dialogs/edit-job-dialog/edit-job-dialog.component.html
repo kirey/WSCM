@@ -16,19 +16,19 @@
           </mat-form-field>
         </div>
         <!-- CLASSLOADING -->
-        <div class="basic-inputs" *ngIf="classLoading">
+        <div class="basic-inputs" *ngIf="classLoadingList">
           <!-- Class Loading true/false  -->
           <div class="checkbox">
-            <mat-checkbox color="warn" (change)="doCheck($event)" [checked]="isChecked" [disabled]="this.classLoading.length == 0">
+            <mat-checkbox color="warn" (change)="doCheck($event)" [checked]="isChecked" [disabled]="this.classLoadingList.length == 0">
               Class Loading </mat-checkbox>
           </div>
           <!-- ClassLoading -->
-          <mat-form-field *ngIf="classLoading.length > 0">
-            <mat-select placeholder="KjcClasses" required name="name">
-              <mat-option *ngFor="let job of classLoading; let i = index" [value]="job">{{job.name}}</mat-option>
+          <mat-form-field *ngIf="classLoadingList.length > 0 && isChecked">
+            <mat-select placeholder="KjcClasses" [(ngModel)]="kjcClasses" required name="kjcClasses">
+              <mat-option *ngFor="let job of classLoadingList; let i = index" [value]="job">{{job.name}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <div *ngIf="classLoading.length == 0" class="no-data">
+          <div *ngIf="classLoadingList.length == 0" class="no-data">
             No classes to show.
           </div>
         </div>
@@ -48,29 +48,29 @@
         </div>
         <hr>
         <!-- ----------- JOB PARAMS -------------- -->
-        <!-- <div class="params-container">
+        <div class="params-container">
           <div class="flex row">
             <div class="flex column params">
-              <h5 class="label"> Add Job Params</h5> -->
-        <!--  Param Name -->
-        <!-- <mat-form-field class="param-field">
-                <input formControlName="name" matInput name="name" placeholder="Name">
+              <h5 class="label"> Add Job Params</h5>
+              <!--  Param Name -->
+              <mat-form-field class="param-field">
+                <input [(ngModel)]="paramName" matInput name="paramName" placeholder="Name">
               </mat-form-field>
               <mat-error *ngIf="nameError">
                 Param name is
                 <strong>required</strong>
-              </mat-error> -->
-        <!-- Param Value -->
-        <!-- <mat-form-field class="param-field">
-                <input formControlName="value" matInput name="value" placeholder="Value">
+              </mat-error>
+              <!-- Param Value -->
+              <mat-form-field class="param-field">
+                <input [(ngModel)]="paramValue" matInput name="paramValue" placeholder="Value">
               </mat-form-field>
               <mat-error *ngIf="valueError">
                 Param value is
                 <strong>required</strong>
-              </mat-error> -->
-        <!-- Description -->
-        <!-- <mat-form-field class="param-field">
-                <input formControlName="description" matInput name="description" placeholder="Description">
+              </mat-error>
+              <!-- Description -->
+              <mat-form-field class="param-field">
+                <input [(ngModel)]="paramDescription" matInput name="paramDescription" placeholder="Description">
               </mat-form-field>
               <button class="param-button" mat-stroked-button color="primary" (click)="addJobParam()">Add</button>
               <div class="param-message" *ngIf="paramMesssage">
@@ -79,7 +79,7 @@
             </div>
             <div class="added-params">
               <h5 class="label"> Added Params</h5>
-              <div *ngFor="let param of paramsArray; let i = index">
+              <div *ngFor="let param of data.jobParameterses; let i = index">
                 <span class="params-show">
                   <mat-icon class="unselect-icon" (click)="removeJobParam(param, i)">close</mat-icon>
                   {{i+1}}. {{param.name}}
@@ -105,7 +105,7 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- Notifications -->
         <div class="basic-inputs" *ngIf="data.listNotificationses">
           <mat-form-field>
@@ -118,10 +118,10 @@
         <hr>
         <!-- Categories -->
         <h3 class="dialog-subtitle">Select categories & weight for each category</h3>
-        <div class="categories">
+        <div class="categories" *ngIf="categories">
           <div class="categories-box">
             <h5 class="label">Choose categories</h5>
-            <div *ngFor="let job of categories">
+            <div *ngFor="let job of categories | filter: listCategoryWeight : 'categories_add_edit'">
               <mat-checkbox color="warn" (change)="checked($event, job)" labelPosition="after" multiple>
                 {{job.categoryName}}
               </mat-checkbox>

@@ -13,13 +13,24 @@ import { SnackBarService } from '../../services/snackbar.service';
 export class EditJobDialogComponent implements OnInit {
   jobs: any;
   jobTypes: any;
-  classLoading: any;
+  classLoadingList: any;
   notifications: any;
   categories: any;
   listCategoryWeight = this.data.jobCategorieses;
   jobCategorieses = [];
   isChecked: boolean;
   selectedNotifications = [];
+  kjcClasses: any;
+
+  // Params
+  paramName: string;
+  paramValue: string;
+  paramDescription: string;
+  valueError: boolean = false; // Validation for params
+  nameError: boolean = false; // Validation for params
+  paramMesssage: boolean = false; // Message if there are 2 same params in array
+  expand: boolean = false;
+  selectedParam: number;
 
   constructor(
     public dialogRef: MatDialogRef<EditJobDialogComponent>,
@@ -53,7 +64,7 @@ export class EditJobDialogComponent implements OnInit {
     this.editJobService.getAllClasses().subscribe(
       res => {
         // console.log(res);
-        this.classLoading = res.data;
+        this.classLoadingList = res.data;
       },
       err => console.log(err)
     );
@@ -94,11 +105,46 @@ export class EditJobDialogComponent implements OnInit {
     this.isChecked = !this.isChecked;
 
     if (!this.isChecked) {
-      // TODO Remove kjcClasses from object
-      // delete this..value['kjcClasses'];
-
+      this.kjcClasses = {};
     }
   }
+
+  // Params
+  addJobParam() {
+    if (!this.paramName) this.nameError = true;
+    else if (!this.paramValue) this.valueError = true;
+    else {
+      if (this.data['jobParameterses'].length > 0) {
+        for (let i = 0; i < this.data['jobParameterses'].length; i++) {
+          if (this.paramName == this.data['jobParameterses'][i]['name']) {
+            return this.paramMesssage = true;
+          }
+          else this.paramMesssage = false;
+        }
+      }
+      if (!this.paramMesssage) {
+        this.data['jobParameterses'].push({
+          name: this.paramName,
+          value: this.paramValue,
+          description: this.paramDescription
+        });
+        this.nameError = false;
+        this.valueError = false;
+        console.log(this.data['jobParameterses']);
+      }
+    }
+  }
+  removeJobParam(param, index) {
+    this.data['jobParameterses'].splice(index, 1)
+  }
+  expandParamsInfo(i) {
+    this.expand = !this.expand;
+
+    if (this.expand) this.selectedParam = i;
+    else this.selectedParam = null;
+
+  }
+
   // Select category - checkbox
   checked(ev, category) {
     if (ev.checked) {
@@ -172,6 +218,16 @@ export class EditJobDialogComponent implements OnInit {
         }
       }
     }
+
+    // Params
+    delete value['paramName'];
+    delete value['paramValue'];
+    delete value['paramDescription'];
+
+    // kjcClasses
+    if (this.kjcClasses) value['kjcClasses'] = this.kjcClasses;
+    else delete value['kjcClasses'];
+
 
     console.log(value);
 
