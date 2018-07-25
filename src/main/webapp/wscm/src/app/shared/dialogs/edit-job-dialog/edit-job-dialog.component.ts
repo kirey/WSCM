@@ -18,7 +18,7 @@ export class EditJobDialogComponent implements OnInit {
   categories: any;
   listCategoryWeight = this.data.jobCategorieses;
   jobCategorieses = [];
-  isChecked: boolean;
+  isChecked: boolean = false;
   selectedNotifications = [];
   kjcClasses: any;
 
@@ -105,7 +105,7 @@ export class EditJobDialogComponent implements OnInit {
     this.isChecked = !this.isChecked;
 
     if (!this.isChecked) {
-      this.kjcClasses = {};
+      this.kjcClasses = null;
     }
   }
 
@@ -194,10 +194,12 @@ export class EditJobDialogComponent implements OnInit {
   }
   // Edit job form
   editJob(value) {
-    // console.log(value);
-
     // Set ID
     value['id'] = this.data.id;
+
+    // Class Loading
+    value['classLoading'] = this.isChecked;
+    if (this.isChecked && !this.kjcClasses) value['classLoading'] = false;
 
     // Set Categories
     value['jobCategorieses'] = this.data.jobCategorieses;
@@ -223,41 +225,19 @@ export class EditJobDialogComponent implements OnInit {
     delete value['paramName'];
     delete value['paramValue'];
     delete value['paramDescription'];
+    if (this.data['jobParameterses']) value['jobParameterses'] = this.data['jobParameterses'];
 
     // kjcClasses
     if (this.kjcClasses) value['kjcClasses'] = this.kjcClasses;
     else delete value['kjcClasses'];
 
+    if (!value['jobName'] || value['jobName'] == "") this.snackbar.openSnackBar('Please, enter job name.', 'Error');
+    else if (!value['jobType']) this.snackbar.openSnackBar('Please, enter job type.', 'Error');
+    else if (!value['status'] || value['status'] == "") this.snackbar.openSnackBar('Please, enter status.', 'Error');
 
-    console.log(value);
-
-    // let list = [];
-    // for (let i = 0; i < this.jobTypes.length; i++) {
-    //   if (value['jobType'] == this.jobTypes[i]['typeName']) {
-    //     list.push(this.jobTypes[i]);
-    //   }
-    // }
-    // console.log(list)
-
-    // if (!obj.eventName) this.snackbar.openSnackBar('Please, enter event name.', '');
-    // else if (!obj.eventType) this.snackbar.openSnackBar('Please, enter event type.', '');
-    // else if (!obj.jobs) this.snackbar.openSnackBar('Please, select job name.', '');
-    // else if (!obj.definition) this.snackbar.openSnackBar('Please, enter definition.', '');
-    // else if (!obj.description) this.snackbar.openSnackBar('Please, enter description.', '');
-    // else if (!obj.status) this.snackbar.openSnackBar('Please, enter status.', '');
-    // else {
-    //   this.editEventService.editEvents(obj).subscribe(
-    //     res => {
-    //       // console.log(res);
-    //       this.snackbar.openSnackBar(res['data'], 'Success');
-    //       this.dialogRef.close();
-    //     },
-    //     err => {
-    //       console.log(err);
-    //       this.snackbar.openSnackBar('Something went wrong.', 'Error');
-    //     }
-    //   );
-    // }
+    else {
+      console.log(value);
+    }
   }
 
   ngOnInit() {
