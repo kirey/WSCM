@@ -9,7 +9,8 @@ import { SnackBarService } from '../../services/snackbar.service';
 @Component({
   selector: 'app-edit-class-dialog',
   templateUrl: './edit-class-dialog.component.html',
-  styleUrls: ['./edit-class-dialog.component.scss']
+  styleUrls: ['./edit-class-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EditClassDialogComponent implements OnInit {
 

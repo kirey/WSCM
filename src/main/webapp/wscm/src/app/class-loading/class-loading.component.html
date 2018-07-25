@@ -2,8 +2,8 @@
     <app-panel></app-panel>
     <div id="classLoading">
         <h1 class="page-title">Class loading management</h1>
-        <div id="myTable">
-            <button color="warn" matTooltip="Add Class" matTooltipPosition="above" (click)="openAddDialog()" mat-mini-fab>
+        <div class="content-wrapper">
+            <button class="add-button" matTooltip="Add Class" matTooltipPosition="above" (click)="openAddDialog()" mat-mini-fab>
             <i class="material-icons plus">add</i>
         </button>
             <div *ngIf="dataSource">
