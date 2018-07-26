@@ -24,6 +24,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatChipsModule } from '@angular/material/chips';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 
 @NgModule({
@@ -79,6 +80,9 @@ import { MatChipsModule } from '@angular/material/chips';
         MatChipsModule
 
     ],
-    declarations: []
+    declarations: [],
+    providers: [
+      { provide: MAT_DIALOG_DATA, useValue: [] }
+    ]
 })
 export class MaterialModule { }

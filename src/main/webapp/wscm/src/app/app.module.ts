@@ -94,7 +94,7 @@ import { JobsHistoryDialogComponent } from './shared/dialogs/jobs-history-dialog
     ReportsComponent,
     EventHistoryComponent,
     EditParameterDialogComponent,
-    JobsHistoryDialogComponent,
+    JobsHistoryDialogComponent
   ],
   imports: [
     BrowserModule,

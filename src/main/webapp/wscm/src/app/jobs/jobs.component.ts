@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -16,7 +16,8 @@ import { JobsHistoryDialogComponent } from '../shared/dialogs/jobs-history-dialo
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
-  styleUrls: ['./jobs.component.scss']
+  styleUrls: ['./jobs.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class JobsComponent implements OnInit {
   dataSource: any;
@@ -54,29 +55,29 @@ export class JobsComponent implements OnInit {
     );
   }
 
-   // Get History
-   getHistory(id) {
-    this.jobService.getHisory(id).subscribe(
-      res => {
-        console.log(res);
-        this.jobHistory = res.data;
-        console.log(this.jobHistory);
-      },
-      err => console.log(err)
-    );
-  }
+    // Get History
+    getHistory(id) {
+      this.jobService.getHisory(id).subscribe(
+        res => {
+          console.log(res);
+          this.jobHistory = res.data;
+          console.log(this.jobHistory);
+        },
+        err => console.log(err)
+      );
+    }
 
   // Open History dialog
   openHistoryDialog(id) {
     this.getHistory(id);
-    const dialogRef = this.dialog.open(JobsHistoryDialogComponent, {
-      width: '800px',
-      data: this.jobHistory
-    });
-    dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
-      console.log('uspesno');
-    });
+      const dialogRef = this.dialog.open(JobsHistoryDialogComponent, {
+        width: '800px',
+        data: this.jobHistory
+      });
+      dialogRef.afterClosed().subscribe(res => {
+        console.log(res);
+        console.log('uspesno');
+      });
   }
   // open add dialog
   openAddDialog() {
@@ -177,5 +178,6 @@ export class JobsComponent implements OnInit {
     this.getList();
     this.dataSource = new MatTableDataSource<Element>(this.jobs);
     this.dataSource.paginator = this.paginator;
+
   }
 }
