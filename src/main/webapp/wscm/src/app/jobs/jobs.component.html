@@ -86,7 +86,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
         <!-- PAGINATOR -->
-        <mat-paginator *ngIf="jobs" #paginator [length]="jobs.length" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+        <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="3" [pageSizeOptions]="[5, 10, 20]"
           [showFirstLastButtons]="true">
         </mat-paginator>
       </div>

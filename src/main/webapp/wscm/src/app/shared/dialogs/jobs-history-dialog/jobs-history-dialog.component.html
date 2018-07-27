@@ -1,5 +1,11 @@
 <div id="historyDialog">
-  <h2 class="dialog-title">Event History</h2>
+  <!-- <span *ngIf="data; else  no_data"></span>-->
+    <!-- <ng-template #no_data>
+      <span class="no-data">
+        No data.
+      </span>
+    </ng-template> -->
+  <h2 class="dialog-title">Job History</h2>
   <mat-dialog-content *ngFor="let history of data">
     <div class="flex">
       <div class="column">

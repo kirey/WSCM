@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Input} from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -20,11 +20,16 @@ import { JobsHistoryDialogComponent } from '../shared/dialogs/jobs-history-dialo
   encapsulation: ViewEncapsulation.None
 })
 export class JobsComponent implements OnInit {
-  dataSource: any;
   jobs: any;
   jobHistory: any;
   data: any;
-
+  dataSource: MatTableDataSource<Element> = new MatTableDataSource([]);
+  paginator: MatPaginator;
+  @ViewChild(MatPaginator)
+  set appBacon(paginator: MatPaginator) {
+    this.paginator = paginator;
+    this.dataSource.paginator = this.paginator;
+  }
   displayedColumns = [
     'jobName',
     'jobType',
@@ -36,7 +41,7 @@ export class JobsComponent implements OnInit {
     'editing'
   ];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   // dataSource = new MatTableDataSource<Element>(this.jobs);
 
   constructor(
@@ -49,7 +54,10 @@ export class JobsComponent implements OnInit {
     this.jobService.getJobs().subscribe(
       res => {
         this.jobs = res.data;
-        console.log(this.jobs);
+        this.dataSource = new MatTableDataSource(this.jobs);
+        this.jobs.paginator = this.paginator;
+      // this.dataIsLoaded = true;
+        console.log(this.dataSource);
       },
       err => console.log(err)
     );
@@ -174,10 +182,7 @@ export class JobsComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getList();
-    this.dataSource = new MatTableDataSource<Element>(this.jobs);
-    this.dataSource.paginator = this.paginator;
-
   }
 }
