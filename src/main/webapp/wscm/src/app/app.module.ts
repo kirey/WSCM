@@ -21,7 +21,7 @@ import { PanelService } from './admin-panel/panel/panel.service';
 import { AuthService } from './admin-panel/shared/services/auth.service';
 import { LoginService } from './admin-panel/login/login.service';
 import { EventsService } from './admin-panel/events/events.service';
-import { ClientService } from './client/client-home/client-home.service';
+import { ClientService } from './client/test-home/test-home.service';
 import { SocketService } from './client/shared/services/socket.service';
 import { EditEventService } from './admin-panel/shared/dialogs/edit-event-dialog/edit-event-dialog.service';
 import { AddEventService } from './admin-panel/shared/dialogs/add-event-dialog/add-event-dialog.service';
@@ -44,7 +44,7 @@ import { LoginComponent } from './admin-panel/login/login.component';
 import { LanguagesComponent } from './admin-panel/languages/languages.component';
 import { EventsComponent } from './admin-panel/events/events.component';
 import { DeleteDialog } from './admin-panel/shared/dialogs/delete-dialog/delete-dialog.component';
-import { ClientHomeComponent } from './client/client-home/client-home.component';
+import { TestHomeComponent } from './client/test-home/test-home.component';
 import { JobsComponent } from './admin-panel/jobs/jobs.component';
 import { EditEventDialogComponent } from './admin-panel/shared/dialogs/edit-event-dialog/edit-event-dialog.component';
 import { AddContentDialogComponent } from './admin-panel/shared/dialogs/add-content-dialog/add-content-dialog.component';
@@ -63,6 +63,8 @@ import { ReportsComponent } from './admin-panel/reports/reports.component';
 import { EventHistoryComponent } from './admin-panel/shared/dialogs/event-history-dialog/event-history.component';
 import { EditParameterDialogComponent } from './admin-panel/shared/dialogs/edit-parameter-dialog/edit-parameter-dialog.component';
 import { JobsHistoryDialogComponent } from './admin-panel/shared/dialogs/jobs-history-dialog/jobs-history-dialog.component';
+import { FooterComponent } from './client/shared/components/footer/footer.component';
+import { ClientHomeComponent } from './client/client-home/client-home.component';
 
 
 @NgModule({
@@ -76,7 +78,7 @@ import { JobsHistoryDialogComponent } from './admin-panel/shared/dialogs/jobs-hi
     FilterPipe,
     EventsComponent,
     DeleteDialog,
-    ClientHomeComponent,
+    TestHomeComponent,
     JobsComponent,
     EditEventDialogComponent,
     AddContentDialogComponent,
@@ -94,7 +96,9 @@ import { JobsHistoryDialogComponent } from './admin-panel/shared/dialogs/jobs-hi
     ReportsComponent,
     EventHistoryComponent,
     EditParameterDialogComponent,
-    JobsHistoryDialogComponent
+    JobsHistoryDialogComponent,
+    FooterComponent,
+    ClientHomeComponent
   ],
   imports: [
     BrowserModule,

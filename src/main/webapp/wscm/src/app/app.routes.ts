@@ -11,8 +11,9 @@ import { JobsComponent } from './admin-panel/jobs/jobs.component';
 import { ReportsComponent } from './admin-panel/reports/reports.component';
 
 // Client components
-import { ClientHomeComponent } from './client/client-home/client-home.component';
+import { TestHomeComponent } from './client/test-home/test-home.component';
 import { MailRedirectComponent } from './client/mail-redirect/mail-redirect.component';
+import { ClientHomeComponent } from './client/client-home/client-home.component';
 
 import { AuthGuard } from './admin-panel/shared/guards/auth.guard';
 
@@ -33,8 +34,9 @@ const routes: Routes = [
   { path: 'panelReports', component: ReportsComponent, canActivate: [AuthGuard] },
 
   // CLIENT ROUTES
+  { path: 'test-home', component: TestHomeComponent },
+  { path: 'test-mail', component: MailRedirectComponent },
   { path: 'home', component: ClientHomeComponent },
-  { path: 'client-mail', component: MailRedirectComponent },
 
   { path: '**', component: ClientHomeComponent }
 ];
