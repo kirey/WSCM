@@ -1,0 +1,100 @@
+#welcome {
+    text-align: center;
+    margin-top: 6%;
+}
+
+.myCard {
+    text-align: center;
+}
+
+footer a {
+    color: white;
+}
+
+footer h5 {
+    color: white;
+}
+
+footer p {
+    color: white;
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    60%,
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    40% {
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+    80% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+}
+
+.card .card-body:hover {
+    background-color: rgb(52, 82, 255);
+    color: white;
+    animation: bounce 1s;
+}
+
+#welcome {
+    animation-duration: 3s;
+    animation-name: slidein;
+}
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .carousel-caption h1 {}
+    .carousel-caption p {}
+    .carousel-caption a {}
+}
+
+@media only screen and (max-width: 900px) {
+    .navbar-brand{
+        font-size: 18px;
+    }
+    .carousel {
+        height: 250px;
+    }
+    .carousel-inner img {
+        height: 250px;
+    }
+    .carousel-caption h1 {
+        color: rgb(52, 82, 255);
+        font-size: 18px;
+    }
+    .carousel-caption p {
+        color: rgb(52, 82, 255);
+        font-size: 12px;
+    }
+    .carousel-caption a {
+        border: none;
+        color: white;
+        padding: 4px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .carousel-item img {
+        opacity: 0.5;
+    }
+}
