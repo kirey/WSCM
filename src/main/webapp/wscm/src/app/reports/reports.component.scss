@@ -1,28 +1,41 @@
 @import '~@angular/material/theming';
 @import '../app.component.scss';
+
+// Helper classes
+.display-none{ 
+  display: none;
+}
+
 #reports {
   width: 100%;
+  
+  // Form
   form {
-    margin-top: 3%;
-    width: 70%;
+    display: flex;
+    align-items: center;
+    padding: 15px 0px
   }
   .mat-form-field {
-    width: 40%;
-    margin-right: 10px;
+    width: 80%;
   }
   mat-checkbox {
-    margin-left: 30px;
+    width: 80%;
+    margin-top: 15px;
   }
   .btn-file {
     position: relative;
     overflow: hidden;
-    background: #64FFDA;
+    background: $warn;
     margin-right: 10px;
+    color: #fff;
   }
   form .btn {
-    width: 400px;
-    height: 60px;
-    padding-top: 17px;
+    width: 420px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
   }
   .btn-file input[type=file] {
     position: absolute;
@@ -35,46 +48,63 @@
     filter: alpha(opacity=0);
     opacity: 0;
     outline: none;
-    background: #64FFDA;
+    background: $warn;
     cursor: inherit;
     display: block;
   }
   #params {
-    // margin-right: 20%;
-    margin-top: 3%;
+    margin: 50px 50px;
     display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
+    flex-wrap: wrap;
+  }
+  .card-label {
+    color: $primary;
+  }
+  .parameter-values {
+    max-width: 185px;
+    word-break: break-word;
   }
   .mat-card {
-    // background: #64FFDA;
-    margin-top: 1%;
-    margin-left: 2%;
-    // margin-right: 20%;
+    margin: 0 10px;
+    margin-bottom: 20px;
   }
   .mat-card-content {
-    margin-top: 30px;
+    margin:50px 0 20px 0;
   }
-  .ediBtn {
-    background: $warn;
-    width: 70%;
+  .mat-card-title {
+    font-size: 20px;
+    color: $gray;
   }
-  .createBtn {
-    background: $warn;
-    width: 200px !important;
-    padding-top: 7px !important;
-    height: 40px !important;
-    margin-left: 15px;
+
+  .mat-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
   #required {
     margin-top: 0;
     margin-bottom: -0px;
-    background-color: #d9534f;
+    background-color: $warn;
     width: 60px;
     padding-left: 3px;
     color: white;
     border-radius: 4px;
     font-size: 13px;
     margin-left: 340px;
+  }
+
+  // Form card
+  .form-card {
+    width: 450px;
+    height: 270px;
+  }
+  .form-wrapper{ 
+    margin-top: 100px;
+    align-items: center;
+  }
+
+  .upload-icon {
+    margin-right: 10px;
   }
 }

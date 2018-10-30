@@ -90,7 +90,7 @@ export class ReportsComponent implements OnInit {
 
       }
       fileReader.readAsText(event.target.files[0]);
-      document.getElementById('jrxmlLabel').style.background = '#FFEE58';
+      document.getElementById('jrxmlLabel').style.background = '#009688';
       console.log(this.customParameters);
     }
   }
@@ -98,12 +98,12 @@ export class ReportsComponent implements OnInit {
     let parentId = event.target.parentElement.id;
     this.subreportFiles.push(event.target.files[0]);
     let fileNameAndSize = event.target.files[0].name + ' Size:' + event.target.files[0].size;
-    document.getElementById(parentId).style.background = '#FFEE58';
+    document.getElementById(parentId).style.background = '#009688';
     document.getElementById(parentId).childNodes[0].nodeValue = parentId + ":" + fileNameAndSize;
   }
   handleJasperFile(event) {
     this.jasper = event.target.files[0].name + ' Size:' + event.target.files[0].size;
-    document.getElementById('jasperLabel').style.background = '#FFEE58';
+    document.getElementById('jasperLabel').style.background = '#009688';
   }
 
   trimToFilename(file) {

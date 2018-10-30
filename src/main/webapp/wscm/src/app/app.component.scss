@@ -1,6 +1,8 @@
 $primary: #009688;
 $accent: #64FFDA;
 $warn: #FF3D00;
+// Additional colors
+$gray: #757575;
 
 // Buttons
 button:active {
@@ -34,6 +36,9 @@ button:focus {
 .center {
     align-items: center;
     justify-content: center;
+}
+.space-around {
+    justify-content: space-around;
 }
 
 // Titles
