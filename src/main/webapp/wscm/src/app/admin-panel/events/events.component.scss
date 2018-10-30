@@ -1,0 +1,8 @@
+@import '../../app.component.scss';
+#events {
+  width: 100%;
+
+  .mat-input-element::selection {
+    background: $primary;
+  }
+}

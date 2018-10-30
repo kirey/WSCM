@@ -1,0 +1,26 @@
+@import '../../app.component.scss';
+
+#classLoading{
+  width: 100%;
+
+  #myTable {
+    margin-left: 12%;
+    margin-top: 15%;
+}
+table{
+    min-width: 100%;
+}
+button{
+    margin-bottom: 10px;
+    background: $warn;
+    float:right;
+}
+#classLoading{
+    width:100%;
+    margin-right: 10%;
+}
+.material-icons {
+  color: white;
+}
+
+}

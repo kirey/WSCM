@@ -1,4 +1,3 @@
-import { ClassLoadingCategoriesService } from './class-loading-categories/class-loading-categories.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,56 +12,57 @@ import 'hammerjs';
 
 
 // Modules
-import { MaterialModule } from './shared/modules/material.module';
+import { MaterialModule } from './material.module';
 
 // Services
-import { AuthGuard } from './shared/guards/auth.guard';
-import { PanelService } from './panel/panel.service';
-import { AuthService } from './shared/services/auth.service';
-import { LoginService } from './login/login.service';
-import { EventsService } from './events/events.service';
-import { ClientService } from './client/client.service';
-import { SocketService } from './shared/services/socket.service';
-import { EditEventService } from './shared/dialogs/edit-event-dialog/edit-event-dialog.service';
-import { AddEventService } from './shared/dialogs/add-event-dialog/add-event-dialog.service';
-import { JobsService } from './jobs/jobs.service';
-import { AddJobService } from './shared/dialogs/add-job-dialog/add-job-dialog.service';
-import { EditJobService } from './shared/dialogs/edit-job-dialog/edit-job-dialog.service';
+import { ClassLoadingCategoriesService } from './admin-panel/class-loading-categories/class-loading-categories.service';
+import { AuthGuard } from './admin-panel/shared/guards/auth.guard';
+import { PanelService } from './admin-panel/panel/panel.service';
+import { AuthService } from './admin-panel/shared/services/auth.service';
+import { LoginService } from './admin-panel/login/login.service';
+import { EventsService } from './admin-panel/events/events.service';
+import { ClientService } from './client/client-home/client-home.service';
+import { SocketService } from './client/shared/services/socket.service';
+import { EditEventService } from './admin-panel/shared/dialogs/edit-event-dialog/edit-event-dialog.service';
+import { AddEventService } from './admin-panel/shared/dialogs/add-event-dialog/add-event-dialog.service';
+import { JobsService } from './admin-panel/jobs/jobs.service';
+import { AddJobService } from './admin-panel/shared/dialogs/add-job-dialog/add-job-dialog.service';
+import { EditJobService } from './admin-panel/shared/dialogs/edit-job-dialog/edit-job-dialog.service';
 // import { EventHistoryService } from './shared/dialogs/event-history-dialog/event-history-dialog.service';
 
 
 
 // Pipes
-import { FilterPipe } from './shared/pipes/filter.pipe';
+import { FilterPipe } from './admin-panel/shared/pipes/filter.pipe';
 
 // Components
-import { PanelComponent } from './panel/panel.component';
+import { PanelComponent } from './admin-panel/panel/panel.component';
 import { AppComponent } from './app.component';
-import { ContentComponent } from './content/content.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { LanguagesComponent } from './languages/languages.component';
-import { EventsComponent } from './events/events.component';
-import { DeleteDialog } from './shared/dialogs/delete-dialog/delete-dialog.component';
-import { ClientComponent } from './client/client.component';
-import { JobsComponent } from './jobs/jobs.component';
-import { EditEventDialogComponent } from './shared/dialogs/edit-event-dialog/edit-event-dialog.component';
-import { AddContentDialogComponent } from './shared/dialogs/add-content-dialog/add-content-dialog.component';
-import { EditContentDialogComponent } from './shared/dialogs/edit-content-dialog/edit-content-dialog.component';
-import { AddEventDialogComponent } from './shared/dialogs/add-event-dialog/add-event-dialog.component';
-import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
-import { ClassLoadingComponent } from './class-loading/class-loading.component';
-import { ClassLoadingCategoriesComponent } from './class-loading-categories/class-loading-categories.component';
-import { AddCategoryDialogComponent } from './shared/dialogs/add-category-dialog/add-category-dialog.component';
-import { EditCategoryDialogComponent } from './shared/dialogs/edit-category-dialog/edit-category-dialog.component';
-import { AddJobDialogComponent } from './shared/dialogs/add-job-dialog/add-job-dialog.component';
-import { AddClassDialogComponent } from './shared/dialogs/add-class-dialog/add-class-dialog.component';
-import { EditClassDialogComponent } from './shared/dialogs/edit-class-dialog/edit-class-dialog.component';
-import { EditJobDialogComponent } from './shared/dialogs/edit-job-dialog/edit-job-dialog.component';
-import { ReportsComponent } from './reports/reports.component';
-import { EventHistoryComponent } from './shared/dialogs/event-history-dialog/event-history.component';
-import { EditParameterDialogComponent } from './shared/dialogs/edit-parameter-dialog/edit-parameter-dialog.component';
-import { JobsHistoryDialogComponent } from './shared/dialogs/jobs-history-dialog/jobs-history-dialog.component';
+import { ContentComponent } from './admin-panel/content/content.component';
+import { HomeComponent } from './admin-panel/home/home.component';
+import { LoginComponent } from './admin-panel/login/login.component';
+import { LanguagesComponent } from './admin-panel/languages/languages.component';
+import { EventsComponent } from './admin-panel/events/events.component';
+import { DeleteDialog } from './admin-panel/shared/dialogs/delete-dialog/delete-dialog.component';
+import { ClientHomeComponent } from './client/client-home/client-home.component';
+import { JobsComponent } from './admin-panel/jobs/jobs.component';
+import { EditEventDialogComponent } from './admin-panel/shared/dialogs/edit-event-dialog/edit-event-dialog.component';
+import { AddContentDialogComponent } from './admin-panel/shared/dialogs/add-content-dialog/add-content-dialog.component';
+import { EditContentDialogComponent } from './admin-panel/shared/dialogs/edit-content-dialog/edit-content-dialog.component';
+import { AddEventDialogComponent } from './admin-panel/shared/dialogs/add-event-dialog/add-event-dialog.component';
+import { MailRedirectComponent } from './client/mail-redirect/mail-redirect.component';
+import { ClassLoadingComponent } from './admin-panel/class-loading/class-loading.component';
+import { ClassLoadingCategoriesComponent } from './admin-panel/class-loading-categories/class-loading-categories.component';
+import { AddCategoryDialogComponent } from './admin-panel/shared/dialogs/add-category-dialog/add-category-dialog.component';
+import { EditCategoryDialogComponent } from './admin-panel/shared/dialogs/edit-category-dialog/edit-category-dialog.component';
+import { AddJobDialogComponent } from './admin-panel/shared/dialogs/add-job-dialog/add-job-dialog.component';
+import { AddClassDialogComponent } from './admin-panel/shared/dialogs/add-class-dialog/add-class-dialog.component';
+import { EditClassDialogComponent } from './admin-panel/shared/dialogs/edit-class-dialog/edit-class-dialog.component';
+import { EditJobDialogComponent } from './admin-panel/shared/dialogs/edit-job-dialog/edit-job-dialog.component';
+import { ReportsComponent } from './admin-panel/reports/reports.component';
+import { EventHistoryComponent } from './admin-panel/shared/dialogs/event-history-dialog/event-history.component';
+import { EditParameterDialogComponent } from './admin-panel/shared/dialogs/edit-parameter-dialog/edit-parameter-dialog.component';
+import { JobsHistoryDialogComponent } from './admin-panel/shared/dialogs/jobs-history-dialog/jobs-history-dialog.component';
 
 
 @NgModule({
@@ -76,7 +76,7 @@ import { JobsHistoryDialogComponent } from './shared/dialogs/jobs-history-dialog
     FilterPipe,
     EventsComponent,
     DeleteDialog,
-    ClientComponent,
+    ClientHomeComponent,
     JobsComponent,
     EditEventDialogComponent,
     AddContentDialogComponent,

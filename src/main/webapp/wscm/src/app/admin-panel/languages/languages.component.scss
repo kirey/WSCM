@@ -1,0 +1,12 @@
+@import '../../app.component.scss';
+
+#languages {
+  width: 80%;
+  p {
+    color: black;
+  }
+ p::selection {
+   background-color: $primary;
+ }
+}
+

@@ -1,0 +1,18 @@
+@import '../../../../app.component.scss';
+// @import '~@angular/material/theming';
+
+#editCategory {
+  width: 100%;
+  justify-content: space-between;
+
+  .mat-form-field {
+    width: 100%;
+    padding: 20px 20px;
+  }
+  .mat-dialog-content{
+    height:200px;
+  }
+.buttons {
+  float: right;
+}
+}

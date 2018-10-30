@@ -1,0 +1,16 @@
+@import '../../../../app.component.scss';
+// @import '~@angular/material/theming';
+
+#editJob {
+  .buttons {
+    float: right;
+  }
+  .basic-fileds {
+    width: 45%!important;
+  }
+  .basic-inputs {
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+}
