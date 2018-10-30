@@ -1,0 +1,99 @@
+@import '../../app.component.scss';
+// @import '~@angular/material/theming';
+
+#login {
+  height: 100vh;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  overflow: hidden; // left content login page
+  z-index: 10;
+  width: 100%;
+
+  #leftSide {
+    background-image: linear-gradient(rgba(0, 150, 136, 0.9), rgba(0, 150, 136, 0.1)), url("../../../assets/login4.jpg");
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    width: 70%;
+    height: 100%;
+    top: 0;
+    margin-left: -84px;
+    transform-origin: bottom right;
+    transform: skewX(-5deg);
+    color: white;
+    align-items: center;
+    justify-content: center;
+  }
+  h1::selection {
+    background: $primary;
+    color: white;
+  }
+ h4::selection {
+    background: $primary;
+    color: white;
+  }
+
+  // right side login page - login form
+  .card-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 370px;
+    height: 50%;
+    // @include mat-elevation(2,
+    // #777,
+    // 0.9);
+  }
+  .mat-card-header-text {
+    text-align: center;
+  }
+  .mat-form-field-infix {
+    width: 220px;
+  }
+  .card-login:hover {
+    box-shadow: 0 10px 6px -6px #777;
+  }
+  .mat-card-title {
+    font-size: 25px;
+    text-align: left;
+    color: #bdbdbd;
+}
+  .mat-card-title::selection {
+    background: $primary;
+    color: white;
+  }
+  .mat-card-subtitle::selection {
+    background: $primary;
+    color: white;
+  }
+  #rightSide {
+    padding: 0 1%;
+    background-color: $warn;
+    display: flex;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+  }
+  .mat-card-actions {
+    margin-left: 0;
+  }
+  .mat-card-header-text {
+    margin: 0;
+  }
+  .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: $primary;
+  }
+  .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+    background-color: $accent;
+  }
+  button {
+    float: right;
+    outline: none;
+  }
+  .mat-input-element {
+    color: black;
+  }
+}

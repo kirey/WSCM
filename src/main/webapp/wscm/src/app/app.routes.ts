@@ -1,33 +1,39 @@
-import { ClassLoadingCategoriesComponent } from './class-loading-categories/class-loading-categories.component';
-import { ClassLoadingComponent } from './class-loading/class-loading.component';
+import { ClassLoadingCategoriesComponent } from './admin-panel/class-loading-categories/class-loading-categories.component';
+import { ClassLoadingComponent } from './admin-panel/class-loading/class-loading.component';
 import { Routes, RouterModule } from '@angular/router';
-import { ContentComponent } from './content/content.component';
-import { HomeComponent } from './home/home.component';
-import { LanguagesComponent } from './languages/languages.component';
-import { LoginComponent } from './login/login.component';
-import { EventsComponent } from './events/events.component';
-import { ClientComponent } from './client/client.component';
-import { MailRedirectComponent } from './mail-redirect/mail-redirect.component';
-import { JobsComponent } from './jobs/jobs.component';
+import { ContentComponent } from './admin-panel/content/content.component';
+import { HomeComponent } from './admin-panel/home/home.component';
+import { LanguagesComponent } from './admin-panel/languages/languages.component';
+import { LoginComponent } from './admin-panel/login/login.component';
+import { EventsComponent } from './admin-panel/events/events.component';
+import { ClientHomeComponent } from './client/client-home/client-home.component';
+import { MailRedirectComponent } from './client/mail-redirect/mail-redirect.component';
+import { JobsComponent } from './admin-panel/jobs/jobs.component';
 
-import { AuthGuard } from './shared/guards/auth.guard';
-import { ReportsComponent } from './reports/reports.component';
+import { AuthGuard } from './admin-panel/shared/guards/auth.guard';
+import { ReportsComponent } from './admin-panel/reports/reports.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', canActivate: [AuthGuard], pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'content', component: ContentComponent, canActivate: [AuthGuard] },
-  { path: 'scheduler', component: EventsComponent, canActivate: [AuthGuard] },
-  { path: 'jobs', component: JobsComponent, canActivate: [AuthGuard] },
-  { path: 'class-loading', component: ClassLoadingComponent, canActivate: [AuthGuard] },
-  { path: 'class-loading-categories', component: ClassLoadingCategoriesComponent, canActivate: [AuthGuard] },
-  { path: 'languages', component: LanguagesComponent },
-  { path: 'client', component: ClientComponent, canActivate: [AuthGuard] },
-  { path: 'client-mail', component: MailRedirectComponent, canActivate: [AuthGuard] },
-  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
 
-  { path: '**', component: HomeComponent }
+  // Main route HOME - CLIENT HOME COMPONENT
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+  // PANEL ROUTES
+  { path: 'panelLogin', component: LoginComponent },
+  { path: 'panel-home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'panel-content', component: ContentComponent, canActivate: [AuthGuard] },
+  { path: 'panel-events', component: EventsComponent, canActivate: [AuthGuard] },
+  { path: 'panel-jobs', component: JobsComponent, canActivate: [AuthGuard] },
+  { path: 'panel-class-loading', component: ClassLoadingComponent, canActivate: [AuthGuard] },
+  { path: 'panel-class-loading-categories', component: ClassLoadingCategoriesComponent, canActivate: [AuthGuard] },
+  { path: 'panel-languages', component: LanguagesComponent },
+  { path: 'panel-reports', component: ReportsComponent, canActivate: [AuthGuard] },
+
+  // CLIENT ROUTES
+  { path: 'home', component: ClientHomeComponent },
+  { path: 'client-mail', component: MailRedirectComponent },
+
+  { path: '**', component: ClientHomeComponent }
 ];
 
 export const AppRoutes: any = RouterModule.forRoot(routes, { useHash: true });
