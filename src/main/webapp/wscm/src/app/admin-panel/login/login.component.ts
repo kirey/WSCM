@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     public router: Router,
     public auth: AuthService,
     public snackBarService: SnackBarService
-  ) {}
+  ) { }
 
   loginUser() {
     if (!this.username.value) {
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         res => {
           console.log(res);
           let body = JSON.parse(res.text());
-          localStorage.setItem('role', body.role);
+          localStorage.setItem('role', body.data.role);
           localStorage.setItem('username', obj.username);
           this.router.navigate(['/home']);
         },
@@ -54,13 +54,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('username') != null && localStorage.getItem('role') != null){
-        if(localStorage.getItem('role') == 'ROLE_USER'){
-            this.router.navigate(['/client']);
-        }else{
-            this.router.navigate(['/home']);
-        }
-    }
+    // if (localStorage.getItem('username') != null && localStorage.getItem('role') != null) {
+    //   if (localStorage.getItem('role') == 'ROLE_USER') {
+    //     this.router.navigate(['/client']);
+    //   } else {
+    //     this.router.navigate(['/home']);
+    //   }
+    // }
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
